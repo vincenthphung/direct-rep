@@ -238,7 +238,8 @@
 
 ### send through backend request to hide api key
 
-- Endpoint path: Google civics API
+- 3rd party endpoint path: Google civics API
+- Local endpoint path:localhost:8000/reps
 - Endpoint method: POST
 - Query parameters:
 
@@ -261,75 +262,63 @@
 - Response shape (JSON):
 
   ````json
-  {
-  "divisions": {
-  (key): {
-  "name": string,
-  "alsoKnownAs": [
-  string
-  ],
-  "officeIndices": [
-  unsigned integer
-  ]
-  }
-  },
-  "offices": [
-  {
-  "name": string,
-  "divisionId": string,
-  "levels": [
-  string
-  ],
-  "roles": [
-  string
-  ],
-  "sources": [
-  {
-  "name": string,
-  "official": boolean
-  }
-  ],
-  "officialIndices": [
-  unsigned integer
-  ]
-  }
-  ],
-  "officials": [
-  {
-  "name": string,
-  "address": [
-  {
-  "locationName": string,
-  "line1": string,
-  "line2": string,
-  "line3": string,
-  "city": string,
-  "state": string,
-  "zip": string
-  }
-  ],
-  "party": string,
-  "phones": [
-  string
-  ],
-  "urls": [
-  string
-  ],
-  "photoUrl": string,
-  "emails": [
-  string
-  ],
-  "channels": [
-  {
-  "type": string,
-  "id": string
-  }
-  ]
-  }
-  ]
-  }
+  {}
+
+      ```
+  ````
+
+## PUT (update letter with reps)
+
+- Local endpoint path:localhost:8000/letter/$pk
+- Endpoint method: PUT
+- Query parameters:
+
+  - reps info
+
+- Headers:
+
+  - Authorization: Bearer token
+
+- Request shape (JSON):
+
+  ```json
+  TBD
+  ```
+
+- Response: Updated letter with reps info
+
+- Response shape (JSON):
+
+  ````json
+  {}
 
       ```
   ````
 
 # Review Page (GET.pk)
+
+## (GET letter)
+
+- Local endpoint path:localhost:8000/review
+- Endpoint method: GET
+- Query parameters:
+
+- Headers:
+
+  - Authorization: Bearer token
+
+- Request shape (JSON):
+
+  ```json
+  TBD
+  ```
+
+- Response: List of reps
+
+- Response shape (JSON):
+
+  ````json
+  {}
+
+      ```
+  ````
