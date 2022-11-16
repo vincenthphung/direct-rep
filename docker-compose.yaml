@@ -1,5 +1,19 @@
-# volumes:
+volumes:
+  postgres-data:
+    external: true
+  # other volumes...
 services:
+  postgres:
+    build:
+      context: ./relational-data
+      dockerfile: ./Dockerfile.dev
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_MULTIPLE_DATABASES=users,letters
+      - POSTGRES_PASSWORD=password
+    ports:
+      - 15432:5432
   fastapi:
     build:
       context: sample_service
@@ -8,7 +22,28 @@ services:
       - 8000:8000
     volumes:
       - ./sample_service:/app
-      
+  users-service:
+    build:
+        context: ./users-service
+        dockerfile: ./Dockerfile.dev
+    ports:
+        - 8080:8000
+    volumes:
+        - ./users-service:/app
+    environment:
+      DATABASE_URL: postgresql://admin:password@postgres/users
+      WAIT_HOSTS: postgres:5432
+  letters-service:
+    build:
+        context: ./letters-service
+        dockerfile: ./Dockerfile.dev
+    ports:
+        - 8090:8000
+    volumes:
+        - ./letters-service:/app
+    environment:
+      DATABASE_URL: postgresql://admin:password@postgres/letters
+      WAIT_HOSTS: postgres:5432
   ghi:
     image: node:lts-bullseye
     command: /bin/bash run.sh
