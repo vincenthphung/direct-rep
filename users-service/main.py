@@ -15,8 +15,3 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
-@app.get("/users")
-def launch_users():
-    return {"users-service/main.py"}

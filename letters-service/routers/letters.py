@@ -4,7 +4,7 @@ from queries.letters import(Error, LetterIn, LetterOut, LetterRepository)
 
 router = APIRouter()
 
-@router.post("/letters", response_model=Union[LetterOut, Error])
+@router.post("/api/letters", response_model=Union[LetterOut, Error])
 def create_letter(
     letter: LetterIn,
     response: Response,
@@ -12,26 +12,26 @@ def create_letter(
 ):
     return repo.create(letter)
 
-@router.put("/letters/{letters_id}")
+@router.put("/api/letters/{letters_id}")
 def edit_letter_body():
     return{"message": "Hello Body"}
 
-@router.get("/letters/{letters_id}")
+@router.get("/api/letters/{letters_id}")
 def get_letter_details():
     return{"message": "Hello World"}
 
-@router.get("/issues")
+@router.get("/api/issues")
 def get_issues():
     return{"message": "Hello World"}
 
-@router.post("/reps")
+@router.post("/api/reps")
 def select_reps_for_letter():
     return{"message": "Hello Letter"}
 
-@router.get("/reps/{reps_id}")
+@router.get("/api/reps/{reps_id}")
 def get_reps_details():
     return{"message": "Hello World"}
 
-@router.get("/civics")
+@router.get("/api/civics")
 def get_reps():
     return{"message": "Hello World"}
