@@ -1,6 +1,6 @@
 ## Log in
 
-- Endpoint path: localhost:8000/api/login/
+- Endpoint path: localhost:8000/token/
 - Endpoint method: POST
 
 - Request shape (form):
@@ -22,7 +22,7 @@
 
 # Signup Page
 
-- Endpoint path: localhost:8000/api/signup/
+- Endpoint path: localhost:8000/signup/
 - Endpoint method: POST
 
 - Request shape (form):
@@ -46,7 +46,7 @@
 
 ## Log out (NavBar Button)
 
-- Endpoint path: localhost:8000/api/logout/
+- Endpoint path: localhost:8000/token/
 - Endpoint method: DELETE
 
 - Headers:
@@ -61,7 +61,7 @@
 
 # Update Profile Page
 
-- Endpoint path: localhost:8000/api/account/$id/
+- Endpoint path: localhost:8000/account/$id/
 - Endpoint method: PUT
 
 - Headers:
@@ -95,7 +95,7 @@
 
 ### «Human-readable of the endpoint»
 
-- Endpoint path: localhost:8000/api/dashboard/
+- Endpoint path: localhost:8000/dashboard/
 - Endpoint method: GET
 - Query parameters:
 
@@ -119,7 +119,7 @@
 
 ## (GET issues list)
 
-- Endpoint path: our database ex. localhost:8000/api/issues
+- Endpoint path: our database ex. localhost:8000/issues
 - Endpoint method: GET
 - Query parameters:
 
@@ -178,7 +178,7 @@
 
 ## POST create instance of letter in our database
 
-- Endpoint path: localhost:8000/api/letters
+- Endpoint path: localhost:8000/letters
 - Endpoint method: POST
 - Query parameters:
 
@@ -207,7 +207,7 @@
 
 ## PUT update / edit instance of letter in our database
 
-- Endpoint path: localhost:8000/api/letters/pk
+- Endpoint path: localhost:8000/letters/pk
 - Endpoint method: PUT
 - Query parameters:
 
