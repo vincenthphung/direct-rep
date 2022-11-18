@@ -14,9 +14,11 @@ Making contacting your elected officials more accessible
 - Keep track of past letter templates / requests
 
 ## Design
-- [API Design](api-design.md)
-- [API Design](api-design.md)
-- [API Design](api-design.md)
+ [API Design](api-design.md)
+ ![API Design](wireframes/wo.png)
+ ![API Design](wireframes/direct-rep-wireframe.png)
+ ![API Design](wireframes/user-service-endpoints.png)
+ ![API Design](wireframes/letter-service-endpoints.png)
 
 ## Stretch Goals
 - Info about upcoming elections
@@ -27,7 +29,7 @@ Making contacting your elected officials more accessible
 
 
 ## The Team
- - Aaryan - Developer 💻
+ - Aaryan Mittal- Developer 💻
 
  - John Gardner - Developer 💻
 
