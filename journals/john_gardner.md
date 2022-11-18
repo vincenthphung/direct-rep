@@ -44,7 +44,9 @@
 
 
 ## 11/17/2022 (Thursday)
-
+Successful POST request to Open AI
+Added Wireframes/Diagrams
+Updated Project README
 
 <br>
 <br>
