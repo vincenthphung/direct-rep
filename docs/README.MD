@@ -13,6 +13,10 @@ Making contacting your elected officials more accessible
 - Email template sent to user’s email with letter draft and rep’s emails list.
 - Keep track of past letter templates / requests
 
+## Design
+- [API Design](api-design.md)
+- [API Design](api-design.md)
+- [API Design](api-design.md)
 
 ## Stretch Goals
 - Info about upcoming elections

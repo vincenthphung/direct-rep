@@ -1,6 +1,6 @@
 ## Log in
 
-- Endpoint path: localhost:8000/token/
+- Endpoint path: localhost:8000/api/login/
 - Endpoint method: POST
 
 - Request shape (form):
@@ -22,7 +22,7 @@
 
 # Signup Page
 
-- Endpoint path: localhost:8000/signup/
+- Endpoint path: localhost:8000/api/accounts/
 - Endpoint method: POST
 
 - Request shape (form):
@@ -46,7 +46,7 @@
 
 ## Log out (NavBar Button)
 
-- Endpoint path: localhost:8000/token/
+- Endpoint path: localhost:8000/api/login/
 - Endpoint method: DELETE
 
 - Headers:
@@ -61,7 +61,7 @@
 
 # Update Profile Page
 
-- Endpoint path: localhost:8000/account/$id/
+- Endpoint path: localhost:8000/api/accounts/$id/
 - Endpoint method: PUT
 
 - Headers:
@@ -95,7 +95,7 @@
 
 ### «Human-readable of the endpoint»
 
-- Endpoint path: localhost:8000/dashboard/
+- Endpoint path: localhost:8000/api/dashboard/
 - Endpoint method: GET
 - Query parameters:
 
@@ -119,7 +119,7 @@
 
 ## (GET issues list)
 
-- Endpoint path: our database ex. localhost:8000/issues
+- Endpoint path: our database ex. localhost:8000/api/issues
 - Endpoint method: GET
 - Query parameters:
 
@@ -178,7 +178,7 @@
 
 ## POST create instance of letter in our database
 
-- Endpoint path: localhost:8000/letters
+- Endpoint path: localhost:8000/api/letters
 - Endpoint method: POST
 - Query parameters:
 
@@ -207,7 +207,7 @@
 
 ## PUT update / edit instance of letter in our database
 
-- Endpoint path: localhost:8000/letters/pk
+- Endpoint path: localhost:8000/api/letters/pk
 - Endpoint method: PUT
 - Query parameters:
 
@@ -239,7 +239,7 @@
 ### send through backend request to hide api key
 
 - 3rd party endpoint path: Google civics API
-- Local endpoint path:localhost:8000/reps
+- Local endpoint path:localhost:8000/api/reps
 - Endpoint method: POST
 - Query parameters:
 
@@ -269,7 +269,7 @@
 
 ## PUT (update letter with reps)
 
-- Local endpoint path:localhost:8000/letter/$pk
+- Local endpoint path:localhost:8000/api/letter/$pk
 - Endpoint method: PUT
 - Query parameters:
 
@@ -299,7 +299,7 @@
 
 ## (GET letter)
 
-- Local endpoint path:localhost:8000/review
+- Local endpoint path:localhost:8000/api/review
 - Endpoint method: GET
 - Query parameters:
 
