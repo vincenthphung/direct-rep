@@ -94,7 +94,7 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 3. I added /api in the beginning of the url after localhost for all the endpoints for the users and letter service.
 
-### Work done during the day
+### Work achieved during the day
 
 1. Finished the readme.md file for the mvp.
 
