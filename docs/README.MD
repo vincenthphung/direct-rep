@@ -1,3 +1,32 @@
-## Project Documentation
+# Direct Rep
+## Who are your customers?
+People residing in the United States of America.
 
-Please put any and all documentation for your project in this folder. Other than the documents that are required at the end of week 13, feel free to organize this however your group sees fit.
+## What needs/desires does your application satisfy for your customers?
+Making contacting your elected officials more accessible
+
+## What features/functionality do you plan to have in the application that helps your customers?
+- List of representatives with their details.
+- List of issues.
+- Open AI to draft an automated AI generated letter.
+- Login / logout feature (Gmail API).
+- Email template sent to user’s email with letter draft and rep’s emails list.
+- Keep track of past letter templates / requests
+
+
+## Stretch Goals
+- Info about upcoming elections
+- “Am I registered?” function to check user voter registration
+- “When’s the next election?” function
+- Direct Rep uses your location and the Google Civic Information API to gather information about your representatives.
+
+
+
+## The Team
+ - Aaryan - Developer 💻
+
+ - John Gardner - Developer 💻
+
+ - Kim Geraghty - Developer 💻
+
+ - Vincent Phung - Developer 💻
