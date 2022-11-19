@@ -31,6 +31,7 @@ services:
     volumes:
         - ./users-service:/app
     environment:
+      SIGNING_KEY: 7ea8f8c1d636b6f92b59a46326d9f59da1e09f0c986fbaeacaad64fed817ce6d
       DATABASE_URL: postgresql://users:password@postgres/users
       WAIT_HOSTS: postgres:5432
   letters-service:
