@@ -35,7 +35,7 @@ Spent some time looking into the Open AI API and set up my own OpenAI API key.
 
 Worked as a team to create our first endpoints on our localhost:8000/docs page.
 Together, we created our docker-compose file to have multiple databases.
-We decided to use PostgreSQL for our database. 
+We decided to use PostgreSQL for our database.
 We were able to run our first migration and have a working POST endpoint with our letter model. This felt great!
 
 ## Thursday 11/17/2022
@@ -49,3 +49,19 @@ Our database is ready and working, everything looks great.
 We worked through a few git pull and merge issues and are learning how to handle these more succesfully.
 
 Plan to review info about Authentication and Logins.
+
+## Friday 11/18/2022
+
+Worked on Authentication today.
+
+Worked as a team with screen sharing to create the Users table in our database.
+Ran migrations in users and letters to update my database. We all merged in our journal updates.
+Then we created our post endpoint to create a user account, and added login and logout with djwot tokens.
+To do this we also had to update our requirements.txt to include the new libraries.
+
+I had an issue with my React container which was solved by simply deleting and recreating the run.sh file.
+Was told by Adrian that it has to do with Windows vs Mac and CRLF vs LF, which are spaces on lines nvisible to the eye.
+
+Other than that, everything went well. Hoping to start some frontend next week and pair programming.
+(So far we have worked as a group with everyone taking a turn at screen sharing).
+Feeling great about this group!
