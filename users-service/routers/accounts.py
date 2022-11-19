@@ -7,7 +7,7 @@ from fastapi import (
     Request,
 )
 from jwtdown_fastapi.authentication import Token
-from .auth import authenticator
+from authenticator import authenticator
 
 from pydantic import BaseModel
 
@@ -15,11 +15,10 @@ from queries.accounts import (
     AccountIn,
     AccountOut,
     AccountRepo,
-    DuplicateAccountError,
 )
 
 class AccountForm(BaseModel):
-    username: str
+    email: str
     password: str
 
 class AccountToken(Token):
@@ -39,14 +38,8 @@ async def create_account(
     repo: AccountRepo = Depends(),
 ):
     hashed_password = authenticator.hash_password(info.password)
-    try:
-        account = repo.create(info, hashed_password)
-    except DuplicateAccountError:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Cannot create an account with those credentials",
-        )
-    form = AccountForm(username=info.email, password=info.password)
+    account = repo.create(info, hashed_password)
+    form = AccountForm(email=info.email, password=info.password)
     token = await authenticator.login(response, request, form, repo)
     return AccountToken(account=account, **token.dict())
 
