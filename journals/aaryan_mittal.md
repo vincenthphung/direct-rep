@@ -103,11 +103,11 @@ We spend more time on making our endpoints more efficient. We made changes to th
 3. Reviewed the endpoints with /api in the beginning.
 
 
-## November 18, 2022 (Thursday)
+## November 18, 2022 (Friday)
 
 ### Work done during the day
 
-1. We started with pair programming.Kim shared her screen. We worked upon adding the authentication feature with making the login, logout and signup page work. We faced problems while working with the routers and queries file and solved with consistently checking the terminal.
+1. We started with pair programming. Kim shared her screen. We worked upon adding the authentication feature with making the login, logout and signup page work for the users service. We faced problems while working with the routers and queries files and solved it with consistently checking the terminal.
 
 2. Kim had a problem with her React Server. We debugged it for some time and realised it was a problem with her system.
 
@@ -115,4 +115,4 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 1. Authentication is working with signup, login and logout.
 
-2. Kim's React issue is solved.
+2. React server issue is solved.
