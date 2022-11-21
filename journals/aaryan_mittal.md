@@ -22,7 +22,7 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 ## November 14, 2022 (Monday)
 
-### Goals for the week.
+### Goals for the week
 
 1. Finish FastAPI docs page with the endpoints.
 
@@ -116,3 +116,13 @@ We spend more time on making our endpoints more efficient. We made changes to th
 1. Authentication is working with signup, login and logout.
 
 2. React server issue is solved.
+
+## November 22, 2022 (Monday)
+
+### Goals for the week
+
+1. Finish all the CRUD operations for the endpoints.
+
+2. Start with Front-end(React). Make the Signup, Login and Logout form working in React.
+
+3. Make the Civics API and OpenAi API working.
