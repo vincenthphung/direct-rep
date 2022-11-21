@@ -17,6 +17,8 @@ Today, I worked on:
 - Updated readme (with group)
 - Review new material on backend authentication
 
-
 # 11/18/2022 (Friday)
 Today, I worked on:
+- Setting up end points on fastapi (with everybody)
+- Connected endpoints to database
+- Review react material
