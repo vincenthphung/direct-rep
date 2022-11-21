@@ -55,9 +55,33 @@ Updated Project README
 
 ## 11/18/2022 (Friday)
 
+>
+>Kim driving
+>
+>created migrations folder for users-service
+>
+>	created init, main, 001_
+>
+>created routers for accounts
+>
+>created queries for accounts
+>
+>created authenticator.py
+>
+>added users, accounts, and authenticator routers to main.py
+>
+>added accounts base/in/out shape
+>
+>added account repo to users-service/queries/
+>
+>created "create_account" function in users-service/routers/accounts.py
+>
+>got account creation and login/logout working
+
+
 <br>
 <br>
 <br>
 <br>
 
-## 11/18/2022 (Friday)
+## 11/21/2022 (Monday)
