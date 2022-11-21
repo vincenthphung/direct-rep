@@ -17,7 +17,7 @@ class LetterOut(BaseModel):
     content: str
 
 class LetterRepository:
-    def create(self, letter: LetterIn) -> Union[LetterOut, Error]:
+    def create(self, topic: str, stance: bool, content: str) -> Union[LetterOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -30,14 +30,18 @@ class LetterRepository:
                         RETURNING id;
                         """,
                         [
-                            letter.topic,
-                            letter.stance,
-                            letter.content
+                            topic,
+                            stance,
+                            content
                         ]
                     )
                     id = result.fetchone()[0]
-                    old_data = letter.dict()
-                    print("Check id \n \n", id, old_data)
-                    return LetterOut(id=id, **old_data)
+                    print("Check id \n \n", id)
+                    return LetterOut(
+                      id=id,
+                      topic=topic,
+                      stance=stance,
+                      content=content
+                      )
         except Exception:
-            return {"message": "Create did not work"}
+            return {"message": "Create letter did not work"}
