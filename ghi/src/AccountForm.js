@@ -1,4 +1,5 @@
 import { useState } from "react";
+import React from "react";
 
 function InputLabel(props) {
   const { id, placeholder, labelText, value, onChange, type } = props;
