@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, Response
 from typing import Union
 import requests
 import json
+import os
 from queries.letters import(Error, LetterIn, LetterOut, LetterRepository)
 from .new_keys import OPENAI_API_KEY
 
@@ -11,17 +12,14 @@ router = APIRouter()
 openai_api_key = OPENAI_API_KEY
 
 # headers structure vary depending on the api source
->>>>>>> ffc5329 (updates to Open AI api)
 url = "https://api.openai.com/v1/completions"
-openai_api_key = "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"
-# headers structure vary depending on the api source
 headers = {"Authorization": f'Bearer {openai_api_key}'}
 
 async def get_open_ai(topic):
   response = requests.post(url, headers=headers, json={
           "model": "text-davinci-002",
           "prompt": topic,
-          "temperature": 0, "max_tokens": 35
+          "temperature": 0.7, "max_tokens": 256
   })
   content = json.loads(response.content)
   return content
