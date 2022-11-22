@@ -85,3 +85,4 @@ Updated Project README
 <br>
 
 ## 11/21/2022 (Monday)
+> Kim and I pair programmed and got the OpenAI API to get the backend to successfully communicate with the Letters Service. It was cool to see our Dashboard send requests to OpenAI and receive a response that had a new letter response based on the query we sent. It really feels like the functionality is coming together and *maybe* that it wouldn't be crazy expensive to operate. This could actually work as a real product which is crazy to me haha.

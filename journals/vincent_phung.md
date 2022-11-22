@@ -22,3 +22,13 @@ Today, I worked on:
 - Setting up end points on fastapi (with everybody)
 - Connected endpoints to database
 - Review react material
+
+# 11/21/2022 (Monday)
+Today, I worked on:
+- Worked with Aaryan to set up sign in form
+- Tried to set up frontend authentication
+- Review new redux material and attempt to set up navlink for tomorrow.
+
+
+# 11/22/2022 (Tuesday)
+Today, I worked on:
