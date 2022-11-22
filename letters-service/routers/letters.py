@@ -4,18 +4,11 @@ import requests
 import json
 import os
 from queries.letters import(Error, LetterIn, LetterOut, LetterRepository)
-from .keys import OPENAI_API_KEY
+from .new_keys import OPENAI_API_KEY
 
 router = APIRouter()
 
-# test = os.environ
-# print("\n \n \n TEST", test)
-
 # add keys.py to gitignore
-# openai_api_key = os.environ["OPENAI_API_KEY"]
-
-# print("\n \n KEY", openai_api_key, type(openai_api_key))
-# openai_api_key = "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"
 openai_api_key = OPENAI_API_KEY
 
 # headers structure vary depending on the api source
