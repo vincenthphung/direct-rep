@@ -3,12 +3,23 @@ from typing import Union
 import requests
 import json
 from queries.letters import(Error, LetterIn, LetterOut, LetterRepository)
+<<<<<<< HEAD
 
 router = APIRouter()
 
 # put the key in a hidden file that doesn't go on gitLab
 # openai_api_key = os.getenv("OPENAI_API_KEY")
 
+=======
+from .new_keys import OPENAI_API_KEY
+
+router = APIRouter()
+
+# add keys.py to gitignore
+openai_api_key = OPENAI_API_KEY
+
+# headers structure vary depending on the api source
+>>>>>>> ffc5329 (updates to Open AI api)
 url = "https://api.openai.com/v1/completions"
 openai_api_key = "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"
 # headers structure vary depending on the api source
