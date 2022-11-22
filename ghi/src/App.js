@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
-// import { BrowserRouter } from "react-router-dom";
-import Construct from './Construct.js'
-import ErrorNotification from './ErrorNotification';
-import AccountForm from './AccountForm'
-import './App.css';
+import { useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Construct from "./Construct.js";
+import ErrorNotification from "./ErrorNotification";
+import AccountForm from "./AccountForm";
+import "./App.css";
 
 function App() {
   const [launch_info, setLaunchInfo] = useState([]);
@@ -28,10 +28,13 @@ function App() {
     getData();
   }, [])
 
-
   return (
     <div>
-      <AccountForm />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/signup" element={<AccountForm />} />
+        </Routes>
+      </BrowserRouter>
       {/* <ErrorNotification error={error} />
       <Construct info={launch_info} /> */}
     </div>
