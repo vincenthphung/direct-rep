@@ -3,14 +3,6 @@ from typing import Union
 import requests
 import json
 from queries.letters import(Error, LetterIn, LetterOut, LetterRepository)
-<<<<<<< HEAD
-
-router = APIRouter()
-
-# put the key in a hidden file that doesn't go on gitLab
-# openai_api_key = os.getenv("OPENAI_API_KEY")
-
-=======
 from .new_keys import OPENAI_API_KEY
 
 router = APIRouter()
