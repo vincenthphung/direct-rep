@@ -65,3 +65,25 @@ Was told by Adrian that it has to do with Windows vs Mac and CRLF vs LF, which a
 Other than that, everything went well. Hoping to start some frontend next week and pair programming.
 (So far we have worked as a group with everyone taking a turn at screen sharing).
 Feeling great about this group!
+
+## Monday 11/21/2022
+
+Spent some time over the weekend learning more about OpenAI. Was able to edit the prompt input by passing the input in as an argument for the third party api function call.
+
+Today we did pair programming. I worked with John using VS Code Live Share to integrate the Open AI api with the backend. Now we can create a letter in our database with the POST request. We added a variable to have "in favor of" and "in opposition to" options, added to the prompt input with concatenation. We learned more about the third party API's different query options.
+
+We added "requests" to our requirements.txt so it will be a part of our file now.
+
+We regrouped with the others and merged all our work into main. They worked on the frontend User form. Great progress all around and pair programming was fun!
+
+Thoughts for next stand up:
+
+- need to add a POST endpoint to create issues to add them to the database or create SQL INSERT in migrations to hardcode the issues
+- need to create an issues table in the database
+- create the reps selection table in the database
+- add PUT endpoint to update user info
+- connect PUT endpoint for editing letter
+- dashboard page should be in letters microservice
+- add a GET endpoint to get all letters for dashboard
+- add a GET endpoint to get all reps for dashboard
+- these will be filtered by the auth / user

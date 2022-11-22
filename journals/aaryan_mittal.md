@@ -126,3 +126,17 @@ We spend more time on making our endpoints more efficient. We made changes to th
 2. Start with Front-end(React). Make the Signup, Login and Logout form working in React.
 
 3. Make the Civics API and OpenAi API working.
+
+## November 22, 2022 (Monday)
+
+### Work done during the day
+
+1. We started with pair-programming. Kim and John did back-end and worked upon the OpenAI endpoints. Vincent and I started with the front-end. When Vincent and I started we faced a problem with a react libraby. The react-router-dom was not working properly and we realised that the libraby had not been installed.
+
+2. Vincent and I continued working on the front-end and. We finished with the signup form in the react.
+
+### Work achieved during the day
+
+1. OpenAI Post request enpoint finished.
+
+2. Signup form in React complete.
