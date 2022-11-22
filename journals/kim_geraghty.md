@@ -78,10 +78,11 @@ We regrouped with the others and merged all our work into main. They worked on t
 
 Thoughts for next stand up:
 
-- need to add a POST endpoint to create issues to add them to the database
+- need to add a POST endpoint to create issues to add them to the database or create SQL INSERT in migrations to hardcode the issues
 - need to create an issues table in the database
 - create the reps selection table in the database
 - add PUT endpoint to update user info
+- connect PUT endpoint for editing letter
 - dashboard page should be in letters microservice
 - add a GET endpoint to get all letters for dashboard
 - add a GET endpoint to get all reps for dashboard
