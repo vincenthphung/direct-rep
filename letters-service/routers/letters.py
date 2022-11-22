@@ -3,7 +3,7 @@ from typing import Union
 import requests
 import json
 import os
-from queries.letters import(Error, LetterIn, LetterOut, LetterRepository)
+from queries.letters import(Error, LetterIn, LetterOut, LetterUpdate, LetterRepository)
 from .new_keys import OPENAI_API_KEY
 
 router = APIRouter()
@@ -52,9 +52,15 @@ def create_letter(
     return repo.create(topic, stance, text)
 
 
-@router.put("/api/letters/{letters_id}")
-def edit_letter_body():
-    return{"message": "Hello Body"}
+@router.put("/api/letters/{letters_id}", response_model=Union[LetterUpdate, Error])
+def edit_letter_body(
+  letter_id: int,
+  content: str,
+  repo: LetterRepository = Depends(),
+) -> Union[LetterUpdate, Error]:
+  print("\n \n CONTENT", content, letter_id)
+  return repo.update(letter_id, content)
+
 
 @router.get("/api/letters/{letters_id}")
 def get_letter_details():

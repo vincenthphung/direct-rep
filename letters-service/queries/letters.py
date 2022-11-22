@@ -10,6 +10,9 @@ class LetterIn(BaseModel):
     stance: bool
     content: str
 
+class LetterUpdate(BaseModel):
+    content: str
+
 class LetterOut(BaseModel):
     id: int
     topic: str
@@ -45,3 +48,29 @@ class LetterRepository:
                       )
         except Exception:
             return {"message": "Create letter did not work"}
+
+
+    def update(self, letter_id: int, content: str) -> Union[LetterUpdate, Error]:
+        try:
+        # connect to the database
+            with pool.connection() as conn:
+        # get a cursor (something to run SQL with)
+                with conn.cursor() as db:
+                    db.execute(
+                    """
+                    UPDATE letter
+                    SET content = %s
+                    WHERE id = %s
+                    """,
+                    [
+                        content,
+                        letter_id
+                    ]
+                )
+
+                # old_data = letter.dict()
+                return LetterUpdate(id=letter_id, content=content)
+
+        except Exception as e:
+            print(e)
+            return{"message": "could not update letter"}
