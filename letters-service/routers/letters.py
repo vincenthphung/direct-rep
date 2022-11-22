@@ -2,23 +2,31 @@ from fastapi import APIRouter, Depends, Response
 from typing import Union
 import requests
 import json
+import os
 from queries.letters import(Error, LetterIn, LetterOut, LetterRepository)
+from .keys import OPENAI_API_KEY
 
 router = APIRouter()
 
-# put the key in a hidden file that doesn't go on gitLab
-# openai_api_key = os.getenv("OPENAI_API_KEY")
+# test = os.environ
+# print("\n \n \n TEST", test)
 
-url = "https://api.openai.com/v1/completions"
-openai_api_key = "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"
+# add keys.py to gitignore
+# openai_api_key = os.environ["OPENAI_API_KEY"]
+
+# print("\n \n KEY", openai_api_key, type(openai_api_key))
+# openai_api_key = "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"
+openai_api_key = OPENAI_API_KEY
+
 # headers structure vary depending on the api source
+url = "https://api.openai.com/v1/completions"
 headers = {"Authorization": f'Bearer {openai_api_key}'}
 
 async def get_open_ai(topic):
   response = requests.post(url, headers=headers, json={
           "model": "text-davinci-002",
           "prompt": topic,
-          "temperature": 0, "max_tokens": 35
+          "temperature": 0.7, "max_tokens": 256
   })
   content = json.loads(response.content)
   return content
