@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function SignupForm(props) {
+function InputLabel(props) {
   const { id, placeholder, labelText, value, onChange, type } = props;
 
   return (
@@ -13,7 +13,7 @@ function SignupForm(props) {
         onChange={onChange}
         required
         type={type}
-        className="form-conrol"
+        className="form-control"
         id={id}
         placeholder={placeholder}
       />
@@ -29,7 +29,7 @@ function AccountForm(props) {
 
   return (
     <form>
-      <SignupForm
+      <InputLabel
         id="name"
         placeholder="Your Full Name"
         labelText="Full Name"
@@ -37,7 +37,7 @@ function AccountForm(props) {
         onChange={(e) => setName(e.target.value)}
         type="text"
       />
-      <SignupForm
+      <InputLabel
         id="email"
         placeholder="email@email.com"
         labelText="Email Address"
@@ -45,7 +45,7 @@ function AccountForm(props) {
         onChange={(e) => setEmail(e.target.value)}
         type="email"
       />
-      <SignupForm
+      <InputLabel
         id="zipcode"
         placeholder="Zipcode"
         labelText="Enter Your Zipcode"
@@ -53,7 +53,7 @@ function AccountForm(props) {
         onChange={(e) => setZipcode(e.target.value)}
         type="integer"
       />
-      <SignupForm
+      <InputLabel
         id="password"
         placeholder="Password"
         labelText="Password"
