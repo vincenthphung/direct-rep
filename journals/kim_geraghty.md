@@ -75,3 +75,14 @@ Today we did pair programming. I worked with John using VS Code Live Share to in
 We added "requests" to our requirements.txt so it will be a part of our file now.
 
 We regrouped with the others and merged all our work into main. They worked on the frontend User form. Great progress all around and pair programming was fun!
+
+Thoughts for next stand up:
+
+- need to add a POST endpoint to create issues to add them to the database
+- need to create an issues table in the database
+- create the reps selection table in the database
+- add PUT endpoint to update user info
+- dashboard page should be in letters microservice
+- add a GET endpoint to get all letters for dashboard
+- add a GET endpoint to get all reps for dashboard
+- these will be filtered by the auth / user
