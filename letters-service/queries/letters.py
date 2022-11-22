@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Union
+from typing import Union, List
 from queries.pool import pool
 
 class Error(BaseModel):
@@ -74,3 +74,33 @@ class LetterRepository:
         except Exception as e:
             print(e)
             return{"message": "could not update letter"}
+        
+    def get_all(self) -> Union[Error, List[LetterOut]]:
+        try:
+            # connect to the database
+            with pool.connection() as conn:
+                # get a cursor (something to run SQL with)
+                with conn.cursor() as db:
+                    # run our SELECT statement
+                    result = db.execute(
+                        """
+                        SELECT id, topic, stance, content
+                        FROM letter
+                        ORDER BY id;
+                        """
+                    )
+                    result = []
+                    for record in db:
+                        letter = LetterOut(
+                            id = record[0],
+                            topic = record[1],
+                            stance = record[2],
+                            content = record[3]
+                        )
+                        result.append(letter)
+                    return result
+        except Exception as e:
+            print("ERROR")
+            print(e)
+            return{"message": "could not get all letters"}
+        

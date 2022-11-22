@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, Response
-from typing import Union
+from typing import Union, List
 import requests
 import json
 import os
@@ -50,6 +50,12 @@ def create_letter(
     text = data['choices'][0]['text']
     print("\n \n TEXT ONLY: ", text)
     return repo.create(topic, stance, text)
+
+@router.get("/api/letters", response_model=Union[List[LetterOut], Error])
+def get_all_letters(
+    repo: LetterRepository = Depends(),
+    ):
+    return repo.get_all()
 
 
 @router.put("/api/letters/{letters_id}", response_model=Union[LetterUpdate, Error])
