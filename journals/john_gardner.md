@@ -86,3 +86,11 @@ Updated Project README
 
 ## 11/21/2022 (Monday)
 > Kim and I pair programmed and got the OpenAI API to get the backend to successfully communicate with the Letters Service. It was cool to see our Dashboard send requests to OpenAI and receive a response that had a new letter response based on the query we sent. It really feels like the functionality is coming together and *maybe* that it wouldn't be crazy expensive to operate. This could actually work as a real product which is crazy to me haha.
+
+
+## 11/22/2022 (Tuesday)
+Today was a super prouductive day. Everyone did one endpoint so we got  
+> Letter: (get_all), (get_one), (update)  
+> Account: (update)
+
+working fully with the back-end and the databases which is awesome! Today Aaryan also got the Signup page fully working between front-end/back-end/AND database which is awesome. He even did hooks and redux in the React. Really cool stuff. I feel like we're working at a really good pace to not only finish early, but potentially with enough time to work on some really cool stretch-goals that we've talked about. 
