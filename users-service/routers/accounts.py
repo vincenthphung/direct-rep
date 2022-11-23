@@ -1,3 +1,4 @@
+from typing import Optional, List, Union
 from fastapi import (
     Depends,
     HTTPException,
@@ -15,6 +16,8 @@ from queries.accounts import (
     AccountIn,
     AccountOut,
     AccountRepo,
+    Account,
+    Error
 )
 
 class AccountForm(BaseModel):
@@ -46,3 +49,17 @@ async def create_account(
 # authenticator.hash_password => comes from the Authenticator base class (inherited in queries)
 # authenticator.login => comes from the Authenticator base class (inherited in queries)
 # repo.create => must match a create function from our queries to create new instance in database table
+
+@router.put("/api/accounts/{id}", response_model=AccountToken | HttpError)
+async def edit_account(
+    id: int,
+    info: AccountIn,
+    request: Request,
+    response: Response,
+    repo: AccountRepo = Depends(),
+):
+    hashed_password = authenticator.hash_password(info.password)
+    account = repo.update(id,info, hashed_password)
+    form = AccountForm(username=info.email, password=info.password)
+    token = await authenticator.login(response, request, form, repo)
+    return AccountToken(account=account, **token.dict())
