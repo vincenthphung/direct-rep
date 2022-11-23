@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, Response
-from typing import Union
+from typing import Optional, Union, List
 import requests
 import json
 import os
-from queries.letters import(Error, LetterIn, LetterOut, LetterRepository)
+from queries.letters import(Error, LetterIn, LetterOut, LetterUpdate, LetterRepository)
 from .new_keys import OPENAI_API_KEY
 
 router = APIRouter()
@@ -51,14 +51,33 @@ def create_letter(
     print("\n \n TEXT ONLY: ", text)
     return repo.create(topic, stance, text)
 
+@router.get("/api/letters", response_model=Union[List[LetterOut], Error])
+def get_all_letters(
+    repo: LetterRepository = Depends(),
+    ):
+    return repo.get_all()
 
-@router.put("/api/letters/{letters_id}")
-def edit_letter_body():
-    return{"message": "Hello Body"}
 
-@router.get("/api/letters/{letters_id}")
-def get_letter_details():
-    return{"message": "Hello World"}
+@router.put("/api/letters/{letters_id}", response_model=Union[LetterUpdate, Error])
+def edit_letter_body(
+  letter_id: int,
+  content: str,
+  repo: LetterRepository = Depends(),
+) -> Union[LetterUpdate, Error]:
+  print("\n \n CONTENT", content, letter_id)
+  return repo.update(letter_id, content)
+
+
+@router.get("/letters/{letter_id}", response_model=Optional[LetterOut])
+def get_one_letter(
+    letter_id: int,
+    response: Response,
+    repo: LetterRepository = Depends(),
+    ) -> LetterOut:
+    letter = repo.get_one(letter_id)
+    if letter is None:
+        response.status_code = 404
+    return letter
 
 @router.get("/api/issues")
 def get_issues():

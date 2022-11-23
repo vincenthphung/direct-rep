@@ -1,4 +1,6 @@
 import { useState } from "react";
+import React from "react";
+import { useCreateUserMutation } from './store/usersApi'
 
 function InputLabel(props) {
   const { id, placeholder, labelText, value, onChange, type } = props;
@@ -22,18 +24,25 @@ function InputLabel(props) {
 }
 
 function AccountForm(props) {
-  const [name, setName] = useState("");
+  const [full_name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [zipcode, setZipcode] = useState("");
   const [password, setPassword] = useState("");
+  const [createUser, result] = useCreateUserMutation()
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    createUser({full_name, email, zipcode, password})
+
+  }
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <InputLabel
         id="name"
         placeholder="Your Full Name"
         labelText="Full Name"
-        value={name}
+        value={full_name}
         onChange={(e) => setName(e.target.value)}
         type="text"
       />

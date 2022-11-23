@@ -82,8 +82,9 @@ Thoughts for next stand up:
 - need to create an issues table in the database
 - create the reps selection table in the database
 - add PUT endpoint to update user info
-- connect PUT endpoint for editing letter
+- connect PUT endpoint for editing letter ✅
 - dashboard page should be in letters microservice
-- add a GET endpoint to get all letters for dashboard
+- add a GET endpoint to get all letters for dashboard ✅
+- connect the GET endpoint for get one letter ✅
 - add a GET endpoint to get all reps for dashboard
 - these will be filtered by the auth / user

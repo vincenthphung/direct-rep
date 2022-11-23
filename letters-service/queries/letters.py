@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Union
+from typing import Optional, Union, List
 from queries.pool import pool
 
 class Error(BaseModel):
@@ -8,6 +8,9 @@ class Error(BaseModel):
 class LetterIn(BaseModel):
     topic: str
     stance: bool
+    content: str
+
+class LetterUpdate(BaseModel):
     content: str
 
 class LetterOut(BaseModel):
@@ -45,3 +48,91 @@ class LetterRepository:
                       )
         except Exception:
             return {"message": "Create letter did not work"}
+
+
+    def update(self, letter_id: int, content: str) -> Union[LetterUpdate, Error]:
+        try:
+        # connect to the database
+            with pool.connection() as conn:
+        # get a cursor (something to run SQL with)
+                with conn.cursor() as db:
+                    db.execute(
+                    """
+                    UPDATE letter
+                    SET content = %s
+                    WHERE id = %s
+                    """,
+                    [
+                        content,
+                        letter_id
+                    ]
+                )
+
+                # old_data = letter.dict()
+                return LetterUpdate(id=letter_id, content=content)
+
+        except Exception as e:
+            print(e)
+            return{"message": "could not update letter"}
+
+    def get_all(self) -> Union[Error, List[LetterOut]]:
+        try:
+            # connect to the database
+            with pool.connection() as conn:
+                # get a cursor (something to run SQL with)
+                with conn.cursor() as db:
+                    # run our SELECT statement
+                    result = db.execute(
+                        """
+                        SELECT id, topic, stance, content
+                        FROM letter
+                        ORDER BY id;
+                        """
+                    )
+                    result = []
+                    for record in db:
+                        letter = LetterOut(
+                            id = record[0],
+                            topic = record[1],
+                            stance = record[2],
+                            content = record[3]
+                        )
+                        result.append(letter)
+                    return result
+        except Exception as e:
+            print("ERROR")
+            print(e)
+            return{"message": "could not get all letters"}
+
+
+    def get_one(self, letter_id: int) -> Optional[LetterOut]:
+        try:
+            # connect to the database
+            with pool.connection() as conn:
+            # get a cursor (something to run SQL with)
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT id, topic, stance, content
+                        FROM letter
+                        WHERE id = %s
+                        """,
+                    [letter_id]
+                    )
+                    record = result.fetchone()
+                    if record is None:
+                        return None
+                    return self.record_to_letter_out(record)
+
+        except Exception as e:
+            print(e)
+            return{"message": "could not get that letter"}
+
+
+    def record_to_letter_out(self, record):
+        return LetterOut(
+            id = record[0],
+            topic = record[1],
+            stance = record[2],
+            content = record[3]
+            )
