@@ -4,11 +4,11 @@
 
 ## November 7, 2022 (Monday)
 
-We decided upon our group Project idea and name. We decided to work upon a web application that auto generates letters through OpenAI API and sends it to representatives accoding to the users zipcode through Google Civics API.
+We decided upon our group Project idea and name. We decided to work upon a web application that auto generates letters through OpenAI API and sends it to representatives according to the users zipcode through Google Civics API.
 
 ## November 8, 2022 (Tuesday)
 
-We desiged the wireframes for our web applications and had effective discussions for the models and design for our web application.
+We designed the wireframes for our web applications and had effective discussions for the models and design for our web application.
 
 ## November 9, 2022 (Wednesday)
 
@@ -32,15 +32,15 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 4. Finish the MVP in ReadMe.MD.
 
-5. Start with autentication.
+5. Start with authentication.
 
 ### Work done during the day
 
-1. We started with setting up FastAPI for our project. We set up the Docker.yaml file and the FastAPI set up for the leter and user model.
+1. We started with setting up FastAPI for our project. We set up the Docker.yaml file and the FastAPI set up for the letter and user model.
 
 2. We started with Pair Programming and John shared his screen and the whole group assisted him.
 
-3. We determined the database to use for our project. We were consfsed between MongoDB and PostgreSQL. We finally decied to set up the PostgreSQL database.
+3. We determined the database to use for our project. We were confused between MongoDB and PostgreSQL. We finally decided to set up the PostgreSQL database.
 
 ### Work achieved during the day.
 
@@ -48,7 +48,7 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 2. The PostgreSQL database is working.
 
-3. The project is workig locally on all our systems.
+3. The project is working locally on all our systems.
 
 ## November 15, 2022 (Tuesday)
 
@@ -64,13 +64,13 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 1. Better endpoints according to the FastAPI docs.
 
-2. A finalised diagram for our project on Excalidraw.
+2. A finalized diagram for our project on Excalidraw.
 
 ## November 16, 2022 (Wednesday)
 
 ### Work done during the day
 
-1. We started with pair programming. I shared my screen for the group and did the code. I started with making the endpoints in the router folder for the letters service. Vincent designed the endpoints for the Users MOdels. I organised Vincent's endpoints for the users model using routers and queries folder.
+1. We started with pair programming. I shared my screen for the group and did the code. I started with making the endpoints in the router folder for the letters service. Vincent designed the endpoints for the Users MOdels. I organized Vincent's endpoints for the users model using routers and queries folder.
 
 2. I designed the migrations folder for the letters service with the help of the team(pair programming). I made the the migration model for the letter model in the letters service. We faced problem while doing the migration in Docker. The whole team spent time looking on the docker file. We came up with the solution after spending around two hours as there was a problem with admin username in the docker compose file.
 
@@ -90,7 +90,7 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 1. We started with pair programming. Vincent shared his screen. We worked upon writing the readme.md file for our project.
 
-2. I reviewd and worked upon the Excalidraw diagram for the project. I redseigned the wireframes and endpoints according to the udpated we made on the readme.md file.
+2. I reviewed and worked upon the Excalidraw diagram for the project. I redesigned the wireframes and endpoints according to the updated we made on the readme.md file.
 
 3. I added /api in the beginning of the url after localhost for all the endpoints for the users and letter service.
 
@@ -98,7 +98,7 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 1. Finished the readme.md file for the mvp.
 
-2. Finalised the excalidraw diagram for the project.
+2. Finalized the excalidraw diagram for the project.
 
 3. Reviewed the endpoints with /api in the beginning.
 
@@ -109,7 +109,7 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 1. We started with pair programming. Kim shared her screen. We worked upon adding the authentication feature with making the login, logout and signup page work for the users service. We faced problems while working with the routers and queries files and solved it with consistently checking the terminal.
 
-2. Kim had a problem with her React Server. We debugged it for some time and realised it was a problem with her system.
+2. Kim had a problem with her React Server. We debugged it for some time and realized it was a problem with her system.
 
 ### Work achieved during the day
 
@@ -117,7 +117,7 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 2. React server issue is solved.
 
-## November 22, 2022 (Monday)
+## November 21, 2022 (Monday)
 
 ### Goals for the week
 
@@ -131,7 +131,7 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 ### Work done during the day
 
-1. We started with pair-programming. Kim and John did back-end and worked upon the OpenAI endpoints. Vincent and I started with the front-end. When Vincent and I started we faced a problem with a react libraby. The react-router-dom was not working properly and we realised that the libraby had not been installed.
+1. We started with pair-programming. Kim and John did back-end and worked upon the OpenAI endpoints. Vincent and I started with the front-end. When Vincent and I started we faced a problem with a react library. The react-router-dom was not working properly and we realized that the library had not been installed.
 
 2. Vincent and I continued working on the front-end and. We finished with the signup form in the react.
 
@@ -140,3 +140,20 @@ We spend more time on making our endpoints more efficient. We made changes to th
 1. OpenAI Post request endpoint finished.
 
 2. Signup form in React complete.
+
+
+## November 22, 2022 (Tuesday)
+
+### Work done during the day
+
+1. Today, we spent time on our backend. Our group worked on different endpoints for the letter service. I worked upon the update user endpoint. I faced some issues while working with the token and hashed password. I was finally able to make the update user endpoint work by referencing the code to create user.
+
+2. I spent time working on the user signup form. I used React Hooks to make the signup form and I connected it to the database using React Redux. I was new to React Redux, so I had to do to some research to make it work.
+
+### Work done during the day
+
+1. All letters endpoints working.
+
+2. User update endpoint working.
+
+3. Signup form in React(frontend) connected to database.
