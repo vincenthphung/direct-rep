@@ -13,12 +13,9 @@ class RepIn(BaseModel):
     level: str
 
 class RepOut(BaseModel):
-    id: int
     name: str
-    address: str
     party: str
-    office: str
-    level: str
+    # level: str
 
 
 class RepRepository(BaseModel):
