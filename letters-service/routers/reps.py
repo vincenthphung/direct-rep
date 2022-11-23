@@ -55,6 +55,8 @@ def get_reps_from_api(data: get_civics_api_reps = Depends()):
   print("\n \n \n LEVELS", levels)
 
   # connect names and levels via officialindices key?
+  # "officialIndices":[8,9,10,11,12,13,14]
+
 
   return "NAME:", name, "ADDRESS:", address, "PARTY:", party, "OFFICE:", office, "LEVEL:", level
 # create list, append each item from list
