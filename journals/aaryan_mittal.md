@@ -137,6 +137,6 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 ### Work achieved during the day
 
-1. OpenAI Post request enpoint finished.
+1. OpenAI Post request endpoint finished.
 
 2. Signup form in React complete.

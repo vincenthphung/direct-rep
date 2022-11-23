@@ -26,6 +26,8 @@ class AccountOut(BaseModel):
     email: str
     zipcode: int
 
+
+
 class AccountRepo:
     def get(self, email: str) -> Optional[Account]:
         # connect the database
@@ -86,3 +88,34 @@ class AccountRepo:
                     zipcode=account.zipcode,
                     hashed_password=hashed_password
                 )
+    def update(self, id: int, account: AccountIn, hashed_password: str) -> Union[Account, Error]:
+        try:
+        # connect to the database
+            with pool.connection() as conn:
+        # get a cursor (something to run SQL with)
+                with conn.cursor() as db:
+                    db.execute(
+                    """
+                    UPDATE users
+                    SET full_name = %s, email = %s, zipcode = %s, hashed_password = %s
+                    WHERE id = %s
+                    """,
+                    [
+                        account.full_name,
+                        account.email,
+                        account.zipcode,
+                        hashed_password,
+                        id
+                    ]
+                )
+
+                # old_data = letter.dict()
+                return Account(id=id,
+                                full_name=account.full_name,
+                                email=account.email,
+                                zipcode=account.zipcode,
+                                hashed_password=hashed_password)
+
+        except Exception as e:
+            print(e)
+            return{"message": "could not update account"}
