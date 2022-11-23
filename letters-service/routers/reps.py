@@ -9,7 +9,7 @@ google_api_key = GOOGLE_CIVICS_KEY
 url = "https://www.googleapis.com/civicinfo/v2/representatives"
 # "x-goog-api-key" is google's word for "Authorization"
 headers = {"x-goog-api-key": google_api_key}
-params = {"address": "94703", "levels": "administrativeArea1"}
+params = {"address": "02116", "levels": "administrativeArea1"}
 
 # levels info:
 # "country" = federal
