@@ -83,14 +83,3 @@ def get_one_letter(
 def get_issues():
     return{"message": "Hello World"}
 
-@router.post("/api/reps")
-def select_reps_for_letter():
-    return{"message": "Hello Letter"}
-
-@router.get("/api/reps/{reps_id}")
-def get_reps_details():
-    return{"message": "Hello World"}
-
-@router.get("/api/civics")
-def get_reps():
-    return{"message": "Hello World"}

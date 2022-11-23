@@ -78,13 +78,50 @@ We regrouped with the others and merged all our work into main. They worked on t
 
 Thoughts for next stand up:
 
-- need to add a POST endpoint to create issues to add them to the database or create SQL INSERT in migrations to hardcode the issues
-- need to create an issues table in the database
-- create the reps selection table in the database
-- add PUT endpoint to update user info
-- connect PUT endpoint for editing letter ✅
-- dashboard page should be in letters microservice
 - add a GET endpoint to get all letters for dashboard ✅
 - connect the GET endpoint for get one letter ✅
-- add a GET endpoint to get all reps for dashboard
+- add PUT endpoint to update user info ✅
+- connect PUT endpoint for editing letter ✅
+
+ISSUES:
+
+- need to create an issues table in the database
+- need to add a POST endpoint to create issues
+- OR create SQL INSERT in migrations to hardcode the issues
+- connect GET endpoint to get issues
+
+REPS:
+
+- dashboard page should be in letters microservice
+- create the reps selection table in the database
+- create a foreign key or reference to letter table
+- add a POST endpoint to create new reps selection
+- add a GET endpoint to get all reps selection for all letters
+- add a GET endpoint to get all reps selection for one letter
 - these will be filtered by the auth / user
+
+FRONTEND:
+
+- create shell for website based on wireframe
+- include nav bar / menu
+- learn more about Redux / finish tutorials
+- eventually connect frontend forms to backend endpoints
+
+## Tuesday 11/22/2022
+
+Worked on some endpoints from the to-do list:
+
+- add a GET endpoint to get all letters for dashboard ✅
+- connect the GET endpoint for get one letter ✅
+- add PUT endpoint to update user info ✅
+- connect PUT endpoint for editing letter ✅
+  We each took turns sharing our screen to create one endpoint and test it out.
+  Set some goals for next to-do list and everyone has some areas we can work on individually.
+
+Still need to review Redux tutorials to get more comfortable with that, but there is enough backend work to keep me busy until then!
+
+I plan to spend some time working with the google civics api to start sketching out what the reps selection table will look like, and how to select them.
+
+Also made a note to add a date_created property to the letter table, so we can later order them by date created.
+
+We will need to figure out how to get the user's zipcode. Instructors mentioned we could probably hit the endpoint with an API call to avoid having to create a poller. Sounds like a great idea. 
