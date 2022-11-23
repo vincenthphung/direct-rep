@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, Response
-from typing import Union, List
+from typing import Optional, Union, List
 import requests
 import json
 import os
@@ -68,9 +68,16 @@ def edit_letter_body(
   return repo.update(letter_id, content)
 
 
-@router.get("/api/letters/{letters_id}")
-def get_letter_details():
-    return{"message": "Hello World"}
+@router.get("/letters/{letter_id}", response_model=Optional[LetterOut])
+def get_one_letter(
+    letter_id: int,
+    response: Response,
+    repo: LetterRepository = Depends(),
+    ) -> LetterOut:
+    letter = repo.get_one(letter_id)
+    if letter is None:
+        response.status_code = 404
+    return letter
 
 @router.get("/api/issues")
 def get_issues():

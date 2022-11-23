@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Union, List
+from typing import Optional, Union, List
 from queries.pool import pool
 
 class Error(BaseModel):
@@ -74,7 +74,7 @@ class LetterRepository:
         except Exception as e:
             print(e)
             return{"message": "could not update letter"}
-        
+
     def get_all(self) -> Union[Error, List[LetterOut]]:
         try:
             # connect to the database
@@ -103,4 +103,36 @@ class LetterRepository:
             print("ERROR")
             print(e)
             return{"message": "could not get all letters"}
-        
+
+
+    def get_one(self, letter_id: int) -> Optional[LetterOut]:
+        try:
+            # connect to the database
+            with pool.connection() as conn:
+            # get a cursor (something to run SQL with)
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT id, topic, stance, content
+                        FROM letter
+                        WHERE id = %s
+                        """,
+                    [letter_id]
+                    )
+                    record = result.fetchone()
+                    if record is None:
+                        return None
+                    return self.record_to_letter_out(record)
+
+        except Exception as e:
+            print(e)
+            return{"message": "could not get that letter"}
+
+
+    def record_to_letter_out(self, record):
+        return LetterOut(
+            id = record[0],
+            topic = record[1],
+            stance = record[2],
+            content = record[3]
+            )
