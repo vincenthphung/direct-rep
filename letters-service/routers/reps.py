@@ -35,72 +35,50 @@ def get_reps_from_api(
   # party = data["officials"][0]["party"]
   # office = data["offices"][0]["name"]
   # level= data["offices"][0]["levels"]
+
+  number = []
+
+  for i in data["offices"]:
+    number.append(i["officialIndices"])
+
+  print("\n \n \n NUMBER", number)
+
   # index = data["offices"][0]["officialIndices"]
 
-  # names = []
-  # addresses = []
-  # parties = []
-  # offices = []
-  # levels = []
-  # indices = []
-
-  # names = [i["name"] for i in data["officials"]]
-  # # addresses = [i["address"] for i in data["officials"]]
-  # parties = [i["party"] for i in data["officials"]]
-  # offices = [i["name"] for i in data["offices"]]
-  # levels = [i["levels"] for i in data["offices"]]
-  # indices = [i["officialIndices"] for i in data["offices"]]
-
-  # print("\n \n \n NAMES", names)
-  # print("\n \n \n ADDRESSES", addresses)
-  # print("\n \n \n PARTIES", parties)
-  # print("\n \n \n OFFICES", offices)
-  # print("\n \n \n LEVELS", levels)
-  # print("\n \n \n INDICES", indices)
-
-  # result = []
-  # for i in data["officials"]:
-  #   name = [i["name"]],
-  #   party = [i["party"]]
-
-  #   result.append(name)
-  #   result.append(party)
-
-  # for j in data["offices"]:
-  #   offices = [j["name"]]
-  #   level = [j["levels"]]
-
-  #   result.append(offices)
-  #   result.append(level)
-
-
-  # result = []
-  # for i in data["officials"]:
-  #   name = [i["name"]],
-  #   party = [i["party"]]
-
-  #   result.append(name)
-  #   result.append(party)
-
-  # for j in data["offices"]:
-  #   offices = [j["name"]]
-  #   level = [j["levels"]]
-
-  #   result.append(offices)
-  #   result.append(level)
-
   result = []
+  new_data = []
+
+  for i, item in enumerate(data["offices"]):
+    new_data.append([item["name"], item["levels"], i])
+
+  for i, item in enumerate(data["officials"]):
+    # new_data.insert(i, [item["name"], item["party"]])
+    new_data.append([item["name"], item["party"], i])
+
+  print("\n \n \n NEW LIST", new_data)
+
+  data_dict = {}
+  good_data = []
+  # for each item in this list
+  # the item is a list
+  # target == i (start at 0)
+  # if the last number of the item == target:
+  # append to good_data?
+  k = 0
+  for item in new_data:
+    target = k
+    if item[2] == target:
+      good_data.append(item)
+    k += 1
+
+  print("\n \n \n GOOD LIST", good_data)
+
   for item in data["officials"]:
-    # print("\n \n \n ITEM", item)
-    # print("\n \n \n NAME", item["name"])
     rep = RepOut(name = item["name"], party = item["party"])
     result.append(rep)
-    print("\n \n \n REP LIST?", result)
+    # print("\n \n \n REP LIST?", result)
 
-    # result.append(rep)
   return result
-  # return result
-  # return "NAME:", name, "ADDRESS:", address, "PARTY:", party, "OFFICE:", office, "LEVEL:", level, "INDEX", index
 
 
 @router.post("/api/reps")
