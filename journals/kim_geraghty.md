@@ -124,4 +124,14 @@ I plan to spend some time working with the google civics api to start sketching 
 
 Also made a note to add a date_created property to the letter table, so we can later order them by date created.
 
-We will need to figure out how to get the user's zipcode. Instructors mentioned we could probably hit the endpoint with an API call to avoid having to create a poller. Sounds like a great idea. 
+We will need to figure out how to get the user's zipcode. Instructors mentioned we could probably hit the endpoint with an API call to avoid having to create a poller. Sounds like a great idea.
+
+## Wednesday 11/23/2022
+
+Working on the google civics api. Parsing through the JSON data.
+Started to create lists to display the data we want to see.
+Connecting the dots between the office names, names of the official, and the official index, when there are more than one official per office name.
+Separated the zipcode variable so it becomes an input and not a hardcode.
+Once the lists look good, I will try to connect it to our database with the reps selection POST endpoint.
+
+Checked in with the group, everyone is working on a separate piece of the project. Things are moving along well! 
