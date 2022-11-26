@@ -89,7 +89,7 @@ def select_rep(
   rep: RepIn,
   repo: RepRepository = Depends(),
 ):
-  print("\n \n \n REP TEST", rep)
+  # print("\n \n \n REP TEST", rep)
   return repo.create(rep)
 
 @router.get("/api/reps/{reps_id}")
