@@ -18,6 +18,7 @@ class RepOut(BaseModel):
     level: str
     name: str
     party: str
+    address: dict
 
 class RepRepository(BaseModel):
   pass

@@ -23,32 +23,21 @@ async def get_civics_api_reps(zipcode):
   content = json.loads(response.content)
   return content
 
-# @router.get("/civics")
 @router.get("/civics", response_model=Union[List[RepOut], Error])
 def get_reps_from_api(
   zipcode: int,
   data: get_civics_api_reps = Depends()):
   get_civics_api_reps(zipcode=zipcode)
 
-  address = data["officials"][0]["address"]
-  print("\n \n \n ADDRESS", address)
-
-  addresses = []
-  for i in data["officials"]:
-    # if i["address"]:
-      # addresses.append(i["address"])
-    print("\n \n \n I", i)
-  # print("\n \n \n ADDRESSES", addresses)
-
+  # see how many entries there are for offices:
   # number = []
   # for i in data["offices"]:
   #   number.append(i["officialIndices"])
   # print("\n \n \n NUMBER", number)
-  # index = data["offices"][0]["officialIndices"]
 
-  list_a = []
-  list_b = []
-  list_c = []
+  list_a = [] # offices
+  list_b = [] # officials
+  list_c = [] # combined
 
   # gather data from offices
   for i, item in enumerate(data["offices"]):
@@ -56,39 +45,42 @@ def get_reps_from_api(
 
   # gather data from officials
   for i, item in enumerate(data["officials"]):
-    list_b.append([item["name"], item["party"], i])
+    if 'address' in item:
+      list_b.append([item["name"], item["party"], item["address"], i])
+    else:
+      list_b.append([item["name"], item["party"], [{'line1': 'N/A', 'city': 'N/A', 'state': 'N/A', 'zip': 'N/A'}], i])
 
   # combine both data into one list
   for i in list_a:
     for j in list_b:
       if i[1] == ['administrativeArea1']:
-        if i[2][0] == j[2] or j[2] in i[2]:
-          list_c.append([i[0], i[1], j[0], j[1]])
+        if i[2][0] == j[3] or j[3] in i[2]:
+          list_c.append([i[0], i[1], j[0], j[1], j[2]])
 
       if i[1] == ['administrativeArea2']:
-        if i[2][0] == j[2] or j[2] in i[2]:
-          list_c.append([i[0], i[1], j[0], j[1]])
+        if i[2][0] == j[3] or j[3] in i[2]:
+          list_c.append([i[0], i[1], j[0], j[1], j[2]])
 
       if i[1] == ['locality']:
-        if i[2][0] == j[2] or j[2] in i[2]:
-          list_c.append([i[0], i[1], j[0], j[1]])
+        if i[2][0] == j[3] or j[3] in i[2]:
+          list_c.append([i[0], i[1], j[0], j[1], j[2]])
 
   # print("\n \n \n LIST A", list_a)
   # print("\n \n \n LIST B", list_b)
   # print("\n \n \n LIST C", list_c)
 
   result = []
-
   # use the combined list to create the output for the endpoint
   for item in list_c:
     rep = RepOut(
       office = item[0],
       level = item[1][0],
       name = item[2],
-      party = item[3])
+      party = item[3],
+      address = {'line1': item[4][0]['line1'], 'city': item[4][0]['city'], 'state': item[4][0]['state'], 'zip': item[4][0]['zip']}
+      )
     result.append(rep)
-  print("\n \n \n RESULT", result)
-
+  # print("\n \n \n RESULT", result)
   return result
 
 
