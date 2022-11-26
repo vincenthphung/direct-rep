@@ -12,11 +12,12 @@ class RepIn(BaseModel):
     office: str
     level: str
 
+
 class RepOut(BaseModel):
+    office: str
+    level: str
     name: str
     party: str
-    # level: str
-
 
 class RepRepository(BaseModel):
   pass

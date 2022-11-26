@@ -19,7 +19,7 @@ headers = {"x-goog-api-key": google_api_key}
 # "locality" = US cities
 
 async def get_civics_api_reps(zipcode):
-  response = requests.get(url, params={"address": zipcode, "levels": "administrativeArea1"}, headers=headers)
+  response = requests.get(url, params={"address": zipcode, "levels": ["administrativeArea1", "administrativeArea2", "locality"]}, headers=headers)
   content = json.loads(response.content)
   return content
 
@@ -30,53 +30,64 @@ def get_reps_from_api(
   data: get_civics_api_reps = Depends()):
   get_civics_api_reps(zipcode=zipcode)
 
-  # name = data["officials"][0]["name"]
-  # address = data["officials"][0]["address"]
-  # party = data["officials"][0]["party"]
-  # office = data["offices"][0]["name"]
-  # level= data["offices"][0]["levels"]
+  address = data["officials"][0]["address"]
+  print("\n \n \n ADDRESS", address)
 
-  number = []
+  addresses = []
+  for i in data["officials"]:
+    # if i["address"]:
+      # addresses.append(i["address"])
+    print("\n \n \n I", i)
+  # print("\n \n \n ADDRESSES", addresses)
 
-  for i in data["offices"]:
-    number.append(i["officialIndices"])
-
-  print("\n \n \n NUMBER", number)
-
+  # number = []
+  # for i in data["offices"]:
+  #   number.append(i["officialIndices"])
+  # print("\n \n \n NUMBER", number)
   # index = data["offices"][0]["officialIndices"]
 
-  result = []
-  new_data = []
+  list_a = []
+  list_b = []
+  list_c = []
 
+  # gather data from offices
   for i, item in enumerate(data["offices"]):
-    new_data.append([item["name"], item["levels"], i])
+    list_a.append([item["name"], item["levels"], item['officialIndices']])
 
+  # gather data from officials
   for i, item in enumerate(data["officials"]):
-    # new_data.insert(i, [item["name"], item["party"]])
-    new_data.append([item["name"], item["party"], i])
+    list_b.append([item["name"], item["party"], i])
 
-  print("\n \n \n NEW LIST", new_data)
+  # combine both data into one list
+  for i in list_a:
+    for j in list_b:
+      if i[1] == ['administrativeArea1']:
+        if i[2][0] == j[2] or j[2] in i[2]:
+          list_c.append([i[0], i[1], j[0], j[1]])
 
-  data_dict = {}
-  good_data = []
-  # for each item in this list
-  # the item is a list
-  # target == i (start at 0)
-  # if the last number of the item == target:
-  # append to good_data?
-  k = 0
-  for item in new_data:
-    target = k
-    if item[2] == target:
-      good_data.append(item)
-    k += 1
+      if i[1] == ['administrativeArea2']:
+        if i[2][0] == j[2] or j[2] in i[2]:
+          list_c.append([i[0], i[1], j[0], j[1]])
 
-  print("\n \n \n GOOD LIST", good_data)
+      if i[1] == ['locality']:
+        if i[2][0] == j[2] or j[2] in i[2]:
+          list_c.append([i[0], i[1], j[0], j[1]])
 
-  for item in data["officials"]:
-    rep = RepOut(name = item["name"], party = item["party"])
+  # print("\n \n \n LIST A", list_a)
+  # print("\n \n \n LIST B", list_b)
+  # print("\n \n \n LIST C", list_c)
+
+  result = []
+
+  # use the combined list to create the output for the endpoint
+  for item in list_c:
+    rep = RepOut(
+      office = item[0],
+      level = item[1][0],
+      name = item[2],
+      party = item[3])
     result.append(rep)
-    # print("\n \n \n REP LIST?", result)
+  print("\n \n \n RESULT", result)
 
   return result
 
