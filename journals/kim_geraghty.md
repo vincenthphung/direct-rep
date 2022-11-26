@@ -134,4 +134,22 @@ Connecting the dots between the office names, names of the official, and the off
 Separated the zipcode variable so it becomes an input and not a hardcode.
 Once the lists look good, I will try to connect it to our database with the reps selection POST endpoint.
 
-Checked in with the group, everyone is working on a separate piece of the project. Things are moving along well! 
+Checked in with the group, everyone is working on a separate piece of the project. Things are moving along well!
+
+## Friday 11/25/2022
+
+Continued working on reps endpoints.
+
+From google civics api, we are now able to get the data we want, formatted with the RepOut class.
+
+Next steps:
+- create rep-selected table
+- connect it with letter table with a foreign key reference
+- will this require us to recreate the database?
+- connect a POST endpoint to create an instance of rep-selected
+- we will have to connect these on the frontend:
+  - dropdown options will be populated by the google civics api
+  - submit button will go to create the rep-selected instance
+- Can we create multiple rep-selected instances with one button?
+
+TBD

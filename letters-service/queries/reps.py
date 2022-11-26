@@ -12,7 +12,6 @@ class RepIn(BaseModel):
     office: str
     level: str
 
-
 class RepOut(BaseModel):
     office: str
     level: str
@@ -20,5 +19,15 @@ class RepOut(BaseModel):
     party: str
     address: dict
 
+
+class RepSelectedIn(BaseModel):
+    pass
+
+class RepSelectedOut(BaseModel):
+    pass
+
 class RepRepository(BaseModel):
   pass
+
+
+# use RepSelected to populate the rep-selected table
