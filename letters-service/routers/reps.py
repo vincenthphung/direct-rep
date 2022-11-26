@@ -2,7 +2,7 @@ from fastapi import APIRouter, Response, Depends
 from typing import Optional, Union, List
 import requests
 import json
-from queries.reps import(Error, RepIn, RepOut, RepRepository)
+from queries.reps import(Error, RepIn, RepOut, CivicsOut, RepRepository)
 from .new_keys import GOOGLE_CIVICS_KEY
 
 router = APIRouter()
@@ -23,7 +23,7 @@ async def get_civics_api_reps(zipcode):
   content = json.loads(response.content)
   return content
 
-@router.get("/civics", response_model=Union[List[RepOut], Error])
+@router.get("/civics", response_model=Union[List[CivicsOut], Error])
 def get_reps_from_api(
   zipcode: int,
   data: get_civics_api_reps = Depends()):
@@ -72,7 +72,7 @@ def get_reps_from_api(
   result = []
   # use the combined list to create the output for the endpoint
   for item in list_c:
-    rep = RepOut(
+    rep = CivicsOut(
       office = item[0],
       level = item[1][0],
       name = item[2],
@@ -84,9 +84,13 @@ def get_reps_from_api(
   return result
 
 
-@router.post("/api/reps")
-def select_reps_for_letter():
-    return{"message": "Hello Letter"}
+@router.post("/api/reps", response_model=Union[RepOut, Error])
+def select_rep(
+  rep: RepIn,
+  repo: RepRepository = Depends(),
+):
+  print("\n \n \n REP TEST", rep)
+  return repo.create(rep)
 
 @router.get("/api/reps/{reps_id}")
 def get_reps_details():
