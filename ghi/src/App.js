@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import Construct from "./Construct.js";
 import ErrorNotification from "./ErrorNotification";
 import AccountForm from "./AccountForm";
+import RepForm from "./RepForm";
 import "./App.css";
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/signup" element={<AccountForm />} />
+          <Route path="/create/reps" element={<RepForm />} />
         </Routes>
       </BrowserRouter>
       <ErrorNotification error={error} />

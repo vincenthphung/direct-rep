@@ -143,13 +143,17 @@ Continued working on reps endpoints.
 From google civics api, we are now able to get the data we want, formatted with the RepOut class.
 
 Next steps:
-- create rep-selected table
-- connect it with letter table with a foreign key reference
-- will this require us to recreate the database?
-- connect a POST endpoint to create an instance of rep-selected
+- create rep table ✅
+- connect it with letter table with a foreign key reference ✅
+- connect a POST endpoint to create an instance of rep ✅
 - we will have to connect these on the frontend:
   - dropdown options will be populated by the google civics api
   - submit button will go to create the rep-selected instance
 - Can we create multiple rep-selected instances with one button?
 
-TBD
+Working on reps frontend:
+- added local host path in docker compose file (last line): REACT_APP_LETTERS_API_HOST: http://localhost:8090
+- added RepForm.js file in src folder
+- added repsApi.js file in store folder
+- added to store.js: import { repsApi } from "./repsApi"; and line 9 [repsApi.reducerPath]: repsApi.reducer,
+- imported and added path to file on App.js in routes <Route path="/create/reps" element={<RepForm />} />
