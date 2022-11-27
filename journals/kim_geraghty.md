@@ -147,7 +147,7 @@ Next steps:
 - connect it with letter table with a foreign key reference ✅
 - connect a POST endpoint to create an instance of rep ✅
 - we will have to connect these on the frontend:
-  - dropdown options will be populated by the google civics api
+  - dropdown options will be populated by the google civics api ✅
   - submit button will go to create the rep-selected instance
 - Can we create multiple rep-selected instances with one button?
 

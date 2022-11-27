@@ -41,7 +41,7 @@ function RepForm() {
           console.log("\n \n DATA", data);
           // return data
           setList(data);
-          console.log("\n \n REPS LIST", reps_list);
+          // console.log("\n \n REPS LIST", reps_list);
         }
       }
 
@@ -58,7 +58,6 @@ function RepForm() {
     <form
     // onSubmit={handleSubmit}
     >
-
       <div className="mb-3">
         <select onChange={setName} required
           id="reps" name="reps" className="form-select">
