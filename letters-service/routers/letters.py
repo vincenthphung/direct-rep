@@ -82,4 +82,3 @@ def get_one_letter(
 @router.get("/api/issues")
 def get_issues():
     return{"message": "Hello World"}
-

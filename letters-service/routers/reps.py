@@ -92,10 +92,19 @@ def select_rep(
   # print("\n \n \n REP TEST", rep)
   return repo.create(rep)
 
-@router.get("/api/reps/{reps_id}")
-def get_reps_details():
-    return{"message": "Hello World"}
+@router.get("/reps/{rep_id}", response_model=Optional[RepOut])
+def get_one_rep_selection(
+    rep_id: int,
+    response: Response,
+    repo: RepRepository = Depends(),
+    ) -> RepOut:
+    rep = repo.get_one(rep_id)
+    if rep is None:
+        response.status_code = 404
+    return rep
 
-@router.get("/api/reps")
-def get_reps_list():
-    return{"message": "Hello World"}
+@router.get("/api/reps", response_model=Union[List[RepOut], Error])
+def get_all_reps_selection(
+    repo: RepRepository = Depends(),
+    ):
+    return repo.get_all()

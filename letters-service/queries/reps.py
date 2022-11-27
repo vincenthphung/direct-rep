@@ -67,3 +67,71 @@ class RepRepository(BaseModel):
         except Exception:
             print("ERROR")
             return {"message": "Create rep did not work"}
+
+    def get_all(self) -> Union[Error, List[RepOut]]:
+        try:
+            # connect to the database
+            with pool.connection() as conn:
+                # get a cursor (something to run SQL with)
+                with conn.cursor() as db:
+                    # run our SELECT statement
+                    result = db.execute(
+                        """
+                        SELECT rep_id, office, level, name, party, address, letter_id
+                        FROM rep
+                        ORDER BY rep_id;
+                        """
+                    )
+                    result = []
+                    for record in db:
+                        rep = RepOut(
+                            rep_id = record[0],
+                            office = record[1],
+                            level = record[2],
+                            name = record[3],
+                            party = record[4],
+                            address = record[5],
+                            letter_id = record[6]
+                        )
+                        result.append(rep)
+                    return result
+        except Exception as e:
+            print("ERROR")
+            print(e)
+            return{"message": "could not get all reps"}
+
+
+    def get_one(self, rep_id: int) -> Optional[RepOut]:
+        try:
+            # connect to the database
+            with pool.connection() as conn:
+            # get a cursor (something to run SQL with)
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT rep_id, office, level, name, party, address, letter_id
+                        FROM rep
+                        WHERE rep_id = %s
+                        """,
+                    [rep_id]
+                    )
+                    record = result.fetchone()
+                    if record is None:
+                        return None
+                    return self.record_to_rep_out(record)
+
+        except Exception as e:
+            print(e)
+            return{"message": "could not get that rep"}
+
+
+    def record_to_rep_out(self, record):
+        return RepOut(
+                        rep_id = record[0],
+                        office = record[1],
+                        level = record[2],
+                        name = record[3],
+                        party = record[4],
+                        address = record[5],
+                        letter_id = record[6]
+            )
