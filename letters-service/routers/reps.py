@@ -17,6 +17,7 @@ headers = {"x-goog-api-key": google_api_key}
 # "administrativeArea1" = US states
 # "administrativeArea2" = US counties
 # "locality" = US cities
+# put counties and cities together, add federal
 
 async def get_civics_api_reps(zipcode):
   response = requests.get(url, params={"address": zipcode, "levels": ["administrativeArea1", "administrativeArea2", "locality"]}, headers=headers)
