@@ -33,24 +33,28 @@ function RepForm() {
   const [reps_list, setList] = useState([]);
   const [createRep, result] = useCreateRepMutation();
 
+  // const reps_list_test = []
 
-    useEffect(() => {
-      //  to select the reps
-      async function fetchReps(zipcode) {
-        const urlCivics = `http://localhost:8090/civics?zipcode=${zipcode}`;
-        const response = await fetch(urlCivics);
-        if (response.ok) {
-          const data = await response.json();
-          console.log("\n \n DATA", data);
-          // return data
-          setList(data);
-          // console.log("\n \n REPS LIST", reps_list);
-        }
+  useEffect(() => {
+    //  to select the reps
+    async function fetchReps(zipcode) {
+      const urlCivics = `http://localhost:8090/civics?zipcode=${zipcode}`;
+      const response = await fetch(urlCivics);
+      if (response.ok) {
+        const data = await response.json();
+        console.log("\n \n DATA", data);
+        // return data
+        // const reps_list_test = data
+        setList(data);
+        // console.log("\n \n REPS LIST", reps_list);
       }
+    }
 
-      fetchReps(`02116`);
-      console.log("\n \n REPS LIST", reps_list);
-    },[]);
+    fetchReps(`02116`);
+    // setList(data);
+    // console.log("\n \n REPS LIST", reps_list);
+    // console.log("\n \n REPS LIST", reps_list_test);
+  }, []);
 
   // async function handleSubmit(e) {
   //   e.preventDefault();
@@ -62,12 +66,17 @@ function RepForm() {
     // onSubmit={handleSubmit}
     >
       <div className="mb-3">
-        <select onChange={setName} required
-          id="reps" name="reps" className="form-select">
+        <select
+          onChange={setName}
+          required
+          id="reps"
+          name="reps"
+          className="form-select"
+        >
           <option value="">See your reps</option>
           {reps_list.map((rep) => {
             return (
-              <option key={rep.id} value={rep.level}>
+              <option key={rep.name} value={rep.level}>
                 {rep.name}
               </option>
             );
