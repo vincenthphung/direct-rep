@@ -43,23 +43,20 @@ function RepForm() {
       if (response.ok) {
         const data = await response.json();
         console.log("\n \n DATA", data);
-        // return data
-        // const reps_list_test = data
         setList(data);
-        // console.log("\n \n REPS LIST", reps_list);
       }
     }
 
     fetchReps(`02116`);
-    // setList(data);
     // console.log("\n \n REPS LIST", reps_list);
-    // console.log("\n \n REPS LIST", reps_list_test);
   }, []);
 
   // async function handleSubmit(e) {
   //   e.preventDefault();
   //   createRep({ office, level, name, party, address, letter_id });
   // }
+
+  // async function createRep() {}
 
   return (
     <form
