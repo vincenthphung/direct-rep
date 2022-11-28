@@ -18,8 +18,8 @@ steps = [
         INSERT INTO issue VALUES (9, 'Social Security/Medicare/Medicaid', 'our current welfare programs:\n');
         INSERT INTO issue VALUES (10, '2020 Election Fraud', 'investigating voter fraud in the 2020 election:\n');
         INSERT INTO issue VALUES (11, 'Gun Law Reform', 'reforming firearm legislation:\n');
-        INSERT INTO issue VALUES (12, 'Lowering Taxes', 'lowering taxes');
-        INSERT INTO issue VALUES (13, 'Military Spending', 'expanding military spending');
+        INSERT INTO issue VALUES (12, 'Lowering Taxes', 'lowering taxes:\n');
+        INSERT INTO issue VALUES (13, 'Military Spending', 'expanding military spending:\n');
         INSERT INTO issue VALUES (14, 'Congressional Term Limits', 'enacting term limits on Congress:\n');
         INSERT INTO issue VALUES (15, 'Supreme Court Term Limits', 'enacting limits on Supreme Court justices:\n');
         """,

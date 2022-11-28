@@ -3,8 +3,11 @@ from typing import Optional, Union, List
 import requests
 import json
 import os
-from queries.letters import(Error, LetterIn, LetterOut, LetterUpdate, LetterRepository)
+from queries.letters import(Error, LetterIn, LetterOut, LetterUpdate, LetterRepository, IssueRepository)
 from .new_keys import OPENAI_API_KEY
+
+
+
 
 router = APIRouter()
 
@@ -80,6 +83,8 @@ def get_one_letter(
     return letter
 
 @router.get("/api/issues")
-def get_issues():
-    return{"message": "Hello World"}
-
+def get_all_issues(
+    repo: IssueRepository = Depends(),
+    ):
+    return repo.get_all()
+    
