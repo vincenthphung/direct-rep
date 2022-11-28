@@ -24,7 +24,12 @@ function InputLabel(props) {
 }
 
 function RepForm() {
-  const [rep_name, setName] = useState("");
+  const [name, setName] = useState("");
+  const [office, setOffice] = useState("");
+  const [level, setLevel] = useState("");
+  const [party, setParty] = useState("");
+  const [address, setAddress] = useState("");
+  const [letter_id, setLetterId] = useState("");
   const [reps_list, setList] = useState([]);
   const [createRep, result] = useCreateRepMutation();
 
@@ -33,9 +38,7 @@ function RepForm() {
       //  to select the reps
       async function fetchReps(zipcode) {
         const urlCivics = `http://localhost:8090/civics?zipcode=${zipcode}`;
-
         const response = await fetch(urlCivics);
-
         if (response.ok) {
           const data = await response.json();
           console.log("\n \n DATA", data);
@@ -51,7 +54,7 @@ function RepForm() {
 
   // async function handleSubmit(e) {
   //   e.preventDefault();
-  //   createRep({ rep_name });
+  //   createRep({ office, level, name, party, address, letter_id });
   // }
 
   return (
