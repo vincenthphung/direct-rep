@@ -3,6 +3,6 @@
   "python.formatting.provider": "black",
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "files.autoSave": "off",
+  "files.autoSave": "afterDelay",
   "cSpell.words": ["zipcode"]
 }
