@@ -1,6 +1,6 @@
 steps = [
     [
-        # "Create The Letter" UP ( reps REFERENCES NOT NULL needs to done)
+        # "Create The Letter" UP
         """
         CREATE TABLE letter(
             id SERIAL PRIMARY KEY NOT NULL,

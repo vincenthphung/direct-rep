@@ -18,6 +18,11 @@ class LetterOut(BaseModel):
     topic: str
     stance: bool
     content: str
+    
+class Issue(BaseModel):
+    id: int
+    user_issue: str
+    openai_issue: str
 
 class LetterRepository:
     def create(self, topic: str, stance: bool, content: str) -> Union[LetterOut, Error]:
@@ -136,3 +141,29 @@ class LetterRepository:
             stance = record[2],
             content = record[3]
             )
+
+class IssueRepository:
+    def get_all(self) -> Union[Error, List[Issue]]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT id, user_issue, openai_issue
+                        FROM issue
+                        ORDER BY id;
+                        """
+                    )
+                    result = []
+                    for record in db:
+                        issue = Issue(
+                            id = record[0],
+                            user_issue= record[1],
+                            openai_issue= record[2]
+                        )
+                        result.append(issue)
+                    return result
+        except Exception as e:
+            print("ERROR")
+            print(e)
+            return{"message": "could not get all issues"}
