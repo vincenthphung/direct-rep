@@ -30,10 +30,10 @@ function RepForm() {
   const [party, setParty] = useState("");
   const [address, setAddress] = useState("");
   const [letter_id, setLetterId] = useState("");
-  const [reps_list, setList] = useState([]);
-  const [createRep, result] = useCreateRepMutation();
 
-  // const reps_list_test = []
+  const [reps_list, setList] = useState([]);
+
+  const [createRep, result] = useCreateRepMutation();
 
   useEffect(() => {
     //  to select the reps
@@ -56,7 +56,12 @@ function RepForm() {
   //   createRep({ office, level, name, party, address, letter_id });
   // }
 
-  // async function createRep() {}
+  async function handleRepChange(event) {
+    const rep = event.target.value;
+    console.log("REP CHANGE", rep, rep.name);
+    setName({ name: rep.name });
+    setOffice(rep.office);
+  }
 
   return (
     <form
@@ -64,7 +69,7 @@ function RepForm() {
     >
       <div className="mb-3">
         <select
-          onChange={setName}
+          onChange={handleRepChange}
           required
           id="reps"
           name="reps"
@@ -73,7 +78,7 @@ function RepForm() {
           <option value="">See your reps</option>
           {reps_list.map((rep) => {
             return (
-              <option key={rep.name} value={rep.level}>
+              <option key={rep.name} value={rep}>
                 {rep.name}
               </option>
             );
