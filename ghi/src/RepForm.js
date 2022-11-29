@@ -15,8 +15,8 @@ function RepForm() {
   const [repId, setRepId] = useState(0);
   const [createRep, result] = useCreateRepMutation();
 
+  //  to select the reps
   useEffect(() => {
-    //  to select the reps
     async function fetchReps(zipcode) {
       const urlCivics = `http://localhost:8090/civics?zipcode=${zipcode}`;
       const response = await fetch(urlCivics);
@@ -27,6 +27,7 @@ function RepForm() {
       }
     }
     fetchReps(`90017`);
+    // connect this with the user account zip code
   }, []);
 
   console.log("\n \n REPS LIST", reps_list);
@@ -36,6 +37,7 @@ function RepForm() {
     event.preventDefault();
     const rep = event.target.value;
     setName(rep);
+    setLetterId(2); // connect this with letter creation process
     for (let i = 0; i < reps_list.length; i++) {
       if (rep === reps_list[i].name) {
         setOffice(reps_list[i].office);
@@ -47,7 +49,6 @@ function RepForm() {
         );
       }
     }
-    setLetterId(4); // connect this with letter creation process
   }
 
   // to send that data to the database via the store reducer:
@@ -57,9 +58,9 @@ function RepForm() {
     createRep({ office, level, name, party, address, letter_id });
   }
 
+  //  to show selected reps
   useEffect(() => {
     if (update) {
-      //  to show selected reps
       async function seeReps() {
         const urlReps = `http://localhost:8090/reps/letter/${letter_id}`;
         const response = await fetch(urlReps);
@@ -71,16 +72,15 @@ function RepForm() {
         }
       }
       seeReps();
-      // setUpdate(false);
     }
-  }, [letter_id, update]);
+  }, [letter_id, selection, update]);
 
-  console.log("Selection", selection);
+  // console.log("Selection", selection);
 
   async function deleteRep(id) {
     // if (window.confirm("Are you sure: This Letter will be Deleted")) {
     setRepId(id);
-    // console.log("REP ID", id);
+    setUpdate(true);
     await fetch(
       `http://localhost:8090/reps/letters/${letter_id}?rep_id=${repId}`,
       {
@@ -89,7 +89,6 @@ function RepForm() {
     );
   }
   // }
-  // setUpdate(true);
 
   return (
     <div className="row">
@@ -134,7 +133,7 @@ function RepForm() {
                 </tr>
               </thead>
               <tbody>
-                {selection.map((rep, i, j, k) => {
+                {selection.map((rep, i, j) => {
                   return (
                     <tr>
                       <td key={rep[j]} value={rep.name}>
@@ -149,7 +148,7 @@ function RepForm() {
                         key={rep.rep_id}
                         value={rep.rep_id}
                       >
-                        Delete {rep.rep_id}
+                        Delete
                       </td>
                     </tr>
                   );
