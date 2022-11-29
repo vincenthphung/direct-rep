@@ -23,6 +23,9 @@ function Navb() {
             <Nav.Link as={NavLink} to="/eletter">
               Edit Letter
             </Nav.Link>
+            <Nav.Link as={NavLink} to="/create/reps">
+              Create Reps
+            </Nav.Link>
           </Nav>
           <Nav>
             <Nav.Link href="#deets">Edit Account</Nav.Link>

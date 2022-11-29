@@ -20,7 +20,7 @@ headers = {"x-goog-api-key": google_api_key}
 # put counties and cities together, add federal
 
 async def get_civics_api_reps(zipcode):
-  response = requests.get(url, params={"address": zipcode, "levels": ["administrativeArea1", "administrativeArea2", "locality"]}, headers=headers)
+  response = requests.get(url, params={"address": zipcode, "levels": ["country", "administrativeArea1", "administrativeArea2", "locality"]}, headers=headers)
   content = json.loads(response.content)
   return content
 
@@ -54,6 +54,10 @@ def get_reps_from_api(
   # combine both data into one list
   for i in list_a:
     for j in list_b:
+      if i[1] == ['country']:
+        if i[2][0] == j[3] or j[3] in i[2]:
+          list_c.append([i[0], i[1], j[0], j[1], j[2]])
+
       if i[1] == ['administrativeArea1']:
         if i[2][0] == j[3] or j[3] in i[2]:
           list_c.append([i[0], i[1], j[0], j[1], j[2]])
@@ -109,3 +113,22 @@ def get_all_reps_selection(
     repo: RepRepository = Depends(),
     ):
     return repo.get_all()
+
+@router.get("/reps/letter/{letter_id}", response_model=Union[List[RepOut], Error])
+def get_reps_per_letter(
+    letter_id: int,
+    response: Response,
+    repo: RepRepository = Depends(),
+    ):
+    rep = repo.get_per_letter(letter_id)
+    if rep is None:
+        response.status_code = 404
+    return rep
+
+@router.delete("/reps/letters/{letter_id}", response_model=bool)
+def delete_reps_from_letter(
+    letter_id: int,
+    rep_id: int,
+    repo: RepRepository = Depends(),
+    ) -> bool:
+    return repo.delete(letter_id, rep_id)
