@@ -70,6 +70,13 @@ def edit_letter_body(
   print("\n \n CONTENT", content, letter_id)
   return repo.update(letter_id, content)
 
+@router.delete("/letters/{letter_id}", response_model=bool)
+def delete_letter(
+    letter_id: int,
+    repo: LetterRepository = Depends(),
+    ) -> bool:
+    return repo.delete(letter_id)
+
 
 @router.get("/letters/{letter_id}", response_model=Optional[LetterOut])
 def get_one_letter(
@@ -87,3 +94,11 @@ def get_all_issues(
     repo: IssueRepository = Depends(),
     ):
     return repo.get_all()
+
+
+# @router.delete("/api/letters/{letter_id}", response_model=bool)
+# def delete_letter(
+#     letter_id: int,
+#     repo: LetterRepository = Depends(),
+# ) -> bool:
+#     return repo.delete(letter_id)

@@ -18,7 +18,7 @@ class LetterOut(BaseModel):
     topic: str
     stance: bool
     content: str
-    
+
 class Issue(BaseModel):
     id: int
     user_issue: str
@@ -132,6 +132,22 @@ class LetterRepository:
         except Exception as e:
             print(e)
             return{"message": "could not get that letter"}
+
+    def delete(self, letter_id: int) -> bool:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        DELETE FROM letter
+                        WHERE id = %s
+                        """,
+                        [letter_id]
+                    )
+                    return True
+        except Exception as e:
+            print(e)
+            return False
 
 
     def record_to_letter_out(self, record):
