@@ -9,6 +9,7 @@ function Dashboard() {
   const [oneContent, setContent] = useState("Letter content");
   const [oneStance, setStance] = useState("Letter stance");
   const [oneTopic, setTopic] = useState("Letter topic");
+  const [oneDate, setDate] = useState("Date");
   const [repSelection, setSelection] = useState([]);
 
   useEffect(() => {
@@ -37,6 +38,7 @@ function Dashboard() {
     setContent(content["content"]);
     setStance(content["stance"]);
     setTopic(content["topic"]);
+    setDate(content["created"]);
     console.log("LETTER ONE CONTENT", content);
 
     //  to show selected reps
@@ -88,7 +90,7 @@ function Dashboard() {
               {letters.map((letter) => {
                 return (
                   <tr key={letter.id}>
-                    <td>Letter date - tbd</td>
+                    <td>{letter.created}</td>
                     <td>
                       {letter.stance ? "in favor of" : "in opposition to"}
                     </td>
@@ -123,7 +125,7 @@ function Dashboard() {
           <h2>Detail letter view</h2>
           <div>
             <Card className="text-center">
-              <Card.Header>Date created:</Card.Header>
+              <Card.Header>Date created: {oneDate} </Card.Header>
               <Card.Body>
                 <Card.Title>
                   Write a letter{" "}
