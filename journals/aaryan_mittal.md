@@ -200,3 +200,19 @@ We spend more time on making our endpoints more efficient. We made changes to th
 2. Made all the issues for letters.
 
 3. Get reps API working in frontend.
+
+## November 29, 2022 (Monday)
+
+### Work done during the day
+
+1. Today we worked more upon the create letter frontend. We faced a lot of challenged when connecting it to the backend as we needed to make an api call. The main issue faced was on the url. I started pair programming with Kim and Vincent. We worked upon the params of the url but were facing problems while linking it to the topic and stance part of the url. After doing a lot off research we found out that topic could be sent in the body of the mutation and it now made the body params of the url variable. Although, this did not solve the issue as topic put in by the user was not being a part of the url param. After trying different patterns, I tried curly braces for the topic params in the mutation as the topic started params got connected with the users topic.
+
+2. The first param of the create user url was working. The next problem was connecting the stance of the user to the url to make the api call. We tried the same pattern with stance as we did wit topic. Although, it did not work. After doing a lot research through the documentation, we found a different way through implementing args(arguments) in the url. We, tried this and it still did not work. We were losing hope and I realized that there was a problem in form and not in the mutation. So, the problem was the user's input was not getting read by the browser and we fixed it in two minutes. And, finally, the url for the create letter was working.
+
+3. John worked upon the issues as there were problems in the database. In the end of every issues there was a "/n" coming up.
+
+### Work achieved during the day
+
+1. Create letter frontend connected with the backend.
+
+2. All the issues working in the backend.
