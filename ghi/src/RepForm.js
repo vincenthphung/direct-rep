@@ -12,8 +12,6 @@ function RepForm() {
   const [letter_id, setLetterId] = useState("letter id");
   const [reps_list, setList] = useState([]);
   const [selection, setSelection] = useState([]);
-  const [update, setUpdate] = useState(true);
-  const [repId, setRepId] = useState(0);
   const [createRep, result] = useCreateRepMutation();
 
   // to get the id of the most recent letter created:
@@ -74,72 +72,34 @@ function RepForm() {
   // to send that data to the database via the store reducer:
   async function handleSubmit(e) {
     e.preventDefault();
-    setUpdate(true);
-    createRep({ office, level, name, party, address, letter_id });
+    createRep({ office, level, name, party, address, letter_id }).then(() =>
+      showReps(letter_id)
+    );
   }
 
-  // //  to show selected reps
-  // useEffect(() => {
-  //   if (update) {
-  //     async function seeReps() {
-  //       const urlReps = `http://localhost:8090/reps/letter/${letter_id}`;
-  //       const response = await fetch(urlReps);
-  //       if (response.ok) {
-  //         await response.json().then((data) => {
-  //           setSelection(data);
-  //           setUpdate(false);
-  //         });
-  //         // console.log("\n \n DATA", data);
-  //         // setSelection(data);
-  //         // console.log("Selection", selection);
-  //         // setUpdate(false);
-  //       }
-  //     }
-  //     seeReps();
-  //   }
-  // }, [letter_id, update]);
+  console.log("SELECTION", selection);
+
+  async function showReps(letter_id) {
+    const urlReps = `http://localhost:8090/reps/letter/${letter_id}`;
+    const response = await fetch(urlReps);
+    if (response.ok) {
+      const data = await response.json();
+      setSelection(data);
+    }
+  }
 
   useEffect(() => {
-    async function seeReps() {
-      const urlReps = `http://localhost:8090/reps/letter/7`;
-      const response = await fetch(urlReps);
-      if (response.ok) {
-        await response.json().then((data) => {
-          setSelection(data);
-        });
-        // console.log("\n \n DATA", data);
-        // setSelection(data);
-        // console.log("Selection", selection);
-        // setUpdate(false);
-      }
-    }
-    seeReps();
-  }, [selection.length]);
-
-  console.log("SELECTION", selection);
-  // async function showReps(letter_id) {
-  //   const urlReps = `http://localhost:8090/reps/letter/${letter_id}`;
-  //   const response = await fetch(urlReps);
-  //   if (response.ok) {
-  //     const data = await response.json();
-  //     setSelection(data);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   showReps();
-  // }, [selection]);
+    showReps(letter_id);
+  }, []);
 
   async function deleteRep(id) {
     // if (window.confirm("Are you sure: This Letter will be Deleted")) {
-    setRepId(id);
-    setUpdate(true);
     await fetch(
-      `http://localhost:8090/reps/letters/${letter_id}?rep_id=${repId}`,
+      `http://localhost:8090/reps/letters/${letter_id}?rep_id=${id}`,
       {
         method: "DELETE",
       }
-    );
+    ).then(() => showReps(letter_id));
   }
   // }
 
@@ -219,3 +179,24 @@ function RepForm() {
 }
 
 export default RepForm;
+
+// //  to show selected reps
+// useEffect(() => {
+//   if (update) {
+//     async function seeReps() {
+//       const urlReps = `http://localhost:8090/reps/letter/${letter_id}`;
+//       const response = await fetch(urlReps);
+//       if (response.ok) {
+//         await response.json().then((data) => {
+//           setSelection(data);
+//           setUpdate(false);
+//         });
+//         // console.log("\n \n DATA", data);
+//         // setSelection(data);
+//         // console.log("Selection", selection);
+//         // setUpdate(false);
+//       }
+//     }
+//     seeReps();
+//   }
+// }, [letter_id, update]);
