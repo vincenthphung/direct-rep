@@ -94,3 +94,16 @@ Today was a super prouductive day. Everyone did one endpoint so we got
 > Account: (update)
 
 working fully with the back-end and the databases which is awesome! Today Aaryan also got the Signup page fully working between front-end/back-end/AND database which is awesome. He even did hooks and redux in the React. Really cool stuff. I feel like we're working at a really good pace to not only finish early, but potentially with enough time to work on some really cool stretch-goals that we've talked about. 
+
+## 11/23/2022 (Wednesday)
+Started working on the Issues Table we need to add. What fields it needs, etc. Gonna try and get this implemeneted sometime over the weekend.
+
+## 11/27/2022 (Sunday)
+Got the Issues Table created in the "letters" db. Got the Issues Table pre-populated with our data. Got migrations running "on-build" for the Letters Service. Got get_all Issues endpoint connected to Issues Table.
+
+## 11/28/2022 (Monday)
+Got caught up with the team with what everyone worked on over the weekend. Got everything all merged and copacetic between branches and on main. 
+
+## 11/29/2022 (Tuesday)
+ - [ ] add created_date to Letter Table
+ - [ ] 
