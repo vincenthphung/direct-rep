@@ -49,7 +49,7 @@ function LetterForm(props) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    createLetter({ topic });
+    createLetter({ topic, stance });
   }
 
   return (

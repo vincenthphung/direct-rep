@@ -12,11 +12,15 @@ export const lettersApi = createApi({
       // providesTags: ['LettersList'],
     }),
     createLetter: builder.mutation({
-      query: ({ topic, stance }) => ({
-        method: "post",
-        url: `api/letters?topic=${topic}&stance=${stance}`,
-        // body: { topic, stance },
-      }),
+      query: (arg) => {
+        const { topic, stance } = arg;
+        console.log(arg);
+        return {
+          method: "post",
+          url: `api/letters?topic=${topic}&stance=${stance}`,
+          params: { topic, stance },
+        };
+      },
       // invalidatesTags: ['LettersList'],
     }),
   }),
