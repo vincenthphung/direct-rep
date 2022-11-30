@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import { useCreateRepMutation } from "./store/repsApi";
+import { Link } from "react-router-dom";
 
 function RepForm() {
   const [name, setName] = useState("name");
@@ -8,16 +9,34 @@ function RepForm() {
   const [level, setLevel] = useState("level");
   const [party, setParty] = useState("party");
   const [address, setAddress] = useState("address");
-  // const [letter_id, setLetterId] = useState("letter id");
+  const [letter_id, setLetterId] = useState("letter id");
   const [reps_list, setList] = useState([]);
   const [selection, setSelection] = useState([]);
   const [update, setUpdate] = useState(true);
   const [repId, setRepId] = useState(0);
-  const [counter, setCounter] = useState(0);
   const [createRep, result] = useCreateRepMutation();
 
-  // setLetterId(4); // connect this with letter creation process
-  const letter_id = 4;
+  // const letter_id = 4;
+
+  // to get the id of the most recent letter created:
+  useEffect(() => {
+    async function fetchLetterId() {
+      const urlLetter = `http://localhost:8090/api/letters`;
+      const response = await fetch(urlLetter);
+      if (response.ok) {
+        const data = await response.json();
+        // console.log("LETTER DATA", data);
+        for (let i = 0; i < data.length; i++) {
+          if (i === data.length - 1) {
+            const lastId = data[i].id;
+            // console.log("LAST", lastId);
+            setLetterId(lastId);
+          }
+        }
+      }
+    }
+    fetchLetterId();
+  }, []);
 
   //  to select the reps
   useEffect(() => {
@@ -41,7 +60,6 @@ function RepForm() {
     event.preventDefault();
     const rep = event.target.value;
     setName(rep);
-    // setLetterId(4); // connect this with letter creation process
     for (let i = 0; i < reps_list.length; i++) {
       if (rep === reps_list[i].name) {
         setOffice(reps_list[i].office);
@@ -83,7 +101,6 @@ function RepForm() {
   //  to show selected reps
   useEffect(() => {
     if (update) {
-      // if (counter )
       async function seeReps() {
         const urlReps = `http://localhost:8090/reps/letter/${letter_id}`;
         const response = await fetch(urlReps);
@@ -124,7 +141,7 @@ function RepForm() {
   //   }
   // }, [letter_id, update]);
 
-  console.log("LETTER ID", letter_id);
+  // console.log("LETTER ID", letter_id);
 
   async function deleteRep(id) {
     // if (window.confirm("Are you sure: This Letter will be Deleted")) {
@@ -205,7 +222,9 @@ function RepForm() {
               </tbody>
             </table>
           </div>
-          <button className="btn btn-primary">Continue to final page</button>
+          <Link to="/review">
+            <button className="btn btn-primary">Continue to final page</button>
+          </Link>
         </div>
       </div>
     </div>

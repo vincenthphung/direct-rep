@@ -8,7 +8,7 @@ function Navb() {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand as={NavLink} to="/dashboard">
+        <Navbar.Brand as={NavLink} to="/">
           DirectREP
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -23,12 +23,17 @@ function Navb() {
             <Nav.Link as={NavLink} to="/eletter">
               Edit Letter
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/create/reps">
-              Create Reps
+            <Nav.Link as={NavLink} to="/selectreps">
+              Select Reps
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/review">
+              Review
             </Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link href="#deets">Edit Account</Nav.Link>
+            <Nav.Link as={NavLink} to="/eaccount">
+              Edit Account
+            </Nav.Link>
             <Nav.Link href="#deets">Logout</Nav.Link>
           </Nav>
         </Navbar.Collapse>

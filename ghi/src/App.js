@@ -9,6 +9,9 @@ import Navigation from "./Nav";
 import Dashboard from "./Dashboard";
 import LetterForm from "./CreateLetter";
 import EditLetter from "./EditLetter";
+import ReviewForm from "./Review";
+import LandingPage from "./Landing";
+import EditAccount from "./EditAccount";
 
 function App() {
   const [launch_info, setLaunchInfo] = useState([]);
@@ -38,12 +41,15 @@ function App() {
       <BrowserRouter>
         <Navigation />
         <Routes>
+          <Route path="/" element={<LandingPage />} />
           <Route path="/signup" element={<AccountForm />} />
-          <Route path="/create/reps" element={<RepForm />} />
+          <Route path="/eaccount" element={<EditAccount />} />
+          <Route path="/selectreps" element={<RepForm />} />
           <Route path="/signup" element={<AccountForm />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/cletter" element={<LetterForm />} />
           <Route path="/eletter" element={<EditLetter />} />
+          <Route path="/review" element={<ReviewForm />} />
         </Routes>
       </BrowserRouter>
       <ErrorNotification error={error} />

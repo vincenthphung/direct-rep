@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import React from "react";
 import Form from "react-bootstrap/Form";
-// import InputGroup from "react-bootstrap/InputGroup";
-// import Button from "react-bootstrap/Button";
 import { useCreateLetterMutation } from "./store/lettersApi";
 
 function InputLabel(props) {
@@ -31,21 +28,7 @@ function LetterForm(props) {
   const [topic, setTopic] = useState("");
   const [stance, setStance] = useState(false);
   // const [content, setContent] = useState("");
-  // const { topic = "create" } = useParams();
   const [createLetter, result] = useCreateLetterMutation();
-
-  // useEffect(() => {
-  //   async function fetchContent(topic, stance) {
-  //     const urlLetter = `http://localhost:8090/api/letters?topic=${topic}&stance=${stance}`;
-  //     const response = await fetch(urlLetter);
-  //     if (response.ok) {
-  //       const data = await response.json();
-  //       console.log("\n \n DATA", data);
-  //       setContent(data);
-  //     }
-  //   }
-  //   fetchContent(``);
-  // }, []);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -53,32 +36,43 @@ function LetterForm(props) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <InputLabel
-        id="Topic"
-        placeholder="Enter the Topic"
-        labeltext="Topic"
-        value={topic}
-        onChange={(e) => setTopic(e.target.value)}
-        type="text"
-      />
-      <Form.Select
-        aria-label="Default select example"
-        id="stance"
-        placeholder="Stance"
-        labeltext="Stance"
-        value={stance}
-        onChange={(e) => setStance(e.target.value === "true" ? true : false)}
-        type="boolean"
-      >
-        <option>Stance</option>
-        <option value={true}>For</option>
-        <option value={false}>Against</option>
-      </Form.Select>
-      <button type="submit" className="btn btn-primary">
-        Submit
-      </button>
-    </form>
+    <div className="row">
+      <div className="offset-3 col-6">
+        <div className="shadow p-4 mt-4">
+          <h1>Create your letter</h1>
+          <form onSubmit={handleSubmit}>
+            <InputLabel
+              id="Topic"
+              placeholder="Enter the Topic"
+              labeltext="Topic"
+              value={topic}
+              onChange={(e) => setTopic(e.target.value)}
+              type="text"
+            />
+            <div className="mb-3">
+              <Form.Select
+                aria-label="Default select example"
+                id="stance"
+                placeholder="Stance"
+                labeltext="Stance"
+                value={stance}
+                onChange={(e) =>
+                  setStance(e.target.value === "true" ? true : false)
+                }
+                type="boolean"
+              >
+                <option>Choose a stance:</option>
+                <option value={true}>For</option>
+                <option value={false}>Against</option>
+              </Form.Select>
+            </div>
+            <button type="submit" className="btn btn-primary">
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 }
 
