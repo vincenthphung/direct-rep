@@ -162,7 +162,7 @@ class RepRepository(BaseModel):
                             letter_id = record[6]
                         )
                         result.append(rep)
-                        print("REP PER LETTER", rep)
+                        # print("REP PER LETTER", rep)
                     return result
         except Exception as e:
             print("ERROR")
