@@ -4,5 +4,12 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.autoSave": "afterDelay",
-  "cSpell.words": ["zipcode"]
+  "cSpell.words": [
+    "Excalidraw",
+    "labeltext",
+    "Mittal",
+    "Signup",
+    "wireframes",
+    "zipcode"
+  ]
 }
