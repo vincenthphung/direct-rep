@@ -3,32 +3,29 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import { useCreateLetterMutation } from "./store/lettersApi";
 
-function InputLabel(props) {
-  const { id, placeholder, labeltext, value, onChange, type } = props;
-
-  return (
-    <div className="mb-3">
-      <label htmlFor={id} className="form-label">
-        {labeltext}
-      </label>
-      <input
-        value={value}
-        onChange={onChange}
-        required
-        type={type}
-        className="form-control"
-        id={id}
-        placeholder={placeholder}
-      />
-    </div>
-  );
-}
-
-function LetterForm(props) {
+function LetterForm() {
+  const [issues, setIssues] = useState([]);
   const [topic, setTopic] = useState("");
   const [stance, setStance] = useState(true);
   // const [content, setContent] = useState("");
   const [createLetter, result] = useCreateLetterMutation();
+
+  // to collect the issues list from the database
+  async function fetchIssues() {
+    const url = `http://localhost:8090/api/issues`;
+    const response = await fetch(url);
+    if (response.ok) {
+      const data = await response.json();
+      setIssues(data);
+    }
+  }
+
+  // to load issues with the first page render
+  useEffect(() => {
+    fetchIssues();
+  }, []);
+
+  console.log("ISSUES LIST", issues);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -41,14 +38,23 @@ function LetterForm(props) {
         <div className="shadow p-4 mt-4">
           <h1>Create your letter</h1>
           <form onSubmit={handleSubmit}>
-            <InputLabel
-              id="Topic"
-              placeholder="Enter the Topic"
-              labeltext="Topic"
-              value={topic}
-              onChange={(e) => setTopic(e.target.value)}
-              type="text"
-            />
+            <div className="mb-3">
+              <select
+                onChange={(e) => setTopic(e.target.value)}
+                required
+                name="issues"
+                className="form-select"
+              >
+                <option value="">Select issue</option>
+                {issues.map((issue) => {
+                  return (
+                    <option key={issue.user_issue} value={issue.openai_issue}>
+                      {issue.user_issue}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
             <div className="mb-3">
               <p>Stance</p>
               <Form.Select
