@@ -143,17 +143,63 @@ Continued working on reps endpoints.
 From google civics api, we are now able to get the data we want, formatted with the RepOut class.
 
 Next steps:
+
 - create rep table ✅
 - connect it with letter table with a foreign key reference ✅
 - connect a POST endpoint to create an instance of rep ✅
 - we will have to connect these on the frontend:
   - dropdown options will be populated by the google civics api ✅
-  - submit button will go to create the rep-selected instance
-- Can we create multiple rep-selected instances with one button?
+  - submit button will go to create the rep-selected instance ✅
 
 Working on reps frontend:
-- added local host path in docker compose file (last line): REACT_APP_LETTERS_API_HOST: http://localhost:8090
+
+- added local host path in docker compose file (last line): REACT_APP_LETTERS_API_HOST
 - added RepForm.js file in src folder
 - added repsApi.js file in store folder
-- added to store.js: import { repsApi } from "./repsApi"; and line 9 [repsApi.reducerPath]: repsApi.reducer,
-- imported and added path to file on App.js in routes <Route path="/create/reps" element={<RepForm />} />
+- added to store.js
+- imported and added path to file on App.js in routes
+
+## Tuesday 11/29/2022
+
+Back to the group after a productive holiday weekend.
+
+Worked with Aaryan to connect the Create letter frontend.
+We learned that query can only accept one argument, and found a creative way to include two arguments thanks to a stack overflow article. It took a couple of hours so it felt great to get it to work.
+
+The Select Reps page is almost done but there is still an issue with the state. It appears that the state gets stuck in the virtual dom and therefore the render is constantly behind by one render. Still looking into how to fix this.
+
+Previous to do list:
+
+ISSUES:
+
+- need to create an issues table in the database ✅
+- OR create SQL INSERT in migrations to hardcode the issues ✅
+- connect GET endpoint to get issues ✅
+
+REPS:
+
+- create the reps selection table in the database ✅
+- create a foreign key or reference to letter table ✅ (added cascade on delete)
+- add a POST endpoint to create new reps selection ✅
+- add a GET endpoint to get all reps selection for all letters ✅
+- add a GET endpoint to get all reps selection for one letter ✅
+
+FRONTEND:
+
+- create shell for website based on wireframe ✅
+- include nav bar / menu ✅
+
+Looking back on this to do list, a lot has been achieved and the project is really coming along.
+
+Upcoming to do list:
+
+- connect issues to create letter dropdown on frontend
+- connect AUTH everywhere
+- connect login, logout, and edit account forms
+- connect edit letter frontend
+- fix state rerender issue on reps form
+- add POST endpoint for issues? (stretch goal)
+- clean up code: delete / comment out print and console log statements
+- clean up endpoints: some inconsistencies
+
+The list is getting shorter! I can see the end in sight 😊
