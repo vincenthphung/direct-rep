@@ -27,14 +27,6 @@ function LetterForm() {
 
   console.log("ISSUES LIST", issues);
 
-  useEffect(() => {
-    (async () => {
-      const response = await fetch("http://localhost:8090/api/issues");
-      const content = await response.json();
-      setIssue(content);
-    })();
-  }, []);
-
   async function handleSubmit(e) {
     e.preventDefault();
     createLetter({ topic, stance });
@@ -47,13 +39,14 @@ function LetterForm() {
           <h1>Create your letter</h1>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
+              <h5> Issue </h5>
               <select
                 onChange={(e) => setTopic(e.target.value)}
                 required
                 name="issues"
                 className="form-select"
               >
-                <option value="">Select issue</option>
+                <option value="">Select Your Issue</option>
                 {issues.map((issue) => {
                   return (
                     <option key={issue.user_issue} value={issue.openai_issue}>
@@ -64,7 +57,7 @@ function LetterForm() {
               </select>
             </div>
             <div className="mb-3">
-              <p>Stance</p>
+              <h5>Stance</h5>
               <Form.Select
                 aria-label="Default select example"
                 id="stance"
