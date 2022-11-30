@@ -1,6 +1,6 @@
 # Journal - Aaryan Mittal
 
-# PROECT OVERVIEW GROUP
+# PROJECT OVERVIEW GROUP
 
 ## November 7, 2022 (Monday)
 
@@ -20,9 +20,9 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 # WORKING PROJECT INDIVIDUAL
 
-## November 14, 2022 (Monday)
 
-### Goals for the week
+
+## Goals for the week 2
 
 1. Finish FastAPI docs page with the endpoints.
 
@@ -33,6 +33,8 @@ We spend more time on making our endpoints more efficient. We made changes to th
 4. Finish the MVP in ReadMe.MD.
 
 5. Start with authentication.
+
+## November 14, 2022 (Monday)
 
 ### Work done during the day
 
@@ -56,7 +58,7 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 1. We spent time working our endpoints readme file as made changed to the endpoints according to the FastAPI docs.
 
-2. We designed our project diagram with the models wieframes and the endpoints for each model on Excalidraw.
+2. We designed our project diagram with the models wireframes and the endpoints for each model on Excalidraw.
 
 3. We spent time doing more research on Google Civic API and OpenAI APi.
 
@@ -117,9 +119,8 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 2. React server issue is solved.
 
-## November 21, 2022 (Monday)
+## Goals for the week 3
 
-### Goals for the week
 
 1. Finish all the CRUD operations for the endpoints.
 
@@ -127,7 +128,7 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 3. Make the Civics API and OpenAi API working.
 
-## November 22, 2022 (Monday)
+## November 21, 2022 (Monday)
 
 ### Work done during the day
 
@@ -150,10 +151,52 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 2. I spent time working on the user signup form. I used React Hooks to make the signup form and I connected it to the database using React Redux. I was new to React Redux, so I had to do to some research to make it work.
 
-### Work done during the day
+### Work achieved during the day
 
 1. All letters endpoints working.
 
 2. User update endpoint working.
 
 3. Signup form in React(frontend) connected to database.
+
+## November 23, 2022 (Wednesday)
+
+### Work done during the day
+
+1. Today, I spent time working on the frontend. I worked upon react and created the navbar and the dashboard page with the get all letters method.
+
+2. I worked in the backed and created a delete letter method and endpoint. I integrated this endpoint to the frontend in the dashboard page.
+
+### Work achieved during the day
+
+1. React Navbar made for the application.
+
+2. Dashboard page working with get all letter working.
+
+3. Delete endpoint for letters working in backend and frontend.
+
+
+## Goals for the week 4
+
+1. Work on authentication.
+
+2. Optimize the frontend according to authentication.
+
+3. Finish the minimal viable product.
+
+## November 28, 2022 (Monday)
+### Work done during the day
+
+1. I worked upon the create letter endpoint and faced a error 402.
+
+2. The group worked upon different endpoints. We put the issues into the database.
+
+3. Get reps api call from Civics Api was finished by Kim.
+
+### Work achieved during the day
+
+1. Create letter frontend working.
+
+2. Made all the issues for letters.
+
+3. Get reps API working in frontend.
