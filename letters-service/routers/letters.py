@@ -95,10 +95,3 @@ def get_all_issues(
     ):
     return repo.get_all()
 
-
-# @router.delete("/api/letters/{letter_id}", response_model=bool)
-# def delete_letter(
-#     letter_id: int,
-#     repo: LetterRepository = Depends(),
-# ) -> bool:
-#     return repo.delete(letter_id)

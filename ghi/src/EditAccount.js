@@ -23,7 +23,10 @@ function InputLabel(props) {
   );
 }
 
-function AccountForm(props) {
+// NEED TO UPDATE THIS PAGE FROM CREATE ACCOUNT TO EDIT ACCOUNT
+// CURRENTLY THIS IS JUST A COPY OF THE CREATE ACCOUNT PAGE
+
+function EditAccount(props) {
   const [full_name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [zipcode, setZipcode] = useState("");
@@ -82,4 +85,4 @@ function AccountForm(props) {
   );
 }
 
-export default AccountForm;
+export default EditAccount;

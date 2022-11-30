@@ -1,64 +1,22 @@
-// import { Link } from "react-router-dom";
-// import { useGetLettersQuery } from "./store/lettersApi";
-// import ErrorNotification from "./ErrorNotification";
-
-// function Dashboard() {
-//   const { data, error, isLoading } = useGetLettersQuery();
-
-//   if (isLoading) {
-//     return <progress className="progress is-primary" max="100"></progress>;
-//   }
-
-//   return (
-//     <div className="columns is-centered">
-//       <div className="column is-narrow">
-//         <ErrorNotification error={error} />
-//         {/* <div className="field has-right-text">
-//                     <className="button">Create Letter</className=>
-//                 </div> */}
-//         <table className="table is-striped">
-//           <thead>
-//             <tr>
-//               <th>Topic</th>
-//               <th>Stance</th>
-//               <th>Content</th>
-//             </tr>
-//           </thead>
-//           <tbody>
-//             {data.letter &&
-//               data.letter.map((letters) => (
-//                 <tr key={letters.id}>
-//                   <td>{letters.topic}</td>
-//                   <td>{letters.stance}</td>
-//                   <td>{letters.content}</td>
-//                 </tr>
-//               ))}
-//           </tbody>
-//         </table>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Dashboard;
-
-// import { Wrapper } from "./Wrapper";
 import Card from "react-bootstrap/Card";
-// import Col from "react-bootstrap/Col";
-// import Row from "react-bootstrap/Row";
 import { useEffect, useState } from "react";
-// import { Link } from "react-router-dom";
-import { Wrapper } from "./Wrapper";
-import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 
-export const Dashboard = () => {
-  const [letter, setLetter] = useState([]);
+function Dashboard() {
+  const [letters, setLetters] = useState([]);
+  const [oneLetter, setOneLetter] = useState([""]);
+  const [oneId, setId] = useState("Letter id");
+  const [oneContent, setContent] = useState("Letter content");
+  const [oneStance, setStance] = useState("Letter stance");
+  const [oneTopic, setTopic] = useState("Letter topic");
+  const [repSelection, setSelection] = useState([]);
 
   useEffect(() => {
     (async () => {
       const response = await fetch("http://localhost:8090/api/letters");
       const content = await response.json();
-      setLetter(content);
+      setLetters(content);
+      console.log("LETTER CONTENT", content);
     })();
   }, []);
 
@@ -67,10 +25,35 @@ export const Dashboard = () => {
       await fetch(`http://localhost:8090/letters/${id}`, {
         method: "DELETE",
       });
-
-      setLetter(letter.filter((p) => p.id !== id));
+      setLetters(letters.filter((p) => p.id !== id));
     }
   };
+
+  async function seeLetter(id) {
+    const response = await fetch(`http://localhost:8090/letters/${id}`);
+    const content = await response.json();
+    setOneLetter(content);
+    setId(content["id"]);
+    setContent(content["content"]);
+    setStance(content["stance"]);
+    setTopic(content["topic"]);
+    console.log("LETTER ONE CONTENT", content);
+
+    //  to show selected reps
+    async function seeReps() {
+      const urlReps = `http://localhost:8090/reps/letter/${id}`;
+      const response = await fetch(urlReps);
+      if (response.ok) {
+        const data = await response.json();
+        console.log("\n \n DATA", data);
+        setSelection(data);
+      }
+    }
+    seeReps();
+  }
+
+  console.log("ONE LETTER", oneLetter);
+  console.log("ONE LETTER STANCE", oneStance);
 
   // const edit = async (id) => {
   //   if (window.confirm("Are you sure: This Letter will be Deleted")) {
@@ -86,79 +69,110 @@ export const Dashboard = () => {
   // };
 
   return (
-    <Wrapper>
-      {/* <div className="pt-3 pb-2 mb-3 border-bottom">
-        <Link to={`/create`} className="btn btn-sm btn-outline-secondary">
-          Add
-        </Link>
-      </div> */}
-
-      <div className="table-responsive">
-        <table className="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th scope="col">Letter</th>
-              <th scope="col">Stance</th>
-              <th scope="col">Content</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {letter.map((letters) => {
-              return (
-                <tr key={letters.id}>
-                  <td>{letters.topic}</td>
-                  <td>{letters.stance}</td>
-                  <td>{letters.content}</td>
-                  <td>
-                    <a
-                      href="#"
-                      className="btn btn-sm btn-outline-secondary"
-                      onClick={(e) => del(letters.id)}
-                    >
-                      Delete
-                    </a>
-                    {/* <a
-                      href="#"
-                      className="btn btn-sm btn-outline-secondary"
-                      onClick={(e) => edit(letters.id)}
-                    >
-                      Edit
-                    </a> */}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+    <div className="row">
+      <div className="offset-3 col-6">
+        <div className="shadow p-4 mt-4">
+          <h1>Past letters</h1>
+          {/* <div className="table-responsive"> */}
+          <table className="table table-striped table-sm">
+            <thead>
+              <tr>
+                <th className="col">Date created</th>
+                <th className="col">Stance</th>
+                <th className="col-7">Issue</th>
+                <th className="col">Delete</th>
+                <th className="col">See details</th>
+              </tr>
+            </thead>
+            <tbody>
+              {letters.map((letter) => {
+                return (
+                  <tr key={letter.id}>
+                    <td>Letter date - tbd</td>
+                    <td>
+                      {letter.stance ? "in favor of" : "in opposition to"}
+                    </td>
+                    <td>{letter.topic}</td>
+                    <td>
+                      <Link
+                        href="#"
+                        className="btn btn-sm btn-outline-secondary"
+                        onClick={(e) => del(letter.id)}
+                      >
+                        Delete
+                      </Link>
+                    </td>
+                    <td>
+                      <Link
+                        href="#"
+                        className="btn btn-sm btn-outline-secondary"
+                        onClick={(e) => seeLetter(letter.id)}
+                      >
+                        See details
+                      </Link>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div>
-        {letter.map((work) => {
-          return (
-            <Card className="text-center" key={work.id}>
-              <Card.Header>Letter Number: {work.id}</Card.Header>
+      <div className="offset-3 col-6">
+        <div className="shadow p-4 mt-4">
+          <h2>Detail letter view</h2>
+          <div>
+            <Card className="text-center">
+              <Card.Header>Date created:</Card.Header>
               <Card.Body>
-                <Card.Title>Topic: {work.stance}</Card.Title>
-                <Card.Text>Stance: {work.topic}</Card.Text>
-                <a href="/eletter">
+                <Card.Title>
+                  Write a letter{" "}
+                  {oneStance ? "in favor of" : "in opposition to"} {oneTopic}
+                </Card.Title>
+                <Card.Text> {oneContent} </Card.Text>
+                {/* <Link href="/eletter">
                   <Button variant="primary">Edit</Button>
-                </a>
+                </Link> */}
               </Card.Body>
-              <Card.Footer className="text-muted">
-                <a
-                  href="#"
-                  className="btn btn-sm btn-outline-secondary"
-                  onClick={(e) => del(work.id)}
-                >
-                  Delete
-                </a>
-              </Card.Footer>
+              <Card.Footer className="text-muted"></Card.Footer>
+              <Card.Body>
+                <Card.Title>Reps selected for this letter</Card.Title>
+                <Card.Text>
+                  <table className="table table-striped table-sm">
+                    <thead>
+                      <tr>
+                        <th>Rep name</th>
+                        <th>Rep office</th>
+                        <th>Rep address</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {repSelection.map((rep, i, j) => {
+                        return (
+                          <tr>
+                            <td key={rep[j]} value={rep.name}>
+                              {rep.name}
+                            </td>
+                            <td key={rep[i]} value={rep.office}>
+                              {rep.office}
+                            </td>
+                            <td key={rep.rep_id} value={rep.rep_id}>
+                              {rep.address}
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </Card.Text>
+              </Card.Body>
+              <Card.Footer className="text-muted"></Card.Footer>
             </Card>
-          );
-        })}
+          </div>
+        </div>
       </div>
-    </Wrapper>
+    </div>
   );
-};
+}
 
 export default Dashboard;

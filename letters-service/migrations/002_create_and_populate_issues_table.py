@@ -9,10 +9,10 @@ steps = [
         );
         INSERT INTO issue VALUES (1, 'Healthcare Reform', 'a single-payer healthcare system: ');
         INSERT INTO issue VALUES (2, 'The LGBTQ+ Movement', 'expanding LGBTQ protections and rights: ');
-        INSERT INTO issue VALUES (3, 'Expanding Border Security', 'increasing surveilance at the US-Mexico border:\n');
+        INSERT INTO issue VALUES (3, 'Expanding Border Security', 'increasing surveilance at the US-Mexico border: ');
         INSERT INTO issue VALUES (4, 'Criminal Justice Reform', 'reforming the criminal justice system: ');
         INSERT INTO issue VALUES (5, 'Religious Freedom', 'protecting religious liberties: ');
-        INSERT INTO issue VALUES (6, 'Separation of Church and State', 'enforcing the separation of church and state:\n');
+        INSERT INTO issue VALUES (6, 'Separation of Church and State', 'enforcing the separation of church and state: ');
         INSERT INTO issue VALUES (7, 'Raising Federal Minimum Wage', 'raising the US minimum wage: ');
         INSERT INTO issue VALUES (8, 'Green Energy', 'transitioning to green energy: ');
         INSERT INTO issue VALUES (9, 'Social Security/Medicare/Medicaid', 'our current welfare programs: ');
