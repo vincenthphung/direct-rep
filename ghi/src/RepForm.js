@@ -77,8 +77,6 @@ function RepForm() {
     );
   }
 
-  console.log("SELECTION", selection);
-
   async function showReps(letter_id) {
     const urlReps = `http://localhost:8090/reps/letter/${letter_id}`;
     const response = await fetch(urlReps);
@@ -88,6 +86,12 @@ function RepForm() {
     }
   }
 
+  // to load it the first time the page renders
+  useEffect(() => {
+    showReps(letter_id);
+  }, [letter_id]);
+
+  // to load it any time we add or delete a rep
   useEffect(() => {
     showReps(letter_id);
   }, []);
@@ -179,24 +183,3 @@ function RepForm() {
 }
 
 export default RepForm;
-
-// //  to show selected reps
-// useEffect(() => {
-//   if (update) {
-//     async function seeReps() {
-//       const urlReps = `http://localhost:8090/reps/letter/${letter_id}`;
-//       const response = await fetch(urlReps);
-//       if (response.ok) {
-//         await response.json().then((data) => {
-//           setSelection(data);
-//           setUpdate(false);
-//         });
-//         // console.log("\n \n DATA", data);
-//         // setSelection(data);
-//         // console.log("Selection", selection);
-//         // setUpdate(false);
-//       }
-//     }
-//     seeReps();
-//   }
-// }, [letter_id, update]);

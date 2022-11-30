@@ -26,7 +26,7 @@ function InputLabel(props) {
 
 function LetterForm(props) {
   const [topic, setTopic] = useState("");
-  const [stance, setStance] = useState(false);
+  const [stance, setStance] = useState(true);
   // const [content, setContent] = useState("");
   const [createLetter, result] = useCreateLetterMutation();
 
@@ -50,6 +50,7 @@ function LetterForm(props) {
               type="text"
             />
             <div className="mb-3">
+              <p>Stance</p>
               <Form.Select
                 aria-label="Default select example"
                 id="stance"

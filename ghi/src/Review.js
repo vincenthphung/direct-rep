@@ -42,7 +42,7 @@ function ReviewForm() {
       setContent(content["content"]);
       setStance(content["stance"]);
       setTopic(content["topic"]);
-      console.log("LETTER ONE CONTENT", content);
+      // console.log("LETTER ONE CONTENT", content);
     }
     showLetter(letter_id);
   }, [letter_id]);
@@ -54,14 +54,19 @@ function ReviewForm() {
       const response = await fetch(urlReps);
       if (response.ok) {
         const data = await response.json();
-        console.log("\n \n DATA", data);
+        // console.log("\n \n DATA", data);
         setSelection(data);
       }
     }
     seeReps(letter_id);
   }, [letter_id]);
 
-  console.log("ONE LETTER", oneLetter);
+  // console.log("ONE LETTER", oneLetter);
+
+  async function copyClipboard() {
+    navigator.clipboard.writeText("Say hello");
+    console.log("clipboard");
+  }
 
   return (
     <div className="row">
@@ -120,7 +125,11 @@ function ReviewForm() {
               <Card.Footer className="text-muted"></Card.Footer>
             </Card>
           </div>
-          <button type="submit" className="btn btn-primary">
+          <button
+            onClick={copyClipboard}
+            type="submit"
+            className="btn btn-primary"
+          >
             Copy letter
           </button>
         </div>
