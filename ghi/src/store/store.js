@@ -8,8 +8,11 @@ export const store = configureStore({
     [usersApi.reducerPath]: usersApi.reducer,
     [repsApi.reducerPath]: repsApi.reducer,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(usersApi.middleware, repsApi.middleware),
+  middleware: (getDefaultMiddleware) => {
+    return getDefaultMiddleware()
+      .concat(usersApi.middleware)
+      .concat(repsApi.middleware);
+  },
 });
 
 setupListeners(store.dispatch);

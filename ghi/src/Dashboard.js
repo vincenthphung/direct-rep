@@ -126,7 +126,6 @@ function Dashboard() {
               <Card.Header>Date created:</Card.Header>
               <Card.Body>
                 <Card.Title>
-                  {" "}
                   Write a letter{" "}
                   {oneStance ? "in favor of" : "in opposition to"} {oneTopic}
                 </Card.Title>

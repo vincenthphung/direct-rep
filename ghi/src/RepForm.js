@@ -8,12 +8,16 @@ function RepForm() {
   const [level, setLevel] = useState("level");
   const [party, setParty] = useState("party");
   const [address, setAddress] = useState("address");
-  const [letter_id, setLetterId] = useState("letter id");
+  // const [letter_id, setLetterId] = useState("letter id");
   const [reps_list, setList] = useState([]);
   const [selection, setSelection] = useState([]);
-  const [update, setUpdate] = useState(false);
+  const [update, setUpdate] = useState(true);
   const [repId, setRepId] = useState(0);
+  const [counter, setCounter] = useState(0);
   const [createRep, result] = useCreateRepMutation();
+
+  // setLetterId(4); // connect this with letter creation process
+  const letter_id = 4;
 
   //  to select the reps
   useEffect(() => {
@@ -22,7 +26,7 @@ function RepForm() {
       const response = await fetch(urlCivics);
       if (response.ok) {
         const data = await response.json();
-        console.log("\n \n DATA", data);
+        // console.log("\n \n DATA", data);
         setList(data);
       }
     }
@@ -30,14 +34,14 @@ function RepForm() {
     // connect this with the user account zip code
   }, []);
 
-  console.log("\n \n REPS LIST", reps_list);
+  // console.log("\n \n REPS LIST", reps_list);
 
   // to get the rep data from the dropdown selection for the database:
   async function handleRepChange(event) {
     event.preventDefault();
     const rep = event.target.value;
     setName(rep);
-    setLetterId(2); // connect this with letter creation process
+    // setLetterId(4); // connect this with letter creation process
     for (let i = 0; i < reps_list.length; i++) {
       if (rep === reps_list[i].name) {
         setOffice(reps_list[i].office);
@@ -56,26 +60,71 @@ function RepForm() {
     e.preventDefault();
     setUpdate(true);
     createRep({ office, level, name, party, address, letter_id });
+    setSelection(selection);
+
+    // //  to show selected reps
+    // async function seeReps() {
+    //   const urlReps = `http://localhost:8090/reps/letter/${letter_id}`;
+    //   const response = await fetch(urlReps);
+    //   if (response.ok) {
+    //     await response.json().then((data) => {
+    //       setSelection(data);
+    //     });
+    //     this.forceUpdate();
+    //     // console.log("\n \n DATA", data);
+    //     // setSelection(data);
+    //     // console.log("Selection", selection);
+    //     // setUpdate(false);
+    //   }
+    // }
+    // seeReps();
   }
 
   //  to show selected reps
   useEffect(() => {
     if (update) {
+      // if (counter )
       async function seeReps() {
         const urlReps = `http://localhost:8090/reps/letter/${letter_id}`;
         const response = await fetch(urlReps);
         if (response.ok) {
-          const data = await response.json();
-          console.log("\n \n DATA", data);
-          setSelection(data);
-          setUpdate(false);
+          await response.json().then((data) => {
+            setSelection(data);
+            setUpdate(false);
+          });
+          // console.log("\n \n DATA", data);
+          // setSelection(data);
+          // console.log("Selection", selection);
+          // setUpdate(false);
         }
       }
       seeReps();
     }
-  }, [letter_id, selection, update]);
+  }, [letter_id, update]);
 
-  // console.log("Selection", selection);
+  // //  to show selected reps
+  // useEffect(() => {
+  //   if (update) {
+  //     // if (counter )
+  //     async function seeReps() {
+  //       const urlReps = `http://localhost:8090/reps/letter/${letter_id}`;
+  //       const response = await fetch(urlReps);
+  //       if (response.ok) {
+  //         await response.json().then((data) => {
+  //           setSelection(data);
+  //           setUpdate(false);
+  //         });
+  //         // console.log("\n \n DATA", data);
+  //         // setSelection(data);
+  //         // console.log("Selection", selection);
+  //         // setUpdate(false);
+  //       }
+  //     }
+  //     seeReps();
+  //   }
+  // }, [letter_id, update]);
+
+  console.log("LETTER ID", letter_id);
 
   async function deleteRep(id) {
     // if (window.confirm("Are you sure: This Letter will be Deleted")) {
@@ -148,7 +197,7 @@ function RepForm() {
                         key={rep.rep_id}
                         value={rep.rep_id}
                       >
-                        Delete
+                        Delete {rep.rep_id}
                       </td>
                     </tr>
                   );
