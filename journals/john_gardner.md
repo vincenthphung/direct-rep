@@ -106,4 +106,9 @@ Got caught up with the team with what everyone worked on over the weekend. Got e
 
 ## 11/29/2022 (Tuesday)
  - [ ] add created_date to Letter Table
- - [ ] 
+
+## 11/30/2022 (Wednesday)
+We spent a lot of the day trying to get Auth to work and just learning how to use it. We managed to get it working on the back-end, still working on the front-end integration. 
+
+## 12/01/2022 (Thursday)
+Today we're going to work on getting Auth working on the front-end.
