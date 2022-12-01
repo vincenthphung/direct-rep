@@ -12,6 +12,14 @@ import EditLetter from "./EditLetter";
 import ReviewForm from "./Review";
 import LandingPage from "./Landing";
 import EditAccount from "./EditAccount";
+import LoginComponent from "./Login";
+import { AuthProvider, useToken } from "./Authentication";
+
+function GetToken() {
+  // Get token from JWT cookie (if already logged in)
+  useToken();
+  return null;
+}
 
 function App() {
   const [launch_info, setLaunchInfo] = useState([]);
@@ -38,6 +46,8 @@ function App() {
 
   return (
     <div>
+      {/* // <AuthProvider>
+    //   <GetToken /> */}
       <BrowserRouter>
         <Navigation />
         <Routes>
@@ -50,10 +60,12 @@ function App() {
           <Route path="/cletter" element={<LetterForm />} />
           <Route path="/eletter" element={<EditLetter />} />
           <Route path="/review" element={<ReviewForm />} />
+          <Route path="/login" element={<LoginComponent />} />
         </Routes>
       </BrowserRouter>
       <ErrorNotification error={error} />
       {/* <Construct info={launch_info} /> */}
+      {/* // </AuthProvider> */}
     </div>
   );
 }
