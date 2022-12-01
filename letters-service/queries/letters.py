@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from datetime import datetime
 from typing import Optional, Union, List
 from queries.pool import pool
 
@@ -6,6 +7,7 @@ class Error(BaseModel):
     message: str
 
 class LetterIn(BaseModel):
+    created: str
     topic: str
     stance: bool
     content: str
@@ -13,8 +15,15 @@ class LetterIn(BaseModel):
 class LetterUpdate(BaseModel):
     content: str
 
+class LetterNew(BaseModel):
+    id: int
+    topic: str
+    stance: bool
+    content: str
+
 class LetterOut(BaseModel):
     id: int
+    created: datetime
     topic: str
     stance: bool
     content: str
@@ -45,7 +54,7 @@ class LetterRepository:
                     )
                     id = result.fetchone()[0]
                     print("Check id \n \n", id)
-                    return LetterOut(
+                    return LetterNew(
                       id=id,
                       topic=topic,
                       stance=stance,
@@ -75,7 +84,6 @@ class LetterRepository:
 
                 # old_data = letter.dict()
                 return LetterUpdate(id=letter_id, content=content)
-
         except Exception as e:
             print(e)
             return{"message": "could not update letter"}
@@ -89,18 +97,20 @@ class LetterRepository:
                     # run our SELECT statement
                     result = db.execute(
                         """
-                        SELECT id, topic, stance, content
+                        SELECT id, created, topic, stance, content
                         FROM letter
                         ORDER BY id;
                         """
                     )
                     result = []
                     for record in db:
+                        # print("\n \n record get all", record)
                         letter = LetterOut(
                             id = record[0],
-                            topic = record[1],
-                            stance = record[2],
-                            content = record[3]
+                            created = record[1],
+                            topic = record[2],
+                            stance = record[3],
+                            content = record[4]
                         )
                         result.append(letter)
                     return result
@@ -118,7 +128,7 @@ class LetterRepository:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        SELECT id, topic, stance, content
+                        SELECT id, created, topic, stance, content
                         FROM letter
                         WHERE id = %s
                         """,
@@ -128,7 +138,6 @@ class LetterRepository:
                     if record is None:
                         return None
                     return self.record_to_letter_out(record)
-
         except Exception as e:
             print(e)
             return{"message": "could not get that letter"}
@@ -153,9 +162,10 @@ class LetterRepository:
     def record_to_letter_out(self, record):
         return LetterOut(
             id = record[0],
-            topic = record[1],
-            stance = record[2],
-            content = record[3]
+            created = record[1],
+            topic = record[2],
+            stance = record[3],
+            content = record[4]
             )
 
 class IssueRepository:

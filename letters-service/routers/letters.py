@@ -3,7 +3,7 @@ from typing import Optional, Union, List
 import requests
 import json
 import os
-from queries.letters import(Error, LetterIn, LetterOut, LetterUpdate, LetterRepository, IssueRepository)
+from queries.letters import(Error, LetterIn, LetterNew, LetterOut, LetterUpdate, LetterRepository, IssueRepository)
 from .new_keys import OPENAI_API_KEY
 
 
@@ -28,7 +28,7 @@ async def get_open_ai(topic):
   return content
 
 
-@router.post("/api/letters", response_model=Union[LetterOut, Error])
+@router.post("/api/letters", response_model=Union[LetterNew, Error])
 def create_letter(
     topic: str, # use this to enter the prompt
     stance: bool,
@@ -94,4 +94,3 @@ def get_all_issues(
     repo: IssueRepository = Depends(),
     ):
     return repo.get_all()
-

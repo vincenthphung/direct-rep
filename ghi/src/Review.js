@@ -1,6 +1,7 @@
 import Card from "react-bootstrap/Card";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import copy from "copy-to-clipboard";
 
 function ReviewForm() {
   const [letter_id, setLetterId] = useState("");
@@ -9,6 +10,7 @@ function ReviewForm() {
   const [oneContent, setContent] = useState("Letter content");
   const [oneStance, setStance] = useState("Letter stance");
   const [oneTopic, setTopic] = useState("Letter topic");
+  const [oneDate, setDate] = useState("Date");
   const [repSelection, setSelection] = useState([]);
 
   // const letter_id = 4;
@@ -42,6 +44,7 @@ function ReviewForm() {
       setContent(content["content"]);
       setStance(content["stance"]);
       setTopic(content["topic"]);
+      setDate(content["created"]);
       // console.log("LETTER ONE CONTENT", content);
     }
     showLetter(letter_id);
@@ -61,12 +64,10 @@ function ReviewForm() {
     seeReps(letter_id);
   }, [letter_id]);
 
-  // console.log("ONE LETTER", oneLetter);
-
-  async function copyClipboard() {
-    navigator.clipboard.writeText("Say hello");
-    console.log("clipboard");
-  }
+  const copyToClipboard = () => {
+    copy(oneContent);
+    alert(`Your letter has been copied: ${oneContent}`);
+  };
 
   return (
     <div className="row">
@@ -75,7 +76,7 @@ function ReviewForm() {
           <h1>Print letter</h1>
           <div className="mb-3">
             <Card className="text-center">
-              <Card.Header>Date created:</Card.Header>
+              <Card.Header>Date created: {oneDate} </Card.Header>
               <Card.Body>
                 <Card.Title>
                   Write a letter{" "}
@@ -126,7 +127,7 @@ function ReviewForm() {
             </Card>
           </div>
           <button
-            onClick={copyClipboard}
+            onClick={copyToClipboard}
             type="submit"
             className="btn btn-primary"
           >
