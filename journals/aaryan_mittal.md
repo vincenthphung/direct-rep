@@ -194,7 +194,7 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 2. Made all the issues for letters.
 
-3. Get reps API working in frontend.
+3. reps API working in frontend.
 
 ## November 29, 2022 (Tuesday)
 
