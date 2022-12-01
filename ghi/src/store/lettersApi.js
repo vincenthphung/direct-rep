@@ -21,9 +21,19 @@ export const lettersApi = createApi({
           params: { topic, stance },
         };
       },
-      // invalidatesTags: ['LettersList'],
+    }),
+    editLetter: builder.mutation({
+      query: (arg) => {
+        const { letter_id, content } = arg;
+        console.log(arg);
+        return {
+          method: "put",
+          url: `/api/letters/{letters_id}?letter_id=${letter_id}&content=${content}`,
+          params: { letter_id, content },
+        };
+      },
     }),
   }),
 });
 
-export const { useGetLettersQuery, useCreateLetterMutation } = lettersApi;
+export const { useGetLettersQuery, useCreateLetterMutation, useEditLetterMutation } = lettersApi;
