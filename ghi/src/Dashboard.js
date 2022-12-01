@@ -1,8 +1,11 @@
 import Card from "react-bootstrap/Card";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuthContext } from "./TokenTest.js";
 
 function Dashboard() {
+  const { token } = useAuthContext();
+
   const [letters, setLetters] = useState([]);
   const [oneLetter, setOneLetter] = useState([""]);
   const [oneId, setId] = useState("Letter id");
@@ -12,18 +15,23 @@ function Dashboard() {
   const [oneDate, setDate] = useState("Date");
   const [repSelection, setSelection] = useState([]);
 
+  console.log("TOKEN DASHBOARD", token);
+
   useEffect(() => {
     (async () => {
-      const response = await fetch("http://localhost:8090/api/letters");
+      const response = await fetch("http://localhost:8090/api/letters", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       const content = await response.json();
       setLetters(content);
-      console.log("LETTER CONTENT", content);
+      console.log("LETTER CONTENT", content, "TOKEN", token);
     })();
   }, []);
 
   const del = async (id) => {
     if (window.confirm("Are you sure: This Letter will be Deleted")) {
       await fetch(`http://localhost:8090/letters/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
         method: "DELETE",
       });
       setLetters(letters.filter((p) => p.id !== id));
@@ -31,7 +39,9 @@ function Dashboard() {
   };
 
   async function seeLetter(id) {
-    const response = await fetch(`http://localhost:8090/letters/${id}`);
+    const response = await fetch(`http://localhost:8090/letters/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     const content = await response.json();
     setOneLetter(content);
     setId(content["id"]);
@@ -44,7 +54,9 @@ function Dashboard() {
     //  to show selected reps
     async function seeReps() {
       const urlReps = `http://localhost:8090/reps/letter/${id}`;
-      const response = await fetch(urlReps);
+      const response = await fetch(urlReps, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       if (response.ok) {
         const data = await response.json();
         console.log("\n \n DATA", data);
@@ -57,25 +69,11 @@ function Dashboard() {
   console.log("ONE LETTER", oneLetter);
   console.log("ONE LETTER STANCE", oneStance);
 
-  // const edit = async (id) => {
-  //   if (window.confirm("Are you sure: This Letter will be Deleted")) {
-  //     await fetch(`http://localhost:8090/letters/${id}`, {
-  //       method: "PUT",
-  //       body: JSON.stringify(),
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-  //     setLetter(letter.filter((p) => p.id !== id));
-  //   }
-  // };
-
   return (
     <div className="row">
       <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
           <h1>Past letters</h1>
-          {/* <div className="table-responsive"> */}
           <table className="table table-striped table-sm">
             <thead>
               <tr>
