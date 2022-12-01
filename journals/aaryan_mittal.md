@@ -230,4 +230,4 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 2. Copy letter working in review page.
 
-3. Authentication backend working.
+3. Authentication working for all the letters endpoints.
