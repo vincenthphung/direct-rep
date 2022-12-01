@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import React from "react";
 import { useCreateRepMutation } from "./store/repsApi";
 import { Link } from "react-router-dom";
+import { useAuthContext } from "./TokenTest.js";
 
 function RepForm() {
+  const { token } = useAuthContext();
   const [name, setName] = useState("name");
   const [office, setOffice] = useState("office");
   const [level, setLevel] = useState("level");
@@ -14,11 +16,15 @@ function RepForm() {
   const [selection, setSelection] = useState([]);
   const [createRep, result] = useCreateRepMutation();
 
+  console.log("TOKEN REP FORM", token);
+
   // to get the id of the most recent letter created:
   useEffect(() => {
     async function fetchLetterId() {
       const urlLetter = `http://localhost:8090/api/letters`;
-      const response = await fetch(urlLetter);
+      const response = await fetch(urlLetter, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       if (response.ok) {
         const data = await response.json();
         // console.log("LETTER DATA", data);
@@ -38,7 +44,9 @@ function RepForm() {
   useEffect(() => {
     async function fetchReps(zipcode) {
       const urlCivics = `http://localhost:8090/civics?zipcode=${zipcode}`;
-      const response = await fetch(urlCivics);
+      const response = await fetch(urlCivics, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       if (response.ok) {
         const data = await response.json();
         // console.log("\n \n DATA", data);
@@ -79,7 +87,9 @@ function RepForm() {
 
   async function showReps(letter_id) {
     const urlReps = `http://localhost:8090/reps/letter/${letter_id}`;
-    const response = await fetch(urlReps);
+    const response = await fetch(urlReps, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     if (response.ok) {
       const data = await response.json();
       setSelection(data);
@@ -100,9 +110,7 @@ function RepForm() {
     // if (window.confirm("Are you sure: This Letter will be Deleted")) {
     await fetch(
       `http://localhost:8090/reps/letters/${letter_id}?rep_id=${id}`,
-      {
-        method: "DELETE",
-      }
+      { headers: { Authorization: `Bearer ${token}` }, method: "DELETE" }
     ).then(() => showReps(letter_id));
   }
   // }

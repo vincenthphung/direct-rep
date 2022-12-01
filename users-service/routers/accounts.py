@@ -44,6 +44,8 @@ async def create_account(
     account = repo.create(info, hashed_password)
     form = AccountForm(username=info.email, password=info.password)
     token = await authenticator.login(response, request, form, repo)
+
+    print("CREATING ACCOUNT")
     return AccountToken(account=account, **token.dict())
 
 # authenticator.hash_password => comes from the Authenticator base class (inherited in queries)
@@ -70,6 +72,7 @@ async def get_token(
     account: Account = Depends(authenticator.try_get_current_account_data)
 ) -> AccountToken | None:
     if account and authenticator.cookie_name in request.cookies:
+        print("GETTING TOKEN")
         return {
             "access_token": request.cookies[authenticator.cookie_name],
             "type": "Bearer",

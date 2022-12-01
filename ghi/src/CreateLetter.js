@@ -2,18 +2,24 @@ import { useState, useEffect } from "react";
 import React from "react";
 import Form from "react-bootstrap/Form";
 import { useCreateLetterMutation } from "./store/lettersApi";
+import { useAuthContext } from "./TokenTest.js";
 
 function LetterForm() {
+  const { token } = useAuthContext();
   const [issues, setIssues] = useState([]);
   const [topic, setTopic] = useState("");
   const [stance, setStance] = useState(true);
   // const [content, setContent] = useState("");
   const [createLetter, result] = useCreateLetterMutation();
 
+  console.log("TOKEN??", token);
+
   // to collect the issues list from the database
   async function fetchIssues() {
     const url = `http://localhost:8090/api/issues`;
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     if (response.ok) {
       const data = await response.json();
       setIssues(data);
