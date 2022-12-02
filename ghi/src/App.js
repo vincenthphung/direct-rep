@@ -15,6 +15,7 @@ import LandingPage from "./Landing";
 import EditAccount from "./EditAccount";
 import LoginForm from "./LoginTest";
 import LogoutButton from "./Logout.js";
+import NewLoginForm from "./NewLogin";
 
 function GetToken() {
   // Get token from JWT cookie (if already logged in)
@@ -64,6 +65,7 @@ function App() {
             <Route path="/cletter" element={<LetterForm />} />
             <Route path="/eletter" element={<EditLetter />} />
             <Route path="/review" element={<ReviewForm />} />
+            <Route path="/newlogin" element={<NewLoginForm />} />
           </Routes>
 
           <ErrorNotification error={error} />

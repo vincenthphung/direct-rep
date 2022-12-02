@@ -81,7 +81,9 @@ function ReviewForm() {
     <div className="row">
       <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
-          <h1>Print letter</h1>
+          <div className="text-center">
+          <h1>Final Letter</h1>
+          </div>
           <div className="mb-3">
             <Card className="text-center">
               <Card.Header>Date created: {oneDate} </Card.Header>
@@ -96,8 +98,15 @@ function ReviewForm() {
                 </Link> */}
               </Card.Body>
               <Card.Footer className="text-muted"></Card.Footer>
+            </Card>
+          </div>
+          <div className="mb-3">
+            <Card className="text-center">
+              <Card.Header>
+                <h5>Representatives</h5>
+              </Card.Header>
               <Card.Body>
-                <Card.Title>Reps selected for this letter</Card.Title>
+                {/* <Card.Title>Representatives</Card.Title> */}
                 <Card.Text>
                   <table className="table table-striped table-sm">
                     <thead>
@@ -131,8 +140,8 @@ function ReviewForm() {
                   </table>
                 </Card.Text>
               </Card.Body>
-              <Card.Footer className="text-muted"></Card.Footer>
             </Card>
+            {/* <Card.Footer className="text-muted"></Card.Footer> */}
           </div>
           <button
             onClick={copyToClipboard}

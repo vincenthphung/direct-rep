@@ -1,6 +1,7 @@
 import { useState } from "react";
 import React from "react";
 import { useCreateUserMutation } from "./store/usersApi";
+import { useNavigate } from "react-router-dom";
 
 function InputLabel(props) {
   const { id, placeholder, labelText, value, onChange, type } = props;
@@ -29,10 +30,12 @@ function AccountForm(props) {
   const [zipcode, setZipcode] = useState("");
   const [password, setPassword] = useState("");
   const [createUser, result] = useCreateUserMutation();
+  const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
     createUser({ full_name, email, zipcode, password });
+    navigate("/newlogin");
   }
 
   return (

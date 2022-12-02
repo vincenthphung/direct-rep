@@ -3,6 +3,7 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import { useCreateLetterMutation } from "./store/lettersApi";
 import { useAuthContext } from "./TokenTest.js";
+import { useNavigate } from "react-router-dom";
 
 function LetterForm() {
   const { token } = useAuthContext();
@@ -11,6 +12,7 @@ function LetterForm() {
   const [stance, setStance] = useState(true);
   // const [content, setContent] = useState("");
   const [createLetter, result] = useCreateLetterMutation();
+  const navigate = useNavigate();
 
   console.log("TOKEN??", token);
 
@@ -36,6 +38,7 @@ function LetterForm() {
   async function handleSubmit(e) {
     e.preventDefault();
     createLetter({ topic, stance });
+    navigate("/eletter");
   }
 
   return (
@@ -80,7 +83,7 @@ function LetterForm() {
                 <option value={false}>Against</option>
               </Form.Select>
             </div>
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary" on>
               Submit
             </button>
           </form>

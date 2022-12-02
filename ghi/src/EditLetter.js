@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import React from "react";
 import { useAuthContext } from "./TokenTest.js";
 import { useEditLetterMutation } from "./store/lettersApi";
+import { useNavigate } from "react-router-dom";
 
 export const EditLetter = () => {
   const { token } = useAuthContext();
@@ -14,6 +15,7 @@ export const EditLetter = () => {
   const [oneTopic, setTopic] = useState("Letter topic");
   const [oneDate, setDate] = useState("Date");
   const [editLetter, result] = useEditLetterMutation();
+  const navigate = useNavigate();
 
   // to get the id of the most recent letter created:
   useEffect(() => {
@@ -60,6 +62,7 @@ export const EditLetter = () => {
     e.preventDefault();
     console.log(oneId, oneContent);
     editLetter({ oneId, oneContent });
+    navigate("/selectreps");
   }
 
   return (
@@ -100,7 +103,7 @@ export const EditLetter = () => {
             type="submit"
             className="btn btn-primary"
           >
-            Save and review
+            Save and Add Representatives
           </button>
         </div>
       </div>
