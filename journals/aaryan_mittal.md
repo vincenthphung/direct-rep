@@ -231,3 +231,29 @@ We spend more time on making our endpoints more efficient. We made changes to th
 2. Copy letter working in review page.
 
 3. Authentication working for all the letters endpoints.
+
+## November 30, 2022 (Wednesday)
+
+### Work done during the day
+
+1. We worked upon login component today. There were problems for the endpoints in react authentication. We fixed by revisiting all the endpoints. We solved the login unauthorized error by trial and error method. We fixed it by trying all the patterns that we could form.
+
+2. We created a react redux file for the login component and connected to all the redux endpoints and React store.
+
+3. We included login authorization for the dashboard and review page.
+
+4. Kim and Vincent did pair-programming and worked upon the edit letter endpoint for react.
+
+5. While merging, I merged the wrong branch to main branch. This lead to a broken main branch and none of our work for the day was reflecting in the main branch. So, I manually changed all the files not realizing I merged the wrong branch. We fixed main, although, we were still confused in what led to the error. So, we checked gitlab and found out that I had merged the wrong branch which led to a broken main branch.
+
+### Work achieved during the day
+
+1. Login user component working in React.
+
+2. Redux file for login component created and connected with React store.
+
+3. Authorization working for all the frontend endpoints.
+
+4. Edit letter endpoint for frontend.
+
+5. Main branch fixed after wrong merge.

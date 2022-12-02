@@ -23,21 +23,27 @@ function LoginForm() {
           {/* <form onSubmit={login}> */}
           <form>
             <div className="mb-3">
-              <label htmlFor="username">Username: </label>
+              <label htmlFor="username">Username</label>
               <input
                 onChange={(e) => setUser(e.target.value)}
-                type="text"
+                type="email"
                 name="username"
                 value={username}
+                className="form-control"
+                required
+                placeholder="email@email.com"
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="password">Password :</label>
+              <label htmlFor="password">Password</label>
               <input
                 onChange={(e) => setPassword(e.target.value)}
-                type="text"
+                type="password"
                 name="password"
                 value={password}
+                className="form-control"
+                required
+                placeholder="password"
               />
             </div>
             <button
