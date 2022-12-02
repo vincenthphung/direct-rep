@@ -1,13 +1,18 @@
+import { useEffect } from "react";
 import { useToken } from "./TokenTest.js";
 
 function LogoutButton() {
-  const [token, logout] = useToken();
-  console.log("logout button", token);
+  const [token, login, logout] = useToken();
 
-  // async function clickLogout(e) {
-  //   e.preventDefault();
-  logout();
-  // }
+  console.log("logout button test", logout);
+
+  useEffect(() => {
+    async function clickLogout() {
+      logout();
+    }
+
+    clickLogout();
+  }, [logout]);
 }
 
 export default LogoutButton;

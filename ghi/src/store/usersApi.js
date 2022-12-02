@@ -13,7 +13,20 @@ export const usersApi = createApi({
         method: "post",
       }),
     }),
+    editUser: builder.mutation({
+      query: (arg) => {
+        const { full_name, email, zipcode, password, userId } = arg;
+        // console.log("edit user arg", arg);
+        return {
+          method: "put",
+          url: `/api/accounts/${userId}`,
+          credentials: "include",
+          body: { full_name, email, zipcode, password },
+          // params: { userId },
+        };
+      },
+    }),
   }),
 });
 
-export const {useCreateUserMutation } = usersApi;
+export const { useCreateUserMutation, useEditUserMutation } = usersApi;
