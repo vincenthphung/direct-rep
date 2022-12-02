@@ -30,6 +30,13 @@ class AccountToken(Token):
 class HttpError(BaseModel):
     detail: str
 
+
+not_authorized = HTTPException(
+    status_code=status.HTTP_401_UNAUTHORIZED,
+    detail="Invalid authentication credentials",
+    headers={"WWW-Authenticate": "Bearer"},
+)
+
 router = APIRouter()
 
 
@@ -66,7 +73,7 @@ async def edit_account(
     token = await authenticator.login(response, request, form, repo)
     return AccountToken(account=account, **token.dict())
 
-@router.get("/token", response_model=AccountToken | None)
+@router.get("/api/accounts/me/token", response_model=AccountToken | None)
 async def get_token(
     request: Request,
     account: Account = Depends(authenticator.try_get_current_account_data)

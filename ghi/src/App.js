@@ -13,7 +13,8 @@ import EditLetter from "./EditLetter";
 import ReviewForm from "./Review";
 import LandingPage from "./Landing";
 import EditAccount from "./EditAccount";
-import LoginForm from "./LoginTest";
+import LoginComponent from "./Login";
+import { AuthProvider, useToken } from "./Authentication";
 
 function GetToken() {
   // Get token from JWT cookie (if already logged in)
@@ -46,6 +47,8 @@ function App() {
 
   return (
     <div>
+      {/* // <AuthProvider>
+    //   <GetToken /> */}
       <BrowserRouter>
         <AuthProvider>
           <GetToken />
