@@ -53,6 +53,7 @@ def create_letter(
     ):
 
     if account_data:
+        print("####\n####\nACCOUNT DATA\n####\n####\n\n", account_data, "\n\n")
     # input_query = "Write a letter" {if stance === true} say = "in favor of"; else: say = "in opposition to" + topic
         say = ""
         if stance == True:
@@ -67,6 +68,7 @@ def create_letter(
         # get_open_ai(topic=topic)
         # print("\n \n \n DATA", data)
         stance = stance
+        print(data)
         text = data['choices'][0]['text']
         print("\n \n TEXT ONLY: ", text)
         return repo.create(topic, stance, text)
