@@ -53,7 +53,7 @@ def create_letter(
     ):
 
     if account_data:
-        print("####\n####\nACCOUNT DATA\n####\n####\n\n", account_data, "\n\n")
+        # print("####\n####\nACCOUNT DATA\n####\n####\n\n", account_data, "\n\n")
     # input_query = "Write a letter" {if stance === true} say = "in favor of"; else: say = "in opposition to" + topic
         say = ""
         if stance == True:
