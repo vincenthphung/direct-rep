@@ -23,7 +23,7 @@ function LoginForm() {
           {/* <form onSubmit={login}> */}
           <form>
             <div className="mb-3">
-              <label htmlFor="username">Username</label>
+              <label htmlFor="username">Email</label>
               <input
                 onChange={(e) => setUser(e.target.value)}
                 type="email"
