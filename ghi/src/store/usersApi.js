@@ -14,15 +14,19 @@ export const usersApi = createApi({
       }),
     }),
     editUser: builder.mutation({
-      query: (data) => ({
-        url: `/api/accounts/`,
-        body: data,
-        method: "put",
-      }),
+      query: (arg) => {
+        const { full_name, email, zipcode, password, userId } = arg;
+        // console.log("edit user arg", arg);
+        return {
+          method: "put",
+          url: `/api/accounts/${userId}`,
+          credentials: "include",
+          body: { full_name, email, zipcode, password },
+          // params: { userId },
+        };
+      },
     }),
   }),
 });
 
 export const { useCreateUserMutation, useEditUserMutation } = usersApi;
-
-// tbd: connect ID here
