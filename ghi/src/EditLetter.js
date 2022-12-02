@@ -76,12 +76,20 @@ export const EditLetter = () => {
                   {oneStance ? "in favor of" : "in opposition to"} {oneTopic}
                 </Card.Title>
                 <Card.Text>
-                  <textarea
-                    value={oneContent}
-                    onChange={(e) => setContent(e.target.value)}
-                  >
-                    {oneContent}
-                  </textarea>
+                  <div className="mb-3">
+                    <label for="letter content" className="form-label">
+                      Review and edit your letter here:
+                    </label>
+                    <textarea
+                      value={oneContent}
+                      onChange={(e) => setContent(e.target.value)}
+                      className="form-control"
+                      id="exampleFormControlTextarea1"
+                      rows="3"
+                    >
+                      {oneContent}
+                    </textarea>
+                  </div>
                 </Card.Text>
               </Card.Body>
               <Card.Footer className="text-muted"></Card.Footer>
