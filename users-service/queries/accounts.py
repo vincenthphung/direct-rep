@@ -27,7 +27,6 @@ class AccountOut(BaseModel):
     zipcode: int
 
 
-
 class AccountRepo:
     def get(self, email: str) -> Optional[Account]:
         # connect the database

@@ -37,7 +37,9 @@ function Navb() {
             <Nav.Link as={NavLink} to="/eaccount">
               Edit Account
             </Nav.Link>
-            <Nav.Link href="#deets">Logout</Nav.Link>
+            <Nav.Link as={NavLink} to="/logout">
+              Logout
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

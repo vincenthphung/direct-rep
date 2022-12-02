@@ -2,8 +2,10 @@ import Card from "react-bootstrap/Card";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import copy from "copy-to-clipboard";
+import { useAuthContext } from "./TokenTest.js";
 
 function ReviewForm() {
+  const { token } = useAuthContext();
   const [letter_id, setLetterId] = useState("");
   const [oneLetter, setOneLetter] = useState([""]);
   const [oneId, setId] = useState("Letter id");
@@ -19,7 +21,9 @@ function ReviewForm() {
   useEffect(() => {
     async function fetchLetterId() {
       const urlLetter = `http://localhost:8090/api/letters`;
-      const response = await fetch(urlLetter);
+      const response = await fetch(urlLetter, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       if (response.ok) {
         const data = await response.json();
         // console.log("LETTER DATA", data);
@@ -33,11 +37,13 @@ function ReviewForm() {
       }
     }
     fetchLetterId();
-  }, []);
+  }, [token]);
 
   useEffect(() => {
     async function showLetter(id) {
-      const response = await fetch(`http://localhost:8090/letters/${id}`);
+      const response = await fetch(`http://localhost:8090/letters/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       const content = await response.json();
       setOneLetter(content);
       setId(content["id"]);
@@ -48,13 +54,15 @@ function ReviewForm() {
       // console.log("LETTER ONE CONTENT", content);
     }
     showLetter(letter_id);
-  }, [letter_id]);
+  }, [letter_id, token]);
 
   useEffect(() => {
     //  to show selected reps
     async function seeReps(id) {
       const urlReps = `http://localhost:8090/reps/letter/${id}`;
-      const response = await fetch(urlReps);
+      const response = await fetch(urlReps, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       if (response.ok) {
         const data = await response.json();
         // console.log("\n \n DATA", data);
@@ -62,7 +70,7 @@ function ReviewForm() {
       }
     }
     seeReps(letter_id);
-  }, [letter_id]);
+  }, [letter_id, token]);
 
   const copyToClipboard = () => {
     copy(oneContent);

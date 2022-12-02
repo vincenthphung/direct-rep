@@ -17,7 +17,7 @@ function LandingPage() {
             </Link>
           </div>
           <div className="mb-3">
-            <Link to="/signup">
+            <Link to="/login">
               <button type="submit" className="btn btn-primary">
                 Login
               </button>

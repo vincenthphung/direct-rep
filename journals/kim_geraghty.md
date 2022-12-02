@@ -203,3 +203,45 @@ Upcoming to do list:
 - clean up endpoints: some inconsistencies
 
 The list is getting shorter! I can see the end in sight 😊
+
+## Wednesday 11/30/2022 and Thursday 12/1/2022
+
+AUTH:
+
+We got the authentication working on the backend and frontend.
+
+For the backend we had to add a new Authenticator class in our letters microservice, since the authenticator file is in the user microservice.
+
+Then we had to update our routers with the following:
+
+```
+account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
+```
+
+For the frontend, we added the TokenTest.js file to be able to create and retrieve the token. Then we connected it to our LoginTest form, where we use state to define username and password, and then call the login function.
+
+We had to make sure the endpoints being called matched what we had in the backend: /token.
+
+I added console.log statements everywhere to be able to follow the token and see what was going on.
+
+Then we had to add the authorization as a header, with the token,to all of our endpoints throughout the React files, inculde the Redux fetch calls.
+
+CONNECT ZIPCODE TO USER:
+
+The RepForm now pulls the zipcode from the current user, by hitting the get account endpoint, and including credentials in that fetch call. Numbers starting with a leading 0 aren't working so we'll have to find a way to fix that (either directly in the SQL table, or by checking the length of the zipcode and adding 0 on the frontend).
+
+The edit letter is now complete. We only edit the content. Followed the same approach as for create letter to pass multiple query arguments to the redux query option:
+
+```
+      query: (arg) => {
+        const { oneId, oneContent } = arg;
+        ... }
+```
+
+Updated to do list:
+
+- start deployment
+- add unit tests
+- finish logout button
+- edit / hide nav bar
+- filter letters per user

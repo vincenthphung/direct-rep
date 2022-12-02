@@ -84,7 +84,7 @@ def get_all_letters(
         return ("Not working")
 
 
-@router.put("/api/letters/{letters_id}", response_model=Union[LetterUpdate, Error])
+@router.put("/letters/{letter_id}", response_model=Union[LetterUpdate, Error])
 def edit_letter_body(
   letter_id: int,
   content: str,

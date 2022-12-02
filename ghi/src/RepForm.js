@@ -14,9 +14,8 @@ function RepForm() {
   const [letter_id, setLetterId] = useState("letter id");
   const [reps_list, setList] = useState([]);
   const [selection, setSelection] = useState([]);
+  const [zip, setZip] = useState("");
   const [createRep, result] = useCreateRepMutation();
-
-  console.log("TOKEN REP FORM", token);
 
   // to get the id of the most recent letter created:
   useEffect(() => {
@@ -38,7 +37,27 @@ function RepForm() {
       }
     }
     fetchLetterId();
-  }, []);
+  }, [token]);
+
+  // to get the zipcode
+  useEffect(() => {
+    async function getZipFromUser() {
+      const url = `http://localhost:8080/token`;
+      const response = await fetch(url, {
+        credentials: "include",
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log("response", response);
+        console.log("get zip data test", data);
+        const zipcode = data.account.zipcode;
+        console.log("zipcode", zipcode);
+        setZip(zipcode);
+        console.log("zip", zip);
+      }
+    }
+    getZipFromUser();
+  }, [token, zip]);
 
   //  to select the reps
   useEffect(() => {
@@ -53,9 +72,9 @@ function RepForm() {
         setList(data);
       }
     }
-    fetchReps(`90017`);
+    fetchReps(zip);
     // connect this with the user account zip code
-  }, []);
+  }, [token, zip]);
 
   // console.log("\n \n REPS LIST", reps_list);
 
@@ -86,25 +105,34 @@ function RepForm() {
   }
 
   async function showReps(letter_id) {
-    const urlReps = `http://localhost:8090/reps/letter/${letter_id}`;
-    const response = await fetch(urlReps, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await fetch(
+      `http://localhost:8090/reps/letter/${letter_id}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     if (response.ok) {
       const data = await response.json();
       setSelection(data);
     }
   }
 
-  // to load it the first time the page renders
+  // to load the Reps selected
   useEffect(() => {
+    async function showReps(letter_id) {
+      const response = await fetch(
+        `http://localhost:8090/reps/letter/${letter_id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setSelection(data);
+      }
+    }
     showReps(letter_id);
-  }, [letter_id]);
-
-  // to load it any time we add or delete a rep
-  useEffect(() => {
-    showReps(letter_id);
-  }, []);
+  }, [letter_id, token]);
 
   async function deleteRep(id) {
     // if (window.confirm("Are you sure: This Letter will be Deleted")) {

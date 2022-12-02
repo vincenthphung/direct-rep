@@ -20,8 +20,6 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 # WORKING PROJECT INDIVIDUAL
 
-
-
 ## Goals for the week 2
 
 1. Finish FastAPI docs page with the endpoints.
@@ -104,7 +102,6 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 3. Reviewed the endpoints with /api in the beginning.
 
-
 ## November 18, 2022 (Friday)
 
 ### Work done during the day
@@ -120,7 +117,6 @@ We spend more time on making our endpoints more efficient. We made changes to th
 2. React server issue is solved.
 
 ## Goals for the week 3
-
 
 1. Finish all the CRUD operations for the endpoints.
 
@@ -141,7 +137,6 @@ We spend more time on making our endpoints more efficient. We made changes to th
 1. OpenAI Post request endpoint finished.
 
 2. Signup form in React complete.
-
 
 ## November 22, 2022 (Tuesday)
 
@@ -175,7 +170,6 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 3. Delete endpoint for letters working in backend and frontend.
 
-
 ## Goals for the week 4
 
 1. Work on authentication.
@@ -185,6 +179,7 @@ We spend more time on making our endpoints more efficient. We made changes to th
 3. Finish the minimal viable product.
 
 ## November 28, 2022 (Monday)
+
 ### Work done during the day
 
 1. I worked upon the create letter endpoint and faced a error 402.
@@ -199,9 +194,9 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 2. Made all the issues for letters.
 
-3. Get reps API working in frontend.
+3. reps API working in frontend.
 
-## November 29, 2022 (Monday)
+## November 29, 2022 (Tuesday)
 
 ### Work done during the day
 
@@ -213,6 +208,52 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 ### Work achieved during the day
 
-1. Create letter frontend connected with the backend.
+1. Create letter form (frontend) connected with the backend.
 
 2. All the issues working in the backend.
+
+## November 30, 2022 (Wednesday)
+
+### Work done during the day
+
+1. Today, I worked upon populating the issues from the issues model. I populated the issues into create letter form in react. So, now the issues(in create letter form) can be selected from a dropdown which is connected to the issues model in the database.
+
+2. I used the react copy clipboard library to create an alert message and copy the contents of a letter from the review page.
+
+3. Our group pair programmed and I shared my screen. We worked upon implementing authentication for the all the endpoints in the letters service. We faced a lot issues in the beginning such as connecting the authenticator from the letters microservice. Later, we were abe to resolve it by duplicating a new authenticator in the router by using the same signing key for all the microservices.
+
+4. Our group spent time on the react part of authentication. We faced a lot problems, so , we decided to do more research and work on it the next day.
+
+### Work achieved during the day
+
+1. Issues dropdown working in the create letter form.
+
+2. Copy letter working in review page.
+
+3. Authentication working for all the letters endpoints.
+
+## November 30, 2022 (Wednesday)
+
+### Work done during the day
+
+1. We worked upon login component today. There were problems for the endpoints in react authentication. We fixed by revisiting all the endpoints. We solved the login unauthorized error by trial and error method. We fixed it by trying all the patterns that we could form.
+
+2. We created a react redux file for the login component and connected to all the redux endpoints and React store.
+
+3. We included login authorization for the dashboard and review page.
+
+4. Kim and Vincent did pair-programming and worked upon the edit letter endpoint for react.
+
+5. While merging, I merged the wrong branch to main branch. This lead to a broken main branch and none of our work for the day was reflecting in the main branch. So, I manually changed all the files not realizing I merged the wrong branch. We fixed main, although, we were still confused in what led to the error. So, we checked gitlab and found out that I had merged the wrong branch which led to a broken main branch.
+
+### Work achieved during the day
+
+1. Login user component working in React.
+
+2. Redux file for login component created and connected with React store.
+
+3. Authorization working for all the frontend endpoints.
+
+4. Edit letter endpoint for frontend.
+
+5. Main branch fixed after wrong merge.
