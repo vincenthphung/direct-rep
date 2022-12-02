@@ -2,7 +2,6 @@ import Card from "react-bootstrap/Card";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "./TokenTest.js";
-import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
   const { token } = useAuthContext();
@@ -15,7 +14,6 @@ function Dashboard() {
   const [oneTopic, setTopic] = useState("Letter topic");
   const [oneDate, setDate] = useState("Date");
   const [repSelection, setSelection] = useState([]);
-  const navigate = useNavigate();
 
   console.log("TOKEN DASHBOARD", token);
 
@@ -26,7 +24,7 @@ function Dashboard() {
       });
       const content = await response.json();
       setLetters(content);
-      console.log("LETTER CONTENT", content, "TOKEN", token);
+      // console.log("LETTER CONTENT", content, "TOKEN", token);
     })();
   }, [token]);
 
@@ -51,7 +49,6 @@ function Dashboard() {
     setStance(content["stance"]);
     setTopic(content["topic"]);
     setDate(content["created"]);
-    console.log("LETTER ONE CONTENT", content);
 
     //  to show selected reps
     async function seeReps() {
@@ -67,9 +64,6 @@ function Dashboard() {
     }
     seeReps();
   }
-
-  console.log("ONE LETTER", oneLetter);
-  console.log("ONE LETTER STANCE", oneStance);
 
   return (
     <div className="row">
@@ -132,9 +126,6 @@ function Dashboard() {
                   {oneStance ? "in favor of" : "in opposition to"} {oneTopic}
                 </Card.Title>
                 <Card.Text> {oneContent} </Card.Text>
-                {/* <Link href="/eletter">
-                  <Button variant="primary">Edit</Button>
-                </Link> */}
               </Card.Body>
               <Card.Footer className="text-muted"></Card.Footer>
               <Card.Body>

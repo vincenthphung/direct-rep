@@ -1,6 +1,5 @@
 import Card from "react-bootstrap/Card";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import copy from "copy-to-clipboard";
 import { useAuthContext } from "./TokenTest.js";
 
@@ -15,8 +14,6 @@ function ReviewForm() {
   const [oneDate, setDate] = useState("Date");
   const [repSelection, setSelection] = useState([]);
 
-  // const letter_id = 4;
-
   // to get the id of the most recent letter created:
   useEffect(() => {
     async function fetchLetterId() {
@@ -26,11 +23,9 @@ function ReviewForm() {
       });
       if (response.ok) {
         const data = await response.json();
-        // console.log("LETTER DATA", data);
         for (let i = 0; i < data.length; i++) {
           if (i === data.length - 1) {
             const lastId = data[i].id;
-            // console.log("LAST", lastId);
             setLetterId(lastId);
           }
         }
@@ -51,7 +46,6 @@ function ReviewForm() {
       setStance(content["stance"]);
       setTopic(content["topic"]);
       setDate(content["created"]);
-      // console.log("LETTER ONE CONTENT", content);
     }
     showLetter(letter_id);
   }, [letter_id, token]);
@@ -65,7 +59,6 @@ function ReviewForm() {
       });
       if (response.ok) {
         const data = await response.json();
-        // console.log("\n \n DATA", data);
         setSelection(data);
       }
     }
@@ -82,7 +75,7 @@ function ReviewForm() {
       <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
           <div className="text-center">
-          <h1>Final Letter</h1>
+            <h1>Final Letter</h1>
           </div>
           <div className="mb-3">
             <Card className="text-center">
@@ -93,9 +86,6 @@ function ReviewForm() {
                   {oneStance ? "in favor of" : "in opposition to"} {oneTopic}
                 </Card.Title>
                 <Card.Text> {oneContent} </Card.Text>
-                {/* <Link href="/eletter">
-                  <Button variant="primary">Edit</Button>
-                </Link> */}
               </Card.Body>
               <Card.Footer className="text-muted"></Card.Footer>
             </Card>

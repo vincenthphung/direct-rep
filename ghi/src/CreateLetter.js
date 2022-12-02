@@ -10,11 +10,10 @@ function LetterForm() {
   const [issues, setIssues] = useState([]);
   const [topic, setTopic] = useState("");
   const [stance, setStance] = useState(true);
-  // const [content, setContent] = useState("");
   const [createLetter, result] = useCreateLetterMutation();
   const navigate = useNavigate();
 
-  console.log("TOKEN??", token);
+  console.log("TOKEN CREATE LETTER", token);
 
   // to collect the issues list from the database
   async function fetchIssues() {
@@ -33,7 +32,7 @@ function LetterForm() {
     fetchIssues();
   }, []);
 
-  console.log("ISSUES LIST", issues);
+  // console.log("ISSUES LIST", issues);
 
   async function handleSubmit(e) {
     e.preventDefault();
