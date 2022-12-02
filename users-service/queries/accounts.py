@@ -36,13 +36,14 @@ class AccountRepo:
                 # Run our SELECT statement
                 result = db.execute(
                     """
-                    SELECT id
-                            , full_name
-                            , email
-                            , zipcode
-                            , hashed_password
+                    SELECT 
+                        id,
+                        full_name,
+                        email,
+                        zipcode,
+                        hashed_password
                     FROM users
-                    WHERE email = %s
+                    WHERE email = %s;
                     """,
                     [email]
                 )
