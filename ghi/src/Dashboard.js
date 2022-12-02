@@ -28,7 +28,7 @@ function Dashboard() {
       setLetters(content);
       console.log("LETTER CONTENT", content, "TOKEN", token);
     })();
-  }, []);
+  }, [token]);
 
   const del = async (id) => {
     if (window.confirm("Are you sure: This Letter will be Deleted")) {
