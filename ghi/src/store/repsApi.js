@@ -2,7 +2,6 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { authApi } from "./authApi";
 
 export const repsApi = createApi({
-  // { token } = useAuthContext();
   reducerPath: "reps",
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_LETTERS_API_HOST,
