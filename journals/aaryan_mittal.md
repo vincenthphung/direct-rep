@@ -256,4 +256,4 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 4. Edit letter endpoint for frontend.
 
-5. Main branch fixed after wrong merge.
+5. Fixed Main branch after wrong merge.
