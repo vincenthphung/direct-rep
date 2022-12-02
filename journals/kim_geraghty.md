@@ -204,22 +204,4 @@ Upcoming to do list:
 
 The list is getting shorter! I can see the end in sight 😊
 
-// to get the zipcode
-useEffect(() => {
-async function getZipFromUser() {
-const url = `${process.env.REACT_APP_USERS_API_HOST}/token/`;
-try {
-const response = await fetch(url, {
-headers: { Authorization: `Bearer ${token}` },
-});
-if (response.ok) {
-const data = await response.json();
-console.log("get zip data test", data);
-const zipcode = data.account.zipcode;
-setZip(zipcode);
-}
-} catch (e) {}
-return false;
-}
-getZipFromUser();
-}, []);
+
