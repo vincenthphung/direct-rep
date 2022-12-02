@@ -13,7 +13,16 @@ export const usersApi = createApi({
         method: "post",
       }),
     }),
+    editUser: builder.mutation({
+      query: (data) => ({
+        url: `/api/accounts/`,
+        body: data,
+        method: "put",
+      }),
+    }),
   }),
 });
 
-export const {useCreateUserMutation } = usersApi;
+export const { useCreateUserMutation, useEditUserMutation } = usersApi;
+
+// tbd: connect ID here
