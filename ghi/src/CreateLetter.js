@@ -35,7 +35,7 @@ function LetterForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    createLetter({ topic, stance });
+    createLetter({ topic, stance, token });
   }
 
   return (
