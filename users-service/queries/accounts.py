@@ -40,7 +40,7 @@ class AccountRepo:
                         id,
                         full_name,
                         email,
-                        zipcode,
+                        TO_CHAR(zipcode, 'fm00000'),
                         hashed_password
                     FROM users
                     WHERE email = %s;
