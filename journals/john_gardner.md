@@ -112,3 +112,6 @@ We spent a lot of the day trying to get Auth to work and just learning how to us
 
 ## 12/01/2022 (Thursday)
 Today we're going to work on getting Auth working on the front-end.
+
+## 12/02/2022 (Friday)
+Today I need to work on the letter database and add a "created_by" field.
