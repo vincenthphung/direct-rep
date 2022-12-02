@@ -18,7 +18,6 @@ export const lettersApi = createApi({
   endpoints: (builder) => ({
     getLetters: builder.query({
       query: () => "/api/letters",
-      // providesTags: ['LettersList'],
     }),
     createLetter: builder.mutation({
       query: (arg) => {
@@ -31,9 +30,24 @@ export const lettersApi = createApi({
           params: { topic, stance },
         };
       },
-      // invalidatesTags: ['LettersList'],
+    }),
+    editLetter: builder.mutation({
+      query: (arg) => {
+        const { oneId, oneContent } = arg;
+        console.log("edit letter arg", arg);
+        return {
+          method: "put",
+          url: `letters/${oneId}?content=${oneContent}`,
+          credentials: "include",
+          params: { oneId, oneContent },
+        };
+      },
     }),
   }),
 });
 
-export const { useGetLettersQuery, useCreateLetterMutation } = lettersApi;
+export const {
+  useGetLettersQuery,
+  useCreateLetterMutation,
+  useEditLetterMutation,
+} = lettersApi;

@@ -59,17 +59,6 @@ function RepForm() {
     getZipFromUser();
   }, [token, zip]);
 
-  // useEffect(() => {
-  //   async function testZip() {
-  //     const data = await getZipFromUser();
-  //     console.log("fetch token test", token);
-  //     console.log("data?", data);
-  //     // setToken(token);
-  //   }
-  //   testZip();
-  //   console.log("TOKEN REP FORM", token);
-  // }, [token]);
-
   //  to select the reps
   useEffect(() => {
     async function fetchReps(zipcode) {
