@@ -2,6 +2,7 @@ import Card from "react-bootstrap/Card";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "./TokenTest.js";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
   const { token } = useAuthContext();
@@ -14,6 +15,7 @@ function Dashboard() {
   const [oneTopic, setTopic] = useState("Letter topic");
   const [oneDate, setDate] = useState("Date");
   const [repSelection, setSelection] = useState([]);
+  const navigate = useNavigate();
 
   console.log("TOKEN DASHBOARD", token);
 

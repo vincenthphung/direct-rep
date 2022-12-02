@@ -147,7 +147,7 @@ function RepForm() {
     <div className="row">
       <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
-          <h1>Select your reps</h1>
+          <h1>Select Representatives</h1>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <select
@@ -157,7 +157,7 @@ function RepForm() {
                 name="reps"
                 className="form-select"
               >
-                <option value="">See your reps</option>
+                <option value="">Representatives</option>
                 {reps_list.map((rep) => {
                   return (
                     <option key={rep.name} value={rep.name}>
@@ -168,14 +168,14 @@ function RepForm() {
               </select>
             </div>
             <button type="submit" className="btn btn-primary">
-              Add to selection
+              ADD
             </button>
           </form>
         </div>
       </div>
       <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
-          <h2>Reps selection</h2>
+          <h2>Representatives</h2>
           <div>
             <table className="table table-striped table-sm">
               <thead>
@@ -210,7 +210,7 @@ function RepForm() {
             </table>
           </div>
           <Link to="/review">
-            <button className="btn btn-primary">Continue to final page</button>
+            <button className="btn btn-primary">Final Page</button>
           </Link>
         </div>
       </div>

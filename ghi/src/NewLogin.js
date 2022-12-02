@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useToken } from "./TokenTest.js";
 import { useNavigate } from "react-router-dom";
 
-function LoginForm() {
+function NewLoginForm() {
   const [token, login] = useToken();
   console.log("login form", token);
 
@@ -22,11 +22,11 @@ function LoginForm() {
     <div className="row">
       <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
-          <h1>Login</h1>
+          <h1>Confirm Account</h1>
           {/* <form onSubmit={login}> */}
           <form>
             <div className="mb-3">
-              <label htmlFor="username">Email</label>
+              <label htmlFor="username">Confirm Email</label>
               <input
                 onChange={(e) => setUser(e.target.value)}
                 type="email"
@@ -38,7 +38,7 @@ function LoginForm() {
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">Confirm Password</label>
               <input
                 onChange={(e) => setPassword(e.target.value)}
                 type="password"
@@ -54,7 +54,7 @@ function LoginForm() {
               type="submit"
               className="btn btn-primary"
             >
-              Login
+              Confirm Account
             </button>
           </form>
         </div>
@@ -63,4 +63,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default NewLoginForm;

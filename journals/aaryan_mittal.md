@@ -232,7 +232,7 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 3. Authentication working for all the letters endpoints.
 
-## November 30, 2022 (Wednesday)
+## December 1, 2022 (Thursday)
 
 ### Work done during the day
 

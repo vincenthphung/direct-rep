@@ -31,6 +31,9 @@ function Navb() {
             </Nav.Link>
           </Nav>
           <Nav>
+            <Nav.Link as={NavLink} to="/signup">
+              Signup
+            </Nav.Link>
             <Nav.Link as={NavLink} to="/login">
               Login
             </Nav.Link>
