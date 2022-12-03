@@ -1,32 +1,31 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 function LandingPage() {
-  return (
-    <div className="row">
-      <div className="offset-3 col-6">
-        <div className="shadow p-4 mt-4">
-          <div className="mb-3">
-            <h1>Welcome to Direct Rep</h1>
-          </div>
-          <div className="mb-3">
-            <Link to="/signup">
-              <button type="submit" className="btn btn-primary">
-                Sign up
-              </button>
-            </Link>
-          </div>
-          <div className="mb-3">
-            <Link to="/login">
-              <button type="submit" className="btn btn-primary">
-                Login
-              </button>
-            </Link>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+	return (
+		<div className='jumbotron centered'>
+			<div className='container'>
+				<i className='fas fa-key fa-6x' />
+				<h1 className='display-3'>Direct Rep</h1>
+				<p className='lead'>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+					eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+					minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+					aliquip ex ea commodo consequat. Duis aute irure dolor in
+					reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+					pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+					culpa qui officia deserunt mollit anim id est laborum.
+				</p>
+				<hr />
+				<a className='btn btn-light btn-lg' href='/signup' role='button'>
+					Register
+				</a>
+				<a className='btn btn-dark btn-lg' href='/login' role='button'>
+					Login
+				</a>
+			</div>
+		</div>
+	);
 }
 
 export default LandingPage;
