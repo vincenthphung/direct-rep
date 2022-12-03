@@ -23,8 +23,8 @@ services:
     volumes:
       - ./users-service:/app
     environment:
-      SIGNING_KEY: 7ea8f8c1d636b6f92b59a46326d9f59da1e09f0c986fbaeacaad64fed817ce6d
-      DATABASE_URL: postgresql://users:password@postgres/users
+      SIGNING_KEY: ${SIGNING_KEY}
+      DATABASE_URL: ${DATABASE_URL}
       WAIT_HOSTS: postgres:5432
   letters-service:
     build:
@@ -35,8 +35,8 @@ services:
     volumes:
       - ./letters-service:/app
     environment:
-      SIGNING_KEY: 7ea8f8c1d636b6f92b59a46326d9f59da1e09f0c986fbaeacaad64fed817ce6d
-      DATABASE_URL: postgresql://letters:password@postgres/letters
+      SIGNING_KEY: ${SIGNING_KEY}
+      DATABASE_URL: ${DATABASE_URL}
       WAIT_HOSTS: postgres:5432
       OPENAI_API_KEY: ${OPENAI_API_KEY}
       GOOGLE_CIVICS_KEY: ${GOOGLE_CIVICS_KEY}
@@ -49,7 +49,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      SIGNING_KEY: 7ea8f8c1d636b6f92b59a46326d9f59da1e09f0c986fbaeacaad64fed817ce6d
+      SIGNING_KEY: ${SIGNING_KEY}
       HOST_OS: ${OS}
       NODE_ENV: development
       HOST: "0.0.0.0"
