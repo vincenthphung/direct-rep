@@ -10,8 +10,8 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_MULTIPLE_DATABASES=users,letters
-      - POSTGRES_PASSWORD=password
+      - POSTGRES_MULTIPLE_DATABASES=${POSTGRES_MULTIPLE_DATABASES}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
       - 15432:5432
   users-service:
@@ -24,7 +24,7 @@ services:
       - ./users-service:/app
     environment:
       SIGNING_KEY: ${SIGNING_KEY}
-      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_URL: postgresql://letters:password@postgres/letters
       WAIT_HOSTS: postgres:5432
   letters-service:
     build:
@@ -36,7 +36,7 @@ services:
       - ./letters-service:/app
     environment:
       SIGNING_KEY: ${SIGNING_KEY}
-      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_URL: postgresql://letters:password@postgres/letters
       WAIT_HOSTS: postgres:5432
       OPENAI_API_KEY: ${OPENAI_API_KEY}
       GOOGLE_CIVICS_KEY: ${GOOGLE_CIVICS_KEY}
