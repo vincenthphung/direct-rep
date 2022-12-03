@@ -36,25 +36,88 @@ lint-job:
 
 # Build the React/JavaScript front-end
 build-front-end-job:
+  # rules:
+  #   # Only run if pushing to the main branch
+  #   - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   stage: build
   image: node:lts-bullseye
   needs:
     - lint-test-job
-  variables:
-    # If either of these variables is defined in the GitLab
-    # CI/CD variables, that value will override the value here.
-    # You need to substitute in your real values for
-    # GROUP_NAME, PROJECT_NAME, & WEBSERVICE_NAME below.
-    PUBLIC_URL: https://GROUP_NAME.gitlab.io/PROJECT_NAME/
-    REACT_APP_SAMPLE_SERVICE_API_HOST: https://WEBSERVICE_NAME.onrender.com
+    - users-service-unit-test-job
+    - letters-service-unit-test-job
+  # variables:
+  #   # If either of these variables is defined in the GitLab
+  #   # CI/CD variables, that value will override the value here.
+  #   # You need to substitute in your real values for
+  #   # GROUP_NAME, PROJECT_NAME, & WEBSERVICE_NAME below.
+  #   PUBLIC_URL: https://directrep.gitlab.io/direct-rep/
+  #   REACT_APP_SAMPLE_SERVICE_API_HOST: https://WEBSERVICE_NAME.onrender.com
   script:
     - cd ghi
     - npm install
     - npm run build
-    - cp build/index.html build/404.html
+    # - cp build/index.html build/404.html
   artifacts:
     paths:
       - ghi/build/
+
+# Build FastAPI back-end
+build-users-service-job:
+  # rules:
+  #   # Only run if pushing to the main branch
+  #   - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  stage: build
+  image: docker:20.10.16
+  services:
+    - docker:20.10.16-dind
+  script:
+    # DO THIS FOR EACH SERVICE YOU NEED TO BUILD A DOCKER
+    # IMAGE FOR
+    - cd users-service
+
+    # Builds the image CHANGE THE /app FOR EACH SERVICE
+    - docker build -t ${CI_REGISTRY_IMAGE}/users-service:latest .
+
+    # Gives the image a specific name
+    - docker tag ${CI_REGISTRY_IMAGE}/users-service:latest ${CI_REGISTRY_IMAGE}/users-service:$CI_JOB_ID
+
+    # Authenticates with the GitLab image registry
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+
+    # Stores your image in the GitLab image registry
+    # with two different tags, the version from the tag
+    # and the name "latest"
+    - docker push ${CI_REGISTRY_IMAGE}/users-service:$CI_JOB_ID
+    - docker push ${CI_REGISTRY_IMAGE}/users-service:latest
+
+build-letters-service-job:
+  rules:
+    # Only run if pushing to the main branch
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  stage: build
+  image: docker:20.10.16
+  services:
+    - docker:20.10.16-dind
+  script:
+    # DO THIS FOR EACH SERVICE YOU NEED TO BUILD A DOCKER
+    # IMAGE FOR
+    - cd api
+
+    # Builds the image CHANGE THE /app FOR EACH SERVICE
+    - docker build -t ${CI_REGISTRY_IMAGE}/app:latest .
+
+    # Gives the image a specific name
+    - docker tag ${CI_REGISTRY_IMAGE}/app:latest ${CI_REGISTRY_IMAGE}/app:$CI_JOB_ID
+
+    # Authenticates with the GitLab image registry
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+
+    # Stores your image in the GitLab image registry
+    # with two different tags, the version from the tag
+    # and the name "latest"
+    - docker push ${CI_REGISTRY_IMAGE}/app:$CI_JOB_ID
+    - docker push ${CI_REGISTRY_IMAGE}/app:latest
+
 
 # Deploy the React/JavaScript front-end to GitLab pages
 pages:

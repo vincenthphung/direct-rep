@@ -5,7 +5,7 @@ WORKDIR /app
 # Copy the top-level files in your service's directory
 COPY requirements.txt requirements.txt
 COPY main.py main.py
-COPY authenticator.py
+COPY authenticator.py authenticator.py
 
 # Copy all of the subdirectories in your service's directory
 COPY queries queries
