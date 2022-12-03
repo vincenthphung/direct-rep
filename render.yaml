@@ -1,0 +1,59 @@
+volumes:
+  postgres-data:
+    external: true
+  # other volumes...
+services:
+  postgres:
+    build:
+      context: ./relational-data
+      dockerfile: ./Dockerfile.dev
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_MULTIPLE_DATABASES=${POSTGRES_MULTIPLE_DATABASES}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - 15432:5432
+  users-service:
+    build:
+      context: ./users-service
+      dockerfile: ./Dockerfile
+    ports:
+      - 8080:8000
+    volumes:
+      - ./users-service:/app
+    environment:
+      SIGNING_KEY: ${SIGNING_KEY}
+      DATABASE_URL: ${DATABASE_URL}
+      WAIT_HOSTS: postgres:5432
+  letters-service:
+    build:
+      context: ./letters-service
+      dockerfile: ./Dockerfile
+    ports:
+      - 8090:8000
+    volumes:
+      - ./letters-service:/app
+    environment:
+      SIGNING_KEY: ${SIGNING_KEY}
+      DATABASE_URL: ${DATABASE_URL}
+      WAIT_HOSTS: postgres:5432
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      GOOGLE_CIVICS_KEY: ${GOOGLE_CIVICS_KEY}
+  ghi:
+    image: node:lts-bullseye
+    command: /bin/bash run.sh
+    working_dir: /app
+    volumes:
+      - ./ghi:/app
+    ports:
+      - "3000:3000"
+    environment:
+      SIGNING_KEY: ${SIGNING_KEY}
+      HOST_OS: ${OS}
+      NODE_ENV: development
+      HOST: "0.0.0.0"
+      PUBLIC_URL: http://localhost:3000
+      REACT_APP_SAMPLE_SERVICE_API_HOST: http://localhost:8000
+      REACT_APP_USERS_API_HOST: http://localhost:8080
+      REACT_APP_LETTERS_API_HOST: http://localhost:8090
