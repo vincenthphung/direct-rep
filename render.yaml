@@ -1,59 +1,80 @@
-volumes:
-  postgres-data:
-    external: true
-  # other volumes...
 services:
-  postgres:
-    build:
-      context: ./relational-data
-      dockerfile: ./Dockerfile.dev
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_MULTIPLE_DATABASES=${POSTGRES_MULTIPLE_DATABASES}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    ports:
-      - 15432:5432
-  users-service:
-    build:
-      context: ./users-service
-      dockerfile: ./Dockerfile
-    ports:
-      - 8080:8000
-    volumes:
-      - ./users-service:/app
-    environment:
-      SIGNING_KEY: ${SIGNING_KEY}
-      DATABASE_URL: ${DATABASE_URL}
-      WAIT_HOSTS: postgres:5432
-  letters-service:
-    build:
-      context: ./letters-service
-      dockerfile: ./Dockerfile
-    ports:
-      - 8090:8000
-    volumes:
-      - ./letters-service:/app
-    environment:
-      SIGNING_KEY: ${SIGNING_KEY}
-      DATABASE_URL: ${DATABASE_URL}
-      WAIT_HOSTS: postgres:5432
-      OPENAI_API_KEY: ${OPENAI_API_KEY}
-      GOOGLE_CIVICS_KEY: ${GOOGLE_CIVICS_KEY}
-  ghi:
-    image: node:lts-bullseye
-    command: /bin/bash run.sh
-    working_dir: /app
-    volumes:
-      - ./ghi:/app
-    ports:
-      - "3000:3000"
-    environment:
-      SIGNING_KEY: ${SIGNING_KEY}
-      HOST_OS: ${OS}
-      NODE_ENV: development
-      HOST: "0.0.0.0"
-      PUBLIC_URL: http://localhost:3000
-      REACT_APP_SAMPLE_SERVICE_API_HOST: http://localhost:8000
-      REACT_APP_USERS_API_HOST: http://localhost:8080
-      REACT_APP_LETTERS_API_HOST: http://localhost:8090
+  # A Docker web service
+  - type: web
+    name: letters
+    env: docker
+    branch: john-deployment # optional (defaults to master)
+    rootDir: letters-service
+    healthCheckPath: /
+    envVars:
+      - key: REDIS_HOST
+        fromService:
+          type: redis
+          name: lightning
+          property: host # available properties are listed below
+      - key: REDIS_PORT
+        fromService:
+          type: redis
+          name: lightning
+          property: port
+      - fromGroup: conc-settings
+  # # A Python cron job that runs every hour
+  # - type: cron
+  #   name: date
+  #   env: python
+  #   schedule: "0 * * * *"
+  #   buildCommand: "true" # ensure it's a string
+  #   startCommand: date
+  #   repo: https://github.com/render-examples/docker.git # optional
+  # # A static site
+  # - type: web
+  #   name: my blog
+  #   env: static
+  #   buildCommand: yarn build
+  #   staticPublishPath: ./build
+  #   pullRequestPreviewsEnabled: true # optional
+  #   buildFilter:
+  #     paths:
+  #     - src/**/*.js
+  #     ignoredPaths:
+  #     - src/**/*.test.js
+  #   headers:
+  #     - path: /*
+  #       name: X-Frame-Options
+  #       value: sameorigin
+  #   routes:
+  #     - type: redirect
+  #       source: /old
+  #       destination: /new
+  #     - type: rewrite
+  #       source: /a/*
+  #       destination: /a
+
+databases:
+  - name: elephant
+    databaseName: mydb # optional (Render may add a suffix)
+    user: adrian # optional
+    ipAllowList: # optional (defaults to allow all)
+      - source: 203.0.113.4/30
+        description: office
+      - source: 198.51.100.1
+        description: home
+
+  - name: private database
+    databaseName: private
+    ipAllowList: [] # only allow internal connections
+
+
+envVarGroups:
+  - name: conc-settings
+    envVars:
+      - key: CONCURRENCY
+        value: 2
+      - key: SECRET
+        generateValue: true
+      - key: USER_PROVIDED_SECRET
+        sync: false
+  - name: stripe
+    envVars:
+      - key: STRIPE_API_URL
+        value: https://api.stripe.com/v2

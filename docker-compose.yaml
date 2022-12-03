@@ -24,7 +24,7 @@ services:
       - ./users-service:/app
     environment:
       SIGNING_KEY: ${SIGNING_KEY}
-      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_URL: ${USERS_DATABASE_URL}
       WAIT_HOSTS: postgres:5432
   letters-service:
     build:
@@ -36,7 +36,7 @@ services:
       - ./letters-service:/app
     environment:
       SIGNING_KEY: ${SIGNING_KEY}
-      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_URL: ${LETTERS_DATABASE_URL}
       WAIT_HOSTS: postgres:5432
       OPENAI_API_KEY: ${OPENAI_API_KEY}
       GOOGLE_CIVICS_KEY: ${GOOGLE_CIVICS_KEY}
