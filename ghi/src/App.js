@@ -47,32 +47,37 @@ function App() {
   }, []);
 
   return (
-    <div>
+    // <div>
       <BrowserRouter>
         <AuthProvider>
           <GetToken />
 
           <Navigation />
           <Routes>
+
             <Route path="/" element={<LandingPage />} />
-            <Route path="/login" element={<LoginForm />} />
-            <Route path="/logout" element={<LogoutButton />} />
-            <Route path="/signup" element={<AccountForm />} />
-            <Route path="/eaccount" element={<EditAccount />} />
-            <Route path="/selectreps" element={<RepForm />} />
-            <Route path="/signup" element={<AccountForm />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/cletter" element={<LetterForm />} />
-            <Route path="/eletter" element={<EditLetter />} />
-            <Route path="/review" element={<ReviewForm />} />
+              <Route path="/login" element={<LoginForm />} />
+              <Route path="/signup" element={<AccountForm />} />
+
+
+            <Route>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/logout" element={<LogoutButton />} />
+
+              <Route path="/eaccount" element={<EditAccount />} />
+              <Route path="/selectreps" element={<RepForm />} />
+              <Route path="/cletter" element={<LetterForm />} />
+              <Route path="/eletter" element={<EditLetter />} />
+              <Route path="/review" element={<ReviewForm />} />
             <Route path="/newlogin" element={<NewLoginForm />} />
-          </Routes>
+          </Route>
+        </Routes>
 
           <ErrorNotification error={error} />
           {/* <Construct info={launch_info} /> */}
         </AuthProvider>
       </BrowserRouter>
-    </div>
+    // </div>
   );
 }
 
