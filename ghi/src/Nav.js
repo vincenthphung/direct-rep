@@ -39,12 +39,12 @@ function Navb() {
             ""
           )}
           <Nav>
-            <Nav.Link as={NavLink} to="/signup">
+            {/* <Nav.Link as={NavLink} to="/signup">
               Signup
             </Nav.Link>
             <Nav.Link as={NavLink} to="/login">
               Login
-            </Nav.Link>
+            </Nav.Link> */}
             {token ? (
               <Fragment>
                 <Nav.Link as={NavLink} to="/eaccount">
