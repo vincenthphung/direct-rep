@@ -23,6 +23,7 @@ function LetterForm() {
     });
     if (response.ok) {
       const data = await response.json();
+      console.log("####\nISSUES\n####\n", data)
       setIssues(data);
     }
   }

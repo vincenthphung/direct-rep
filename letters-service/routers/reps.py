@@ -3,9 +3,11 @@ from typing import Optional, Union, List
 import requests
 import json
 from queries.reps import(Error, RepIn, RepOut, CivicsOut, RepRepository)
-from .new_keys import GOOGLE_CIVICS_KEY
 from jwtdown_fastapi.authentication import Authenticator
 import os
+
+SIGNING_KEY = os.environ["SIGNING_KEY"]
+GOOGLE_CIVICS_KEY = os.environ["GOOGLE_CIVICS_KEY"]
 
 class MyAuthenticator(Authenticator):
     async def get_account_data(self, username: str, accounts):
@@ -21,7 +23,7 @@ class MyAuthenticator(Authenticator):
         pass
 
 # print("\n \n SIGNING_KEY", os.environ)
-authenticator = MyAuthenticator(os.environ["SIGNING_KEY"])
+authenticator = MyAuthenticator(SIGNING_KEY)
 
 
 router = APIRouter()
@@ -29,7 +31,7 @@ router = APIRouter()
 google_api_key = GOOGLE_CIVICS_KEY
 url = "https://www.googleapis.com/civicinfo/v2/representatives"
 # "x-goog-api-key" is google's word for "Authorization"
-headers = {"x-goog-api-key": google_api_key}
+headers = {"x-goog-api-key": GOOGLE_CIVICS_KEY}
 
 # levels info:
 # "country" = federal
