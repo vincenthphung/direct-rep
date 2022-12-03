@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 function LandingPage() {
 	return (
 		<div className='jumbotron centered'>
-			<div className='container'>
+			<div className="container offset-3 col-6 mb-3">
 				<i className='fas fa-key fa-6x' />
 				<h1 className='display-3'>Direct Rep</h1>
 				<p className='lead'>
