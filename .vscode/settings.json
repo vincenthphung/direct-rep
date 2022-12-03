@@ -3,7 +3,7 @@
   "python.formatting.provider": "black",
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "files.autoSave": "off",
+  "files.autoSave": "onFocusChange",
   "cSpell.words": [
     "Excalidraw",
     "labeltext",

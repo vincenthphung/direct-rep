@@ -56,11 +56,11 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<LoginForm />} />
-            <Route path="/logout" element={<LogoutButton />} />
             <Route path="/signup" element={<AccountForm />} />
+
+            <Route path="/logout" element={<LogoutButton />} />
             <Route path="/eaccount" element={<EditAccount />} />
             <Route path="/selectreps" element={<RepForm />} />
-            <Route path="/signup" element={<AccountForm />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/cletter" element={<LetterForm />} />
             <Route path="/eletter" element={<EditLetter />} />
