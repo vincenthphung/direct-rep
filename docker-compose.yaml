@@ -17,26 +17,26 @@ services:
   users-service:
     build:
       context: ./users-service
-      dockerfile: ./Dockerfile.dev
+      dockerfile: ./Dockerfile
     ports:
       - 8080:8000
     volumes:
       - ./users-service:/app
     environment:
       SIGNING_KEY: ${SIGNING_KEY}
-      DATABASE_URL: postgresql://letters:password@postgres/letters
+      DATABASE_URL: ${DATABASE_URL}
       WAIT_HOSTS: postgres:5432
   letters-service:
     build:
       context: ./letters-service
-      dockerfile: ./Dockerfile.dev
+      dockerfile: ./Dockerfile
     ports:
       - 8090:8000
     volumes:
       - ./letters-service:/app
     environment:
       SIGNING_KEY: ${SIGNING_KEY}
-      DATABASE_URL: postgresql://letters:password@postgres/letters
+      DATABASE_URL: ${DATABASE_URL}
       WAIT_HOSTS: postgres:5432
       OPENAI_API_KEY: ${OPENAI_API_KEY}
       GOOGLE_CIVICS_KEY: ${GOOGLE_CIVICS_KEY}
