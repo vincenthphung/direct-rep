@@ -2,12 +2,29 @@ stages:
   - test
   - build
   - deploy
+
+services:
+  - postgres:14.2-bullseye
+
+variables:
+  POSTGRES_PASSWORD: test
+  DATABASE_URL: postgresql://postgres:test@postgres:5432/postgres
+
 lint-test-job:
   image: 'python:3-bullseye'
   stage: test
   script:
     - pip install flake8
     - flake8 sample_service
+letters-service-test-job:
+  image: python:3.10-bullseye
+  stage: test
+  script:
+    - cd letters-service
+    - pip install -r requirements.txt
+    - python manage.py test
+
+
 build-front-end-job:
   stage: build
   image: 'node:lts-bullseye'
