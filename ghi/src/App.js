@@ -46,13 +46,14 @@ function App() {
   // }, []);
 
   return (
-    <div>
+    // <div>
       <BrowserRouter>
         <AuthProvider>
           <GetToken />
 
           <Navigation />
           <Routes>
+
             <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/signup" element={<AccountForm />} />
@@ -65,13 +66,13 @@ function App() {
             <Route path="/eletter" element={<EditLetter />} />
             <Route path="/review" element={<ReviewForm />} />
             <Route path="/newlogin" element={<NewLoginForm />} />
-          </Routes>
+        </Routes>
 
           {/* <ErrorNotification error={error} /> */}
           {/* <Construct info={launch_info} /> */}
         </AuthProvider>
       </BrowserRouter>
-    </div>
+    // </div>
   );
 }
 

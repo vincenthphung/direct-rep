@@ -1,6 +1,6 @@
 import Card from "react-bootstrap/Card";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import {useEffect,useState} from "react";
+import { Routes, Route, Link, Navigate } from 'react-router-dom';
 import { useAuthContext } from "./TokenTest.js";
 
 function Dashboard() {
@@ -116,6 +116,7 @@ function Dashboard() {
           </div>
         </div>
       </div>
+
       <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
           <h2>Detail letter view</h2>
@@ -158,6 +159,7 @@ function Dashboard() {
             </table>
           </div>
         </div>
+
         <div className="offset-3 col-6">
           <div className="shadow p-4 mt-4">
             <Link to="/cletter">
