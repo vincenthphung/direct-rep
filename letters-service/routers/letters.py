@@ -5,11 +5,10 @@ import json
 import os
 from queries.letters import (Error, LetterIn, LetterNew,
                              LetterOut, LetterUpdate, LetterRepository, IssueRepository)
-from .new_keys import OPENAI_API_KEY
 from jwtdown_fastapi.authentication import Authenticator
 import os
 
-OPENAI_URL = os.environ["OPENAI_URL"]
+OPENAI_URL = os.getenv["OPENAI_URL"]
 
 
 class MyAuthenticator(Authenticator):
