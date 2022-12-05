@@ -17,7 +17,7 @@ services:
   users-service:
     build:
       context: ./users-service
-      dockerfile: ./Dockerfile.dev
+      dockerfile: ./Dockerfile
     ports:
       - 8080:8000
     volumes:
@@ -29,7 +29,7 @@ services:
   letters-service:
     build:
       context: ./letters-service
-      dockerfile: ./Dockerfile.dev
+      dockerfile: ./Dockerfile
     ports:
       - 8090:8000
     volumes:
