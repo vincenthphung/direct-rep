@@ -71,6 +71,8 @@ def get_reps_from_api(
       if 'address' in item:
         if 'emails' in item:
           list_b.append([item["name"], item["party"], item["address"], item['emails'][0], i])
+        else:
+          list_b.append([item["name"], item["party"], item["address"], 'N/A', i])
       elif 'emails' in item:
         list_b.append([item["name"], item["party"], [{'line1': 'N/A', 'city': 'N/A', 'state': 'N/A', 'zip': 'N/A'}], item['emails'][0], i])
       else:

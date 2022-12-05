@@ -85,7 +85,7 @@ function Dashboard() {
                 {letters.map((letter) => {
                   return (
                     <tr key={letter.id}>
-                      <td>{letter.created}</td>
+                      <td>{new Date(letter.created).toLocaleDateString()}</td>
                       <td>
                         {letter.stance ? "in favor of" : "in opposition to"}
                       </td>
@@ -121,7 +121,7 @@ function Dashboard() {
           <h2>Detail letter view</h2>
           <div className="mb-3">
             <Card className="text-center">
-              <Card.Header>Date created: {oneDate} </Card.Header>
+              <Card.Header>Date created: {''} {oneDate ? new Date(oneDate).toLocaleDateString() : ''} </Card.Header>
               <Card.Body>
                 <Card.Title>
                   Write a letter{" "}
