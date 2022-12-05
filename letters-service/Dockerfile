@@ -7,4 +7,4 @@ RUN chmod +x /wait
 RUN python -m pip install -r requirements.txt
 WORKDIR /app
 # CMD /wait && python -m migrations up && uvicorn main:app --reload --host 0.0.0.0
-CMD /wait && uvicorn /wait main:app --reload --host 0.0.0.0
+# CMD /wait && uvicorn main:app --reload --host 0.0.0.0
