@@ -105,24 +105,18 @@ function ReviewForm() {
                         <th>Office</th>
                         <th>Party</th>
                         <th>Address</th>
+                        <th>Email</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {repSelection.map((rep, i, j, k, l) => {
+                      {repSelection.map((rep) => {
                         return (
-                          <tr>
-                            <td key={rep[j]} value={rep.name}>
-                              {rep.name}
-                            </td>
-                            <td key={rep[i]} value={rep.office}>
-                              {rep.office}
-                            </td>
-                            <td key={rep[l]} value={rep.party}>
-                              {rep.party}
-                            </td>
-                            <td key={rep.rep_id} value={rep.rep_id}>
-                              {rep.address}
-                            </td>
+                          <tr key={rep.rep_id}>
+                            <td value={rep.name}>{rep.name}</td>
+                            <td value={rep.office}>{rep.office}</td>
+                            <td value={rep.party}>{rep.party}</td>
+                            <td value={rep.rep_id}>{rep.address}</td>
+                            <td value={rep.email}>{rep.email}</td>
                           </tr>
                         );
                       })}

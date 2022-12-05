@@ -68,33 +68,37 @@ def get_reps_from_api(
 
     # gather data from officials
     for i, item in enumerate(data["officials"]):
-      if 'address' in item:
-        list_b.append([item["name"], item["party"], item["address"], i])
+      if 'address' and 'emails' in item:
+        list_b.append([item["name"], item["party"], item["address"], item['emails'][0], i])
+      elif 'address' in item:
+        list_b.append([item["name"], item["party"], item["address"], "N/A", i])
+      elif 'emails' in item:
+        list_b.append([item["name"], item["party"], [{'line1': 'N/A', 'city': 'N/A', 'state': 'N/A', 'zip': 'N/A'}], item['emails'][0], i])
       else:
-        list_b.append([item["name"], item["party"], [{'line1': 'N/A', 'city': 'N/A', 'state': 'N/A', 'zip': 'N/A'}], i])
+        list_b.append([item["name"], item["party"], [{'line1': 'N/A', 'city': 'N/A', 'state': 'N/A', 'zip': 'N/A'}], "N/A", i])
 
     # combine both data into one list
     for i in list_a:
       for j in list_b:
-        if i[1] == ['country']:
-          if i[2][0] == j[3] or j[3] in i[2]:
-            list_c.append([i[0], i[1], j[0], j[1], j[2]])
+        if i[1] == ['country']: # level
+          if i[2][0] == j[4] or j[4] in i[2]: # office name and index numbers
+            list_c.append([i[0], i[1], j[0], j[1], j[2], j[3]])
 
         if i[1] == ['administrativeArea1']:
-          if i[2][0] == j[3] or j[3] in i[2]:
-            list_c.append([i[0], i[1], j[0], j[1], j[2]])
+          if i[2][0] == j[4] or j[4] in i[2]: # office name and index numbers
+            list_c.append([i[0], i[1], j[0], j[1], j[2], j[3]])
 
         if i[1] == ['administrativeArea2']:
-          if i[2][0] == j[3] or j[3] in i[2]:
-            list_c.append([i[0], i[1], j[0], j[1], j[2]])
+          if i[2][0] == j[4] or j[4] in i[2]: # office name and index numbers
+            list_c.append([i[0], i[1], j[0], j[1], j[2], j[3]])
 
         if i[1] == ['locality']:
-          if i[2][0] == j[3] or j[3] in i[2]:
-            list_c.append([i[0], i[1], j[0], j[1], j[2]])
+          if i[2][0] == j[4] or j[4] in i[2]: # office name and index numbers
+            list_c.append([i[0], i[1], j[0], j[1], j[2], j[3]])
 
-    # print("\n \n \n LIST A", list_a)
-    # print("\n \n \n LIST B", list_b)
-    # print("\n \n \n LIST C", list_c)
+    print("\n \n \n LIST A", list_a)
+    print("\n \n \n LIST B", list_b)
+    print("\n \n \n LIST C", list_c)
 
     result = []
     # use the combined list to create the output for the endpoint
@@ -104,7 +108,8 @@ def get_reps_from_api(
         level = item[1][0],
         name = item[2],
         party = item[3],
-        address = {'line1': item[4][0]['line1'], 'city': item[4][0]['city'], 'state': item[4][0]['state'], 'zip': item[4][0]['zip']}
+        address = {'line1': item[4][0]['line1'], 'city': item[4][0]['city'], 'state': item[4][0]['state'], 'zip': item[4][0]['zip']},
+        email = item[5]
         )
       result.append(rep)
     # print("\n \n \n RESULT", result)

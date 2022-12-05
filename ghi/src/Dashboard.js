@@ -134,24 +134,20 @@ function Dashboard() {
                   <table className="table table-striped table-sm">
                     <thead>
                       <tr>
-                        <th>Rep name</th>
-                        <th>Rep office</th>
-                        <th>Rep address</th>
+                        <th>Name</th>
+                        <th>Office</th>
+                        <th>Address</th>
+                        <th>Email</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {repSelection.map((rep, i, j) => {
+                      {repSelection.map((rep) => {
                         return (
-                          <tr>
-                            <td key={rep[j]} value={rep.name}>
-                              {rep.name}
-                            </td>
-                            <td key={rep[i]} value={rep.office}>
-                              {rep.office}
-                            </td>
-                            <td key={rep.rep_id} value={rep.rep_id}>
-                              {rep.address}
-                            </td>
+                          <tr key={rep.rep_id}>
+                            <td value={rep.name}>{rep.name}</td>
+                            <td value={rep.office}>{rep.office}</td>
+                            <td value={rep.rep_id}>{rep.address}</td>
+                            <td value={rep.email}>{rep.email}</td>
                           </tr>
                         );
                       })}

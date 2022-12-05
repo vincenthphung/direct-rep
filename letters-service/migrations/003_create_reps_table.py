@@ -9,6 +9,7 @@ steps = [
             name VARCHAR(255) NOT NULL,
             party VARCHAR(255) NOT NULL,
             address VARCHAR(1000) NOT NULL,
+            email VARCHAR(255) NOT NULL,
             letter_id INT,
             FOREIGN KEY (letter_id) REFERENCES letter(id) ON DELETE CASCADE
         );

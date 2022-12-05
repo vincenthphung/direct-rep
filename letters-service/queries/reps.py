@@ -11,6 +11,7 @@ class CivicsOut(BaseModel):
     name: str
     party: str
     address: dict
+    email: str
 
 class RepIn(BaseModel):
     office: str
@@ -18,6 +19,7 @@ class RepIn(BaseModel):
     name: str
     party: str
     address: str
+    email: str
     letter_id: int
 
 class RepOut(BaseModel):
@@ -27,6 +29,7 @@ class RepOut(BaseModel):
     name: str
     party: str
     address: str
+    email: str
     letter_id: int
 
 class RepRepository(BaseModel):
@@ -37,9 +40,9 @@ class RepRepository(BaseModel):
                     result = db.execute(
                         """
                         INSERT INTO rep
-                            (office, level, name, party, address, letter_id)
+                            (office, level, name, party, address, email, letter_id)
                         VALUES
-                            (%s, %s, %s, %s, %s, %s)
+                            (%s, %s, %s, %s, %s, %s, %s)
                         RETURNING rep_id;
                         """,
                         [
@@ -48,6 +51,7 @@ class RepRepository(BaseModel):
                             rep.name,
                             rep.party,
                             rep.address,
+                            rep.email,
                             rep.letter_id
                         ]
                     )
@@ -62,6 +66,7 @@ class RepRepository(BaseModel):
                         name=rep.name,
                         party=rep.party,
                         address=rep.address,
+                        email = rep.email,
                         letter_id=rep.letter_id
                         )
         except Exception:
@@ -77,7 +82,7 @@ class RepRepository(BaseModel):
                     # run our SELECT statement
                     result = db.execute(
                         """
-                        SELECT rep_id, office, level, name, party, address, letter_id
+                        SELECT rep_id, office, level, name, party, address, email, letter_id
                         FROM rep
                         ORDER BY rep_id;
                         """
@@ -91,7 +96,8 @@ class RepRepository(BaseModel):
                             name = record[3],
                             party = record[4],
                             address = record[5],
-                            letter_id = record[6]
+                            email = record[6],
+                            letter_id = record[7]
                         )
                         result.append(rep)
                     return result
@@ -109,7 +115,7 @@ class RepRepository(BaseModel):
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        SELECT rep_id, office, level, name, party, address, letter_id
+                        SELECT rep_id, office, level, name, party, address, email, letter_id
                         FROM rep
                         WHERE rep_id = %s
                         """,
@@ -133,7 +139,8 @@ class RepRepository(BaseModel):
                         name = record[3],
                         party = record[4],
                         address = record[5],
-                        letter_id = record[6]
+                        email = record[6],
+                        letter_id = record[7]
             )
 
     def get_per_letter(self, letter_id: int) -> Union[List[RepOut], Error]:
@@ -144,7 +151,7 @@ class RepRepository(BaseModel):
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        SELECT rep_id, office, level, name, party, address, letter_id
+                        SELECT rep_id, office, level, name, party, address, email, letter_id
                         FROM rep
                         WHERE letter_id = %s
                         """,
@@ -159,7 +166,8 @@ class RepRepository(BaseModel):
                             name = record[3],
                             party = record[4],
                             address = record[5],
-                            letter_id = record[6]
+                            email = record[6],
+                            letter_id = record[7]
                         )
                         result.append(rep)
                         # print("REP PER LETTER", rep)

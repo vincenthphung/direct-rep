@@ -15,6 +15,7 @@ function RepForm() {
   const [reps_list, setList] = useState([]);
   const [selection, setSelection] = useState([]);
   const [zip, setZip] = useState("");
+  const [email, setEmail] = useState("");
   const [createRep, result] = useCreateRepMutation();
 
   // to get the id of the most recent letter created:
@@ -68,7 +69,7 @@ function RepForm() {
       });
       if (response.ok) {
         const data = await response.json();
-        // console.log("\n \n DATA", data);
+        console.log("\n \n DATA", data);
         setList(data);
       }
     }
@@ -92,6 +93,7 @@ function RepForm() {
         setAddress(
           `${addressDict["line1"]} ${addressDict["city"]}, ${addressDict["state"]} ${addressDict["zip"]}`
         );
+        setEmail(reps_list[i].email);
       }
     }
   }
@@ -99,8 +101,8 @@ function RepForm() {
   // to send that data to the database via the store reducer:
   async function handleSubmit(e) {
     e.preventDefault();
-    createRep({ office, level, name, party, address, letter_id }).then(() =>
-      showReps(letter_id)
+    createRep({ office, level, name, party, address, email, letter_id }).then(
+      () => showReps(letter_id)
     );
   }
 
@@ -186,22 +188,17 @@ function RepForm() {
                 </tr>
               </thead>
               <tbody>
-                {selection.map((rep, i, j) => {
+                {selection.map((rep) => {
                   return (
-                    <tr>
-                      <td key={rep[j]} value={rep.name}>
-                        {rep.name}
-                      </td>
-                      <td key={rep[i]} value={rep.office}>
-                        {rep.office}
-                      </td>
+                    <tr key={rep.rep_id}>
+                      <td value={rep.name}>{rep.name}</td>
+                      <td value={rep.office}>{rep.office}</td>
                       <td
                         className="btn"
                         onClick={() => deleteRep(rep.rep_id)}
-                        key={rep.rep_id}
                         value={rep.rep_id}
                       >
-                        Delete {rep.rep_id}
+                        Delete
                       </td>
                     </tr>
                   );
