@@ -14,32 +14,31 @@ services:
     dockerCommand: users-service/Dockerfile # optional (defaults to Dockerfile command)
     healthCheckPath: /
 
-databases:
-  - name: elephant
-    databaseName: mydb # optional (Render may add a suffix)
-    user: adrian # optional
-    ipAllowList: # optional (defaults to allow all)
-      - source: 203.0.113.4/30
-        description: office
-      - source: 198.51.100.1
-        description: home
+# databases:
+#   - name: elephant
+#     databaseName: mydb # optional (Render may add a suffix)
+#     user: adrian # optional
+#     ipAllowList: # optional (defaults to allow all)
+#       - source: 203.0.113.4/30
+#         description: office
+#       - source: 198.51.100.1
+#         description: home
 
-  - name: private database
-    databaseName: private
-    ipAllowList: [] # only allow internal connections
+#   - name: private database
+#     databaseName: private
+#     ipAllowList: [] # only allow internal connections
 
 
 envVarGroups:
-  - name: conc-settings
+  - name: env
     envVars:
-      - key: CONCURRENCY
-        value: 2
-      - key: SECRET
-        generateValue: true
-      - key: USER_PROVIDED_SECRET
-        sync: false
-  - name: stripe
-    envVars:
-      - key: STRIPE_API_URL
-        value: https://api.stripe.com/v2
-
+      - key: OPENAI_API_KEY
+        value: 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
+      - key: GOOGLE_CIVICS_KEY
+        value: AIzaSyClJYcriOpQpFbceuCAQCQEBBFqseMRjbk
+      - key: SIGNING_KEY
+        value: 7ea8f8c1d636b6f92b59a46326d9f59da1e09f0c986fbaeacaad64fed817ce6d
+      - key: LETTERS_DATABASE_URL
+        value: postgres://qguhdady:v_KZXAFST6YPLW42ttXQZVBoFLj2SJ2P@kashin.db.elephantsql.com/qguhdady
+      - key: USERS_DATABASE_URL
+        value: postgres://rsiduqiy:SQZwR4x0gG7cN_aQw_QuxnA9w9nidXI-@kashin.db.elephantsql.com/rsiduqiy
