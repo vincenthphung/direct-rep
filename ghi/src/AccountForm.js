@@ -65,7 +65,7 @@ function AccountForm() {
               labelText="Enter your zipcode"
               value={zipcode}
               onChange={(e) => setZipcode(e.target.value)}
-              type="integer"
+              type="text"
             />
             <InputLabel
               id="password"

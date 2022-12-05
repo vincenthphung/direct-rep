@@ -87,7 +87,7 @@ function EditAccount() {
               labelText="Enter Your Zipcode"
               value={zipcode}
               onChange={(e) => setZipcode(e.target.value)}
-              type="integer"
+              type="text"
             />
             <InputLabel
               id="password"
