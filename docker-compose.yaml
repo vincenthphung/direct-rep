@@ -6,7 +6,7 @@ services:
   postgres:
     build:
       context: ./relational-data
-      dockerfile: ./Dockerfile.dev
+      dockerfile: ./Dockerfile
     volumes:
       - postgres-data:/var/lib/postgresql/data
     environment:
