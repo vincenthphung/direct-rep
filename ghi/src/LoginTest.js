@@ -12,8 +12,7 @@ function LoginForm() {
 
   async function clickForm(e) {
     e.preventDefault();
-    login(username, password);
-    navigate("/dashboard");
+    login(username, password).then(() => navigate("/dashboard"));
   }
 
   return (

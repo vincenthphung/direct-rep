@@ -107,47 +107,48 @@ export function useToken() {
     return handleErrorMessage(error);
   }
 
-  async function signup(username, password, email, firstName, lastName) {
-    const url = `${process.env.REACT_APP_USERS_API_HOST}/api/accounts/`;
-    const response = await fetch(url, {
-      method: "post",
-      body: JSON.stringify({
-        username,
-        password,
-        email,
-        first_name: firstName,
-        last_name: lastName,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (response.ok) {
-      await login(username, password);
-    }
-    return false;
-  }
+  // async function signup(username, password, email, firstName, lastName) {
+  //   const url = `${process.env.REACT_APP_USERS_API_HOST}/api/accounts/`;
+  //   const response = await fetch(url, {
+  //     method: "post",
+  //     body: JSON.stringify({
+  //       username,
+  //       password,
+  //       email,
+  //       first_name: firstName,
+  //       last_name: lastName,
+  //     }),
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   });
+  //   if (response.ok) {
+  //     await login(username, password);
+  //   }
+  //   return false;
+  // }
 
-  async function update(username, password, email, firstName, lastName) {
-    const url = `${process.env.REACT_APP_USERS_API_HOST}/api/accounts/`;
-    const response = await fetch(url, {
-      method: "patch",
-      body: JSON.stringify({
-        username,
-        password,
-        email,
-        first_name: firstName,
-        last_name: lastName,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (response.ok) {
-      await login(username, password);
-    }
-    return false;
-  }
+  // async function update(username, password, email, firstName, lastName) {
+  //   const url = `${process.env.REACT_APP_USERS_API_HOST}/api/accounts/`;
+  //   const response = await fetch(url, {
+  //     method: "patch",
+  //     body: JSON.stringify({
+  //       username,
+  //       password,
+  //       email,
+  //       first_name: firstName,
+  //       last_name: lastName,
+  //     }),
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   });
+  //   if (response.ok) {
+  //     await login(username, password);
+  //   }
+  //   return false;
+  // }
 
-  return [token, login, logout, signup, update];
+  // return [token, login, logout, signup, update];
+  return [token, login, logout];
 }

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import { useEditUserMutation } from "./store/usersApi";
+import { useNavigate } from "react-router-dom";
 
 function InputLabel(props) {
   const { id, placeholder, labelText, value, onChange, type } = props;
@@ -23,12 +24,13 @@ function InputLabel(props) {
   );
 }
 
-function EditAccount(props) {
+function EditAccount() {
   const [full_name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [zipcode, setZipcode] = useState("");
   const [password, setPassword] = useState("");
   const [userId, setId] = useState("");
+  const navigate = useNavigate();
   const [editUser, result] = useEditUserMutation();
 
   // to get current account info
@@ -53,7 +55,9 @@ function EditAccount(props) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    editUser({ full_name, email, zipcode, password, userId });
+    editUser({ full_name, email, zipcode, password, userId }).then(() =>
+      navigate("/dashboard")
+    );
   }
 
   return (
