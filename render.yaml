@@ -1,12 +1,10 @@
 services:
-  letters:
   - type: web
     name: letters
     env: docker
     rootDir: letters-service
     dockerCommand: letters-service/Dockerfile # optional (defaults to Dockerfile command)
     healthCheckPath: /
-  users:
   - type: web
     name: users
     env: docker
