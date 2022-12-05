@@ -25,7 +25,7 @@ function ReviewForm() {
         for (let i = 0; i < data.length; i++) {
           if (i === data.length - 1) {
             const lastId = data[i].id;
-            setId(lastId);
+            setLetterId(lastId);
           }
         }
       }
@@ -34,14 +34,14 @@ function ReviewForm() {
   }, [token]);
 
   useEffect(() => {
-    if (oneId != null) {
-      async function showLetter(oneId) {
+      if (oneId != null) {
+        async function showLetter(oneId) {
         const response = await fetch(`http://localhost:8090/letters/${oneId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const content = await response.json();
         setOneLetter(content);
-        console.log("letter content", content);
+        console.log("letter content", content)
         setId(content["id"]);
         setContent(content["content"]);
         setStance(content["stance"]);
@@ -49,7 +49,7 @@ function ReviewForm() {
         setDate(content["created"]);
       }
       showLetter(oneId);
-    }
+      }
   }, [oneId, token]);
 
   useEffect(() => {

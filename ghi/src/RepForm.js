@@ -6,15 +6,16 @@ import { useAuthContext } from "./TokenTest.js";
 
 function RepForm() {
   const { token } = useAuthContext();
-  const [name, setName] = useState("name");
-  const [office, setOffice] = useState("office");
-  const [level, setLevel] = useState("level");
-  const [party, setParty] = useState("party");
-  const [address, setAddress] = useState("address");
-  const [letter_id, setLetterId] = useState("letter id");
+  const [name, setName] = useState();
+  const [office, setOffice] = useState();
+  const [level, setLevel] = useState();
+  const [party, setParty] = useState();
+  const [address, setAddress] = useState();
+  const [letter_id, setLetterId] = useState();
   const [reps_list, setList] = useState([]);
   const [selection, setSelection] = useState([]);
-  const [zip, setZip] = useState("");
+  const [zip, setZip] = useState();
+  const [email, setEmail] = useState();
   const [createRep, result] = useCreateRepMutation();
 
   // to get the id of the most recent letter created:
@@ -61,19 +62,22 @@ function RepForm() {
 
   //  to select the reps
   useEffect(() => {
-    async function fetchReps(zipcode) {
-      const urlCivics = `http://localhost:8090/civics?zipcode=${zipcode}`;
-      const response = await fetch(urlCivics, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      if (response.ok) {
-        const data = await response.json();
-        // console.log("\n \n DATA", data);
-        setList(data);
+    // to prevent loading before zip is defined:
+    if (zip != null) {
+      async function fetchReps(zip) {
+        const urlCivics = `http://localhost:8090/civics?zipcode=${zip}`;
+        const response = await fetch(urlCivics, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          console.log("\n \n DATA", data);
+          setList(data);
+        }
       }
+      fetchReps(zip);
+      // connects the reps fetch with the user's zip code
     }
-    fetchReps(zip);
-    // connect this with the user account zip code
   }, [token, zip]);
 
   // console.log("\n \n REPS LIST", reps_list);
@@ -92,6 +96,7 @@ function RepForm() {
         setAddress(
           `${addressDict["line1"]} ${addressDict["city"]}, ${addressDict["state"]} ${addressDict["zip"]}`
         );
+        setEmail(reps_list[i].email);
       }
     }
   }
@@ -99,8 +104,8 @@ function RepForm() {
   // to send that data to the database via the store reducer:
   async function handleSubmit(e) {
     e.preventDefault();
-    createRep({ office, level, name, party, address, letter_id }).then(() =>
-      showReps(letter_id)
+    createRep({ office, level, name, party, address, email, letter_id }).then(
+      () => showReps(letter_id)
     );
   }
 
@@ -119,23 +124,25 @@ function RepForm() {
 
   // to load the Reps selected
   useEffect(() => {
-    async function showReps(letter_id) {
-      const response = await fetch(
-        `http://localhost:8090/reps/letter/${letter_id}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
+    if (letter_id != null) {
+      async function showReps(letter_id) {
+        const response = await fetch(
+          `http://localhost:8090/reps/letter/${letter_id}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setSelection(data);
         }
-      );
-      if (response.ok) {
-        const data = await response.json();
-        setSelection(data);
       }
+      showReps(letter_id);
     }
-    showReps(letter_id);
   }, [letter_id, token]);
 
   async function deleteRep(id) {
-    // if (window.confirm("Are you sure: This Letter will be Deleted")) {
+    // if (window.confirm("Are you sure? This letter will be deleted")) {
     await fetch(
       `http://localhost:8090/reps/letters/${letter_id}?rep_id=${id}`,
       { headers: { Authorization: `Bearer ${token}` }, method: "DELETE" }
@@ -186,22 +193,17 @@ function RepForm() {
                 </tr>
               </thead>
               <tbody>
-                {selection.map((rep, i, j) => {
+                {selection.map((rep) => {
                   return (
-                    <tr>
-                      <td key={rep[j]} value={rep.name}>
-                        {rep.name}
-                      </td>
-                      <td key={rep[i]} value={rep.office}>
-                        {rep.office}
-                      </td>
+                    <tr key={rep.rep_id}>
+                      <td value={rep.name}>{rep.name}</td>
+                      <td value={rep.office}>{rep.office}</td>
                       <td
                         className="btn"
                         onClick={() => deleteRep(rep.rep_id)}
-                        key={rep.rep_id}
                         value={rep.rep_id}
                       >
-                        Delete {rep.rep_id}
+                        Delete
                       </td>
                     </tr>
                   );

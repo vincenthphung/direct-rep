@@ -9,35 +9,32 @@ function LetterForm() {
   const { token } = useAuthContext();
   const [issues, setIssues] = useState([]);
   const [topic, setTopic] = useState("");
-  const [stance, setStance] = useState(true);
+  const [stance, setStance] = useState();
   const [createLetter, result] = useCreateLetterMutation();
   const navigate = useNavigate();
 
   console.log("TOKEN CREATE LETTER", token);
 
-  // to collect the issues list from the database
-  async function fetchIssues() {
-    const url = `http://localhost:8090/api/issues`;
-    const response = await fetch(url, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    if (response.ok) {
-      const data = await response.json();
-      setIssues(data);
-    }
-  }
-
-  // to load issues with the first page render
+  // to collect and load the issues list from the database
   useEffect(() => {
+    async function fetchIssues() {
+      const url = `http://localhost:8090/api/issues`;
+      const response = await fetch(url, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setIssues(data);
+      }
+    }
     fetchIssues();
-  }, []);
+  }, [token]);
 
   // console.log("ISSUES LIST", issues);
 
   async function handleSubmit(e) {
     e.preventDefault();
-    createLetter({ topic, stance });
-    navigate("/eletter");
+    createLetter({ topic, stance }).then(() => navigate("/eletter"));
   }
 
   return (
@@ -54,7 +51,7 @@ function LetterForm() {
                 name="issues"
                 className="form-select"
               >
-                <option value="">Select Your Issue</option>
+                <option value="">Select your issue</option>
                 {issues.map((issue) => {
                   return (
                     <option key={issue.user_issue} value={issue.openai_issue}>
@@ -77,12 +74,12 @@ function LetterForm() {
                 }
                 type="boolean"
               >
-                <option>Choose a stance:</option>
+                <option>Choose your stance</option>
                 <option value={true}>For</option>
                 <option value={false}>Against</option>
               </Form.Select>
             </div>
-            <button type="submit" className="btn btn-primary" on>
+            <button type="submit" className="btn btn-primary">
               Submit
             </button>
           </form>
