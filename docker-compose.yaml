@@ -1,19 +1,4 @@
-volumes:
-  postgres-data:
-    external: true
-  # other volumes...
 services:
-  postgres:
-    build:
-      context: ./relational-data
-      dockerfile: ./Dockerfile
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_MULTIPLE_DATABASES=users,letters
-      - POSTGRES_PASSWORD=password
-    ports:
-      - 15432:5432
   users-service:
     build:
       context: ./users-service
