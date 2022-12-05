@@ -2,13 +2,14 @@ from fastapi import APIRouter, Depends, Response
 from typing import Optional, Union, List
 import requests
 import json
-import os
 from queries.letters import (Error, LetterIn, LetterNew,
                              LetterOut, LetterUpdate, LetterRepository, IssueRepository)
 from jwtdown_fastapi.authentication import Authenticator
 import os
 
-OPENAI_URL = os.getenv("OPENAI_URL")
+OPENAI_URL = os.getenv('OPENAI_URL')
+SIGNING_KEY = os.getenf('SIGNING_KEY')
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
 
 class MyAuthenticator(Authenticator):
@@ -26,16 +27,14 @@ class MyAuthenticator(Authenticator):
 
 
 # print("\n \n SIGNING_KEY", os.environ)
-authenticator = MyAuthenticator(os.environ["SIGNING_KEY"])
+authenticator = MyAuthenticator(SIGNING_KEY)
 
 router = APIRouter()
 
-# add keys.py to gitignore
-openai_api_key = OPENAI_API_KEY
 
 # headers structure vary depending on the api source
 url = OPENAI_URL
-headers = {"Authorization": f'Bearer {openai_api_key}'}
+headers = {"Authorization": f'Bearer {OPENAI_API_KEY}'}
 
 
 async def get_open_ai(topic):
