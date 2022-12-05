@@ -5,7 +5,7 @@ from routers.reps import authenticator
 # from authenticator import authenticator
 import os
 
-REACT_URL = os.envrion["REACT_URL"]
+REACT_URL = os.getenv('REACT_URL')
 
 app = FastAPI()
 app.include_router(letters.router)

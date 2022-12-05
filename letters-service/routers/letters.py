@@ -8,7 +8,7 @@ from queries.letters import (Error, LetterIn, LetterNew,
 from jwtdown_fastapi.authentication import Authenticator
 import os
 
-OPENAI_URL = os.getenv["OPENAI_URL"]
+OPENAI_URL = os.getenv("OPENAI_URL")
 
 
 class MyAuthenticator(Authenticator):
