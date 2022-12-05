@@ -110,9 +110,9 @@ def get_reps_from_api(
                     if i[2][0] == j[4] or j[4] in i[2]:  # office name and index numbers
                         list_c.append([i[0], i[1], j[0], j[1], j[2], j[3]])
 
-        print("\n \n \n LIST A", list_a)
-        print("\n \n \n LIST B", list_b)
-        print("\n \n \n LIST C", list_c)
+    # print("\n \n \n LIST A", list_a)
+    # print("\n \n \n LIST B", list_b)
+    # print("\n \n \n LIST C", list_c)
 
         result = []
         # use the combined list to create the output for the endpoint
