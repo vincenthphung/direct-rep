@@ -22,6 +22,8 @@ COPY migrations migrations
 COPY queries queries
 COPY routers routers
 
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.9.0/wait /wait
+
 RUN pip install -r requirements.txt
 CMD /wait && python -m migrations up && uvicorn main:app --reload --host 0.0.0.0
 # CMD uvicorn main:app --reload --host 0.0.0.0 --port 0.0.0.0:8090
