@@ -24,7 +24,7 @@ function InputLabel(props) {
   );
 }
 
-function AccountForm(props) {
+function AccountForm() {
   const [full_name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [zipcode, setZipcode] = useState("");
@@ -45,8 +45,8 @@ function AccountForm(props) {
           <form onSubmit={handleSubmit}>
             <InputLabel
               id="name"
-              placeholder="Your Full Name"
-              labelText="Full Name"
+              placeholder="Your full name"
+              labelText="Full name"
               value={full_name}
               onChange={(e) => setName(e.target.value)}
               type="text"
@@ -54,7 +54,7 @@ function AccountForm(props) {
             <InputLabel
               id="email"
               placeholder="email@email.com"
-              labelText="Email Address"
+              labelText="Email address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               type="email"
@@ -62,7 +62,7 @@ function AccountForm(props) {
             <InputLabel
               id="zipcode"
               placeholder="Zipcode"
-              labelText="Enter Your Zipcode"
+              labelText="Enter your zipcode"
               value={zipcode}
               onChange={(e) => setZipcode(e.target.value)}
               type="integer"

@@ -1,6 +1,5 @@
 import React from "react";
-import { useAuthContext } from "./TokenTest.js";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useToken } from "./TokenTest.js";
 import { useNavigate } from "react-router-dom";
 
@@ -14,8 +13,7 @@ function NewLoginForm() {
 
   async function clickForm(e) {
     e.preventDefault();
-    login(username, password);
-    navigate("/dashboard");
+    login(username, password).then(() => navigate("/dashboard"));
   }
 
   return (
@@ -62,6 +60,5 @@ function NewLoginForm() {
     </div>
   );
 }
-
 
 export default NewLoginForm;

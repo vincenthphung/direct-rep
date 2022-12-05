@@ -80,19 +80,20 @@ export const EditLetter = () => {
                   {oneStance ? "in favor of" : "in opposition to"} {oneTopic}
                 </Card.Title>
                 <Card.Text>
-                  <div className="mb-3">
-                    <label for="letter content" className="form-label">
-                      Review and edit your letter here:
-                    </label>
-                    <textarea
-                      value={oneContent}
-                      onChange={(e) => setContent(e.target.value)}
-                      className="form-control"
-                      rows="3"
-                    >
-                      {oneContent}
-                    </textarea>
-                  </div>
+                  <label
+                    htmlFor="letter content"
+                    className="form-label fst-italic"
+                  >
+                    Review and edit your letter here:
+                  </label>
+                  <textarea
+                    value={oneContent}
+                    onChange={(e) => setContent(e.target.value)}
+                    className="form-control"
+                    rows="10"
+                  >
+                    {oneContent}
+                  </textarea>
                 </Card.Text>
               </Card.Body>
               <Card.Footer className="text-muted"></Card.Footer>
@@ -103,7 +104,7 @@ export const EditLetter = () => {
             type="submit"
             className="btn btn-primary"
           >
-            Save and Add Representatives
+            Save and select representatives
           </button>
         </div>
       </div>
