@@ -83,7 +83,7 @@ function ReviewForm() {
           </div>
           <div className="mb-3">
             <Card className="text-center">
-              <Card.Header>Date created: {oneDate} </Card.Header>
+              <Card.Header>Date created: {''} {oneDate ? new Date(oneDate).toLocaleDateString() : ''} </Card.Header>
               <Card.Body>
                 <Card.Title>
                   Write a letter{" "}
