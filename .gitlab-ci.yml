@@ -2,14 +2,11 @@ stages:
   - test
   - build
   - deploy
-
 services:
   - postgres:14.2-bullseye
-
 variables:
   POSTGRES_PASSWORD: test
   DATABASE_URL: postgresql://postgres:test@postgres:5432/postgres
-
 lint-test-job:
   image: 'python:3-bullseye'
   stage: test
@@ -30,16 +27,14 @@ users-service-test-job:
     - cd users-service
     - pip install -r requirements.txt
     - python manage.py test
-
-
 build-front-end-job:
   stage: build
   image: 'node:lts-bullseye'
   needs:
     - lint-test-job
   variables:
-    PUBLIC_URL: 'https://GROUP_NAME.gitlab.io/PROJECT_NAME/'
-    REACT_APP_SAMPLE_SERVICE_API_HOST: 'https://WEBSERVICE_NAME.onrender.com'
+    PUBLIC_URL: 'https://directrep.gitlab.io/directrep/'
+    REACT_APP_SAMPLE_SERVICE_API_HOST: 'https://directrep.onrender.com'
   script:
     - cd ghi
     - npm install

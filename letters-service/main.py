@@ -12,11 +12,14 @@ app.include_router(letters.router)
 app.include_router(reps.router)
 # app.include_router(authenticator.router)
 
+origins = [
+    REACT_URL,
+    os.environ.get("CORS_HOST", None),
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        os.environ.get("CORS_HOST", REACT_URL)
-    ],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
