@@ -7,6 +7,7 @@ function Dashboard() {
   const { token } = useAuthContext();
 
   const [letters, setLetters] = useState([]);
+  const [user, setUser] = useState();
   const [oneLetter, setOneLetter] = useState([""]);
   const [oneId, setId] = useState("Letter id");
   const [oneContent, setContent] = useState("Letter content");
@@ -17,16 +18,38 @@ function Dashboard() {
 
   console.log("TOKEN DASHBOARD", token);
 
+  // to get the user's id
+  useEffect(() => {
+    async function getUserId() {
+      const url = `http://localhost:8080/token`;
+      const response = await fetch(url, {
+        credentials: "include",
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log("response", response);
+        setUser(data.account.id);
+        console.log("Set user", user)
+      }
+    }
+    getUserId();
+  }, [token, user]);
+
+
   useEffect(() => {
     (async () => {
       const response = await fetch("http://localhost:8090/api/letters", {
         headers: { Authorization: `Bearer ${token}` },
       });
       const content = await response.json();
-      setLetters(content);
-      // console.log("LETTER CONTENT", content, "TOKEN", token);
+      console.log("ALL LETTERS CONTENT", content);
+      const userContent = content.filter((c) => c['user_id'] === user)
+      console.log("test user content", userContent);
+      setLetters(userContent);
     })();
-  }, [token]);
+  }, [token, user]);
+
+  console.log("user letters", letters);
 
   const del = async (id) => {
     if (window.confirm("Are you sure: This Letter will be Deleted")) {

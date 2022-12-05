@@ -5,6 +5,7 @@ import { useAuthContext } from "./TokenTest.js";
 
 function ReviewForm() {
   const { token } = useAuthContext();
+  const [user, setUser] = useState();
   const [oneLetter, setOneLetter] = useState([]);
   const [oneId, setId] = useState();
   const [oneContent, setContent] = useState();
@@ -12,6 +13,23 @@ function ReviewForm() {
   const [oneTopic, setTopic] = useState();
   const [oneDate, setDate] = useState();
   const [repSelection, setSelection] = useState([]);
+
+ // to get the user's id
+ useEffect(() => {
+  async function getUserId() {
+    const url = `http://localhost:8080/token`;
+    const response = await fetch(url, {
+      credentials: "include",
+    });
+    if (response.ok) {
+      const data = await response.json();
+      console.log("response", response);
+      setUser(data.account.id);
+      console.log("Set user", user)
+    }
+  }
+  getUserId();
+}, [token, user]);
 
   // to get the id of the most recent letter created:
   useEffect(() => {
@@ -21,7 +39,9 @@ function ReviewForm() {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (response.ok) {
-        const data = await response.json();
+        const content = await response.json();
+        const data = content.filter((c) => c['user_id'] === user)
+        console.log("test user content", data);
         for (let i = 0; i < data.length; i++) {
           if (i === data.length - 1) {
             const lastId = data[i].id;
@@ -31,7 +51,7 @@ function ReviewForm() {
       }
     }
     fetchLetterId();
-  }, [token]);
+  }, [token, user]);
 
   useEffect(() => {
       if (oneId != null) {

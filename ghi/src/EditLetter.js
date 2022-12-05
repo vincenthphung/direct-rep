@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 export const EditLetter = () => {
   const { token } = useAuthContext();
+ const [user, setUser] = useState();
   const [oneLetter, setOneLetter] = useState([""]);
   const [oneId, setId] = useState();
   const [oneContent, setContent] = useState();
@@ -16,6 +17,23 @@ export const EditLetter = () => {
   const [editLetter, result] = useEditLetterMutation();
   const navigate = useNavigate();
 
+ // to get the user's id
+ useEffect(() => {
+  async function getUserId() {
+    const url = `http://localhost:8080/token`;
+    const response = await fetch(url, {
+      credentials: "include",
+    });
+    if (response.ok) {
+      const data = await response.json();
+      console.log("response", response);
+      setUser(data.account.id);
+      console.log("Set user", user)
+    }
+  }
+  getUserId();
+}, [token, user]);
+
   // to get the id of the most recent letter created:
   useEffect(() => {
     async function fetchLetterId() {
@@ -24,7 +42,10 @@ export const EditLetter = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (response.ok) {
-        const data = await response.json();
+        const content = await response.json();
+        const data = content.filter((c) => c['user_id'] === user)
+        console.log("test user content", data);
+
         // console.log("LETTER DATA", data);
         for (let i = 0; i < data.length; i++) {
           if (i === data.length - 1) {
@@ -36,7 +57,7 @@ export const EditLetter = () => {
       }
     }
     fetchLetterId();
-  }, [token]);
+  }, [token, user]);
 
   // to get the content of the letter
   useEffect(() => {
