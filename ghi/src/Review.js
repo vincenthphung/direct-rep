@@ -5,13 +5,12 @@ import { useAuthContext } from "./TokenTest.js";
 
 function ReviewForm() {
   const { token } = useAuthContext();
-  const [letter_id, setLetterId] = useState("");
-  const [oneLetter, setOneLetter] = useState([""]);
-  const [oneId, setId] = useState("Letter id");
-  const [oneContent, setContent] = useState("Letter content");
-  const [oneStance, setStance] = useState("Letter stance");
-  const [oneTopic, setTopic] = useState("Letter topic");
-  const [oneDate, setDate] = useState("Date");
+  const [oneLetter, setOneLetter] = useState([]);
+  const [oneId, setId] = useState();
+  const [oneContent, setContent] = useState();
+  const [oneStance, setStance] = useState();
+  const [oneTopic, setTopic] = useState();
+  const [oneDate, setDate] = useState();
   const [repSelection, setSelection] = useState([]);
 
   // to get the id of the most recent letter created:
@@ -26,7 +25,7 @@ function ReviewForm() {
         for (let i = 0; i < data.length; i++) {
           if (i === data.length - 1) {
             const lastId = data[i].id;
-            setLetterId(lastId);
+            setId(lastId);
           }
         }
       }
@@ -35,35 +34,40 @@ function ReviewForm() {
   }, [token]);
 
   useEffect(() => {
-    async function showLetter(id) {
-      const response = await fetch(`http://localhost:8090/letters/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const content = await response.json();
-      setOneLetter(content);
-      setId(content["id"]);
-      setContent(content["content"]);
-      setStance(content["stance"]);
-      setTopic(content["topic"]);
-      setDate(content["created"]);
+    if (oneId != null) {
+      async function showLetter(oneId) {
+        const response = await fetch(`http://localhost:8090/letters/${oneId}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const content = await response.json();
+        setOneLetter(content);
+        console.log("letter content", content);
+        setId(content["id"]);
+        setContent(content["content"]);
+        setStance(content["stance"]);
+        setTopic(content["topic"]);
+        setDate(content["created"]);
+      }
+      showLetter(oneId);
     }
-    showLetter(letter_id);
-  }, [letter_id, token]);
+  }, [oneId, token]);
 
   useEffect(() => {
     //  to show selected reps
-    async function seeReps(id) {
-      const urlReps = `http://localhost:8090/reps/letter/${id}`;
-      const response = await fetch(urlReps, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setSelection(data);
+    if (oneId != null) {
+      async function seeReps(oneId) {
+        const urlReps = `http://localhost:8090/reps/letter/${oneId}`;
+        const response = await fetch(urlReps, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setSelection(data);
+        }
       }
+      seeReps(oneId);
     }
-    seeReps(letter_id);
-  }, [letter_id, token]);
+  }, [oneId, token]);
 
   const copyToClipboard = () => {
     copy(oneContent);
@@ -90,48 +94,32 @@ function ReviewForm() {
               <Card.Footer className="text-muted"></Card.Footer>
             </Card>
           </div>
-          <div className="mb-3">
-            <Card className="text-center">
-              <Card.Header>
-                <h5>Representatives</h5>
-              </Card.Header>
-              <Card.Body>
-                {/* <Card.Title>Representatives</Card.Title> */}
-                <Card.Text>
-                  <table className="table table-striped table-sm">
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Office</th>
-                        <th>Party</th>
-                        <th>Address</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {repSelection.map((rep, i, j, k, l) => {
-                        return (
-                          <tr>
-                            <td key={rep[j]} value={rep.name}>
-                              {rep.name}
-                            </td>
-                            <td key={rep[i]} value={rep.office}>
-                              {rep.office}
-                            </td>
-                            <td key={rep[l]} value={rep.party}>
-                              {rep.party}
-                            </td>
-                            <td key={rep.rep_id} value={rep.rep_id}>
-                              {rep.address}
-                            </td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
-                </Card.Text>
-              </Card.Body>
-            </Card>
-            {/* <Card.Footer className="text-muted"></Card.Footer> */}
+          <div className="mb-3 text-center">
+            <h3>Reps selected for this letter</h3>
+            <table className="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Office</th>
+                  <th>Party</th>
+                  <th>Address</th>
+                  <th>Email</th>
+                </tr>
+              </thead>
+              <tbody>
+                {repSelection.map((rep) => {
+                  return (
+                    <tr key={rep.rep_id}>
+                      <td value={rep.name}>{rep.name}</td>
+                      <td value={rep.office}>{rep.office}</td>
+                      <td value={rep.party}>{rep.party}</td>
+                      <td value={rep.rep_id}>{rep.address}</td>
+                      <td value={rep.email}>{rep.email}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
           </div>
           <button
             onClick={copyToClipboard}
