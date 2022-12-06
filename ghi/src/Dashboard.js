@@ -33,8 +33,6 @@ function Dashboard() {
     getUserId();
   }, [token, user]);
 
-  console.log("TOKEN DASHBOARD", token);
-
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
   useEffect(() => {
