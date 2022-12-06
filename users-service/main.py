@@ -4,7 +4,7 @@ import os
 from routers import accounts
 from authenticator import authenticator
 
-REACT_URL = os.environ(["REACT_URL"])
+REACT_URL = os.getenv("REACT_URL")
 
 app = FastAPI()
 # app.include_router(users.router)
