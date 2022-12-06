@@ -5,17 +5,35 @@ import { useAuthContext } from "./TokenTest.js";
 
 function Dashboard() {
   const { token } = useAuthContext();
-
   const [letters, setLetters] = useState([]);
+  const [user, setUser] = useState();
   const [oneLetter, setOneLetter] = useState([""]);
-  const [oneId, setId] = useState("Letter id");
-  const [oneContent, setContent] = useState("Letter content");
-  const [oneStance, setStance] = useState("Letter stance");
-  const [oneTopic, setTopic] = useState("Letter topic");
-  const [oneDate, setDate] = useState("Date");
+  const [oneId, setId] = useState();
+  const [oneContent, setContent] = useState();
+  const [oneStance, setStance] = useState();
+  const [oneTopic, setTopic] = useState();
+  const [oneDate, setDate] = useState();
   const [repSelection, setSelection] = useState([]);
 
-  console.log("TOKEN DASHBOARD", token);
+  // console.log("TOKEN DASHBOARD", token);
+
+  // to get the user's id
+  useEffect(() => {
+    async function getUserId() {
+      const url = `http://localhost:8080/token`;
+      const response = await fetch(url, {
+        credentials: "include",
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setUser(data.account.id);
+        // console.log("Set user", user)
+      }
+    }
+    getUserId();
+  }, [token, user]);
+
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
   useEffect(() => {
     (async () => {
@@ -23,10 +41,14 @@ function Dashboard() {
         headers: { Authorization: `Bearer ${token}` },
       });
       const content = await response.json();
-      setLetters(content);
-      // console.log("LETTER CONTENT", content, "TOKEN", token);
+      // console.log("ALL LETTERS CONTENT", content);
+      const userContent = content.filter((c) => c['user_id'] === user)
+      // console.log("test user content", userContent);
+      setLetters(userContent);
     })();
-  }, [token]);
+  }, [token, user]);
+
+  // console.log("user letters", letters);
 
   const del = async (id) => {
     if (window.confirm("Are you sure: This Letter will be Deleted")) {
@@ -58,7 +80,7 @@ function Dashboard() {
       });
       if (response.ok) {
         const data = await response.json();
-        console.log("\n \n DATA", data);
+        // console.log("\n \n DATA", data);
         setSelection(data);
       }
     }
@@ -122,11 +144,10 @@ function Dashboard() {
           <h2>Detail letter view</h2>
           <div className="mb-3">
             <Card className="text-center">
-              <Card.Header>Date created: {''} {oneDate ? new Date(oneDate).toLocaleDateString() : ''} </Card.Header>
+              <Card.Header>Date created: {''} {oneDate ? new Date(oneDate).toLocaleDateString(undefined, options) : ''} </Card.Header>
               <Card.Body>
                 <Card.Title>
-                  Write a letter{" "}
-                  {oneStance ? "in favor of" : "in opposition to"} {oneTopic}
+                  {oneTopic != null? oneStance ? `Write a letter in favor of ${oneTopic}` : `Write a letter in opposition to ${oneTopic}` : '' }
                 </Card.Title>
                 <Card.Text> {oneContent} </Card.Text>
               </Card.Body>

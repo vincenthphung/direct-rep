@@ -7,7 +7,8 @@ steps = [
             created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             topic VARCHAR(1000) NOT NULL,
             stance BOOLEAN NOT NULL,
-            content TEXT NOT NULL
+            content TEXT NOT NULL,
+            user_id INTEGER NOT NULL
         );
         """,
         # SQL statement DOWN

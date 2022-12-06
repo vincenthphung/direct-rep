@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import { useCreateLetterMutation } from "./store/lettersApi";
 import { useAuthContext } from "./TokenTest.js";
 import { useNavigate } from "react-router-dom";
+import { trackPromise } from 'react-promise-tracker';
 
 function LetterForm() {
   const { token } = useAuthContext();
@@ -13,7 +14,7 @@ function LetterForm() {
   const [createLetter, result] = useCreateLetterMutation();
   const navigate = useNavigate();
 
-  console.log("TOKEN CREATE LETTER", token);
+  // console.log("TOKEN CREATE LETTER", token);
 
   // to collect and load the issues list from the database
   useEffect(() => {
@@ -34,7 +35,7 @@ function LetterForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    createLetter({ topic, stance }).then(() => navigate("/eletter"));
+    trackPromise(createLetter({ topic, stance }).then(() => navigate("/eletter")));
   }
 
   return (
