@@ -57,7 +57,7 @@ class LetterRepository:
                         ]
                     )
                     id = result.fetchone()[0]
-                    print("Check id \n \n", id)
+                    # print("Check id \n \n", id)
                     return LetterNew(
                       id=id,
                       topic=topic,
@@ -86,7 +86,6 @@ class LetterRepository:
                         letter_id
                     ]
                 )
-
                 # old_data = letter.dict()
                 return LetterUpdate(id=letter_id, content=content)
         except Exception as e:

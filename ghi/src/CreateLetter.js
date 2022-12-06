@@ -13,7 +13,7 @@ function LetterForm() {
   const [createLetter, result] = useCreateLetterMutation();
   const navigate = useNavigate();
 
-  console.log("TOKEN CREATE LETTER", token);
+  // console.log("TOKEN CREATE LETTER", token);
 
   // to collect and load the issues list from the database
   useEffect(() => {

@@ -26,9 +26,8 @@ export const EditLetter = () => {
     });
     if (response.ok) {
       const data = await response.json();
-      console.log("response", response);
       setUser(data.account.id);
-      console.log("Set user", user)
+      // console.log("Set user", user)
     }
   }
   getUserId();
@@ -44,8 +43,6 @@ export const EditLetter = () => {
       if (response.ok) {
         const content = await response.json();
         const data = content.filter((c) => c['user_id'] === user)
-        console.log("test user content", data);
-
         // console.log("LETTER DATA", data);
         for (let i = 0; i < data.length; i++) {
           if (i === data.length - 1) {
@@ -70,11 +67,11 @@ export const EditLetter = () => {
         setOneLetter(content);
         setId(content["id"]);
         setContent(content["content"]);
-        console.log("initial content", content["content"]);
+        // console.log("initial content", content["content"]);
         setStance(content["stance"]);
         setTopic(content["topic"]);
         setDate(content["created"]);
-        console.log("LETTER ONE CONTENT", content);
+        // console.log("LETTER ONE CONTENT", content);
       }
       showLetter(oneId);
     }
@@ -82,7 +79,7 @@ export const EditLetter = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(oneId, oneContent);
+    // console.log(oneId, oneContent);
     editLetter({ oneId, oneContent });
     navigate("/selectreps");
   }

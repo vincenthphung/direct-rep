@@ -28,9 +28,8 @@ function RepForm() {
     });
     if (response.ok) {
       const data = await response.json();
-      console.log("response", response);
       setUser(data.account.id);
-      console.log("Set user", user)
+      // console.log("Set user", user)
     }
   }
   getUserId();
@@ -46,7 +45,7 @@ function RepForm() {
       if (response.ok) {
         const content = await response.json();
         const data = content.filter((c) => c['user_id'] === user)
-        console.log("test user content", data);
+        // console.log("test user content", data);
         // console.log("LETTER DATA", data);
         for (let i = 0; i < data.length; i++) {
           if (i === data.length - 1) {
@@ -73,7 +72,7 @@ function RepForm() {
         const zipcode = data.account.zipcode;
         // console.log("zipcode", zipcode);
         setZip(zipcode);
-        console.log("zip", zip);
+        // console.log("zip", zip);
       }
     }
     getZipFromUser();
@@ -90,7 +89,6 @@ function RepForm() {
         });
         if (response.ok) {
           const data = await response.json();
-          console.log("\n \n DATA", data);
           setList(data);
         }
       }

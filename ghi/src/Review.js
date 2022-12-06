@@ -23,9 +23,8 @@ function ReviewForm() {
     });
     if (response.ok) {
       const data = await response.json();
-      console.log("response", response);
       setUser(data.account.id);
-      console.log("Set user", user)
+      // console.log("Set user", user)
     }
   }
   getUserId();
@@ -41,7 +40,6 @@ function ReviewForm() {
       if (response.ok) {
         const content = await response.json();
         const data = content.filter((c) => c['user_id'] === user)
-        console.log("test user content", data);
         for (let i = 0; i < data.length; i++) {
           if (i === data.length - 1) {
             const lastId = data[i].id;
@@ -61,7 +59,7 @@ function ReviewForm() {
         });
         const content = await response.json();
         setOneLetter(content);
-        console.log("letter content", content)
+        // console.log("letter content", content)
         setId(content["id"]);
         setContent(content["content"]);
         setStance(content["stance"]);
@@ -98,7 +96,7 @@ function ReviewForm() {
     <div className="row">
       <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
-          <div className="text-center">
+          <div>
             <h1>Final Letter</h1>
           </div>
           <div className="mb-3">

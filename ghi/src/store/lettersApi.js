@@ -22,7 +22,7 @@ export const lettersApi = createApi({
     createLetter: builder.mutation({
       query: (arg) => {
         const { topic, stance } = arg;
-        console.log(arg);
+        // console.log(arg);
         return {
           method: "post",
           url: `api/letters?topic=${topic}&stance=${stance}`,
@@ -34,7 +34,7 @@ export const lettersApi = createApi({
     editLetter: builder.mutation({
       query: (arg) => {
         const { oneId, oneContent } = arg;
-        console.log("edit letter arg", arg);
+        // console.log("edit letter arg", arg);
         return {
           method: "put",
           url: `letters/${oneId}?content=${oneContent}`,

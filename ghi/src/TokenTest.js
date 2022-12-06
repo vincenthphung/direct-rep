@@ -67,7 +67,7 @@ export function useToken() {
   useEffect(() => {
     async function fetchToken() {
       const token = await getTokenInternal();
-      console.log("login token test", token);
+      // console.log("login token test", token);
       setToken(token);
     }
     if (!token) {
@@ -81,7 +81,7 @@ export function useToken() {
       await fetch(url, { method: "delete", credentials: "include" });
       internalToken = null;
       setToken(null);
-      console.log("LOGOUT TOKEN TEST", token);
+      // console.log("LOGOUT TOKEN TEST", token);
       navigate("/");
     }
   }
@@ -90,9 +90,9 @@ export function useToken() {
     const url = `${process.env.REACT_APP_USERS_API_HOST}/token/`;
     const form = new FormData();
     form.append("username", username);
-    console.log("token test username", username);
+    // console.log("token test username", username);
     form.append("password", password);
-    console.log("token test password", password);
+    // console.log("token test password", password);
     const response = await fetch(url, {
       method: "post",
       credentials: "include",
@@ -107,48 +107,5 @@ export function useToken() {
     return handleErrorMessage(error);
   }
 
-  // async function signup(username, password, email, firstName, lastName) {
-  //   const url = `${process.env.REACT_APP_USERS_API_HOST}/api/accounts/`;
-  //   const response = await fetch(url, {
-  //     method: "post",
-  //     body: JSON.stringify({
-  //       username,
-  //       password,
-  //       email,
-  //       first_name: firstName,
-  //       last_name: lastName,
-  //     }),
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   });
-  //   if (response.ok) {
-  //     await login(username, password);
-  //   }
-  //   return false;
-  // }
-
-  // async function update(username, password, email, firstName, lastName) {
-  //   const url = `${process.env.REACT_APP_USERS_API_HOST}/api/accounts/`;
-  //   const response = await fetch(url, {
-  //     method: "patch",
-  //     body: JSON.stringify({
-  //       username,
-  //       password,
-  //       email,
-  //       first_name: firstName,
-  //       last_name: lastName,
-  //     }),
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   });
-  //   if (response.ok) {
-  //     await login(username, password);
-  //   }
-  //   return false;
-  // }
-
-  // return [token, login, logout, signup, update];
   return [token, login, logout];
 }
