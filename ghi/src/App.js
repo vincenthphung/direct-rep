@@ -21,81 +21,59 @@ function GetToken() {
   useToken();
   return null;
 }
-const domain = /https:\/\/[^/]+/;
-const basename = process.env.PUBLIC_URL.replace(domain, '');
-return (
-  <BrowswerRouter basename={basename}>
-    <AuthProvider>
-      <GetToken />
-      <Navigation />
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/signup" element={<AccountForm />} />
-        <Route path="/logout" element={<LogoutButton />} />
-        <Route path="/eaccount" element={<EditAccount />} />
-        <Route path="/selectreps" element={<RepForm />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/cletter" element={<LetterForm />} />
-        <Route path="/eletter" element={<EditLetter />} />
-        <Route path="/review" element={<ReviewForm />} />
-        <Route path="/newlogin" element={<NewLoginForm />} />
-      </Routes>
-    </AuthProvider>
-  </BrowswerRouter>
-);
 
+function App() {
+  // const [launch_info, setLaunchInfo] = useState([]);
+  // const [error, setError] = useState(null);
 
-// function App() {
-// const [launch_info, setLaunchInfo] = useState([]);
-// const [error, setError] = useState(null);
+  // useEffect(() => {
+  //   async function getData() {
+  //     let url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/api/launch-details`;
+  //     console.log("fastapi url: ", url);
+  //     let response = await fetch(url);
+  //     console.log("------- hello? -------");
+  //     let data = await response.json();
 
-// useEffect(() => {
-//   async function getData() {
-//     let url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/api/launch-details`;
-//     console.log("fastapi url: ", url);
-//     let response = await fetch(url);
-//     console.log("------- hello? -------");
-//     let data = await response.json();
+  //     if (response.ok) {
+  //       console.log("got launch data!");
+  //       setLaunchInfo(data.launch_details);
+  //     } else {
+  //       console.log("drat! something happened");
+  //       setError(data.message);
+  //     }
+  //   }
+  //   getData();
+  // }, []);
 
-//     if (response.ok) {
-//       console.log("got launch data!");
-//       setLaunchInfo(data.launch_details);
-//     } else {
-//       console.log("drat! something happened");
-//       setError(data.message);
-//     }
-//   }
-//   getData();
-// }, []);
-
-// return (
+  return (
     // <div>
-      // <BrowserRouter>
-      //   <AuthProvider>
-      //     <GetToken />
+    <BrowserRouter>
+      <AuthProvider>
+        <GetToken />
 
-      //     <Navigation />
-      //     <Routes>
+        <Navigation />
+        <Routes>
 
-      //       <Route path="/" element={<LandingPage />} />
-      //       <Route path="/login" element={<LoginForm />} />
-      //       <Route path="/signup" element={<AccountForm />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/signup" element={<AccountForm />} />
 
-      //       <Route path="/logout" element={<LogoutButton />} />
-      //       <Route path="/eaccount" element={<EditAccount />} />
-      //       <Route path="/selectreps" element={<RepForm />} />
-      //       <Route path="/dashboard" element={<Dashboard />} />
-      //       <Route path="/cletter" element={<LetterForm />} />
-      //       <Route path="/eletter" element={<EditLetter />} />
-      //       <Route path="/review" element={<ReviewForm />} />
-      //       <Route path="/newlogin" element={<NewLoginForm />} />
-      //   </Routes>
+          <Route path="/logout" element={<LogoutButton />} />
+          <Route path="/eaccount" element={<EditAccount />} />
+          <Route path="/selectreps" element={<RepForm />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/cletter" element={<LetterForm />} />
+          <Route path="/eletter" element={<EditLetter />} />
+          <Route path="/review" element={<ReviewForm />} />
+          <Route path="/newlogin" element={<NewLoginForm />} />
+        </Routes>
 
-      //     {/* <ErrorNotification error={error} /> */}
-      //     {/* <Construct info={launch_info} /> */}
-      //   </AuthProvider>
-      // </BrowserRouter>
+        {/* <ErrorNotification error={error} /> */}
+        {/* <Construct info={launch_info} /> */}
+      </AuthProvider>
+    </BrowserRouter>
     // </div>
-  // );
-// }
+  );
+}
+
+export default App;
