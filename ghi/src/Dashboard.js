@@ -1,6 +1,6 @@
 import Card from "react-bootstrap/Card";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import {useEffect,useState} from "react";
+import { Routes, Route, Link, Navigate } from 'react-router-dom';
 import { useAuthContext } from "./TokenTest.js";
 
 function Dashboard() {
@@ -16,7 +16,7 @@ function Dashboard() {
   const [repSelection, setSelection] = useState([]);
 
   console.log("TOKEN DASHBOARD", token);
-
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   useEffect(() => {
     (async () => {
       const response = await fetch("http://localhost:8090/api/letters", {
@@ -116,12 +116,13 @@ function Dashboard() {
           </div>
         </div>
       </div>
+
       <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
           <h2>Detail letter view</h2>
           <div className="mb-3">
             <Card className="text-center">
-              <Card.Header>Date created: {''} {oneDate ? new Date(oneDate).toLocaleDateString() : ''} </Card.Header>
+              <Card.Header>Date created: {''} {oneDate ? new Date(oneDate).toLocaleDateString(undefined, options) : ''} </Card.Header>
               <Card.Body>
                 <Card.Title>
                   Write a letter{" "}
@@ -158,6 +159,7 @@ function Dashboard() {
             </table>
           </div>
         </div>
+
         <div className="offset-3 col-6">
           <div className="shadow p-4 mt-4">
             <Link to="/cletter">

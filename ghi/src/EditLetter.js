@@ -5,6 +5,7 @@ import { useAuthContext } from "./TokenTest.js";
 import { useEditLetterMutation } from "./store/lettersApi";
 import { useNavigate } from "react-router-dom";
 
+
 export const EditLetter = () => {
   const { token } = useAuthContext();
   const [oneLetter, setOneLetter] = useState([""]);
@@ -65,15 +66,17 @@ export const EditLetter = () => {
     editLetter({ oneId, oneContent });
     navigate("/selectreps");
   }
-
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   return (
     <div className="row">
       <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
+          <div className="text-center">
           <h1>Edit letter</h1>
+          </div>
           <div className="mb-3">
             <Card className="text-center">
-              <Card.Header>Date created: {''} {oneDate ? new Date(oneDate).toLocaleDateString() : ''} </Card.Header>
+              <Card.Header>Date created: {''} {oneDate ? new Date(oneDate).toLocaleDateString(undefined, options) : ''} </Card.Header>
               <Card.Body>
                 <Card.Title>
                   Write a letter{" "}

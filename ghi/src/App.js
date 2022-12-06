@@ -65,6 +65,7 @@ function App() {
             <Route path="/eletter" element={<EditLetter />} />
             <Route path="/review" element={<ReviewForm />} />
             <Route path="/newlogin" element={<NewLoginForm />} />
+            <Route path="/newlogin" element={<NewLoginForm />} />
           </Routes>
 
           {/* <ErrorNotification error={error} /> */}
