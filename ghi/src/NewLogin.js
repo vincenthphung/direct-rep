@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 function NewLoginForm() {
   const [token, login] = useToken();
-  console.log("login form", token);
+  // console.log("login form", token);
 
   const [username, setUser] = useState("");
   const [password, setPassword] = useState("");
