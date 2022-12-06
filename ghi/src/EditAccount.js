@@ -42,8 +42,7 @@ function EditAccount() {
       });
       if (response.ok) {
         const data = await response.json();
-        console.log("response", response);
-        console.log("get user data test", data);
+        // console.log("get user data test", data);
         setName(data.account.full_name);
         setEmail(data.account.email);
         setZipcode(data.account.zipcode);

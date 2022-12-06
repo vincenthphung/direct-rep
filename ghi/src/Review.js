@@ -5,6 +5,7 @@ import { useAuthContext } from "./TokenTest.js";
 
 function ReviewForm() {
   const { token } = useAuthContext();
+  const [user, setUser] = useState();
   const [oneLetter, setOneLetter] = useState([]);
   const [oneId, setId] = useState();
   const [oneContent, setContent] = useState();
@@ -12,6 +13,22 @@ function ReviewForm() {
   const [oneTopic, setTopic] = useState();
   const [oneDate, setDate] = useState();
   const [repSelection, setSelection] = useState([]);
+
+ // to get the user's id
+ useEffect(() => {
+  async function getUserId() {
+    const url = `http://localhost:8080/token`;
+    const response = await fetch(url, {
+      credentials: "include",
+    });
+    if (response.ok) {
+      const data = await response.json();
+      setUser(data.account.id);
+      // console.log("Set user", user)
+    }
+  }
+  getUserId();
+}, [token, user]);
 
   // to get the id of the most recent letter created:
   useEffect(() => {
@@ -21,7 +38,8 @@ function ReviewForm() {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (response.ok) {
-        const data = await response.json();
+        const content = await response.json();
+        const data = content.filter((c) => c['user_id'] === user)
         for (let i = 0; i < data.length; i++) {
           if (i === data.length - 1) {
             const lastId = data[i].id;
@@ -31,7 +49,7 @@ function ReviewForm() {
       }
     }
     fetchLetterId();
-  }, [token]);
+  }, [token, user]);
 
   useEffect(() => {
       if (oneId != null) {
@@ -41,7 +59,7 @@ function ReviewForm() {
         });
         const content = await response.json();
         setOneLetter(content);
-        console.log("letter content", content)
+        // console.log("letter content", content)
         setId(content["id"]);
         setContent(content["content"]);
         setStance(content["stance"]);
@@ -71,19 +89,19 @@ function ReviewForm() {
 
   const copyToClipboard = () => {
     copy(oneContent);
-    alert(`Your letter has been copied: ${oneContent}`);
+    alert(`Your letter has been copied:${oneContent}`);
   };
 
   return (
     <div className="row">
       <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
-          <div className="text-center">
+          <div>
             <h1>Final Letter</h1>
           </div>
           <div className="mb-3">
             <Card className="text-center">
-              <Card.Header>Date created: {''} {oneDate ? new Date(oneDate).toLocaleDateString() : ''} </Card.Header>
+              <Card.Header>Date created: {oneDate} </Card.Header>
               <Card.Body>
                 <Card.Title>
                   Write a letter{" "}

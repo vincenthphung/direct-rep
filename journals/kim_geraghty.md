@@ -245,3 +245,24 @@ Updated to do list:
 - finish logout button
 - edit / hide nav bar
 - filter letters per user
+
+## Friday 12/2/2022 and Monday 12/5/2022
+
+On Friday we started testing deployment. There is still a lot to learn on that front.
+Over the weekend I spent some time cleaning up the code, commenting out console log and print statements, and fixing a few errors that still popped up in the console.
+I edited tables to make sure keys were not overlapping.
+I added do not if null statements to prevent some fetch functions from running empty (!= null)
+I updated useEffect dependencies where needed to make sure they run smoothly.
+I added .then to our navigate links to make sure the user doesn't get to a page before the state has had time to change.
+
+Today I added the user_id field to the letter table so that we can filter the letters by user. This connects to the account data in the backend that is being pulled during the authentication check.
+
+The MVP is practically complete.
+
+Updated to do list:
+
+- fix leading zeros issue for zipcodes that start with zeros
+- create unit tests
+- get deployment done.
+
+The list keeps getting shorter!

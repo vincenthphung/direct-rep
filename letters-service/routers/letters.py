@@ -58,23 +58,19 @@ def create_letter(
 ):
 
     if account_data:
+        # print("POST letter account data", account_data)
         # input_query = "Write a letter" {if stance === true} say = "in favor of"; else: say = "in opposition to" + topic
         say = ""
         if stance == True:
             say = "in favor of"
         else:
             say = "in opposition to"
-
         input_query = f"Write a letter {say} {topic}"
-        print("\n \n \n INPUT QUERY", input_query)
         get_open_ai(topic=input_query)
-
-        # get_open_ai(topic=topic)
-        # print("\n \n \n DATA", data)
         stance = stance
-        text = data['choices'][0]['text']
-        print("\n \n TEXT ONLY: ", text)
-        return repo.create(topic, stance, text)
+        content = data['choices'][0]['text']
+        user_id = account_data['id']
+        return repo.create(topic, stance, content, user_id)
     else:
         return ("Not working")
 
@@ -99,11 +95,21 @@ def edit_letter_body(
         authenticator.try_get_current_account_data),
     repo: LetterRepository = Depends(),
 ) -> Union[LetterUpdate, Error]:
-    if account_data:
+
+
+<< << << < HEAD
+   if account_data:
         print("\n \n CONTENT", content, letter_id)
         return repo.update(letter_id, content)
     else:
         return ("Not working")
+
+== =====
+   if account_data:
+        return repo.update(letter_id, content)
+    else:
+        return ("Not working")
+>>>>>> > main
 
 
 @router.delete("/letters/{letter_id}", response_model=bool)

@@ -11,6 +11,7 @@ class LetterIn(BaseModel):
     topic: str
     stance: bool
     content: str
+    user_id: int
 
 class LetterUpdate(BaseModel):
     content: str
@@ -20,6 +21,7 @@ class LetterNew(BaseModel):
     topic: str
     stance: bool
     content: str
+    user_id: int
 
 class LetterOut(BaseModel):
     id: int
@@ -27,6 +29,7 @@ class LetterOut(BaseModel):
     topic: str
     stance: bool
     content: str
+    user_id: int
 
 class Issue(BaseModel):
     id: int
@@ -34,31 +37,33 @@ class Issue(BaseModel):
     openai_issue: str
 
 class LetterRepository:
-    def create(self, topic: str, stance: bool, content: str) -> Union[LetterOut, Error]:
+    def create(self, topic: str, stance: bool, content: str, user_id: int) -> Union[LetterOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
                         INSERT INTO letter
-                            (topic, stance, content)
+                            (topic, stance, content, user_id)
                         VALUES
-                            (%s, %s, %s)
+                            (%s, %s, %s, %s)
                         RETURNING id;
                         """,
                         [
                             topic,
                             stance,
-                            content
+                            content,
+                            user_id
                         ]
                     )
                     id = result.fetchone()[0]
-                    print("Check id \n \n", id)
+                    # print("Check id \n \n", id)
                     return LetterNew(
                       id=id,
                       topic=topic,
                       stance=stance,
-                      content=content
+                      content=content,
+                      user_id=user_id
                       )
         except Exception:
             return {"message": "Create letter did not work"}
@@ -81,7 +86,6 @@ class LetterRepository:
                         letter_id
                     ]
                 )
-
                 # old_data = letter.dict()
                 return LetterUpdate(id=letter_id, content=content)
         except Exception as e:
@@ -97,7 +101,7 @@ class LetterRepository:
                     # run our SELECT statement
                     result = db.execute(
                         """
-                        SELECT id, created, topic, stance, content
+                        SELECT id, created, topic, stance, content, user_id
                         FROM letter
                         ORDER BY id;
                         """
@@ -110,7 +114,8 @@ class LetterRepository:
                             created = record[1],
                             topic = record[2],
                             stance = record[3],
-                            content = record[4]
+                            content = record[4],
+                            user_id = record[5]
                         )
                         result.append(letter)
                     return result
@@ -128,7 +133,7 @@ class LetterRepository:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        SELECT id, created, topic, stance, content
+                        SELECT id, created, topic, stance, content, user_id
                         FROM letter
                         WHERE id = %s
                         """,
@@ -165,7 +170,8 @@ class LetterRepository:
             created = record[1],
             topic = record[2],
             stance = record[3],
-            content = record[4]
+            content = record[4],
+            user_id = record[5]
             )
 
 class IssueRepository:

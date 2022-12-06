@@ -6,6 +6,7 @@ import { useAuthContext } from "./TokenTest.js";
 
 function RepForm() {
   const { token } = useAuthContext();
+  const [user, setUser] = useState();
   const [name, setName] = useState();
   const [office, setOffice] = useState();
   const [level, setLevel] = useState();
@@ -18,6 +19,22 @@ function RepForm() {
   const [email, setEmail] = useState();
   const [createRep, result] = useCreateRepMutation();
 
+ // to get the user's id
+ useEffect(() => {
+  async function getUserId() {
+    const url = `http://localhost:8080/token`;
+    const response = await fetch(url, {
+      credentials: "include",
+    });
+    if (response.ok) {
+      const data = await response.json();
+      setUser(data.account.id);
+      // console.log("Set user", user)
+    }
+  }
+  getUserId();
+}, [token, user]);
+
   // to get the id of the most recent letter created:
   useEffect(() => {
     async function fetchLetterId() {
@@ -26,7 +43,9 @@ function RepForm() {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (response.ok) {
-        const data = await response.json();
+        const content = await response.json();
+        const data = content.filter((c) => c['user_id'] === user)
+        // console.log("test user content", data);
         // console.log("LETTER DATA", data);
         for (let i = 0; i < data.length; i++) {
           if (i === data.length - 1) {
@@ -38,7 +57,7 @@ function RepForm() {
       }
     }
     fetchLetterId();
-  }, [token]);
+  }, [token, user]);
 
   // to get the zipcode
   useEffect(() => {
@@ -49,12 +68,11 @@ function RepForm() {
       });
       if (response.ok) {
         const data = await response.json();
-        console.log("response", response);
-        console.log("get zip data test", data);
+        // console.log("response", response);
         const zipcode = data.account.zipcode;
-        console.log("zipcode", zipcode);
+        // console.log("zipcode", zipcode);
         setZip(zipcode);
-        console.log("zip", zip);
+        // console.log("zip", zip);
       }
     }
     getZipFromUser();
@@ -71,7 +89,6 @@ function RepForm() {
         });
         if (response.ok) {
           const data = await response.json();
-          console.log("\n \n DATA", data);
           setList(data);
         }
       }
@@ -182,7 +199,9 @@ function RepForm() {
       </div>
       <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
+        <div className="text-center">
           <h2>Representatives</h2>
+          </div>
           <div>
             <table className="table table-striped table-sm">
               <thead>
@@ -199,7 +218,7 @@ function RepForm() {
                       <td value={rep.name}>{rep.name}</td>
                       <td value={rep.office}>{rep.office}</td>
                       <td
-                        className="btn"
+                        className="btn btn-sm btn-outline-secondary"
                         onClick={() => deleteRep(rep.rep_id)}
                         value={rep.rep_id}
                       >

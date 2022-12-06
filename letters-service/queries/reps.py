@@ -56,7 +56,7 @@ class RepRepository(BaseModel):
                         ]
                     )
                     rep_id = result.fetchone()[0]
-                    print("\n \n Check id \n \n", rep_id)
+                    # print("\n \n Check id \n \n", rep_id)
                     # print("\n \n Check rep \n \n", RepOut)
 
                     return RepOut(
