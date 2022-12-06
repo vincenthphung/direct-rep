@@ -293,9 +293,11 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 1. I worked upon showing the loading sign when there is a buffer while generating a letter. I used a built in react library named PromiseTracker and added it to the index.js page to make it work.
 
-2. Kim worked upon cleaning the console errors and messages.
+2. We worked upon cleaning the console errors and messages.
 
 3. John worked upon deployment and succeeded with deploying one letters microservice.
+
+4. Kim added the created by field to the letters table and then filtered the letters in dashboard according to the user.
 
 ### Work achieved during the day
 
@@ -303,4 +305,4 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 2. Browser console in cleaned and has no errors.
 
-
+3. Letters in dashboard filtered for each user.
