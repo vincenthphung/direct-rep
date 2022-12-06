@@ -289,4 +289,18 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 ## December 5, 2022 (Monday)
 
-1. I worked upon showing the loading sign when there is a buffer.
+### Work done during the day
+
+1. I worked upon showing the loading sign when there is a buffer while generating a letter. I used a built in react library named PromiseTracker and added it to the index.js page to make it work.
+
+2. Kim worked upon cleaning the console errors and messages.
+
+3. John worked upon deployment and succeeded with deploying one letters microservice.
+
+### Work achieved during the day
+
+1. Loading sign showing during the buffer time to generate a letter.
+
+2. Browser console in cleaned and has no errors.
+
+
