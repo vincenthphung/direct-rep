@@ -285,3 +285,8 @@ We spend more time on making our endpoints more efficient. We made changes to th
 2. Write unit tests for the working components.
 
 3. Start working on stretch goals.
+
+
+## December 5, 2022 (Monday)
+
+1. I worked upon showing the loading sign when there is a buffer.
