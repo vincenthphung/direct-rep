@@ -8,7 +8,7 @@ from jwtdown_fastapi.authentication import Authenticator
 import os
 
 OPENAI_URL = os.getenv('OPENAI_URL')
-SIGNING_KEY = os.getenf('SIGNING_KEY')
+SIGNING_KEY = os.getenv('SIGNING_KEY')
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
 
