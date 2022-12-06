@@ -3,11 +3,12 @@ from typing import Optional, Union, List
 import requests
 import json
 from queries.reps import (Error, RepIn, RepOut, CivicsOut, RepRepository)
-from .new_keys import GOOGLE_CIVICS_KEY
 from jwtdown_fastapi.authentication import Authenticator
 import os
 
-GOOGLE_CIVICS_URL = os.environ["GOOGLE_CIVICS_URL"]
+GOOGLE_CIVICS_URL = os.getenv('GOOGLE_CIVICS_URL')
+SIGNING_KEY = os.getenv('SIGNING_KEY')
+GOOGLE_CIVICS_KEY = os.getenv('GOOGLE_CIVICS_KEY')
 
 
 class MyAuthenticator(Authenticator):
@@ -25,15 +26,13 @@ class MyAuthenticator(Authenticator):
 
 
 # print("\n \n SIGNING_KEY", os.environ)
-authenticator = MyAuthenticator(os.environ["SIGNING_KEY"])
+authenticator = MyAuthenticator(SIGNING_KEY)
 
 
 router = APIRouter()
 
-google_api_key = GOOGLE_CIVICS_KEY
-url = GOOGLE_CIVICS_URL
 # "x-goog-api-key" is google's word for "Authorization"
-headers = {"x-goog-api-key": google_api_key}
+headers = {"x-goog-api-key": GOOGLE_CIVICS_KEY}
 
 # levels info:
 # "country" = federal
@@ -45,7 +44,7 @@ headers = {"x-goog-api-key": google_api_key}
 
 
 async def get_civics_api_reps(zipcode):
-    response = requests.get(url, params={"address": zipcode, "levels": [
+    response = requests.get(GOOGLE_CIVICS_URL, params={"address": zipcode, "levels": [
                             "country", "administrativeArea1", "administrativeArea2", "locality"]}, headers=headers)
     content = json.loads(response.content)
     return content
