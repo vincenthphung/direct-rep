@@ -257,3 +257,31 @@ We spend more time on making our endpoints more efficient. We made changes to th
 4. Edit letter endpoint for frontend.
 
 5. Fixed Main branch after wrong merge.
+
+## December 2, 2022 (Friday)
+
+### Work done during the day
+
+1. My team worked upon the logout component for authentication in frontend. Kim worked upon it.
+
+2. I worked upon the flow for making a letter. I connected the create letter page to edit letter. So when a letter is made the user is directly taken to edit letter. Then I connected the edit letter to representative selection page. So, after editing the letter the used can select the reps accordingly. Then, I connected the reps page to the final review page. So, after the letter is made the user can see the final letter with the representatives accordingly. I also worked upon the interface of the review to make it appear better.
+
+3. We worked upon the navigation bar to change according to authentication.
+
+4. We started working upon deployment. We did pair programming and John shared his screen. We were unable to finish it and were facing errors. So, we decided to do more research upon and then finish it.
+
+### Work achieved during the day
+
+1. Login component working in frontend.
+
+2. All the endpoints after creating a letter are connected.
+
+3. Navigation bar working according to authentication.
+
+## Goals for the week 5
+
+1. Finish Deployment for the application.
+
+2. Write unit tests for the working components.
+
+3. Start working on stretch goals.

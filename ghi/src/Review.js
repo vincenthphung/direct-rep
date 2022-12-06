@@ -89,7 +89,7 @@ function ReviewForm() {
 
   const copyToClipboard = () => {
     copy(oneContent);
-    alert(`Your letter has been copied: ${oneContent}`);
+    alert(`Your letter has been copied:${oneContent}`);
   };
 
   return (
@@ -101,7 +101,7 @@ function ReviewForm() {
           </div>
           <div className="mb-3">
             <Card className="text-center">
-              <Card.Header>Date created: {''} {oneDate ? new Date(oneDate).toLocaleDateString() : ''} </Card.Header>
+              <Card.Header>Date created: {oneDate} </Card.Header>
               <Card.Body>
                 <Card.Title>
                   Write a letter{" "}

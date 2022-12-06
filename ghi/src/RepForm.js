@@ -199,7 +199,9 @@ function RepForm() {
       </div>
       <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
+        <div className="text-center">
           <h2>Representatives</h2>
+          </div>
           <div>
             <table className="table table-striped table-sm">
               <thead>
@@ -216,7 +218,7 @@ function RepForm() {
                       <td value={rep.name}>{rep.name}</td>
                       <td value={rep.office}>{rep.office}</td>
                       <td
-                        className="btn"
+                        className="btn btn-sm btn-outline-secondary"
                         onClick={() => deleteRep(rep.rep_id)}
                         value={rep.rep_id}
                       >
