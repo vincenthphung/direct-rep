@@ -22,7 +22,7 @@ const LoadingIndicator = props => {
           alignItems: "center"
         }}
       >
-        <div><h2>Your Letter is being processed</h2></div>
+        <div><h2>Your letter is being processed</h2></div>
         <ProgressBar
   height="75"
   width="75"
