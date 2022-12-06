@@ -3,6 +3,7 @@ from fastapi import Depends
 from jwtdown_fastapi.authentication import Authenticator
 from queries.accounts import AccountRepo, AccountOut, Account
 
+SIGNING_KEY = os.getenv('SIGNING_KEY')
 
 # modify this to match up with our code:
 
@@ -41,4 +42,4 @@ class MyAuthenticator(Authenticator):
         return users.email, AccountOut(**users.dict())
 
 
-authenticator = MyAuthenticator(os.environ["SIGNING_KEY"])
+authenticator = MyAuthenticator(SIGNING_KEY)
