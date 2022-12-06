@@ -1,6 +1,6 @@
 # Journal - Aaryan Mittal
 
-# PROJECT OVERVIEW GROUP
+# PROJECT SETUP
 
 ## November 7, 2022 (Monday)
 
@@ -18,7 +18,7 @@ We started to work upon the endpoints for our web application. We created a new 
 
 We spend more time on making our endpoints more efficient. We made changes to the use model and changed the signup method from dropdowns for state, city and county to only zipcode. This made our code better as we had better aces for the accurate data for the user through civics API, as zipcode made the location more accurate.
 
-# WORKING PROJECT INDIVIDUAL
+# PROJECT (CODE)
 
 ## Goals for the week 2
 
