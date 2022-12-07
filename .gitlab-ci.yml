@@ -3,7 +3,7 @@ stages:
   - build
   - deploy
 
-lint-job:
+lint-test-job:
   image: "python:3-bullseye"
   stage: test
   script:
