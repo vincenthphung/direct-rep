@@ -14,14 +14,6 @@ services:
       - POSTGRES_PASSWORD=password
     ports:
       - 15432:5432
-  fastapi:
-    build:
-      context: sample_service
-      dockerfile: Dockerfile.dev
-    ports:
-      - 8000:8000
-    volumes:
-      - ./sample_service:/app
   users-service:
     build:
       context: ./users-service
