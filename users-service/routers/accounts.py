@@ -20,12 +20,15 @@ from queries.accounts import (
     Error
 )
 
+
 class AccountForm(BaseModel):
     username: str
     password: str
 
+
 class AccountToken(Token):
     account: AccountOut
+
 
 class HttpError(BaseModel):
     detail: str
@@ -52,6 +55,7 @@ async def create_account(
 # authenticator.login => comes from the Authenticator base class (inherited in queries)
 # repo.create => must match a create function from our queries to create new instance in database table
 
+
 @router.put("/api/accounts/{id}", response_model=AccountToken | HttpError)
 async def edit_account(
     id: int,
@@ -61,10 +65,11 @@ async def edit_account(
     repo: AccountRepo = Depends(),
 ):
     hashed_password = authenticator.hash_password(info.password)
-    account = repo.update(id,info, hashed_password)
+    account = repo.update(id, info, hashed_password)
     form = AccountForm(username=info.email, password=info.password)
     token = await authenticator.login(response, request, form, repo)
     return AccountToken(account=account, **token.dict())
+
 
 @router.get("/token", response_model=AccountToken | None)
 async def get_token(
