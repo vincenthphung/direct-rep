@@ -1,6 +1,6 @@
 import os
 # from psycopg_pool import ConnectionPool
-import pscyopg
+import psycopg
 
 USERS_DATABASE_URL = os.environ.get("USERS_DATABASE_URL")
 
