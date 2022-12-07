@@ -44,4 +44,5 @@ class MyAuthenticator(Authenticator):
 
 
 # authenticator = MyAuthenticator(os.environ["SIGNING_KEY"])
-authenticator = MyAuthenticator(SIGNING_KEY)
+authenticators = MyAuthenticator(SIGNING_KEY)
+print("\n\n\n\n", "authenticators = ", authenticators, "\n\n\n\n\n")

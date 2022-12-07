@@ -8,7 +8,8 @@ from fastapi import (
     Request,
 )
 from jwtdown_fastapi.authentication import Token
-from authenticator import authenticator
+# from authenticator import authenticator
+from authenticator import authenticators
 
 from pydantic import BaseModel
 
@@ -44,10 +45,10 @@ async def create_account(
     response: Response,
     repo: AccountRepo = Depends(),
 ):
-    hashed_password = authenticator.hash_password(info.password)
+    hashed_password = authenticators.hash_password(info.password)
     account = repo.create(info, hashed_password)
     form = AccountForm(username=info.email, password=info.password)
-    token = await authenticator.login(response, request, form, repo)
+    token = await authenticators.login(response, request, form, repo)
     # print("CREATING ACCOUNT")
     return AccountToken(account=account, **token.dict())
 
@@ -64,22 +65,22 @@ async def edit_account(
     response: Response,
     repo: AccountRepo = Depends(),
 ):
-    hashed_password = authenticator.hash_password(info.password)
+    hashed_password = authenticators.hash_password(info.password)
     account = repo.update(id, info, hashed_password)
     form = AccountForm(username=info.email, password=info.password)
-    token = await authenticator.login(response, request, form, repo)
+    token = await authenticators.login(response, request, form, repo)
     return AccountToken(account=account, **token.dict())
 
 
 @router.get("/token", response_model=AccountToken | None)
 async def get_token(
     request: Request,
-    account: Account = Depends(authenticator.try_get_current_account_data)
+    account: Account = Depends(authenticators.try_get_current_account_data)
 ) -> AccountToken | None:
-    if account and authenticator.cookie_name in request.cookies:
+    if account and authenticators.cookie_name in request.cookies:
         # print("GETTING TOKEN")
         return {
-            "access_token": request.cookies[authenticator.cookie_name],
+            "access_token": request.cookies[authenticators.cookie_name],
             "type": "Bearer",
             "account": account,
         }
