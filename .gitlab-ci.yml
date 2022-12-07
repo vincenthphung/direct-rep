@@ -1,43 +1,43 @@
-stages:
-  - test
-  - build
-  - deploy
+# stages:
+#   - test
+#   - build
+#   - deploy
 
-lint-test-job:
-  image: "python:3-bullseye"
-  stage: test
-  script:
-    - pip install flake8
-    - flake8 letters_service
-    - flake8 users_service
+# lint-test-job:
+#   image: "python:3-bullseye"
+#   stage: test
+#   script:
+#     - pip install flake8
+#     - flake8 letters_service
+#     - flake8 users_service
 
-build-front-end-job:
-  stage: build
-  image: "node:lts-bullseye"
-  needs:
-    - lint-test-job
-  variables:
-    PUBLIC_URL: "https://directrep.gitlab.io/direct-rep/"
-    REACT_APP_LETTERS_API_HOST: "https://letters-service-t3i8.onrender.com"
-    REACT_APP_USERS_API_HOST: "https://users-service-85db.onrender.com"
-  script:
-    - cd ghi
-    - npm install
-    - npm run build
-    - cp build/index.html build/404.html
-  artifacts:
-    paths:
-      - ghi/build/
-pages:
-  stage: deploy
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-  dependencies:
-    - build-front-end-job
-  needs:
-    - build-front-end-job
-  script:
-    - mv ghi/build/ public
-  artifacts:
-    paths:
-      - public
+# build-front-end-job:
+#   stage: build
+#   image: "node:lts-bullseye"
+#   needs:
+#     - lint-test-job
+#   variables:
+#     PUBLIC_URL: "https://directrep.gitlab.io/direct-rep/"
+#     REACT_APP_LETTERS_API_HOST: "https://letters-service-t3i8.onrender.com"
+#     REACT_APP_USERS_API_HOST: "https://users-service-85db.onrender.com"
+#   script:
+#     - cd ghi
+#     - npm install
+#     - npm run build
+#     - cp build/index.html build/404.html
+#   artifacts:
+#     paths:
+#       - ghi/build/
+# pages:
+#   stage: deploy
+#   rules:
+#     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+#   dependencies:
+#     - build-front-end-job
+#   needs:
+#     - build-front-end-job
+#   script:
+#     - mv ghi/build/ public
+#   artifacts:
+#     paths:
+#       - public
