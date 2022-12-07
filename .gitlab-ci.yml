@@ -2,20 +2,25 @@ stages:
   - test
   - build
   - deploy
+
+
 lint-test-job:
   image: 'python:3-bullseye'
   stage: test
   script:
     - pip install flake8
     - flake8 sample_service
+
+
 build-front-end-job:
   stage: build
   image: 'node:lts-bullseye'
   needs:
     - lint-test-job
   variables:
-    PUBLIC_URL: 'https://GROUP_NAME.gitlab.io/PROJECT_NAME/'
-    REACT_APP_SAMPLE_SERVICE_API_HOST: 'https://WEBSERVICE_NAME.onrender.com'
+    PUBLIC_URL: 'https://directrep.gitlab.io/direct-rep/'
+    REACT_APP_LETTERS_API_HOST: 'https://letters-service-hpce.onrender.com/'
+    REACT_APP_USERS_API_HOST: ''
   script:
     - cd ghi
     - npm install

@@ -3,7 +3,10 @@ async def migrate():
     import os
     import sys
 
-    db_url = os.environ["DATABASE_URL"]
+    DATABASE_URL = os.environ.get("DATABASE_URL")
+
+    # db_url = os.environ["DATABASE_URL"]
+    db_url = DATABASE_URL
 
     if len(sys.argv) < 2:
         print("Command: up|down [amount]")
