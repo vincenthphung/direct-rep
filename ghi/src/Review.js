@@ -13,7 +13,7 @@ function ReviewForm() {
   const [oneTopic, setTopic] = useState();
   const [oneDate, setDate] = useState();
   const [repSelection, setSelection] = useState([]);
-
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
  // to get the user's id
  useEffect(() => {
   async function getUserId() {
@@ -101,7 +101,7 @@ function ReviewForm() {
           </div>
           <div className="mb-3">
             <Card className="text-center">
-              <Card.Header>Date created: {oneDate} </Card.Header>
+              <Card.Header>Date created: {oneDate ? new Date(oneDate).toLocaleDateString(undefined, options) : ''} </Card.Header>
               <Card.Body>
                 <Card.Title>
                   Write a letter{" "}
