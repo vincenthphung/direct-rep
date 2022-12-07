@@ -14,7 +14,7 @@ function LetterForm() {
   const [createLetter, result] = useCreateLetterMutation();
   const navigate = useNavigate();
 
-  // console.log("TOKEN CREATE LETTER", token);
+  console.log("TOKEN CREATE LETTER", token);
 
   // to collect and load the issues list from the database
   useEffect(() => {
@@ -31,7 +31,7 @@ function LetterForm() {
     fetchIssues();
   }, [token]);
 
-  // console.log("ISSUES LIST", issues);
+  console.log("ISSUES LIST", issues);
 
   async function handleSubmit(e) {
     e.preventDefault();

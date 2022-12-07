@@ -15,7 +15,7 @@ function Dashboard() {
   const [oneDate, setDate] = useState();
   const [repSelection, setSelection] = useState([]);
 
-  // console.log("TOKEN DASHBOARD", token);
+  console.log("TOKEN DASHBOARD", token);
 
   // to get the user's id
   useEffect(() => {
@@ -27,7 +27,7 @@ function Dashboard() {
       if (response.ok) {
         const data = await response.json();
         setUser(data.account.id);
-        // console.log("Set user", user)
+        console.log("Set user", user)
       }
     }
     getUserId();
@@ -41,7 +41,7 @@ function Dashboard() {
         headers: { Authorization: `Bearer ${token}` },
       });
       const content = await response.json();
-      // console.log("ALL LETTERS CONTENT", content);
+      console.log("ALL LETTERS CONTENT", content);
       const userContent = content.filter((c) => c['user_id'] === user)
       // console.log("test user content", userContent);
       setLetters(userContent);
