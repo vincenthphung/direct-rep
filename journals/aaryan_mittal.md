@@ -306,3 +306,19 @@ We spend more time on making our endpoints more efficient. We made changes to th
 2. Browser console in cleaned and has no errors.
 
 3. Letters in dashboard filtered for each user.
+
+## December 6, 2022 (Tuesday)
+
+### Work done during the day
+
+1. I upon showing the loading icon for buffers in edit letter and rep selection page.
+
+2. I added letter detail view to another page. I used the letter id to redirect to another page with letter id. Then I used react params function to decode the letter id and put it to the get letter url. I created a copy button to copy the details of the letter.
+
+3. My team worked upon deployment.
+
+### Work achieved during the day
+
+1. Loading icon added to edit letter and select rep page.
+
+2. Detail View is working on another page
