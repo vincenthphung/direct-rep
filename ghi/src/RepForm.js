@@ -3,6 +3,8 @@ import React from "react";
 import { useCreateRepMutation } from "./store/repsApi";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "./TokenTest.js";
+import { trackPromise } from 'react-promise-tracker';
+import { useNavigate } from "react-router-dom";
 
 function RepForm() {
   const { token } = useAuthContext();
@@ -18,6 +20,7 @@ function RepForm() {
   const [zip, setZip] = useState();
   const [email, setEmail] = useState();
   const [createRep, result] = useCreateRepMutation();
+  const navigate = useNavigate();
 
  // to get the user's id
  useEffect(() => {
@@ -121,9 +124,9 @@ function RepForm() {
   // to send that data to the database via the store reducer:
   async function handleSubmit(e) {
     e.preventDefault();
-    createRep({ office, level, name, party, address, email, letter_id }).then(
+    trackPromise(createRep({ office, level, name, party, address, email, letter_id }).then(
       () => showReps(letter_id)
-    );
+    ));
   }
 
   async function showReps(letter_id) {
@@ -166,6 +169,12 @@ function RepForm() {
     ).then(() => showReps(letter_id));
   }
   // }
+
+  async function finalPage(e) {
+    e.preventDefault();
+    // console.log(oneId, oneContent);
+    navigate("/review");
+  }
 
   return (
     <div className="row">
@@ -230,9 +239,7 @@ function RepForm() {
               </tbody>
             </table>
           </div>
-          <Link to="/review">
-            <button className="btn btn-primary">Final Page</button>
-          </Link>
+            <button onClick={finalPage} className="btn btn-primary">Final Page</button>
         </div>
       </div>
     </div>

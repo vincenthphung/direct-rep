@@ -4,7 +4,7 @@ import React from "react";
 import { useAuthContext } from "./TokenTest.js";
 import { useEditLetterMutation } from "./store/lettersApi";
 import { useNavigate } from "react-router-dom";
-
+import { trackPromise } from 'react-promise-tracker';
 
 export const EditLetter = () => {
   const { token } = useAuthContext();
@@ -81,8 +81,7 @@ export const EditLetter = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     // console.log(oneId, oneContent);
-    editLetter({ oneId, oneContent });
-    navigate("/selectreps");
+    trackPromise(editLetter({ oneId, oneContent }).then(() => navigate("/selectreps")));
   }
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   return (
