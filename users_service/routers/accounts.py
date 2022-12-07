@@ -51,6 +51,7 @@ async def create_account(
     form = AccountForm(username=info.email, password=info.password)
     token = await authenticators.login(response, request, form, repo)
     # print("CREATING ACCOUNT")
+    print("\n\n\n####\nROUTER\n#### ", router)
     return AccountToken(account=account, **token.dict())
 
 # authenticator.hash_password => comes from the Authenticator base class (inherited in queries)

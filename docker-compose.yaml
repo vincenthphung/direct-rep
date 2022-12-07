@@ -14,26 +14,26 @@ services:
       - POSTGRES_PASSWORD=password
     ports:
       - 15432:5432
-  users-service:
+  users_service:
     build:
-      context: ./users-service
+      context: ./users_service
       dockerfile: ./Dockerfile.dev
     ports:
       - 8080:8000
     volumes:
-      - ./users-service:/app
+      - ./users_service:/app
     environment:
       SIGNING_KEY: ${SIGNING_KEY}
       USERS_DATABASE_URL: ${USERS_DATABASE_URL}
       WAIT_HOSTS: postgres:5432
-  letters-service:
+  letters_service:
     build:
-      context: ./letters-service
+      context: ./letters_service
       dockerfile: ./Dockerfile.dev
     ports:
       - 8090:8000
     volumes:
-      - ./letters-service:/app
+      - ./letters_service:/app
     environment:
       SIGNING_KEY: ${SIGNING_KEY}
       LETTERS_DATABASE_URL: ${LETTERS_DATABASE_URL}
