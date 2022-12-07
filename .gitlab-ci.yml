@@ -4,12 +4,13 @@ stages:
   - deploy
 
 
-lint-test-job:
+lint-job:
   image: 'python:3-bullseye'
   stage: test
   script:
     - pip install flake8
-    - flake8 sample_service
+    - flake8 letters-service
+    - flake8 users-service
 
 
 build-front-end-job:
