@@ -23,6 +23,8 @@ function GetToken() {
 }
 
 function App() {
+  const domain = /https:\/\/[^/]+/;
+  const basename = process.env.PUBLIC_URL.replace(domain, '');
   // const [launch_info, setLaunchInfo] = useState([]);
   // const [error, setError] = useState(null);
 
@@ -47,31 +49,31 @@ function App() {
 
   return (
     // <div>
-      <BrowserRouter>
-        <AuthProvider>
-          <GetToken />
+    <BrowserRouter basename={basename}>
+      <AuthProvider>
+        <GetToken />
 
-          <Navigation />
-          <Routes>
+        <Navigation />
+        <Routes>
 
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/login" element={<LoginForm />} />
-            <Route path="/signup" element={<AccountForm />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/signup" element={<AccountForm />} />
 
-            <Route path="/logout" element={<LogoutButton />} />
-            <Route path="/eaccount" element={<EditAccount />} />
-            <Route path="/selectreps" element={<RepForm />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/cletter" element={<LetterForm />} />
-            <Route path="/eletter" element={<EditLetter />} />
-            <Route path="/review" element={<ReviewForm />} />
-            <Route path="/newlogin" element={<NewLoginForm />} />
+          <Route path="/logout" element={<LogoutButton />} />
+          <Route path="/eaccount" element={<EditAccount />} />
+          <Route path="/selectreps" element={<RepForm />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/cletter" element={<LetterForm />} />
+          <Route path="/eletter" element={<EditLetter />} />
+          <Route path="/review" element={<ReviewForm />} />
+          <Route path="/newlogin" element={<NewLoginForm />} />
         </Routes>
 
-          {/* <ErrorNotification error={error} /> */}
-          {/* <Construct info={launch_info} /> */}
-        </AuthProvider>
-      </BrowserRouter>
+        {/* <ErrorNotification error={error} /> */}
+        {/* <Construct info={launch_info} /> */}
+      </AuthProvider>
+    </BrowserRouter>
     // </div>
   );
 }
