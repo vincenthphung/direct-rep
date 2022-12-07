@@ -24,6 +24,8 @@ function GetToken() {
 }
 
 function App() {
+  const domain = /https:\/\/[^/]+/;
+  const basename = process.env.PUBLIC_URL.replace(domain, '');
   // const [launch_info, setLaunchInfo] = useState([]);
   // const [error, setError] = useState(null);
 
@@ -48,16 +50,16 @@ function App() {
 
   return (
     // <div>
-      <BrowserRouter>
-        <AuthProvider>
-          <GetToken />
+    <BrowserRouter basename={basename}>
+      <AuthProvider>
+        <GetToken />
 
-          <Navigation />
-          <Routes>
+        <Navigation />
+        <Routes>
 
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/login" element={<LoginForm />} />
-            <Route path="/signup" element={<AccountForm />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/signup" element={<AccountForm />} />
 
             <Route path="/logout" element={<LogoutButton />} />
             <Route path="/eaccount" element={<EditAccount />} />
@@ -70,10 +72,10 @@ function App() {
             <Route path="/letters/:id" element={<DetailView />} />
         </Routes>
 
-          {/* <ErrorNotification error={error} /> */}
-          {/* <Construct info={launch_info} /> */}
-        </AuthProvider>
-      </BrowserRouter>
+        {/* <ErrorNotification error={error} /> */}
+        {/* <Construct info={launch_info} /> */}
+      </AuthProvider>
+    </BrowserRouter>
     // </div>
   );
 }

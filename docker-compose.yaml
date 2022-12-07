@@ -14,14 +14,6 @@ services:
       - POSTGRES_PASSWORD=password
     ports:
       - 15432:5432
-  fastapi:
-    build:
-      context: sample_service
-      dockerfile: Dockerfile.dev
-    ports:
-      - 8000:8000
-    volumes:
-      - ./sample_service:/app
   users-service:
     build:
       context: ./users-service
@@ -31,8 +23,8 @@ services:
     volumes:
       - ./users-service:/app
     environment:
-      SIGNING_KEY: 7ea8f8c1d636b6f92b59a46326d9f59da1e09f0c986fbaeacaad64fed817ce6d
-      DATABASE_URL: postgresql://users:password@postgres/users
+      SIGNING_KEY: ${SIGNING_KEY}
+      USERS_DATABASE_URL: ${USERS_DATABASE_URL}
       WAIT_HOSTS: postgres:5432
   letters-service:
     build:
@@ -43,9 +35,13 @@ services:
     volumes:
       - ./letters-service:/app
     environment:
-      SIGNING_KEY: 7ea8f8c1d636b6f92b59a46326d9f59da1e09f0c986fbaeacaad64fed817ce6d
-      DATABASE_URL: postgresql://letters:password@postgres/letters
+      SIGNING_KEY: ${SIGNING_KEY}
+      LETTERS_DATABASE_URL: ${LETTERS_DATABASE_URL}
       WAIT_HOSTS: postgres:5432
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      GOOGLE_CIVICS_KEY: ${GOOGLE_CIVICS_KEY}
+      OPENAI_URL: ${OPENAI_URL}
+      GOOGLE_CIVICS_URL: ${GOOGLE_CIVICS_URL}
   ghi:
     image: node:lts-bullseye
     command: /bin/bash run.sh

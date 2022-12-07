@@ -2,8 +2,11 @@ async def migrate():
     from . import down, up, LATEST, ZERO
     import os
     import sys
+    
+    USERS_DATABASE_URL = os.environ.get("USERS_DATABASE_URL")
 
-    db_url = os.environ["DATABASE_URL"]
+    # db_url = os.environ["DATABASE_URL"]
+    db_url = USERS_DATABASE_URL
 
     if len(sys.argv) < 2:
         print("Command: up|down [amount]")

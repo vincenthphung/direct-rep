@@ -12,6 +12,8 @@ from queries.accounts import AccountRepo, AccountOut, Account
 # AccountRepo: this would be the name of our Repo model
 # same for AccountIn, AccountOut, etc.
 
+SIGNING_KEY = os.environ.get("SIGNING_KEY")
+
 
 class MyAuthenticator(Authenticator):
     async def get_account_data(
@@ -41,4 +43,6 @@ class MyAuthenticator(Authenticator):
         return users.email, AccountOut(**users.dict())
 
 
-authenticator = MyAuthenticator(os.environ["SIGNING_KEY"])
+# authenticator = MyAuthenticator(os.environ["SIGNING_KEY"])
+authenticators = MyAuthenticator(SIGNING_KEY)
+print("\n\n\n\n", "authenticators = ", authenticators, "\n\n\n\n\n")
