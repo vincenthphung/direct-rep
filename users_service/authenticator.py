@@ -32,7 +32,7 @@ class MyAuthenticator(Authenticator):
         # Return the accounts. That's it.
         return accounts
 
-    def get_hashed_password(self, account: Account):
+    def get_hashed_password(self, account: AccountOut):
         # Return the encrypted password value from your
         # account object
         return account.hashed_password
