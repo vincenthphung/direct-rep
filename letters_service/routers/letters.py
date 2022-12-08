@@ -9,10 +9,18 @@ from queries.letters import (Error, LetterIn, LetterNew,
 from jwtdown_fastapi.authentication import Authenticator
 import os
 from .token_auth import get_current_user
+from pydantic import BaseModel
 
 OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 SIGNING_KEY = os.environ.get('SIGNING_KEY')
 OPENAI_URL = os.environ.get('OPENAI_URL')
+
+
+class AccountOut(BaseModel):
+    id: int
+    full_name: str
+    email: str
+    zipcode: int
 
 
 class MyAuthenticator(Authenticator):
@@ -23,10 +31,10 @@ class MyAuthenticator(Authenticator):
         pass
 
     def get_hashed_password(self, account):
-        pass
+        return account.hashed_password
 
     def get_account_data_for_cookie(self, account):
-        pass
+        return account.email, AccountOut(account.dict())
 
 
 # print("\n \n SIGNING_KEY", os.environ)
@@ -139,10 +147,21 @@ def get_one_letter(
         return ("Not working")
 
 
+@router.get("/api/issues")
+def get_all_issues(
+    account_data: Optional[dict] = Depends(
+        authenticator.try_get_current_account_data),
+    repo: IssueRepository = Depends(),
+):
+    if account_data:
+        print("/n/n/n/n Account Data /n/n/n/n", account_data)
+        return repo.get_all()
+    else:
+        return ("Not working")
+
 # @router.get("/api/issues")
 # def get_all_issues(
-#     account_data: Optional[dict] = Depends(
-#         authenticator.try_get_current_account_data),
+#     account_data: Optional[dict] = Depends(get_current_user),
 #     repo: IssueRepository = Depends(),
 # ):
 #     print("/n/n/n/n Account Data /n/n/n/n", account_data)
@@ -150,14 +169,3 @@ def get_one_letter(
 #         return repo.get_all()
 #     else:
 #         return ("Not working")
-
-@router.get("/api/issues")
-def get_all_issues(
-    account_data: Optional[dict] = Depends(get_current_user),
-    repo: IssueRepository = Depends(),
-):
-    print("/n/n/n/n Account Data /n/n/n/n", account_data)
-    if account_data:
-        return repo.get_all()
-    else:
-        return ("Not working")
