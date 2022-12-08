@@ -37,6 +37,7 @@ class AccountRepo:
         # with pool.connection() as conn:
         # get a cursor (something to run SQL with)
         with conn.cursor() as db:
+            print("\n\n\n\n######\nCONN.CURSOR() ===> ", db)
             # Run our SELECT statement
             result = db.execute(
                 """
@@ -50,7 +51,9 @@ class AccountRepo:
                 """,
                 [email]
             )
+            print("\n\n\n\n######\nRESULT ===> ", result)
             record = result.fetchone()
+            print("\n\n\n\n######\nRECORD ===> ", record)
             if record is None:
                 return None
 
