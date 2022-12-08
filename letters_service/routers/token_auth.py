@@ -11,9 +11,12 @@ class AccountOut(BaseModel):
     zipcode: int
 
 # oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="localhost:8080/token")
-print("\n\n\nOAuth oauth2_scheme\n\n\n", oauth2_scheme)
+# oauth2_scheme = OAuth2PasswordBearer(tokenUrl="localhost:8080/token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/token")
+
+print("\n\n\nOAuth oauth2_scheme:\n\n\n", oauth2_scheme, "\n\n\n")
 SECRET_KEY = os.environ.get("SIGNING_KEY")
+print("\n\n\nOAuth SECRET KEY:\n\n\n", SECRET_KEY, "\n\n\n")
 
 async def get_current_user(token: str = Depends(oauth2_scheme)):
   credentials_exception = HTTPException(
