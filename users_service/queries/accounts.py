@@ -77,7 +77,7 @@ class AccountRepo:
                     (full_name, email, zipcode, hashed_password)
                 VALUES
                     (%s, %s, %s, %s)
-                RETURNING id;
+                RETURNING id; commit;
                 """,
                 [
                     account.full_name,
