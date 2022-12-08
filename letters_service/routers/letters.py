@@ -150,7 +150,7 @@ def get_one_letter(
 @router.get("/api/issues")
 def get_all_issues(
     account_data: Optional[dict] = Depends(
-        authenticator.try_get_current_account_data),
+        authenticator.get_current_account_data),
     repo: IssueRepository = Depends(),
 ):
     if account_data:
