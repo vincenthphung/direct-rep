@@ -144,6 +144,7 @@ def get_all_issues(
         authenticator.try_get_current_account_data),
     repo: IssueRepository = Depends(),
 ):
+    print("/n/n/n/n Account Data /n/n/n/n", account_data)
     if account_data:
         return repo.get_all()
     else:
