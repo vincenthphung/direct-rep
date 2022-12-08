@@ -1,11 +1,11 @@
 import React from "react";
-import { useAuthContext } from "./TokenTest.js";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useToken } from "./TokenTest.js";
 import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
-  const [token, login] = useToken();
+  const [, login] = useToken();
+  // const [token, login] = useToken();
   const [username, setUser] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();

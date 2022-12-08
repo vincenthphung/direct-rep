@@ -4,7 +4,8 @@ import { useToken } from "./TokenTest.js";
 import { useNavigate } from "react-router-dom";
 
 function NewLoginForm() {
-  const [token, login] = useToken();
+  const [, login] = useToken();
+  // const [token, login] = useToken();
   // console.log("login form", token);
 
   const [username, setUser] = useState("");

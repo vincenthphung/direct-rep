@@ -9,13 +9,14 @@ import { trackPromise } from 'react-promise-tracker';
 export const EditLetter = () => {
   const { token } = useAuthContext();
  const [user, setUser] = useState();
-  const [oneLetter, setOneLetter] = useState([""]);
+  const [, setOneLetter] = useState([""]);
   const [oneId, setId] = useState();
   const [oneContent, setContent] = useState();
   const [oneStance, setStance] = useState();
   const [oneTopic, setTopic] = useState();
   const [oneDate, setDate] = useState();
-  const [editLetter, result] = useEditLetterMutation();
+  const [editLetter, ] = useEditLetterMutation();
+  // const [editLetter, result] = useEditLetterMutation();
   const navigate = useNavigate();
 
  // to get the user's id

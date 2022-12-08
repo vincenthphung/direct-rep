@@ -1,6 +1,5 @@
-import Card from "react-bootstrap/Card";
 import {useEffect,useState} from "react";
-import { Routes, Route, Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuthContext } from "./TokenTest.js";
 
 function Dashboard() {

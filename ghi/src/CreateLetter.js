@@ -11,7 +11,8 @@ function LetterForm() {
   const [issues, setIssues] = useState([]);
   const [topic, setTopic] = useState("");
   const [stance, setStance] = useState();
-  const [createLetter, result] = useCreateLetterMutation();
+  const [createLetter, ] = useCreateLetterMutation();
+  // const [createLetter, result] = useCreateLetterMutation();
   const navigate = useNavigate();
 
   console.log("TOKEN CREATE LETTER", token);

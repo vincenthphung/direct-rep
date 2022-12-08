@@ -2,14 +2,14 @@ import { useParams } from 'react-router-dom';
 import { useAuthContext } from "./TokenTest.js";
 import {useEffect,useState} from "react";
 import Card from "react-bootstrap/Card";
-import { Routes, Route, Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import copy from "copy-to-clipboard";
 
 function DetailView() {
     const params = useParams();
     const { token } = useAuthContext();
-    const [oneLetter, setOneLetter] = useState([""]);
-    const [oneId, setId] = useState();
+    const [, setOneLetter] = useState([""]);
+    const [, setId] = useState();
     const [oneContent, setContent] = useState();
     const [oneStance, setStance] = useState();
     const [oneTopic, setTopic] = useState();

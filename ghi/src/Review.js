@@ -6,7 +6,7 @@ import { useAuthContext } from "./TokenTest.js";
 function ReviewForm() {
   const { token } = useAuthContext();
   const [user, setUser] = useState();
-  const [oneLetter, setOneLetter] = useState([]);
+  const [, setOneLetter] = useState([]);
   const [oneId, setId] = useState();
   const [oneContent, setContent] = useState();
   const [oneStance, setStance] = useState();

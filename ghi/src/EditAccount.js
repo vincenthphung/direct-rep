@@ -31,7 +31,8 @@ function EditAccount() {
   const [password, setPassword] = useState("");
   const [userId, setId] = useState("");
   const navigate = useNavigate();
-  const [editUser, result] = useEditUserMutation();
+  const [editUser, ] = useEditUserMutation();
+  // const [editUser, result] = useEditUserMutation();
 
   // to get current account info
   useEffect(() => {

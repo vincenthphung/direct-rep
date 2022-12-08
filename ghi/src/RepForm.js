@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import { useCreateRepMutation } from "./store/repsApi";
-import { Link } from "react-router-dom";
 import { useAuthContext } from "./TokenTest.js";
 import { trackPromise } from 'react-promise-tracker';
 import { useNavigate } from "react-router-dom";
@@ -19,7 +18,8 @@ function RepForm() {
   const [selection, setSelection] = useState([]);
   const [zip, setZip] = useState();
   const [email, setEmail] = useState();
-  const [createRep, result] = useCreateRepMutation();
+  const [createRep, ] = useCreateRepMutation();
+  // const [createRep, result] = useCreateRepMutation();
   const navigate = useNavigate();
 
  // to get the user's id
