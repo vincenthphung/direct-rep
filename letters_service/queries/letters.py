@@ -2,32 +2,24 @@ from pydantic import BaseModel
 from datetime import datetime
 from typing import Optional, Union, List
 from queries.pool import pool
-# from queries.pool import conn
-
 
 class Error(BaseModel):
     message: str
-
 
 class LetterIn(BaseModel):
     created: str
     topic: str
     stance: bool
     content: str
-    user_id: int
-
 
 class LetterUpdate(BaseModel):
     content: str
-
 
 class LetterNew(BaseModel):
     id: int
     topic: str
     stance: bool
     content: str
-    user_id: int
-
 
 class LetterOut(BaseModel):
     id: int
@@ -35,80 +27,77 @@ class LetterOut(BaseModel):
     topic: str
     stance: bool
     content: str
-    user_id: int
-
 
 class Issue(BaseModel):
     id: int
     user_issue: str
     openai_issue: str
 
-
 class LetterRepository:
-    def create(self, topic: str, stance: bool, content: str, user_id: int) -> Union[LetterOut, Error]:
+    def create(self, topic: str, stance: bool, content: str) -> Union[LetterOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
                         INSERT INTO letter
-                            (topic, stance, content, user_id)
+                            (topic, stance, content)
                         VALUES
-                            (%s, %s, %s, %s)
+                            (%s, %s, %s)
                         RETURNING id;
                         """,
                         [
                             topic,
                             stance,
-                            content,
-                            user_id
+                            content
                         ]
                     )
                     id = result.fetchone()[0]
-                    # print("Check id \n \n", id)
+                    print("Check id \n \n", id)
                     return LetterNew(
-                        id=id,
-                        topic=topic,
-                        stance=stance,
-                        content=content,
-                        user_id=user_id
-                    )
+                      id=id,
+                      topic=topic,
+                      stance=stance,
+                      content=content
+                      )
         except Exception:
             return {"message": "Create letter did not work"}
 
+
     def update(self, letter_id: int, content: str) -> Union[LetterUpdate, Error]:
         try:
-            # connect to the database
+        # connect to the database
             with pool.connection() as conn:
-            # get a cursor (something to run SQL with)
+        # get a cursor (something to run SQL with)
                 with conn.cursor() as db:
                     db.execute(
-                        """
+                    """
                     UPDATE letter
                     SET content = %s
                     WHERE id = %s
                     """,
-                        [
-                            content,
-                            letter_id
-                        ]
-                    )
+                    [
+                        content,
+                        letter_id
+                    ]
+                )
+
                 # old_data = letter.dict()
                 return LetterUpdate(id=letter_id, content=content)
         except Exception as e:
             print(e)
-            return {"message": "could not update letter"}
+            return{"message": "could not update letter"}
 
     def get_all(self) -> Union[Error, List[LetterOut]]:
         try:
             # connect to the database
             with pool.connection() as conn:
-            # get a cursor (something to run SQL with)
+                # get a cursor (something to run SQL with)
                 with conn.cursor() as db:
                     # run our SELECT statement
                     result = db.execute(
                         """
-                        SELECT id, created, topic, stance, content, user_id
+                        SELECT id, created, topic, stance, content
                         FROM letter
                         ORDER BY id;
                         """
@@ -117,19 +106,19 @@ class LetterRepository:
                     for record in db:
                         # print("\n \n record get all", record)
                         letter = LetterOut(
-                            id=record[0],
-                            created=record[1],
-                            topic=record[2],
-                            stance=record[3],
-                            content=record[4],
-                            user_id=record[5]
+                            id = record[0],
+                            created = record[1],
+                            topic = record[2],
+                            stance = record[3],
+                            content = record[4]
                         )
                         result.append(letter)
                     return result
         except Exception as e:
             print("ERROR")
             print(e)
-            return {"message": "could not get all letters"}
+            return{"message": "could not get all letters"}
+
 
     def get_one(self, letter_id: int) -> Optional[LetterOut]:
         try:
@@ -139,11 +128,11 @@ class LetterRepository:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        SELECT id, created, topic, stance, content, user_id
+                        SELECT id, created, topic, stance, content
                         FROM letter
                         WHERE id = %s
                         """,
-                        [letter_id]
+                    [letter_id]
                     )
                     record = result.fetchone()
                     if record is None:
@@ -151,7 +140,7 @@ class LetterRepository:
                     return self.record_to_letter_out(record)
         except Exception as e:
             print(e)
-            return {"message": "could not get that letter"}
+            return{"message": "could not get that letter"}
 
     def delete(self, letter_id: int) -> bool:
         try:
@@ -169,16 +158,15 @@ class LetterRepository:
             print(e)
             return False
 
+
     def record_to_letter_out(self, record):
         return LetterOut(
-            id=record[0],
-            created=record[1],
-            topic=record[2],
-            stance=record[3],
-            content=record[4],
-            user_id=record[5]
-        )
-
+            id = record[0],
+            created = record[1],
+            topic = record[2],
+            stance = record[3],
+            content = record[4]
+            )
 
 class IssueRepository:
     def get_all(self) -> Union[Error, List[Issue]]:
@@ -195,13 +183,14 @@ class IssueRepository:
                     result = []
                     for record in db:
                         issue = Issue(
-                            id=record[0],
-                            user_issue=record[1],
-                            openai_issue=record[2]
+                            id = record[0],
+                            user_issue= record[1],
+                            openai_issue= record[2]
                         )
                         result.append(issue)
                     return result
         except Exception as e:
             print("ERROR")
             print(e)
-            return {"message": "could not get all issues"}
+            return{"message": "could not get all issues"}
+
