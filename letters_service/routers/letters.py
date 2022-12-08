@@ -8,6 +8,7 @@ from queries.letters import (Error, LetterIn, LetterNew,
 # from .new_keys import OPENAI_API_KEY
 from jwtdown_fastapi.authentication import Authenticator
 import os
+from token_auth import get_current_user
 
 OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 SIGNING_KEY = os.environ.get('SIGNING_KEY')
@@ -138,10 +139,21 @@ def get_one_letter(
         return ("Not working")
 
 
+# @router.get("/api/issues")
+# def get_all_issues(
+#     account_data: Optional[dict] = Depends(
+#         authenticator.try_get_current_account_data),
+#     repo: IssueRepository = Depends(),
+# ):
+#     print("/n/n/n/n Account Data /n/n/n/n", account_data)
+#     if account_data:
+#         return repo.get_all()
+#     else:
+#         return ("Not working")
+
 @router.get("/api/issues")
 def get_all_issues(
-    account_data: Optional[dict] = Depends(
-        authenticator.try_get_current_account_data),
+    account_data: Optional[dict] = Depends(get_current_user),
     repo: IssueRepository = Depends(),
 ):
     print("/n/n/n/n Account Data /n/n/n/n", account_data)
