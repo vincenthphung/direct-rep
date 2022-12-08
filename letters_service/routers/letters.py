@@ -8,7 +8,7 @@ from queries.letters import (Error, LetterIn, LetterNew,
 # from .new_keys import OPENAI_API_KEY
 from jwtdown_fastapi.authentication import Authenticator
 import os
-from token_auth import get_current_user
+from .token_auth import get_current_user
 
 OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 SIGNING_KEY = os.environ.get('SIGNING_KEY')

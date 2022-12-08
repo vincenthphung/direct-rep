@@ -8,6 +8,7 @@ import os
 app = FastAPI()
 app.include_router(letters.router)
 app.include_router(reps.router)
+# app.include_router(token_auth.router)
 # app.include_router(authenticator.router)
 
 origins = [
