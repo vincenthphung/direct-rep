@@ -157,6 +157,7 @@ def get_all_issues(
         print("/n/n/n/n Account Data /n/n/n/n", account_data)
         return repo.get_all()
     else:
+        print("/n/n/n/n Account Data /n/n/n/n", account_data)
         return ("Not working")
 
 # @router.get("/api/issues")

@@ -3,6 +3,17 @@ from datetime import datetime
 from typing import Optional, Union, List
 # from queries.pool import pool
 from queries.pool import conn
+import psycopg
+from psycopg2 import connect
+import os
+
+keepalive_kwargs = {
+    "keepalives": 1,
+    "keepalives_idle": 300,
+    "keepalives_interval": 10,
+    "keepalives_count": 5
+}
+
 
 
 class Error(BaseModel):
@@ -184,25 +195,26 @@ class IssueRepository:
     def get_all(self) -> Union[Error, List[Issue]]:
         try:
             # with pool.connection() as conn:
-            with conn.cursor() as db:
-                result = db.execute(
-                    """
-                    SELECT id, user_issue, openai_issue
-                    FROM issue
-                    ORDER BY id;
-                    """
-                )
-                result = []
-                for record in db:
-                    issue = Issue(
-                        id=record[0],
-                        user_issue=record[1],
-                        openai_issue=record[2]
+            with connect(conninfo=os.environ.get("LETTERS_DATABASE_URL"), **keepalive_kwargs) as conn:
+
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT id, user_issue, openai_issue
+                        FROM issue
+                        ORDER BY id;
+                        """
                     )
-                    result.append(issue)
-                return result
+                    result = []
+                    for record in db:
+                        issue = Issue(
+                            id=record[0],
+                            user_issue=record[1],
+                            openai_issue=record[2]
+                        )
+                        result.append(issue)
+                    return result
         except Exception as e:
             print("ERROR")
             print(e)
             return {"message": "could not get all issues"}
-
