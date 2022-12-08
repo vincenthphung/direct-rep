@@ -21,7 +21,7 @@ export const EditLetter = () => {
  // to get the user's id
  useEffect(() => {
   async function getUserId() {
-    const url = `http://localhost:8080/token`;
+    const url = `${process.env.REACT_APP_USERS_API_HOST}/token`;
     const response = await fetch(url, {
       credentials: "include",
     });
@@ -37,7 +37,7 @@ export const EditLetter = () => {
   // to get the id of the most recent letter created:
   useEffect(() => {
     async function fetchLetterId() {
-      const urlLetter = `http://localhost:8090/api/letters`;
+      const urlLetter = `${process.env.REACT_APP_LETTERS_API_HOST}/api/letters`;
       const response = await fetch(urlLetter, {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -61,7 +61,7 @@ export const EditLetter = () => {
   useEffect(() => {
     if (oneId != null) {
       async function showLetter(oneId) {
-        const response = await fetch(`http://localhost:8090/letters/${oneId}`, {
+        const response = await fetch(`${process.env.REACT_APP_LETTERS_API_HOST}/letters/${oneId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const content = await response.json();

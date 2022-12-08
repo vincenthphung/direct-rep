@@ -19,7 +19,7 @@ function LetterForm() {
   // to collect and load the issues list from the database
   useEffect(() => {
     async function fetchIssues() {
-      const url = `http://localhost:8090/api/issues`;
+      const url = `${process.env.REACT_APP_LETTERS_API_HOST}/api/issues`;
       const response = await fetch(url, {
         headers: { Authorization: `Bearer ${token}` },
       });

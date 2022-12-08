@@ -1,7 +1,7 @@
-# stages:
-#   - test
-#   - build
-#   - deploy
+stages:
+  # - test
+  - build
+  - deploy
 
 # lint-test-job:
 #   image: "python:3-bullseye"
@@ -18,8 +18,8 @@ build-front-end-job:
   #   - lint-test-job
   variables:
     PUBLIC_URL: "https://directrep.gitlab.io/direct-rep/"
-    REACT_APP_LETTERS_API_HOST: "https://letters-service-t3i8.onrender.com"
-    REACT_APP_USERS_API_HOST: "https://users-service-85db.onrender.com"
+    REACT_APP_LETTERS_API_HOST: "https://letters-service-u1pb.onrender.com"
+    REACT_APP_USERS_API_HOST: "https://users-service-57wg.onrender.com"
   script:
     - cd ghi
     - npm install
@@ -28,6 +28,7 @@ build-front-end-job:
   artifacts:
     paths:
       - ghi/build/
+
 pages:
   stage: deploy
   rules:

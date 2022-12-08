@@ -20,7 +20,7 @@ function DetailView() {
     // console.log(id)
     useEffect(() => {
         (async () => {
-          const response = await fetch(`http://localhost:8090/letters/${s}`, {
+          const response = await fetch(`${process.env.REACT_APP_LETTERS_API_HOST}/letters/${s}`, {
             headers: { Authorization: `Bearer ${token}` },
           });
           const content = await response.json();
@@ -34,7 +34,7 @@ function DetailView() {
     setDate(content["created"]);
         })();
         async function seeReps() {
-            const urlReps = `http://localhost:8090/reps/letter/${s}`;
+            const urlReps = `${process.env.REACT_APP_LETTERS_API_HOST}/reps/letter/${s}`;
             const response = await fetch(urlReps, {
               headers: { Authorization: `Bearer ${token}` },
             });

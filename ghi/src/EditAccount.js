@@ -36,7 +36,7 @@ function EditAccount() {
   // to get current account info
   useEffect(() => {
     async function getUserData() {
-      const url = `http://localhost:8080/token`;
+      const url = `${process.env.REACT_APP_USERS_API_HOST}/token`;
       const response = await fetch(url, {
         credentials: "include",
       });

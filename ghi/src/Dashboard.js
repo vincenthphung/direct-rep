@@ -13,7 +13,7 @@ function Dashboard() {
   // to get the user's id
   useEffect(() => {
     async function getUserId() {
-      const url = `http://localhost:8080/token`;
+      const url = `${process.env.REACT_APP_USERS_API_HOST}/token`;
       const response = await fetch(url, {
         credentials: "include",
       });
@@ -29,7 +29,7 @@ function Dashboard() {
 
   useEffect(() => {
     (async () => {
-      const response = await fetch("http://localhost:8090/api/letters", {
+      const response = await fetch(`${process.env.REACT_APP_LETTERS_API_HOST}/api/letters`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const content = await response.json();
@@ -44,7 +44,7 @@ function Dashboard() {
 
   const del = async (id) => {
     if (window.confirm("Are you sure: This Letter will be Deleted")) {
-      await fetch(`http://localhost:8090/letters/${id}`, {
+      await fetch(`${process.env.REACT_APP_LETTERS_API_HOST}/letters/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
         method: "DELETE",
       });

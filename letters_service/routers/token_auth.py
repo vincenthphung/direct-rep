@@ -10,10 +10,10 @@ class AccountOut(BaseModel):
     email: str
     zipcode: int
 
-# oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 # oauth2_scheme = OAuth2PasswordBearer(tokenUrl="localhost:8080/token")
 # oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/token")
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="https://users-service-57wg.onrender.com/token")
+# oauth2_scheme = OAuth2PasswordBearer(tokenUrl="https://users-service-57wg.onrender.com/token")
 
 
 print("\n\n\nOAuth oauth2_scheme:\n\n\n", oauth2_scheme, "\n\n\n")
