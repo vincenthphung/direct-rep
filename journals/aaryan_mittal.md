@@ -322,3 +322,21 @@ We spend more time on making our endpoints more efficient. We made changes to th
 1. Loading icon added to edit letter and select rep page.
 
 2. Detail View is working on another page
+
+
+## December 6, 2022 (Wednesday)
+
+### Work done during the day
+
+1. We worked upon deployment. We faced issues during authentication in deployment. The authentication works for letter microservice in development but does not work in deploymeny.
+
+2. We worked upon creating a Elephantsql server for our letters database.
+
+3. We created a users service database in render.com. We connected the users service database to beekeeper application.
+
+
+### Work achieved during the day
+
+1. Letters service database working in Elephantsql.
+
+2. Users service database working in Render.com and connected to beekeeper.
