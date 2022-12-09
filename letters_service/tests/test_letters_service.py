@@ -27,7 +27,7 @@ def test_get_issue():
 
 class EmptyLetters:
     def get_all(self):
-        return {"letters": []}
+        return []
 
 def test_get_all_letters():
     # Arrange
@@ -40,7 +40,7 @@ def test_get_all_letters():
     # Assert
     # assert response.status_code == 200
     print("Get all letters test", response)
-    assert response.json() == {"letters": []}
+    assert response.json() == []
     # Clean up
     app.dependency_overrides = {}
 
