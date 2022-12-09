@@ -24,8 +24,10 @@ function GetToken() {
 }
 
 function App() {
-  const domain = /https:\/\/[^/]+/;
-  const basename = process.env.PUBLIC_URL.replace(domain, '');
+  // const domain = /https:\/\/[^/]+/;
+  // const basename = process.env.PUBLIC_URL.replace(domain, '');
+
+  const basename = process.env.PUBLIC_URL;
 
   console.log("What is process env public url", process.env.PUBLIC_URL);
   // const basename = process.env.PUBLIC_URL.replace(domain,domain);
