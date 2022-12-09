@@ -1,5 +1,5 @@
 from fastapi.testclient import TestClient
-from routers.letters import authenticator
+# from routers.letters import authenticator
 from main import app
 
 client = TestClient(app)
