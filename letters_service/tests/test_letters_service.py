@@ -26,7 +26,7 @@ def test_get_issue():
   assert data[0] == issue
 
 class EmptyLetters:
-    def get_letters(self):
+    def get_all(self):
         return []
 
 def test_get_all_letters():
