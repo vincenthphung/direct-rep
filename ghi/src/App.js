@@ -24,11 +24,11 @@ function GetToken() {
 }
 
 function App() {
-  // const domain = /https:\/\/[^/]+/;
-  // const basename = process.env.PUBLIC_URL.replace(domain, '');
+  const domain = /https:\/\/[^/]+/;
 
-  const basename = process.env.PUBLIC_URL;
-
+  console.log("DOMAIN", domain);
+  const basename = process.env.PUBLIC_URL.replace(domain, '');
+  // const basename = process.env.PUBLIC_URL;
   console.log("What is process env public url", process.env.PUBLIC_URL);
   // const basename = process.env.PUBLIC_URL.replace(domain,domain);
   // const [launch_info, setLaunchInfo] = useState([]);
@@ -65,6 +65,7 @@ function App() {
 
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginForm />} />
+          {console.log("Login path", basename)}
           <Route path="/signup" element={<AccountForm />} />
 
             <Route path="/logout" element={<LogoutButton />} />
