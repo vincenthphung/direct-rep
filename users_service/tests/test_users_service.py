@@ -6,7 +6,7 @@ client = TestClient(app)
 
 
 def test_get_token_returns_none_for_user_not_logged_in():
-    app.dependency_overrides[authenticator.try_get_current_account_data] = lambda: None
+    app.dependency_overrides[authenticators.try_get_current_account_data] = lambda: None
     response = client.get("/token")
     app.dependency_overrides = {}
     assert response.status_code == 200
@@ -21,9 +21,9 @@ def test_get_token_returns_token_for_user_logged_in():
         "zipcode": "12345",
     }
     app.dependency_overrides[
-        authenticator.try_get_current_account_data
+        authenticators.try_get_current_account_data
     ] = lambda: account
-    response = client.get("/token", cookies={authenticator.cookie_name: "HELLO!"})
+    response = client.get("/token", cookies={authenticators.cookie_name: "HELLO!"})
     app.dependency_overrides = {}
     assert response.status_code == 200
     data = response.json()
