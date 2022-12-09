@@ -5,7 +5,7 @@ import { AuthProvider, useToken } from "./TokenTest.js";
 import AccountForm from "./AccountForm";
 import RepForm from "./RepForm";
 import "./App.css";
-import Navigation from "./Nav";
+// import Navigation from "./Nav";
 import Dashboard from "./Dashboard";
 import LetterForm from "./CreateLetter";
 import EditLetter from "./EditLetter";
@@ -16,6 +16,7 @@ import LoginForm from "./LoginTest";
 import LogoutButton from "./Logout.js";
 import NewLoginForm from "./NewLogin";
 import DetailView from "./Detailview";
+import Navb from "./Nav";
 
 function GetToken() {
   // Get token from JWT cookie (if already logged in)
@@ -60,8 +61,9 @@ function App() {
       <AuthProvider>
         <GetToken />
 
-        <Navigation />
-        <Routes>
+        {/* <Navigation /> */}
+        <Navb />
+        <Routes basename={basename}>
 
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginForm />} />
