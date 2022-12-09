@@ -2,9 +2,9 @@ import Card from "react-bootstrap/Card";
 import { useState, useEffect } from "react";
 import React from "react";
 import { useAuthContext } from "./TokenTest.js";
-import { useEditLetterMutation } from "./store/lettersApi";
+// import { useEditLetterMutation } from "./store/lettersApi";
 import { useNavigate } from "react-router-dom";
-import { trackPromise } from 'react-promise-tracker';
+// import { trackPromise } from 'react-promise-tracker';
 
 export const EditLetter = () => {
   const { token } = useAuthContext();
@@ -15,7 +15,7 @@ export const EditLetter = () => {
   const [oneStance, setStance] = useState();
   const [oneTopic, setTopic] = useState();
   const [oneDate, setDate] = useState();
-  const [editLetter, ] = useEditLetterMutation();
+  // const [editLetter, ] = useEditLetterMutation();
   // const [editLetter, result] = useEditLetterMutation();
   const navigate = useNavigate();
 
