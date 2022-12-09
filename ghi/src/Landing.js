@@ -12,6 +12,11 @@ function LandingPage() {
 Get in touch with your representatives and let AI help you write a letter about important political issues.
 				</p>
 				<hr />
+				<Link to="/signup">
+              <button type="submit" className="btn btn-dark btn-lg">
+                Signup
+              </button>
+							</Link>
 					<Link to="/login">
               <button type="submit" className="btn btn-dark btn-lg">
                 Login
