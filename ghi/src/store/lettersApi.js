@@ -27,7 +27,7 @@ export const lettersApi = createApi({
           method: "post",
           url: `api/letters?topic=${topic}&stance=${stance}`,
           credentials: "include",
-          params: { topic, stance },
+          // params: { topic, stance },
         };
       },
     }),
