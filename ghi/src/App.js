@@ -24,7 +24,7 @@ function GetToken() {
 }
 
 function App() {
-  const domain = /http:\/\/[^/]+/;
+  const domain = /https:\/\/[^/]+/;
   // const domain = /https:\/\/[^/]+/;
 
   console.log("DOMAIN", domain);
