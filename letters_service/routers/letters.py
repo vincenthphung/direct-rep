@@ -68,7 +68,7 @@ def create_letter(
     topic: str,  # use this to enter the prompt
     stance: bool,
     account_data: Optional[dict] = Depends(
-        authenticator.try_get_current_account_data),
+        authenticator.get_current_account_data),
     data: get_open_ai = Depends(),
     repo: LetterRepository = Depends()
 ):
@@ -94,7 +94,7 @@ def create_letter(
 @router.get("/api/letters", response_model=Union[List[LetterOut], Error])
 def get_all_letters(
     account_data: Optional[dict] = Depends(
-        authenticator.try_get_current_account_data),
+        authenticator.get_current_account_data),
     repo: LetterRepository = Depends(),
 ):
     if account_data:
