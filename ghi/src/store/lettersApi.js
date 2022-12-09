@@ -1,19 +1,22 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-// import { authApi } from "./authApi";
+import { authApi } from "./authApi";
 
 export const lettersApi = createApi({
   reducerPath: "letter",
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_LETTERS_API_HOST,
-    // prepareHeaders: (headers, { getState }) => {
-    //   const selector = authApi.endpoints.getToken.select();
-    //   const { data: tokenData } = selector(getState());
-    //   if (tokenData && tokenData.access_token) {
-    //     console.log("letters store authorized, token data:", tokenData);
-    //     headers.set("Authorization", `Bearer ${tokenData.access_token}`);
-    //   }
-    //   return headers;
-    // },
+    prepareHeaders: (headers, { getState }) => {
+      const selector = authApi.endpoints.getToken.select();
+      const { data: tokenData } = selector(getState());
+      if (tokenData && tokenData.access_token) {
+        console.log("letters store authorized, token data:", tokenData);
+        headers.set("Authorization", `Bearer ${tokenData.access_token}`);
+      }
+      else {
+        console.log("headers invalid");
+      }
+      return headers;
+    },
   }),
   tagTypes: ["LettersList"],
   endpoints: (builder) => ({
