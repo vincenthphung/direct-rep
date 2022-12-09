@@ -57,7 +57,7 @@ async def get_civics_api_reps(zipcode):
 
 @router.get("/civics", response_model=Union[List[CivicsOut], Error])
 def get_reps_from_api(
-        zipcode: int,
+        zipcode: str,
         account_data: Optional[dict] = Depends(
             authenticator.try_get_current_account_data),
         data: get_civics_api_reps = Depends()):

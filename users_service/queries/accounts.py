@@ -12,20 +12,20 @@ class Account(BaseModel):
     id: int
     full_name: str
     email: str
-    zipcode: int
+    zipcode: str
     hashed_password: str
 
 class AccountIn(BaseModel):
     full_name: str
     email: str
-    zipcode: int
+    zipcode: str
     password: str
 
 class AccountOut(BaseModel):
     id: int
     full_name: str
     email: str
-    zipcode: int
+    zipcode: str
 
 
 class AccountRepo:
