@@ -34,7 +34,7 @@ class CreateRep:
 def test_create_rep():
     # Arrange
     app.dependency_overrides[RepRepository] = CreateRep
-    app.dependency_overrides[authenticator.try_get_current_account_data] = lambda: CreateRep
+    app.dependency_overrides[authenticator.try_get_current_account_data] = lambda: None
     # app.dependency_overrides[get_current_user] = override_auth_user
     json = {
     "office": "President",
