@@ -19,6 +19,14 @@ user-service-test-job:
     - pip install -r requirements.txt
     - python -m pytest
 
+letters-service-test-job:
+  image: "python:3-bullseye"
+  stage: test
+  script:
+    - cd letters_service
+    - pip install -r requirements.txt
+    - python -m pytest
+
 build-front-end-job:
   stage: build
   image: "node:lts-bullseye"
