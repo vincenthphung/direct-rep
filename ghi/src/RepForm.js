@@ -122,7 +122,7 @@ function RepForm() {
   }
 
   // to create a rep:
-  async function postRep(data) {
+  async function postRep({ office, level, name, party, address, email, letter_id }) {
     const url = `${process.env.REACT_APP_LETTERS_API_HOST}/api/reps`;
     const fetchConfig = {
       method: "post",
@@ -130,7 +130,7 @@ function RepForm() {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
       },
-      body: data
+      body: { office, level, name, party, address, email, letter_id }
     };
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
