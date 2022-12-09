@@ -46,7 +46,7 @@ def test_create_rep():
     "letter_id": 1,
     }
 
-    app.dependency_overrides[authenticator.try_get_current_account_data] = lambda: json
+    app.dependency_overrides[authenticator.try_get_current_account_data] = lambda: expected
     app.dependency_overrides[RepRepository] = CreateRep
     # app.dependency_overrides[get_current_user] = override_auth_user
 
@@ -66,6 +66,7 @@ def test_create_rep():
 
     # Assert
     assert response.status_code == 200
+    print("REPS test data", response)
     assert response.json() == expected
 
     # Clean up
