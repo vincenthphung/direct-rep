@@ -1,7 +1,7 @@
 from fastapi.testclient import TestClient
 from routers.letters import authenticator
-# from queries.letters import LetterRepository
-from queries.reps import RepRepository
+from queries.letters import LetterRepository
+# from queries.reps import RepRepository
 from main import app
 
 client = TestClient(app)
@@ -25,52 +25,71 @@ def test_get_issue():
   print("ISSUE test data", data)
   assert data[0] == issue
 
+class EmptyLetters:
+    def get_letters(self):
+        return []
+
+def test_get_all_letters():
+    # Arrange
+    app.dependency_overrides[LetterRepository] = EmptyLetters
+    app.dependency_overrides[
+      authenticator.try_get_current_account_data
+  ] = lambda: None
+    # Act
+    response = client.get("/api/letters")
+    # Assert
+    assert response.status_code == 200
+    assert response.json() == {"letters": []}
+    # Clean up
+    app.dependency_overrides = {}
+
+
 # class CreateRep:
 #     def create(self, rep):
 #         result = {"rep_id": 1}
 #         result.update(rep)
 #         return result
 
-def test_create_rep():
-    rep = {}
-    print("Reps?, rep", rep)
-    # Arrange
-    app.dependency_overrides[RepRepository] = lambda: rep
-    print("REPS? CreateRep", rep)
+# def test_create_rep():
+#     rep = {}
+#     print("Reps?, rep", rep)
+#     # Arrange
+#     app.dependency_overrides[RepRepository] = lambda: rep
+#     print("REPS? CreateRep", rep)
 
-    app.dependency_overrides[authenticator.try_get_current_account_data] = lambda: rep
-    print("REPS? dependency rep", rep)
-    # app.dependency_overrides[get_current_user] = override_auth_user
-    json = {
-    "office": "President",
-    "level": "country",
-    "name": "Joe Biden",
-    "party": "Democrat",
-    "address": "123 White House Street",
-    "email": "joe@biden.com",
-    "letter_id": 1
-    }
-    expected = {
-    "rep_id": int,
-    "office": "President",
-    "level": "country",
-    "name": "Joe Biden",
-    "party": "Democrat",
-    "address": "123 White House Street",
-    "email": "joe@biden.com",
-    "letter_id": 1
-    }
+#     app.dependency_overrides[authenticator.try_get_current_account_data] = lambda: rep
+#     print("REPS? dependency rep", rep)
+#     # app.dependency_overrides[get_current_user] = override_auth_user
+#     json = {
+#     "office": "President",
+#     "level": "country",
+#     "name": "Joe Biden",
+#     "party": "Democrat",
+#     "address": "123 White House Street",
+#     "email": "joe@biden.com",
+#     "letter_id": 1
+#     }
+#     expected = {
+#     "rep_id": int,
+#     "office": "President",
+#     "level": "country",
+#     "name": "Joe Biden",
+#     "party": "Democrat",
+#     "address": "123 White House Street",
+#     "email": "joe@biden.com",
+#     "letter_id": 1
+#     }
 
-    # Act
-    response = client.post("/api/reps", json=json)
-    print("REPS? response", response)
-    # Assert
-    assert response.status_code == 200
-    print("REPS test data", response)
-    assert response.json() == expected
+#     # Act
+#     response = client.post("/api/reps", json=json)
+#     print("REPS? response", response)
+#     # Assert
+#     assert response.status_code == 200
+#     print("REPS test data", response)
+#     assert response.json() == expected
 
-    # Clean up
-    app.dependency_overrides = {}
+#     # Clean up
+#     app.dependency_overrides = {}
 
 
 # def test_get_letter():
