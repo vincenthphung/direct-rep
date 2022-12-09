@@ -23,4 +23,4 @@ def test_create_letter():
     assert response.status_code == 200
     data = response.json()
     print("LETTER test data", data)
-    assert data["letter"] == letter
+    assert data[0] == letter
