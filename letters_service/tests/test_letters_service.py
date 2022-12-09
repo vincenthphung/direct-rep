@@ -27,7 +27,7 @@ def test_get_issue():
 
 class EmptyLetters:
     def get_all(self):
-        return []
+        return {"letters": []}
 
 def test_get_all_letters():
     # Arrange
