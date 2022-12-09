@@ -15,7 +15,8 @@ user-service-test-job:
   image: "python:3-bullseye"
   stage: test
   script:
-    - pip install pytest
+    - cd users_service
+    - pip install -r requirements.txt
     - python -m pytest
 
 build-front-end-job:
