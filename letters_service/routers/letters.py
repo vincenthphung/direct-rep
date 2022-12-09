@@ -53,10 +53,10 @@ url = OPENAI_URL
 headers = {"Authorization": f'Bearer {OPENAI_API_KEY}'}
 
 
-async def get_open_ai(topic):
+async def get_open_ai(prompt):
     response = requests.post(url, headers=headers, json={
         "model": "text-davinci-002",
-        "prompt": topic,
+        "prompt": prompt,
         "temperature": 0.7, "max_tokens": 256
     })
     content = json.loads(response.content)
@@ -82,7 +82,8 @@ def create_letter(
         else:
             say = "in opposition to"
         input_query = f"Write a letter {say} {topic}"
-        get_open_ai(topic=input_query)
+        print("POST letter input query", input_query)
+        get_open_ai(prompt=input_query)
         stance = stance
         content = data['choices'][0]['text']
         user_id = account_data['id']
@@ -160,14 +161,3 @@ def get_all_issues(
     else:
         print("/n/n/n/n Account Data /n/n/n/n", account_data)
         return ("Not working")
-
-# @router.get("/api/issues")
-# def get_all_issues(
-#     account_data: Optional[dict] = Depends(get_current_user),
-#     repo: IssueRepository = Depends(),
-# ):
-#     print("/n/n/n/n Account Data /n/n/n/n", account_data)
-#     if account_data:
-#         return repo.get_all()
-#     else:
-#         return ("Not working")
