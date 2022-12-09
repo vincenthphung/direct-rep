@@ -1,5 +1,5 @@
 from fastapi.testclient import TestClient
-from authenticator import authenticator
+from authenticator import authenticators
 from main import app
 
 client = TestClient(app)
