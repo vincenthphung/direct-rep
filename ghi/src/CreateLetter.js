@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import { useCreateLetterMutation } from "./store/lettersApi";
 import { useAuthContext } from "./TokenTest.js";
 import { useNavigate } from "react-router-dom";
-// import { trackPromise } from 'react-promise-tracker';
+import { trackPromise } from 'react-promise-tracker';
 
 function LetterForm() {
   const { token } = useAuthContext();
@@ -37,8 +37,8 @@ function LetterForm() {
   async function handleSubmit(e) {
     e.preventDefault();
     console.log("Create letter handle submit")
-    // trackPromise(createLetter({ topic, stance }).then(() => navigate("/eletter")));
-    createLetter({ topic, stance }).then(() => navigate("/eletter"));
+    trackPromise(createLetter({ topic, stance }).then(() => navigate("/eletter")));
+    // createLetter({ topic, stance }).then(() => navigate("/eletter"));
   }
 
   return (
