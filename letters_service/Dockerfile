@@ -11,6 +11,7 @@ COPY main.py main.py
 # Modify these instructions to do that
 COPY queries queries
 COPY routers routers
+COPY tests tests
 
 
 # If you're using a relational database with migrations,
@@ -19,7 +20,7 @@ COPY migrations migrations
 
 RUN python -m pip install -r requirements.txt
 # CMD uvicorn main:app --host 0.0.0.0 --port 8090
-# CMD uvicorn main:app --host 0.0.0.0 
+# CMD uvicorn main:app --host 0.0.0.0
 
 # If you're using a relational database and want migrations
 # to be run automatically, delete the previous CMD line and
