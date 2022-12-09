@@ -28,16 +28,13 @@ def test_get_issue():
 
 class CreateRep:
     def create(self, rep):
-        result = {"id": 1}
+        result = {"rep_id": 1}
         result.update(rep)
         return result
 
 
 def test_create_rep():
     # Arrange
-    app.dependency_overrides[authenticator.try_get_current_account_data] = lambda: []
-    app.dependency_overrides[RepRepository] = CreateRep
-    # app.dependency_overrides[get_current_user] = override_auth_user
 
     json = {
     "office": "President",
@@ -49,8 +46,12 @@ def test_create_rep():
     "letter_id": 1,
     }
 
+    app.dependency_overrides[authenticator.try_get_current_account_data] = lambda: json
+    app.dependency_overrides[RepRepository] = CreateRep
+    # app.dependency_overrides[get_current_user] = override_auth_user
+
     expected = {
-    "id": 1,
+    "rep_id": 1,
     "office": "President",
     "level": "country",
     "name": "Joe Biden",
