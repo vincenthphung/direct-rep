@@ -6,8 +6,7 @@ from routers import letters, reps
 import os
 
 app = FastAPI()
-app.include_router(letters.router)
-app.include_router(reps.router)
+
 # app.include_router(token_auth.router)
 # app.include_router(authenticator.router)
 
@@ -16,10 +15,10 @@ app.include_router(reps.router)
 #     os.environ.get("CORS_HOST", None),
 # ]
 
-origins = [
-    "http://localhost:3000",
-    os.environ.get("CORS_HOST")
-]
+# origins = [
+#     "http://localhost:3000",
+#     os.environ.get("CORS_HOST")
+# ]
 
 app.add_middleware(
     CORSMiddleware,
@@ -28,3 +27,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(letters.router)
+app.include_router(reps.router)

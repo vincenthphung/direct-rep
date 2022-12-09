@@ -5,18 +5,17 @@ from routers import accounts
 from authenticator import authenticators
 
 app = FastAPI()
-app.include_router(accounts.router)
-app.include_router(authenticators.router)
+
 
 # origins = [
 #     "http://localhost:3000",
 #     os.environ.get("CORS_HOST", None),
 # ]
 
-origins = [
-    "http://localhost:3000",
-    os.environ.get("CORS_HOST")
-]
+# origins = [
+#     "http://localhost:3000",
+#     os.environ.get("CORS_HOST")
+# ]
 
 app.add_middleware(
     CORSMiddleware,
@@ -25,3 +24,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(accounts.router)
+app.include_router(authenticators.router)
