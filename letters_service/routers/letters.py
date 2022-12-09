@@ -53,10 +53,10 @@ url = OPENAI_URL
 headers = {"Authorization": f'Bearer {OPENAI_API_KEY}'}
 
 
-async def get_open_ai(prompt):
+async def get_open_ai(topic):
     response = requests.post(url, headers=headers, json={
         "model": "text-davinci-002",
-        "prompt": prompt,
+        "prompt": topic,
         "temperature": 0.7, "max_tokens": 256
     })
     content = json.loads(response.content)
@@ -82,7 +82,7 @@ def create_letter(
             say = "in opposition to"
         input_query = f"Write a letter {say} {topic}"
         print("POST letter input query", input_query)
-        get_open_ai(prompt=input_query)
+        get_open_ai(topic=input_query)
         stance = stance
         content = data['choices'][0]['text']
         user_id = account_data['id']
