@@ -25,17 +25,17 @@ def test_get_issue():
   print("ISSUE test data", data)
   assert data[0] == issue
 
-
 class CreateRep:
     def create(self, rep):
         result = {"rep_id": 1}
         result.update(rep)
         return result
 
-
 def test_create_rep():
     # Arrange
-
+    app.dependency_overrides[RepRepository] = CreateRep
+    app.dependency_overrides[authenticator.try_get_current_account_data] = lambda: CreateRep
+    # app.dependency_overrides[get_current_user] = override_auth_user
     json = {
     "office": "President",
     "level": "country",
@@ -43,13 +43,8 @@ def test_create_rep():
     "party": "Democrat",
     "address": "123 White House Street",
     "email": "joe@biden.com",
-    "letter_id": 1,
+    "letter_id": 1
     }
-
-    app.dependency_overrides[authenticator.try_get_current_account_data] = lambda: expected
-    app.dependency_overrides[RepRepository] = CreateRep
-    # app.dependency_overrides[get_current_user] = override_auth_user
-
     expected = {
     "rep_id": 1,
     "office": "President",
@@ -58,12 +53,10 @@ def test_create_rep():
     "party": "Democrat",
     "address": "123 White House Street",
     "email": "joe@biden.com",
-    "letter_id": 1,
+    "letter_id": 1
     }
-
     # Act
     response = client.post("/api/reps", json=json)
-
     # Assert
     assert response.status_code == 200
     print("REPS test data", response)
