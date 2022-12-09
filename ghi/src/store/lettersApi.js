@@ -56,17 +56,3 @@ export const {
   useCreateLetterMutation,
   useEditLetterMutation,
 } = lettersApi;
-
-
-// createLetter: builder.mutation({
-//   query: (arg) => {
-//     const { topic, stance } = arg;
-//     console.log("arg", arg);
-//     return {
-//       method: "post",
-//       url: `api/letters?topic=${topic}&stance=${stance}`,
-//       credentials: "include",
-//       params: { topic, stance },
-//     };
-//   },
-// }),

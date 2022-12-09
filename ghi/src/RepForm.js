@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import React from "react";
-import { useCreateRepMutation } from "./store/repsApi";
+// import { useCreateRepMutation } from "./store/repsApi";
 import { useAuthContext } from "./TokenTest.js";
-import { trackPromise } from 'react-promise-tracker';
+// import { trackPromise } from 'react-promise-tracker';
 import { useNavigate } from "react-router-dom";
 
 function RepForm() {
@@ -18,7 +18,7 @@ function RepForm() {
   const [selection, setSelection] = useState([]);
   const [zip, setZip] = useState();
   const [email, setEmail] = useState();
-  const [createRep, ] = useCreateRepMutation();
+  // const [createRep, ] = useCreateRepMutation();
   // const [createRep, result] = useCreateRepMutation();
   const navigate = useNavigate();
 
@@ -121,12 +121,31 @@ function RepForm() {
     }
   }
 
+  // to create a rep:
+  async function postRep(data) {
+    const url = `${process.env.REACT_APP_LETTERS_API_HOST}/api/reps`;
+    const fetchConfig = {
+      method: "post",
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: data
+    };
+    const response = await fetch(url, fetchConfig);
+    if (response.ok) {
+      const data = await response.json();
+      console.log("post rep", data);
+    }
+  }
+
   // to send that data to the database via the store reducer:
   async function handleSubmit(e) {
     e.preventDefault();
-    trackPromise(createRep({ office, level, name, party, address, email, letter_id }).then(
-      () => showReps(letter_id)
-    ));
+    postRep({ office, level, name, party, address, email, letter_id }).then(() => showReps(letter_id));
+    // trackPromise(createRep({ office, level, name, party, address, email, letter_id }).then(
+    //   () => showReps(letter_id)
+    // ));
   }
 
   async function showReps(letter_id) {
