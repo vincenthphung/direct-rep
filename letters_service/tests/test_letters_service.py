@@ -1,6 +1,7 @@
 from fastapi.testclient import TestClient
 from routers.letters import authenticator
 # from queries.letters import LetterRepository
+from queries.reps import RepRepository
 from main import app
 
 client = TestClient(app)
@@ -23,6 +24,51 @@ def test_get_issue():
   data = response.json()
   print("ISSUE test data", data)
   assert data[0] == issue
+
+
+class CreateRep:
+    def create(self, rep):
+        result = {"id": 1}
+        result.update(rep)
+        return result
+
+
+def test_create_rep():
+    # Arrange
+    app.dependency_overrides[authenticator.try_get_current_account_data] = lambda: CreateRep
+    app.dependency_overrides[RepRepository] = CreateRep
+    # app.dependency_overrides[get_current_user] = override_auth_user
+
+    json = {
+    "office": "President",
+    "level": "country",
+    "name": "Joe Biden",
+    "party": "Democrat",
+    "address": "123 White House Street",
+    "email": "joe@biden.com",
+    "letter_id": 1,
+    }
+
+    expected = {
+    "id": 1,
+    "office": "President",
+    "level": "country",
+    "name": "Joe Biden",
+    "party": "Democrat",
+    "address": "123 White House Street",
+    "email": "joe@biden.com",
+    "letter_id": 1,
+    }
+
+    # Act
+    response = client.post("/api/reps", json=json)
+
+    # Assert
+    assert response.status_code == 200
+    assert response.json() == expected
+
+    # Clean up
+    app.dependency_overrides = {}
 
 
 # def test_get_letter():
