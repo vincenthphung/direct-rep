@@ -67,9 +67,9 @@ async def get_open_ai(topic):
 def create_letter(
     topic: str,  # use this to enter the prompt
     stance: bool,
-    account_data: Optional[dict] = Depends(
+    account_data: dict = Depends(
         authenticator.get_current_account_data),
-    data: get_open_ai = Depends(),
+    data: get_open_ai = Depends(authenticator.get_current_account_data),
     repo: LetterRepository = Depends()
 ):
 
