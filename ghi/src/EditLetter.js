@@ -79,11 +79,30 @@ export const EditLetter = () => {
     }
   }, [oneId, token]);
 
+  // to edit a letter:
+  async function putLetter(oneId, oneContent) {
+    const url = `${process.env.REACT_APP_LETTERS_API_HOST}/letters/${oneId}?content=${oneContent}`;
+    const fetchConfig = {
+      method: "put",
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+    };
+    const response = await fetch(url, fetchConfig);
+    if (response.ok) {
+      const data = await response.json();
+      console.log("put letter", data);
+    }
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
+    putLetter(oneId, oneContent).then(() => navigate("/selectreps"))
     // console.log(oneId, oneContent);
-    trackPromise(editLetter({ oneId, oneContent }).then(() => navigate("/selectreps")));
+    // trackPromise(editLetter({ oneId, oneContent }).then(() => navigate("/selectreps")));
   }
+
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   return (
     <div className="row">

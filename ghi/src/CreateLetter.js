@@ -3,7 +3,7 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 // import { useCreateLetterMutation } from "./store/lettersApi";
 import { useAuthContext } from "./TokenTest.js";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import { trackPromise } from 'react-promise-tracker';
 
 function LetterForm() {
@@ -13,7 +13,7 @@ function LetterForm() {
   const [stance, setStance] = useState();
   // const [createLetter, ] = useCreateLetterMutation();
   // const [createLetter, result] = useCreateLetterMutation();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   console.log("TOKEN CREATE LETTER", token);
 
@@ -34,6 +34,7 @@ function LetterForm() {
 
   console.log("ISSUES LIST", issues);
 
+  // to create a letter:
   async function postLetter(topic, stance) {
     const url = `${process.env.REACT_APP_LETTERS_API_HOST}/api/letters?topic=${topic}&stance=${stance}`;
     const fetchConfig = {
@@ -43,7 +44,6 @@ function LetterForm() {
         Authorization: `Bearer ${token}`
       },
     };
-
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
       const data = await response.json();
@@ -54,7 +54,7 @@ function LetterForm() {
   async function handleSubmit(e) {
     e.preventDefault();
     console.log("Create letter handle submit")
-    postLetter(topic, stance);
+    postLetter(topic, stance).then(() => navigate("/eletter"));
     // trackPromise(createLetter({ topic, stance }).then(() => navigate("/eletter")));
     // createLetter({ topic, stance }).then(() => navigate("/eletter"));
   }
