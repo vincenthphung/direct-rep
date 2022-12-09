@@ -15,7 +15,7 @@ import LoginForm from "./LoginTest";
 import LogoutButton from "./Logout.js";
 import NewLoginForm from "./NewLogin";
 import DetailView from "./Detailview";
-import Navb from "./Nav";
+// import Navb from "./Nav";
 
 function GetToken() {
   // Get token from JWT cookie (if already logged in)
@@ -62,23 +62,21 @@ function App() {
         <GetToken />
 
         {/* <Navigation /> */}
-        <Navb />
+        {/* <Navb /> */}
         <Routes basename={basename}>
 
           <Route path="/" element={<LandingPage />} />
-          <Route path={basename + "/login"} element={<LoginForm />} />
-          {console.log("Login path", basename)}
+          <Route path="/login" element={<LoginForm />} />
           <Route path="/signup" element={<AccountForm />} />
-
-            <Route path="/logout" element={<LogoutButton />} />
-            <Route path="/eaccount" element={<EditAccount />} />
-            <Route path="/selectreps" element={<RepForm />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/cletter" element={<LetterForm />} />
-            <Route path="/eletter" element={<EditLetter />} />
-            <Route path="/review" element={<ReviewForm />} />
-            <Route path="/newlogin" element={<NewLoginForm />} />
-            <Route path="/letters/:id" element={<DetailView />} />
+          <Route path="/logout" element={<LogoutButton />} />
+          <Route path="/eaccount" element={<EditAccount />} />
+          <Route path="/selectreps" element={<RepForm />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/cletter" element={<LetterForm />} />
+          <Route path="/eletter" element={<EditLetter />} />
+          <Route path="/review" element={<ReviewForm />} />
+          <Route path="/newlogin" element={<NewLoginForm />} />
+          <Route path="/letters/:id" element={<DetailView />} />
         </Routes>
 
         {/* <ErrorNotification error={error} /> */}
