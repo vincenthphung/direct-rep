@@ -41,7 +41,7 @@ function RepForm() {
   // to get the id of the most recent letter created:
   useEffect(() => {
     async function fetchLetterId() {
-      const urlLetter = `${process.env.REACT_APP_LETTERS_API_HOST}api/letters`;
+      const urlLetter = `${process.env.REACT_APP_LETTERS_API_HOST}/api/letters`;
       const response = await fetch(urlLetter, {
         headers: { Authorization: `Bearer ${token}` },
       });
