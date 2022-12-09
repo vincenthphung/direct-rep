@@ -34,7 +34,7 @@ def test_get_all_letters():
     app.dependency_overrides[LetterRepository] = EmptyLetters
     app.dependency_overrides[
       authenticator.try_get_current_account_data
-  ] = lambda: None
+  ] = lambda: EmptyLetters
     # Act
     response = client.get("/api/letters")
     # Assert
