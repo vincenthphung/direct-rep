@@ -1,6 +1,3 @@
-import os
-# from psycopg_pool import ConnectionPool
-import psycopg
 from fastapi.testclient import TestClient
 from routers.letters import authenticator
 from main import app
@@ -8,14 +5,6 @@ from main import app
 client = TestClient(app)
 
 print("Letters test file")
-
-# def test_get_token_returns_none_for_user_not_logged_in():
-#     app.dependency_overrides[authenticator.try_get_current_account_data] = lambda: None
-#     response = client.get("/token")
-#     app.dependency_overrides = {}
-#     assert response.status_code == 200
-#     assert response.json() == None
-
 
 def test_create_letter():
     letter = {
@@ -33,4 +22,5 @@ def test_create_letter():
     app.dependency_overrides = {}
     assert response.status_code == 200
     data = response.json()
+    print("LETTER test data", data)
     assert data["letter"] == letter
