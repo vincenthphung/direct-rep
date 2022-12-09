@@ -33,9 +33,13 @@ class CreateRep:
 
 def test_create_rep():
     rep = CreateRep
+    print("Reps?, rep", rep)
     # Arrange
     app.dependency_overrides[RepRepository] = lambda: CreateRep
+    print("REPS? CreateRep", CreateRep)
+
     app.dependency_overrides[authenticator.try_get_current_account_data] = lambda: rep
+    print("REPS? dependency rep", rep)
     # app.dependency_overrides[get_current_user] = override_auth_user
     json = {
     "office": "President",
@@ -56,8 +60,11 @@ def test_create_rep():
     "email": "joe@biden.com",
     "letter_id": 1
     }
+
+    data = {}
     # Act
-    response = client.post("/api/reps", json=json)
+    response = client.post("/api/reps", data=data, json=json)
+    print("REPS? response", response)
     # Assert
     assert response.status_code == 200
     print("REPS test data", response)
