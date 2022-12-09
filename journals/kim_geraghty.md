@@ -266,3 +266,28 @@ Updated to do list:
 - get deployment done.
 
 The list keeps getting shorter!
+
+## Tuesday 12/6/2022, Wednesday 12/7/2022, Thursday 12/8/2022
+
+Three days spent entirely on deployment. It took a while.
+
+We have one database on render and one database on Elephant SQL. We had to restart a few times but finally got it working.
+We had some errors with too many connections with the database. We did upgrade to a slightly better than free version and changed the method we use in our pool.py files to access and insert data into the database.
+We have two services deployed on render.
+We got the frontend deployment done. We're using the gitlab-ci.yml file and have our environment variables saved on render and gitlab.
+These include our API keys, database urls, third party api endpoints, public url, and render's urls for our microservices.
+
+I fixed the leading zeros issue by converting the zipcode from an integer to a string. Everything works now.
+
+It was so great to finally get frontend deployment working. I had to change a few of our auth stuff and switched back from redux to regular React to make that easier to deal with.
+
+To do list:
+
+- unit tests
+- clean up code and frontend a little bit.
+
+Phew! 😊
+
+## Friday 12/9/2022
+
+Hopefully we can finish unit tests today.
