@@ -340,3 +340,23 @@ We spend more time on making our endpoints more efficient. We made changes to th
 1. Letters service database working in Elephantsql.
 
 2. Users service database working in Render.com and connected to beekeeper.
+
+
+## December 7, 2022 (Thursday)
+
+### Work done during the day
+
+1. We worked upon backend deployment today. We faced an issue of not being able to communicate the render docs to letters and users service. We spent a lot of time looking for the issue. Later, through instruction we got to know that they do not communicate in backend but work in frontend deployment.
+
+2. We wrote gitlab yml files and did frontend deployment. We got stuck in an issue where our filed would work for HTTP web request but would not work for HTTPS web request. Gitlab only supported HTTPS request. So, we looked at the code and found a request in our authenticator which was HTTP. After, changing the authenticator request, the issue got fixed.
+
+3. Kim worked upon the zipcodes. If a zipcode started from the digit 0, then reps api did not work. She fixed the issue in the backend.
+
+
+### Work achieved during the day
+
+1. Backend deployed on render.com and working.
+
+2. Frontend deployed on gitlab and working.
+
+3. Zipcodes that start with digit 0 are working.
