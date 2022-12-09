@@ -7,7 +7,7 @@ export function getToken() {
 }
 
 export async function getTokenInternal() {
-  const url = `${process.env.REACT_APP_USERS_API_HOST}/token/`;
+  const url = `${process.env.REACT_APP_USERS_API_HOST}/token`;
   try {
     const response = await fetch(url, {
       credentials: "include",
@@ -77,7 +77,7 @@ export function useToken() {
 
   async function logout() {
     if (token) {
-      const url = `${process.env.REACT_APP_USERS_API_HOST}/token/`;
+      const url = `${process.env.REACT_APP_USERS_API_HOST}/token`;
       await fetch(url, { method: "delete", credentials: "include" });
       internalToken = null;
       setToken(null);
@@ -87,7 +87,7 @@ export function useToken() {
   }
 
   async function login(username, password) {
-    const url = `${process.env.REACT_APP_USERS_API_HOST}/token/`;
+    const url = `${process.env.REACT_APP_USERS_API_HOST}/token`;
     const form = new FormData();
     form.append("username", username);
     console.log("token test username", username);
