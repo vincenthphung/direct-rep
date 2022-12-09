@@ -72,7 +72,6 @@ def create_letter(
     data: get_open_ai = Depends(),
     repo: LetterRepository = Depends()
 ):
-
     if account_data:
         print("POST letter account data", account_data)
         # input_query = "Write a letter" {if stance === true} say = "in favor of"; else: say = "in opposition to" + topic
@@ -156,8 +155,8 @@ def get_all_issues(
     repo: IssueRepository = Depends(),
 ):
     if account_data:
-        print("/n/n/n/n Account Data /n/n/n/n", account_data)
+        print("\n\n Account Data Issues success \n\n", account_data)
         return repo.get_all()
     else:
-        print("/n/n/n/n Account Data /n/n/n/n", account_data)
+        print("\n\n Account Data Issues Fail \n\n", account_data)
         return ("Not working")

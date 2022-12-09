@@ -37,7 +37,8 @@ function LetterForm() {
   async function handleSubmit(e) {
     e.preventDefault();
     console.log("Create letter handle submit")
-    trackPromise(createLetter({ topic, stance }).then(() => navigate("/eletter")));
+    // trackPromise(createLetter({ topic, stance }).then(() => navigate("/eletter")));
+    createLetter({ topic, stance }).then(() => navigate("/eletter"));
   }
 
   return (
