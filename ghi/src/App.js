@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider, useToken } from "./TokenTest.js";
-// import Construct from "./Construct.js";
 // import ErrorNotification from "./ErrorNotification";
 import AccountForm from "./AccountForm";
 import RepForm from "./RepForm";
@@ -32,6 +31,7 @@ function App() {
   // const basename = process.env.PUBLIC_URL;
   console.log("What is process env public url", process.env.PUBLIC_URL);
   // const basename = process.env.PUBLIC_URL.replace(domain,domain);
+
   // const [launch_info, setLaunchInfo] = useState([]);
   // const [error, setError] = useState(null);
 
@@ -66,7 +66,7 @@ function App() {
         <Routes basename={basename}>
 
           <Route path="/" element={<LandingPage />} />
-          <Route path="/login" element={<LoginForm />} />
+          <Route path={basename + "/login"} element={<LoginForm />} />
           {console.log("Login path", basename)}
           <Route path="/signup" element={<AccountForm />} />
 
