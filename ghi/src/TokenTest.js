@@ -90,9 +90,9 @@ export function useToken() {
     const url = `${process.env.REACT_APP_USERS_API_HOST}/token/`;
     const form = new FormData();
     form.append("username", username);
-    // console.log("token test username", username);
+    console.log("token test username", username);
     form.append("password", password);
-    // console.log("token test password", password);
+    console.log("token test password", password);
     const response = await fetch(url, {
       method: "post",
       credentials: "include",
