@@ -75,7 +75,6 @@ function RepForm() {
         const zipcode = data.account.zipcode;
         // console.log("zipcode", zipcode);
         setZip(zipcode);
-        // console.log("zip", zip);
       }
     }
     getZipFromUser();
