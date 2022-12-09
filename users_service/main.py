@@ -8,6 +8,11 @@ app = FastAPI()
 app.include_router(accounts.router)
 app.include_router(authenticators.router)
 
+# origins = [
+#     "http://localhost:3000",
+#     os.environ.get("CORS_HOST", None),
+# ]
+
 origins = [
     "http://localhost:3000",
     os.environ.get("CORS_HOST", None),

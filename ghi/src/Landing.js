@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react';
 
 
 function LandingPage() {
@@ -11,12 +12,11 @@ function LandingPage() {
 Get in touch with your representatives and let AI help you write a letter about important political issues.
 				</p>
 				<hr />
-				<a className='btn btn-light btn-lg' href='/signup' role='button'>
-					Register
-				</a>
-				<a className='btn btn-dark btn-lg' href='/login' role='button'>
-					Login
-				</a>
+					<Link to="/login">
+              <button type="submit" className="btn btn-dark btn-lg">
+                Login
+              </button>
+							</Link>
 			</div>
 		</div>
 	);
