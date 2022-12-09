@@ -69,12 +69,12 @@ def create_letter(
     stance: bool,
     account_data: dict = Depends(
         authenticator.get_current_account_data),
-    data: get_open_ai = Depends(authenticator.get_current_account_data),
+    data: get_open_ai = Depends(),
     repo: LetterRepository = Depends()
 ):
 
     if account_data:
-        # print("POST letter account data", account_data)
+        print("POST letter account data", account_data)
         # input_query = "Write a letter" {if stance === true} say = "in favor of"; else: say = "in opposition to" + topic
         say = ""
         if stance == True:
@@ -88,6 +88,7 @@ def create_letter(
         user_id = account_data['id']
         return repo.create(topic, stance, content, user_id)
     else:
+        print("Create letter fail")
         return ("Not working")
 
 
