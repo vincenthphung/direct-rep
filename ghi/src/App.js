@@ -25,7 +25,8 @@ function GetToken() {
 
 function App() {
   const domain = /https:\/\/[^/]+/;
-  const basename = process.env.PUBLIC_URL.replace(domain, '');
+  // const basename = process.env.PUBLIC_URL.replace(domain, '');
+  const basename = process.env.PUBLIC_URL.replace(domain,domain);
   // const [launch_info, setLaunchInfo] = useState([]);
   // const [error, setError] = useState(null);
 
@@ -51,6 +52,7 @@ function App() {
   return (
     // <div>
     <BrowserRouter basename={basename}>
+      {console.log("BASENAME", basename)}
       <AuthProvider>
         <GetToken />
 
