@@ -22,12 +22,12 @@ export const lettersApi = createApi({
     createLetter: builder.mutation({
       query: (arg) => {
         const { topic, stance } = arg;
-        console.log("arg", arg);
+        console.log("create letter arg", arg);
         return {
           method: "post",
           url: `api/letters?topic=${topic}&stance=${stance}`,
           credentials: "include",
-          // params: { topic, stance },
+          params: { topic, stance },
         };
       },
     }),
@@ -51,3 +51,17 @@ export const {
   useCreateLetterMutation,
   useEditLetterMutation,
 } = lettersApi;
+
+
+// createLetter: builder.mutation({
+//   query: (arg) => {
+//     const { topic, stance } = arg;
+//     console.log("arg", arg);
+//     return {
+//       method: "post",
+//       url: `api/letters?topic=${topic}&stance=${stance}`,
+//       credentials: "include",
+//       params: { topic, stance },
+//     };
+//   },
+// }),
