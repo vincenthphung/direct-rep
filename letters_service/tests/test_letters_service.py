@@ -2,6 +2,7 @@ from fastapi.testclient import TestClient
 from routers.letters import authenticator
 from queries.letters import LetterRepository
 from queries.reps import RepRepository
+from routers.reps import RepIn
 from main import app
 
 client = TestClient(app)
@@ -47,7 +48,7 @@ def test_get_all_letters():
 
 class CreateRep:
     def create(self, rep):
-        result = {"rep_id": 1}
+        result = {"rep_id": 100}
         result.update(rep)
         return result
 
@@ -59,26 +60,26 @@ def test_create_rep():
     app.dependency_overrides[authenticator.try_get_current_account_data] = lambda: CreateRep
     # app.dependency_overrides[get_current_user] = override_auth_user
 
-    json = CreateRep(
-    office="President",
-    level="country",
-    name= "Joe Biden",
-    party= "Democrat",
-    address= "123 White House Street",
-    email= "joe@biden.com",
-    letter_id= 1
-    ).dict()
+    json = RepIn(
+      office="President",
+      level="country",
+      name= "Joe Biden",
+      party= "Democrat",
+      address= "123 White House Street",
+      email= "joe@biden.com",
+      letter_id= 100
+      ).dict()
 
     expected = {
-    "rep_id": int,
-    "office": "President",
-    "level": "country",
-    "name": "Joe Biden",
-    "party": "Democrat",
-    "address": "123 White House Street",
-    "email": "joe@biden.com",
-    "letter_id": 1
-    }
+      "rep_id": 100,
+      "office": "President",
+      "level": "country",
+      "name": "Joe Biden",
+      "party": "Democrat",
+      "address": "123 White House Street",
+      "email": "joe@biden.com",
+      "letter_id": 100
+      }
 
     # Act
     response = client.post("/api/reps", json=json)
