@@ -53,40 +53,48 @@ class CreateRep:
         return result
 
 def test_create_rep():
-
+  test_reps = {
+    "rep_id": 100,
+    "office": "President",
+    "level": "country",
+    "name": "Joe Biden",
+    "party": "Democrat",
+    "address": "123 White House Street",
+    "email": "joe@biden.com",
+    "letter_id": 100
+    }
     # Arrange
-    app.dependency_overrides[RepRepository] = CreateRep
+  app.dependency_overrides[RepRepository] = CreateRep
+  app.dependency_overrides[authenticator.try_get_current_account_data] = lambda: test_reps
 
-    app.dependency_overrides[authenticator.try_get_current_account_data] = lambda: CreateRep
+  json = RepIn(
+    office="President",
+    level="country",
+    name= "Joe Biden",
+    party= "Democrat",
+    address= "123 White House Street",
+    email= "joe@biden.com",
+    letter_id= 100
+    ).dict()
 
-    json = RepIn(
-      office="President",
-      level="country",
-      name= "Joe Biden",
-      party= "Democrat",
-      address= "123 White House Street",
-      email= "joe@biden.com",
-      letter_id= 100
-      ).dict()
-
-    expected = {
-      "rep_id": 100,
-      "office": "President",
-      "level": "country",
-      "name": "Joe Biden",
-      "party": "Democrat",
-      "address": "123 White House Street",
-      "email": "joe@biden.com",
-      "letter_id": 100
-      }
+  expected = {
+    "rep_id": 100,
+    "office": "President",
+    "level": "country",
+    "name": "Joe Biden",
+    "party": "Democrat",
+    "address": "123 White House Street",
+    "email": "joe@biden.com",
+    "letter_id": 100
+    }
 
     # Act
-    response = client.post("/api/reps", json=json)
-    print("REPS? response", response)
-    # Assert
-    # assert response.status_code == 200
-    print("REPS test data", response)
-    assert response.json() == expected
+  response = client.post("/api/reps", json=json)
+  print("REPS? response", response)
+  # Assert
+  # assert response.status_code == 200
+  print("REPS test data", response)
+  assert response.json() == expected
 
-    # Clean up
-    app.dependency_overrides = {}
+  # Clean up
+  app.dependency_overrides = {}
