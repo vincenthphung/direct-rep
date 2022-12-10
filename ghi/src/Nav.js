@@ -24,7 +24,11 @@ function Navb() {
               </Nav.Link>
             </Nav>
           ) : (
-            ""
+            <Fragment>
+              <Nav.Link as={NavLink} to="/eaccount">
+                Edit Account
+              </Nav.Link>
+            </Fragment>
           )}
           <Nav>
             {token ? (
