@@ -73,8 +73,11 @@ def test_create_rep():
     "letter_id": 100,
     }
     # Arrange
+  def get_reps():
+    return test_reps
+
   app.dependency_overrides[RepRepository] = CreateRep
-  app.dependency_overrides[authenticator.try_get_current_account_data] = lambda: test_reps
+  app.dependency_overrides[authenticator.try_get_current_account_data] = get_reps
 
   json = RepIn(
     office="President",
@@ -84,7 +87,7 @@ def test_create_rep():
     address= "123 White House Street",
     email= "joe@biden.com",
     letter_id= 100,
-    )
+    ).dict()
 
   expected = {
     "rep_id": 100,
