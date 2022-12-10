@@ -44,7 +44,9 @@ class Issue(BaseModel):
 
 
 class LetterRepository:
-    def create(self, topic: str, stance: bool, content: str, user_id: int) -> Union[LetterOut, Error]:  #noqa
+    def create(
+        self, topic: str, stance: bool, content: str, user_id: int
+    ) -> Union[LetterOut, Error]:
         try:
             with conn.cursor() as db:
                 result = db.execute(
@@ -73,7 +75,9 @@ class LetterRepository:
         except Exception:
             return {"message": "Create letter did not work"}
 
-    def update(self, letter_id: int, content: str) -> Union[LetterUpdate, Error]:  #noqa
+    def update(
+        self, letter_id: int, content: str
+    ) -> Union[LetterUpdate, Error]:
         try:
             with conn.cursor() as db:
                 db.execute(
