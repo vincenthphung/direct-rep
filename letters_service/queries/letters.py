@@ -73,7 +73,9 @@ class LetterRepository:
         except Exception:
             return {"message": "Create letter did not work"}
 
-    def update(self, letter_id: int, content: str) -> Union[LetterUpdate, Error]:
+    def update(
+        self, letter_id: int, content: str
+        ) -> Union[LetterUpdate, Error]:
         try:
             with conn.cursor() as db:
                 db.execute(

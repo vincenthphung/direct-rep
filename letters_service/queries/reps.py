@@ -1,6 +1,5 @@
 from pydantic import BaseModel
 from typing import Optional, Union, List
-# from queries.pool import pool
 from queries.pool import conn
 
 
@@ -41,12 +40,12 @@ class RepOut(BaseModel):
 class RepRepository(BaseModel):
     def create(self, rep: RepIn) -> Union[RepOut, Error]:
         try:
-            # with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
                     """
                     INSERT INTO rep
-                        (office, level, name, party, address, email, letter_id)
+                        (office, level, name,
+                        party, address, email, letter_id)
                     VALUES
                         (%s, %s, %s, %s, %s, %s, %s)
                     RETURNING rep_id;
@@ -62,9 +61,6 @@ class RepRepository(BaseModel):
                     ]
                 )
                 rep_id = result.fetchone()[0]
-                # print("\n \n Check id \n \n", rep_id)
-                # print("\n \n Check rep \n \n", RepOut)
-
                 return RepOut(
                     rep_id=rep_id,
                     office=rep.office,
@@ -81,14 +77,11 @@ class RepRepository(BaseModel):
 
     def get_all(self) -> Union[Error, List[RepOut]]:
         try:
-            # connect to the database
-            # with pool.connection() as conn:
-            # get a cursor (something to run SQL with)
             with conn.cursor() as db:
-                # run our SELECT statement
                 result = db.execute(
                     """
-                    SELECT rep_id, office, level, name, party, address, email, letter_id
+                    SELECT rep_id, office, level, name,
+                    party, address, email, letter_id
                     FROM rep
                     ORDER BY rep_id;
                     """
@@ -114,13 +107,12 @@ class RepRepository(BaseModel):
 
     def get_one(self, rep_id: int) -> Optional[RepOut]:
         try:
-            # connect to the database
-            # with pool.connection() as conn:
-            # get a cursor (something to run SQL with)
             with conn.cursor() as db:
                 result = db.execute(
                     """
-                    SELECT rep_id, office, level, name, party, address, email, letter_id
+                    SELECT
+                    rep_id, office, level, name,
+                    party, address, email, letter_id
                     FROM rep
                     WHERE rep_id = %s
                     """,
@@ -149,13 +141,12 @@ class RepRepository(BaseModel):
 
     def get_per_letter(self, letter_id: int) -> Union[List[RepOut], Error]:
         try:
-            # connect to the database
-            # with pool.connection() as conn:
-            # get a cursor (something to run SQL with)
             with conn.cursor() as db:
                 result = db.execute(
                     """
-                    SELECT rep_id, office, level, name, party, address, email, letter_id
+                    SELECT
+                    rep_id, office, level, name,
+                    party, address, email, letter_id
                     FROM rep
                     WHERE letter_id = %s
                     """,
@@ -174,7 +165,6 @@ class RepRepository(BaseModel):
                         letter_id=record[7]
                     )
                     result.append(rep)
-                    # print("REP PER LETTER", rep)
                 return result
         except Exception as e:
             print("ERROR")
@@ -183,7 +173,6 @@ class RepRepository(BaseModel):
 
     def delete(self, letter_id: int, rep_id: int) -> bool:
         try:
-            # with pool.connection() as conn:
             with conn.cursor() as db:
                 db.execute(
                     """
