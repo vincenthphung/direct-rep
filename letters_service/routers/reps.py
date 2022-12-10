@@ -32,11 +32,20 @@ router = APIRouter()
 url = GOOGLE_CIVICS_URL
 headers = {"x-goog-api-key": GOOGLE_CIVICS_KEY}
 
+
 async def get_civics_api_reps(zipcode):
-    response = requests.get(url, params={"address": zipcode, "levels": [
-                            "country", "administrativeArea1", "administrativeArea2", "locality"]}, headers=headers)
+    response = requests.get(url,
+                            params={
+                                "address": zipcode,
+                                "levels": [
+                                    "country",
+                                    "administrativeArea1",
+                                    "administrativeArea2",
+                                    "locality"]},
+                            headers=headers)
     content = json.loads(response.content)
     return content
+
 
 @router.get("/civics", response_model=Union[List[CivicsOut], Error])
 def get_reps_from_api(
@@ -67,28 +76,36 @@ def get_reps_from_api(
                                   item["address"], 'N/A', i])
             elif 'emails' in item:
                 list_b.append([item["name"], item["party"], [
-                              {'line1': 'N/A', 'city': 'N/A', 'state': 'N/A', 'zip': 'N/A'}], item['emails'][0], i])
+                              {'line1': 'N/A', 'city': 'N/A',
+                               'state': 'N/A', 'zip': 'N/A'}],
+                               item['emails'][0], i])
             else:
                 list_b.append([item["name"], item["party"], [
-                              {'line1': 'N/A', 'city': 'N/A', 'state': 'N/A', 'zip': 'N/A'}], "N/A", i])
+                              {'line1': 'N/A', 'city': 'N/A',
+                               'state': 'N/A', 'zip': 'N/A'}],
+                               "N/A", i])
 
         # combine both data into one list
         for i in list_a:
             for j in list_b:
                 if i[1] == ['country']:  # level
-                    if i[2][0] == j[4] or j[4] in i[2]:  # office name and index numbers
+                    if i[2][0] == j[4] or j[4] in i[2]:
+                        # office name and index numbers
                         list_c.append([i[0], i[1], j[0], j[1], j[2], j[3]])
 
                 if i[1] == ['administrativeArea1']:
-                    if i[2][0] == j[4] or j[4] in i[2]:  # office name and index numbers
+                    if i[2][0] == j[4] or j[4] in i[2]:
+                        # office name and index numbers
                         list_c.append([i[0], i[1], j[0], j[1], j[2], j[3]])
 
                 if i[1] == ['administrativeArea2']:
-                    if i[2][0] == j[4] or j[4] in i[2]:  # office name and index numbers
+                    if i[2][0] == j[4] or j[4] in i[2]:
+                        # office name and index numbers
                         list_c.append([i[0], i[1], j[0], j[1], j[2], j[3]])
 
                 if i[1] == ['locality']:
-                    if i[2][0] == j[4] or j[4] in i[2]:  # office name and index numbers
+                    if i[2][0] == j[4] or j[4] in i[2]:
+                        # office name and index numbers
                         list_c.append([i[0], i[1], j[0], j[1], j[2], j[3]])
 
         result = []
@@ -99,8 +116,11 @@ def get_reps_from_api(
                 level=item[1][0],
                 name=item[2],
                 party=item[3],
-                address={'line1': item[4][0]['line1'], 'city': item[4][0]['city'],
-                         'state': item[4][0]['state'], 'zip': item[4][0]['zip']},
+                address={
+                    'line1': item[4][0]['line1'],
+                    'city': item[4][0]['city'],
+                    'state': item[4][0]['state'],
+                    'zip': item[4][0]['zip']},
                 email=item[5]
             )
             result.append(rep)
@@ -151,7 +171,8 @@ def get_all_reps_selection(
         print("Not Authorized")
 
 
-@router.get("/reps/letter/{letter_id}", response_model=Union[List[RepOut], Error])
+@router.get("/reps/letter/{letter_id}",
+            response_model=Union[List[RepOut], Error])
 def get_reps_per_letter(
     letter_id: int,
     response: Response,
