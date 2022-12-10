@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from datetime import datetime
 from typing import Optional, Union, List
-from queries.pool import pool
+# from queries.pool import pool
 from queries.pool import conn
 # import psycopg
 # from psycopg2 import connect

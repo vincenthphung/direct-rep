@@ -3,26 +3,35 @@ stages:
   - build
   - deploy
 
-# lint-test-job:
-#   image: "python:3-bullseye"
-#   stage: test
-#   script:
-#     - pip install flake8
-#     - flake8 letters_service
-#     - flake8 users_service
+lint-test-job:
+  image: "python:3-bullseye"
+  stage: test
+  script:
+    - pip install flake8
+    - flake8 letters_service
+    - flake8 users_service
 
 user-service-test-job:
   image: "python:3-bullseye"
   stage: test
   script:
-    - pip install pytest
+    - cd users_service
+    - pip install -r requirements.txt
+    - python -m pytest
+
+letters-service-test-job:
+  image: "python:3-bullseye"
+  stage: test
+  script:
+    - cd letters_service
+    - pip install -r requirements.txt
     - python -m pytest
 
 build-front-end-job:
   stage: build
   image: "node:lts-bullseye"
-  # needs:
-  #   - lint-test-job
+  needs:
+    - lint-test-job
   variables:
     PUBLIC_URL: "https://directrep.gitlab.io/direct-rep"
     REACT_APP_LETTERS_API_HOST: "https://letters-service-u1pb.onrender.com"

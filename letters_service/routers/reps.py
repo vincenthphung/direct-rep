@@ -141,9 +141,10 @@ def get_reps_from_api(
 def select_rep(
     rep: RepIn,
     account_data: Optional[dict] = Depends(
-        authenticator.try_get_current_account_data),
+        authenticator.get_current_account_data),
     repo: RepRepository = Depends(),
 ):
+    print("post rep account data", account_data)
     if account_data:
         # print("\n \n \n REP TEST", rep)
         return repo.create(rep)
