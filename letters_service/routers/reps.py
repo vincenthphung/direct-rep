@@ -3,7 +3,6 @@ from typing import Optional, Union, List
 import requests
 import json
 from queries.reps import (Error, RepIn, RepOut, CivicsOut, RepRepository)
-# from .new_keys import GOOGLE_CIVICS_KEY
 from jwtdown_fastapi.authentication import Authenticator
 import os
 
@@ -26,34 +25,18 @@ class MyAuthenticator(Authenticator):
         pass
 
 
-# print("\n \n SIGNING_KEY", os.environ)
-# authenticator = MyAuthenticator(os.environ["SIGNING_KEY"])
 authenticator = MyAuthenticator(SIGNING_KEY)
 
 router = APIRouter()
 
-# google_api_key = GOOGLE_CIVICS_KEY
-# url = "https://www.googleapis.com/civicinfo/v2/representatives"
 url = GOOGLE_CIVICS_URL
-# "x-goog-api-key" is google's word for "Authorization"
-# headers = {"x-goog-api-key": google_api_key}
 headers = {"x-goog-api-key": GOOGLE_CIVICS_KEY}
-
-# levels info:
-# "country" = federal
-# "administrativeArea1" = US states
-# "administrativeArea2" = US counties
-# "locality" = US cities
-# put counties and cities together, add federal
-# emails - add to params - stretch goal
-
 
 async def get_civics_api_reps(zipcode):
     response = requests.get(url, params={"address": zipcode, "levels": [
                             "country", "administrativeArea1", "administrativeArea2", "locality"]}, headers=headers)
     content = json.loads(response.content)
     return content
-
 
 @router.get("/civics", response_model=Union[List[CivicsOut], Error])
 def get_reps_from_api(
@@ -63,12 +46,6 @@ def get_reps_from_api(
         data: get_civics_api_reps = Depends()):
     if account_data:
         get_civics_api_reps(zipcode=zipcode)
-
-        # see how many entries there are for offices:
-        # number = []
-        # for i in data["offices"]:
-        #   number.append(i["officialIndices"])
-        # print("\n \n \n NUMBER", number)
 
         list_a = []  # offices
         list_b = []  # officials
@@ -114,10 +91,6 @@ def get_reps_from_api(
                     if i[2][0] == j[4] or j[4] in i[2]:  # office name and index numbers
                         list_c.append([i[0], i[1], j[0], j[1], j[2], j[3]])
 
-        # print("\n \n \n LIST A", list_a)
-        # print("\n \n \n LIST B", list_b)
-        # print("\n \n \n LIST C", list_c)
-
         result = []
         # use the combined list to create the output for the endpoint
         for item in list_c:
@@ -131,7 +104,6 @@ def get_reps_from_api(
                 email=item[5]
             )
             result.append(rep)
-        # print("\n \n \n RESULT", result)
         return result
     else:
         print("Not Authorized")
@@ -144,9 +116,7 @@ def select_rep(
         authenticator.get_current_account_data),
     repo: RepRepository = Depends(),
 ):
-    print("post rep account data", account_data)
     if account_data:
-        # print("\n \n \n REP TEST", rep)
         return repo.create(rep)
     else:
         print("Not Authorized")
