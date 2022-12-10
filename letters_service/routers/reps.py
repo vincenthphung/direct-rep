@@ -83,7 +83,7 @@ def get_reps_from_api(
                 list_b.append([item["name"], item["party"], [
                               {'line1': 'N/A', 'city': 'N/A',
                                'state': 'N/A', 'zip': 'N/A'}
-                              ],"N/A", i])
+                              ], "N/A", i])
 
         # combine both data into one list
         for i in list_a:

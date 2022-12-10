@@ -15,8 +15,8 @@ def test_get_issue():
         "openai_issue": "a single-payer healthcare system: ",
     }
     app.dependency_overrides[
-      authenticator.try_get_current_account_data
-      ] = lambda: issue
+        authenticator.try_get_current_account_data
+    ] = lambda: issue
     response = client.get("/api/issues")
     app.dependency_overrides = {}
     assert response.status_code == 200
