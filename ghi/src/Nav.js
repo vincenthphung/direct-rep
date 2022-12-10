@@ -37,11 +37,6 @@ function Navb() {
                 </Nav.Link>
               </Fragment>
             ) : (
-              ""
-            )}
-          </Nav>
-          <Nav>
-            {token === null ? (
               <Fragment>
                 <Nav.Link as={NavLink} to="/signup">
                   Signup
@@ -50,8 +45,6 @@ function Navb() {
                   Login
                 </Nav.Link>
               </Fragment>
-            ) : (
-              ""
             )}
           </Nav>
         </Navbar.Collapse>
