@@ -8,19 +8,14 @@ from fastapi import (
     Request,
 )
 from jwtdown_fastapi.authentication import Token
+
 # from authenticator import authenticator
 from authenticator import authenticators
 
 
 from pydantic import BaseModel
 
-from queries.accounts import (
-    AccountIn,
-    AccountOut,
-    AccountRepo,
-    Account,
-    Error
-)
+from queries.accounts import AccountIn, AccountOut, AccountRepo, Account, Error
 
 
 class AccountForm(BaseModel):
@@ -55,6 +50,7 @@ async def create_account(
     print("\n\n\n####\nROUTER\n#### ", router)
     return AccountToken(account=account, **token.dict())
 
+
 # authenticator.hash_password => comes from the Authenticator base class (inherited in queries)
 # authenticator.login => comes from the Authenticator base class (inherited in queries)
 # repo.create => must match a create function from our queries to create new instance in database table
@@ -78,7 +74,7 @@ async def edit_account(
 @router.get("/token", response_model=AccountToken | None)
 async def get_token(
     request: Request,
-    account: Account = Depends(authenticators.try_get_current_account_data)
+    account: Account = Depends(authenticators.try_get_current_account_data),
 ) -> AccountToken | None:
     if account and authenticators.cookie_name in request.cookies:
         print("GETTING TOKEN")

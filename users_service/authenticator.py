@@ -7,7 +7,7 @@ from queries.accounts import AccountRepo, AccountOut, Account
 # modify this to match up with our code:
 
 # accounts.get => this should be the method we created to get an account.
-# for ex: if could be: accounts.get_one => if our method was named def get_one()
+# for ex: if could be: accounts.get_one =>if our method was named def get_one()
 
 # AccountRepo: this would be the name of our Repo model
 # same for AccountIn, AccountOut, etc.

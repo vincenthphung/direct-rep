@@ -13,6 +13,6 @@ steps = [
         # SQL statement DOWN
         """
         DROP TABLE users;
-        """
+        """,
     ]
 ]

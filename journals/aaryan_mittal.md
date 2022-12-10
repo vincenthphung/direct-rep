@@ -372,7 +372,7 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 2. After lunch, we started with letters service and made a unit for getting an issue endpoint and then for getting all letter endpoint. We then tried to create an unit test for posting a rep into letter but were running into an authorization error. After spending a lot of time and not being able to succeed, we decided it's best for us to do it as a stretch goal as we were meeting the requirements for unit tests.
 
-3. We spend time into formatting. I worked upon the react and frontend portion. I remove the console.log statements, unnecessary comments and did the formatting. I also worked upon the formatting the files in the letters-service backend according to the lint tests.
+3. We spend time into formatting. I worked upon the react and frontend portion. I remove the console.log statements, unnecessary comments and did the formatting. I also worked upon the formatting the files in the letters-service and user-service (backend) according to the lint tests.
 
 4. John decided to work on the readme file for the project. Kim worked upon formatting the backend files.
 
