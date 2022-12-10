@@ -359,4 +359,31 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 2. Frontend deployed on gitlab and working.
 
-3. Zipcodes that start with digit 0 are working.
+3. Website is fully deployed.
+
+4. Zipcodes that start with digit 0 are working.
+
+
+## December 8, 2022 (Friday)
+
+### Work done during the day
+
+1. We started working upon unit tests. We started with users service and made the first unit for checking a logged in user through their token. We created another unit test to test a logged out user.
+
+2. After lunch, we started with letters service and made a unit for getting an issue endpoint and then for getting all letter endpoint. We then tried to create an unit test for posting a rep into letter but were running into an authorization error. After spending a lot of time and not being able to succeed, we decided it's best for us to do it as a stretch goal as we were meeting the requirements for unit tests.
+
+3. We spend time into formatting. I worked upon the react and frontend portion. I remove the console.log statements, unnecessary comments and did the formatting.
+
+4. John decided to work on the readme file for the project. Kim worked upon formatting the backend files.
+
+### Work achieved during the day
+
+1. Unit tests complete for users service.
+
+2. Unit tests complete for letters service.
+
+3. Formatting done for all the files.
+
+4. Readme is updated.
+
+## MVP FOR THE PROJECT IS FINISHED!!!
