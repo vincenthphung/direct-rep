@@ -54,9 +54,7 @@ async def get_civics_api_reps(zipcode):
 @router.get("/civics", response_model=Union[List[CivicsOut], Error])
 def get_reps_from_api(
     zipcode: str,
-    account_data: Optional[dict] = Depends(
-        authenticator.try_get_current_account_data
-    ),
+    account_data: dict = Depends(authenticator.get_current_account_data),
     data: get_civics_api_reps = Depends(),
 ):
     if account_data:
@@ -178,9 +176,7 @@ def get_reps_from_api(
 @router.post("/api/reps", response_model=Union[RepOut, Error])
 def select_rep(
     rep: RepIn,
-    account_data: Optional[dict] = Depends(
-        authenticator.get_current_account_data
-    ),
+    account_data: dict = Depends(authenticator.get_current_account_data),
     repo: RepRepository = Depends(),
 ):
     if account_data:
@@ -193,9 +189,7 @@ def select_rep(
 def get_one_rep_selection(
     rep_id: int,
     response: Response,
-    account_data: Optional[dict] = Depends(
-        authenticator.try_get_current_account_data
-    ),
+    account_data: dict = Depends(authenticator.get_current_account_data),
     repo: RepRepository = Depends(),
 ) -> RepOut:
     if account_data:
@@ -209,9 +203,7 @@ def get_one_rep_selection(
 
 @router.get("/api/reps", response_model=Union[List[RepOut], Error])
 def get_all_reps_selection(
-    account_data: Optional[dict] = Depends(
-        authenticator.try_get_current_account_data
-    ),
+    account_data: dict = Depends(authenticator.get_current_account_data),
     repo: RepRepository = Depends(),
 ):
     if account_data:
@@ -226,9 +218,7 @@ def get_all_reps_selection(
 def get_reps_per_letter(
     letter_id: int,
     response: Response,
-    account_data: Optional[dict] = Depends(
-        authenticator.try_get_current_account_data
-    ),
+    account_data: dict = Depends(authenticator.get_current_account_data),
     repo: RepRepository = Depends(),
 ):
     if account_data:
@@ -244,9 +234,7 @@ def get_reps_per_letter(
 def delete_reps_from_letter(
     letter_id: int,
     rep_id: int,
-    account_data: Optional[dict] = Depends(
-        authenticator.try_get_current_account_data
-    ),
+    account_data: dict = Depends(authenticator.get_current_account_data),
     repo: RepRepository = Depends(),
 ) -> bool:
     if account_data:

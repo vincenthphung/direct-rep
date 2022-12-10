@@ -89,9 +89,7 @@ def create_letter(
 
 @router.get("/api/letters", response_model=Union[List[LetterOut], Error])
 def get_all_letters(
-    account_data: Optional[dict] = Depends(
-        authenticator.get_current_account_data
-    ),
+    account_data: dict = Depends(authenticator.get_current_account_data),
     repo: LetterRepository = Depends(),
 ):
     if account_data:
@@ -104,9 +102,7 @@ def get_all_letters(
 def edit_letter_body(
     letter_id: int,
     content: str,
-    account_data: Optional[dict] = Depends(
-        authenticator.try_get_current_account_data
-    ),
+    account_data: dict = Depends(authenticator.get_current_account_data),
     repo: LetterRepository = Depends(),
 ) -> Union[LetterUpdate, Error]:
     if account_data:
@@ -118,9 +114,7 @@ def edit_letter_body(
 @router.delete("/letters/{letter_id}", response_model=bool)
 def delete_letter(
     letter_id: int,
-    account_data: Optional[dict] = Depends(
-        authenticator.try_get_current_account_data
-    ),
+    account_data: dict = Depends(authenticator.get_current_account_data),
     repo: LetterRepository = Depends(),
 ) -> bool:
     if account_data:
@@ -133,9 +127,7 @@ def delete_letter(
 def get_one_letter(
     letter_id: int,
     response: Response,
-    account_data: Optional[dict] = Depends(
-        authenticator.try_get_current_account_data
-    ),
+    account_data: dict = Depends(authenticator.get_current_account_data),
     repo: LetterRepository = Depends(),
 ) -> LetterOut:
     if account_data:
@@ -149,9 +141,7 @@ def get_one_letter(
 
 @router.get("/api/issues")
 def get_all_issues(
-    account_data: Optional[dict] = Depends(
-        authenticator.get_current_account_data
-    ),
+    account_data: dict = Depends(authenticator.get_current_account_data),
     repo: IssueRepository = Depends(),
 ):
     if account_data:
