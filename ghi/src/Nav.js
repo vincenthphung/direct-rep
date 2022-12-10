@@ -22,15 +22,6 @@ function Navb() {
               <Nav.Link as={NavLink} to="/cletter">
                 Create Letter
               </Nav.Link>
-              <Nav.Link as={NavLink} to="/eletter">
-                Edit Letter
-              </Nav.Link>
-              <Nav.Link as={NavLink} to="/selectreps">
-                Select Reps
-              </Nav.Link>
-              <Nav.Link as={NavLink} to="/review">
-                Review
-              </Nav.Link>
             </Nav>
           ) : (
             ""
