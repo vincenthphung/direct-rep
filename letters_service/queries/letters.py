@@ -57,12 +57,7 @@ class LetterRepository:
                         (%s, %s, %s, %s)
                     RETURNING id;
                     """,
-                    [
-                        topic,
-                        stance,
-                        content,
-                        user_id
-                    ]
+                    [topic, stance, content, user_id],
                 )
                 id = result.fetchone()[0]
                 return LetterNew(
@@ -70,7 +65,7 @@ class LetterRepository:
                     topic=topic,
                     stance=stance,
                     content=content,
-                    user_id=user_id
+                    user_id=user_id,
                 )
         except Exception:
             return {"message": "Create letter did not work"}
@@ -86,10 +81,7 @@ class LetterRepository:
                 SET content = %s
                 WHERE id = %s
                 """,
-                    [
-                        content,
-                        letter_id
-                    ]
+                    [content, letter_id],
                 )
             return LetterUpdate(id=letter_id, content=content)
         except Exception as e:
@@ -114,7 +106,7 @@ class LetterRepository:
                         topic=record[2],
                         stance=record[3],
                         content=record[4],
-                        user_id=record[5]
+                        user_id=record[5],
                     )
                     result.append(letter)
                 return result
@@ -131,7 +123,7 @@ class LetterRepository:
                     FROM letter
                     WHERE id = %s
                     """,
-                    [letter_id]
+                    [letter_id],
                 )
                 record = result.fetchone()
                 if record is None:
@@ -149,7 +141,7 @@ class LetterRepository:
                     DELETE FROM letter
                     WHERE id = %s
                     """,
-                    [letter_id]
+                    [letter_id],
                 )
                 return True
         except Exception as e:
@@ -163,7 +155,7 @@ class LetterRepository:
             topic=record[2],
             stance=record[3],
             content=record[4],
-            user_id=record[5]
+            user_id=record[5],
         )
 
 
@@ -183,7 +175,7 @@ class IssueRepository:
                     issue = Issue(
                         id=record[0],
                         user_issue=record[1],
-                        openai_issue=record[2]
+                        openai_issue=record[2],
                     )
                     result.append(issue)
                 return result

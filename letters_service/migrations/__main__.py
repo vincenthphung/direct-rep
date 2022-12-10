@@ -3,7 +3,7 @@ async def migrate():
     import os
     import sys
 
-    LETTERS_DATABASE_URL = os.environ.get('LETTERS_DATABASE_URL')
+    LETTERS_DATABASE_URL = os.environ.get("LETTERS_DATABASE_URL")
 
     db_url = LETTERS_DATABASE_URL
 

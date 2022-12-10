@@ -57,8 +57,8 @@ class RepRepository(BaseModel):
                         rep.party,
                         rep.address,
                         rep.email,
-                        rep.letter_id
-                    ]
+                        rep.letter_id,
+                    ],
                 )
                 rep_id = result.fetchone()[0]
                 return RepOut(
@@ -69,7 +69,7 @@ class RepRepository(BaseModel):
                     party=rep.party,
                     address=rep.address,
                     email=rep.email,
-                    letter_id=rep.letter_id
+                    letter_id=rep.letter_id,
                 )
         except Exception:
             return {"message": "Create rep did not work"}
@@ -95,7 +95,7 @@ class RepRepository(BaseModel):
                         party=record[4],
                         address=record[5],
                         email=record[6],
-                        letter_id=record[7]
+                        letter_id=record[7],
                     )
                     result.append(rep)
                 return result
@@ -114,7 +114,7 @@ class RepRepository(BaseModel):
                     FROM rep
                     WHERE rep_id = %s
                     """,
-                    [rep_id]
+                    [rep_id],
                 )
                 record = result.fetchone()
                 if record is None:
@@ -134,7 +134,7 @@ class RepRepository(BaseModel):
             party=record[4],
             address=record[5],
             email=record[6],
-            letter_id=record[7]
+            letter_id=record[7],
         )
 
     def get_per_letter(self, letter_id: int) -> Union[List[RepOut], Error]:
@@ -148,7 +148,7 @@ class RepRepository(BaseModel):
                     FROM rep
                     WHERE letter_id = %s
                     """,
-                    [letter_id]
+                    [letter_id],
                 )
                 result = []
                 for record in db:
@@ -160,7 +160,7 @@ class RepRepository(BaseModel):
                         party=record[4],
                         address=record[5],
                         email=record[6],
-                        letter_id=record[7]
+                        letter_id=record[7],
                     )
                     result.append(rep)
                 return result
@@ -176,7 +176,7 @@ class RepRepository(BaseModel):
                     DELETE FROM rep
                     WHERE letter_id = %s AND rep_id = %s
                     """,
-                    [letter_id, rep_id]
+                    [letter_id, rep_id],
                 )
                 return True
         except Exception as e:

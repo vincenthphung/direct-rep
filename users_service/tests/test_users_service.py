@@ -25,7 +25,9 @@ def test_get_token_returns_token_for_user_logged_in():
     app.dependency_overrides[
         authenticators.try_get_current_account_data
     ] = lambda: account
-    response = client.get("/token", cookies={authenticators.cookie_name: "HELLO!"})
+    response = client.get(
+        "/token", cookies={authenticators.cookie_name: "HELLO!"}
+    )
     app.dependency_overrides = {}
     assert response.status_code == 200
     data = response.json()

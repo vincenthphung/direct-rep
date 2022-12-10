@@ -14,6 +14,6 @@ steps = [
         # SQL statement DOWN
         """
         DROP TABLE letter;
-        """
+        """,
     ]
 ]

@@ -17,6 +17,6 @@ steps = [
         # SQL statement DOWN
         """
         DROP TABLE rep;
-        """
+        """,
     ]
 ]

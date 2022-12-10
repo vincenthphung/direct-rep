@@ -3,18 +3,20 @@ from typing import Optional, Union, List
 import requests
 import json
 import os
-from queries.letters import (Error,
-                             LetterNew,
-                             LetterOut,
-                             LetterUpdate,
-                             LetterRepository,
-                             IssueRepository)
+from queries.letters import (
+    Error,
+    LetterNew,
+    LetterOut,
+    LetterUpdate,
+    LetterRepository,
+    IssueRepository,
+)
 from jwtdown_fastapi.authentication import Authenticator
 from pydantic import BaseModel
 
-OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
-SIGNING_KEY = os.environ.get('SIGNING_KEY')
-OPENAI_URL = os.environ.get('OPENAI_URL')
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
+SIGNING_KEY = os.environ.get("SIGNING_KEY")
+OPENAI_URL = os.environ.get("OPENAI_URL")
 
 
 class AccountOut(BaseModel):
@@ -43,15 +45,20 @@ authenticator = MyAuthenticator(SIGNING_KEY)
 router = APIRouter()
 
 url = OPENAI_URL
-headers = {"Authorization": f'Bearer {OPENAI_API_KEY}'}
+headers = {"Authorization": f"Bearer {OPENAI_API_KEY}"}
 
 
 async def get_open_ai(topic):
-    response = requests.post(url, headers=headers, json={
-        "model": "text-davinci-002",
-        "prompt": topic,
-        "temperature": 0.7, "max_tokens": 256
-    })
+    response = requests.post(
+        url,
+        headers=headers,
+        json={
+            "model": "text-davinci-002",
+            "prompt": topic,
+            "temperature": 0.7,
+            "max_tokens": 256,
+        },
+    )
     content = json.loads(response.content)
     return content
 
@@ -60,10 +67,9 @@ async def get_open_ai(topic):
 def create_letter(
     topic: str,  # use this to enter the prompt
     stance: bool,
-    account_data: dict = Depends(
-        authenticator.get_current_account_data),
+    account_data: dict = Depends(authenticator.get_current_account_data),
     data: get_open_ai = Depends(),
-    repo: LetterRepository = Depends()
+    repo: LetterRepository = Depends(),
 ):
     if account_data:
         say = ""
@@ -74,23 +80,24 @@ def create_letter(
         input_query = f"Write a letter {say} {topic}"
         get_open_ai(topic=input_query)
         stance = stance
-        content = data['choices'][0]['text']
-        user_id = account_data['id']
+        content = data["choices"][0]["text"]
+        user_id = account_data["id"]
         return repo.create(topic, stance, content, user_id)
     else:
-        return ("Not working")
+        return "Not working"
 
 
 @router.get("/api/letters", response_model=Union[List[LetterOut], Error])
 def get_all_letters(
     account_data: Optional[dict] = Depends(
-        authenticator.get_current_account_data),
+        authenticator.get_current_account_data
+    ),
     repo: LetterRepository = Depends(),
 ):
     if account_data:
         return repo.get_all()
     else:
-        return ("Not working")
+        return "Not working"
 
 
 @router.put("/letters/{letter_id}", response_model=Union[LetterUpdate, Error])
@@ -98,26 +105,28 @@ def edit_letter_body(
     letter_id: int,
     content: str,
     account_data: Optional[dict] = Depends(
-        authenticator.try_get_current_account_data),
+        authenticator.try_get_current_account_data
+    ),
     repo: LetterRepository = Depends(),
 ) -> Union[LetterUpdate, Error]:
     if account_data:
         return repo.update(letter_id, content)
     else:
-        return ("Not working")
+        return "Not working"
 
 
 @router.delete("/letters/{letter_id}", response_model=bool)
 def delete_letter(
     letter_id: int,
     account_data: Optional[dict] = Depends(
-        authenticator.try_get_current_account_data),
+        authenticator.try_get_current_account_data
+    ),
     repo: LetterRepository = Depends(),
 ) -> bool:
     if account_data:
         return repo.delete(letter_id)
     else:
-        return ("Not working")
+        return "Not working"
 
 
 @router.get("/letters/{letter_id}", response_model=Optional[LetterOut])
@@ -125,7 +134,8 @@ def get_one_letter(
     letter_id: int,
     response: Response,
     account_data: Optional[dict] = Depends(
-        authenticator.try_get_current_account_data),
+        authenticator.try_get_current_account_data
+    ),
     repo: LetterRepository = Depends(),
 ) -> LetterOut:
     if account_data:
@@ -134,16 +144,17 @@ def get_one_letter(
             response.status_code = 404
         return letter
     else:
-        return ("Not working")
+        return "Not working"
 
 
 @router.get("/api/issues")
 def get_all_issues(
     account_data: Optional[dict] = Depends(
-        authenticator.get_current_account_data),
+        authenticator.get_current_account_data
+    ),
     repo: IssueRepository = Depends(),
 ):
     if account_data:
         return repo.get_all()
     else:
-        return ("Not working")
+        return "Not working"

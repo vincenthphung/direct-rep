@@ -26,6 +26,6 @@ steps = [
         # SQL statement DOWN
         """
         DROP TABLE issue;
-        """
+        """,
     ]
 ]
