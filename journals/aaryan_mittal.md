@@ -350,7 +350,7 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 2. We wrote gitlab yml files and did frontend deployment. We got stuck in an issue where our filed would work for HTTP web request but would not work for HTTPS web request. Gitlab only supported HTTPS request. So, we looked at the code and found a request in our authenticator which was HTTP. After, changing the authenticator request, the issue got fixed.
 
-3. Kim worked upon the zipcodes. If a zipcode started from the digit 0, then reps api did not work. She fixed the issue in the backend.
+3. Kim worked upon the zipcodes. If a zipcode started from the digit 0, then reps api did not work because it would not consider it as a real digit. She then changed the inout from integer to a string and then sent to Google Civic API. The API accepted it as a string, so the error got fixed.
 
 
 ### Work achieved during the day
