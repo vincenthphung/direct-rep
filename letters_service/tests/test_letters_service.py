@@ -39,7 +39,7 @@ def test_get_all_letters():
     # Act
     response = client.get("/api/letters")
     # Assert
-    # assert response.status_code == 200
+    assert response.status_code == 200
     print("Get all letters test", response)
     assert response.json() == []
     # Clean up
@@ -48,7 +48,16 @@ def test_get_all_letters():
 
 class CreateRep:
     def create(self, rep):
-        result = {"rep_id": 100}
+        result = {
+          "rep_id": 100,
+          "office":"President",
+          "level":"country",
+          "name": "Joe Biden",
+          "party": "Democrat",
+          "address": "123 White House Street",
+          "email": "joe@biden.com",
+          "letter_id": 100
+          }
         result.update(rep)
         return result
 
