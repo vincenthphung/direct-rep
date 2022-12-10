@@ -6,7 +6,9 @@ client = TestClient(app)
 
 
 def test_get_token_returns_none_for_user_not_logged_in():
-    app.dependency_overrides[authenticators.try_get_current_account_data] = lambda: None
+    app.dependency_overrides[
+        authenticators.try_get_current_account_data
+    ] = lambda: None
     response = client.get("/token")
     app.dependency_overrides = {}
     assert response.status_code == 200

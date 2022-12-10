@@ -42,4 +42,5 @@ class MyAuthenticator(Authenticator):
         # You must return TWO values from this method.
         return users.email, AccountOut(**users.dict())
 
+
 authenticators = MyAuthenticator(SIGNING_KEY)

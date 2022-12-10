@@ -1,4 +1,3 @@
-from typing import Optional, List, Union
 from fastapi import (
     Depends,
     Response,
@@ -6,13 +5,9 @@ from fastapi import (
     Request,
 )
 from jwtdown_fastapi.authentication import Token
-
 from authenticator import authenticators
-
-
 from pydantic import BaseModel
-
-from queries.accounts import AccountIn, AccountOut, AccountRepo, Account, Error
+from queries.accounts import AccountIn, AccountOut, AccountRepo, Account
 
 
 class AccountForm(BaseModel):

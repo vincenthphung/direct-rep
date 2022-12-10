@@ -1,7 +1,5 @@
 from pydantic import BaseModel
 from typing import Optional, Union
-
-
 from queries.pool import conn
 
 
@@ -92,7 +90,10 @@ class AccountRepo:
                 db.execute(
                     """
                 UPDATE users
-                SET full_name = %s, email = %s, zipcode = %s, hashed_password = %s
+                SET full_name = %s,
+                    email = %s,
+                    zipcode = %s,
+                    hashed_password = %s
                 WHERE id = %s
                 """,
                     [
