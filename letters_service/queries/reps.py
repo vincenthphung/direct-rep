@@ -72,7 +72,6 @@ class RepRepository(BaseModel):
                     letter_id=rep.letter_id
                 )
         except Exception:
-            print("ERROR")
             return {"message": "Create rep did not work"}
 
     def get_all(self) -> Union[Error, List[RepOut]]:
@@ -101,7 +100,6 @@ class RepRepository(BaseModel):
                     result.append(rep)
                 return result
         except Exception as e:
-            print("ERROR")
             print(e)
             return {"message": "could not get all reps"}
 
@@ -167,7 +165,6 @@ class RepRepository(BaseModel):
                     result.append(rep)
                 return result
         except Exception as e:
-            print("ERROR")
             print(e)
             return {"message": "could not get reps for that letter"}
 

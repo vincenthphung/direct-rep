@@ -119,7 +119,6 @@ class LetterRepository:
                     result.append(letter)
                 return result
         except Exception as e:
-            print("ERROR")
             print(e)
             return {"message": "could not get all letters"}
 
@@ -189,6 +188,5 @@ class IssueRepository:
                     result.append(issue)
                 return result
         except Exception as e:
-            print("ERROR")
             print(e)
             return {"message": "could not get all issues"}

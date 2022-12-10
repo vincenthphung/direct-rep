@@ -63,7 +63,6 @@ async def read_migrations(dir: str) -> list[MigrationFile]:
 
 
 async def ensure_migrations_table(db_url: str):
-    print("\n\n\n\n\n","ENSURE - letters db_url =", db_url, "\n\n\n\n\n\n\n")
     async with await AsyncConnection.connect(db_url) as conn:
         async with conn.cursor() as db:
             await db.execute(
@@ -77,7 +76,6 @@ async def ensure_migrations_table(db_url: str):
 
 
 async def current_migrations(db_url: str) -> list[MigrationRecord]:
-    print("\n\n\n\n\n","CURRENT - letters db_url =", db_url, "\n\n\n\n\n\n\n")
     async with await AsyncConnection.connect(db_url) as conn:
         async with conn.cursor(row_factory=class_row(MigrationRecord)) as db:
             await db.execute(
@@ -92,7 +90,6 @@ async def current_migrations(db_url: str) -> list[MigrationRecord]:
 
 async def up(db_url, to=LATEST, dir=os.path.dirname(__file__)):
     await ensure_migrations_table(db_url)
-    print("\n\n\n\n\n","DEF UP -> ENSURE - letters db_url =", db_url, "\n\n\n\n\n\n\n")
     migrations = await read_migrations(dir)
     applied = await current_migrations(db_url)
     migrations_to_run = zip_longest(migrations, applied)
@@ -118,7 +115,6 @@ async def up(db_url, to=LATEST, dir=os.path.dirname(__file__)):
 
 
 async def down(db_url, to=ZERO, dir=os.path.dirname(__file__)):
-    print("\n\n\n\n\n","DEF DOWN -> ENSURE - letters db_url =", db_url, "\n\n\n\n\n\n\n")
     await ensure_migrations_table(db_url)
     migrations = await read_migrations(dir)
     applied = await current_migrations(db_url)

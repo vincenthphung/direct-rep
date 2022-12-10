@@ -1,15 +1,12 @@
 from typing import Optional, List, Union
 from fastapi import (
     Depends,
-    HTTPException,
-    status,
     Response,
     APIRouter,
     Request,
 )
 from jwtdown_fastapi.authentication import Token
 
-# from authenticator import authenticator
 from authenticator import authenticators
 
 
@@ -43,17 +40,9 @@ async def create_account(
 ):
     hashed_password = authenticators.hash_password(info.password)
     account = repo.create(info, hashed_password)
-    print("\n\n\n####\nACCOUNT\n#### ", account)
     form = AccountForm(username=info.email, password=info.password)
     token = await authenticators.login(response, request, form, repo)
-    # print("CREATING ACCOUNT")
-    print("\n\n\n####\nROUTER\n#### ", router)
     return AccountToken(account=account, **token.dict())
-
-
-# authenticator.hash_password => comes from the Authenticator base class (inherited in queries)
-# authenticator.login => comes from the Authenticator base class (inherited in queries)
-# repo.create => must match a create function from our queries to create new instance in database table
 
 
 @router.put("/api/accounts/{id}", response_model=AccountToken | HttpError)
@@ -77,7 +66,6 @@ async def get_token(
     account: Account = Depends(authenticators.try_get_current_account_data),
 ) -> AccountToken | None:
     if account and authenticators.cookie_name in request.cookies:
-        print("GETTING TOKEN")
         return {
             "access_token": request.cookies[authenticators.cookie_name],
             "type": "Bearer",

@@ -5,8 +5,6 @@ from main import app
 
 client = TestClient(app)
 
-print("Letters test file")
-
 
 def test_get_issue():
     issue = {
@@ -21,7 +19,6 @@ def test_get_issue():
     app.dependency_overrides = {}
     assert response.status_code == 200
     data = response.json()
-    print("ISSUE test data", data)
     assert data[0] == issue
 
 
@@ -40,7 +37,6 @@ def test_get_all_letters():
     response = client.get("/api/letters")
     # Assert
     assert response.status_code == 200
-    print("Get all letters test", response)
     assert response.json() == []
     # Clean up
     app.dependency_overrides = {}

@@ -1,8 +1,7 @@
 from pydantic import BaseModel
-from typing import Optional, List, Union
-from datetime import date
+from typing import Optional, Union
 
-# from queries.pool import pool
+
 from queries.pool import conn
 
 
@@ -34,11 +33,7 @@ class AccountOut(BaseModel):
 
 class AccountRepo:
     def get(self, email: str) -> Optional[Account]:
-        # connect the database
-        # with pool.connection() as conn:
-        # get a cursor (something to run SQL with)
         with conn.cursor() as db:
-            # Run our SELECT statement
             result = db.execute(
                 """
                 SELECT id
@@ -64,11 +59,7 @@ class AccountRepo:
             )
 
     def create(self, account: AccountIn, hashed_password: str) -> Account:
-        # connect the database
-        # with pool.connection() as conn:
-        # get a cursor (something to run SQL with)
         with conn.cursor() as db:
-            # Run our INSERT statement
             result = db.execute(
                 """
                 INSERT INTO users
@@ -97,9 +88,6 @@ class AccountRepo:
         self, id: int, account: AccountIn, hashed_password: str
     ) -> Union[Account, Error]:
         try:
-            # connect to the database
-            # with pool.connection() as conn:
-            # get a cursor (something to run SQL with)
             with conn.cursor() as db:
                 db.execute(
                     """
@@ -115,7 +103,6 @@ class AccountRepo:
                         id,
                     ],
                 )
-            # old_data = letter.dict()
             return Account(
                 id=id,
                 full_name=account.full_name,

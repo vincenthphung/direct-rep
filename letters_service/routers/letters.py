@@ -66,7 +66,6 @@ def create_letter(
     repo: LetterRepository = Depends()
 ):
     if account_data:
-        print("POST letter account data", account_data)
         say = ""
         if stance is True:
             say = "in favor of"

@@ -42,7 +42,4 @@ class MyAuthenticator(Authenticator):
         # You must return TWO values from this method.
         return users.email, AccountOut(**users.dict())
 
-
-# authenticator = MyAuthenticator(os.environ["SIGNING_KEY"])
 authenticators = MyAuthenticator(SIGNING_KEY)
-print("\n\n\n\n", "authenticators = ", authenticators, "\n\n\n\n\n")
