@@ -13,12 +13,12 @@ function LandingPage() {
         </p>
         <hr />
         <Link to="/signup">
-          <button type="submit" className="btn btn-dark btn-lg">
+          <button type="submit" className="btn btn-dark btn-lg ms-5">
             Signup
           </button>
         </Link>
         <Link to="/login">
-          <button type="submit" className="btn btn-dark btn-lg">
+          <button type="submit" className="btn btn-dark btn-lg ms-5">
             Login
           </button>
         </Link>
