@@ -77,13 +77,13 @@ def get_reps_from_api(
             elif 'emails' in item:
                 list_b.append([item["name"], item["party"], [
                               {'line1': 'N/A', 'city': 'N/A',
-                               'state': 'N/A', 'zip': 'N/A'}],
-                               item['emails'][0], i])
+                               'state': 'N/A', 'zip': 'N/A'}
+                              ], item['emails'][0], i])
             else:
                 list_b.append([item["name"], item["party"], [
                               {'line1': 'N/A', 'city': 'N/A',
-                               'state': 'N/A', 'zip': 'N/A'}],
-                               "N/A", i])
+                               'state': 'N/A', 'zip': 'N/A'}
+                              ],"N/A", i])
 
         # combine both data into one list
         for i in list_a:

@@ -3,9 +3,12 @@ from typing import Optional, Union, List
 import requests
 import json
 import os
-from queries.letters import (Error, LetterNew,
-                             LetterOut, LetterUpdate, LetterRepository, IssueRepository)
-# from .new_keys import OPENAI_API_KEY
+from queries.letters import (Error,
+                             LetterNew,
+                             LetterOut,
+                             LetterUpdate,
+                             LetterRepository,
+                             IssueRepository)
 from jwtdown_fastapi.authentication import Authenticator
 from pydantic import BaseModel
 
@@ -64,9 +67,8 @@ def create_letter(
 ):
     if account_data:
         print("POST letter account data", account_data)
-        # input_query = "Write a letter" {if stance === true} say = "in favor of"; else: say = "in opposition to" + topic
         say = ""
-        if stance == True:
+        if stance is True:
             say = "in favor of"
         else:
             say = "in opposition to"

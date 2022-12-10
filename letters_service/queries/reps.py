@@ -80,7 +80,8 @@ class RepRepository(BaseModel):
             with conn.cursor() as db:
                 result = db.execute(
                     """
-                    SELECT rep_id, office, level, name, party, address, email, letter_id
+                    SELECT rep_id, office, level, name,
+                    party, address, email, letter_id
                     FROM rep
                     ORDER BY rep_id;
                     """
