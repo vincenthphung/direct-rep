@@ -3,9 +3,6 @@ import { useToken } from "./TokenTest.js";
 
 function LogoutButton() {
   const [, , logout] = useToken();
-  // const [token, login, logout] = useToken();
-
-  // console.log("logout button test", logout);
 
   useEffect(() => {
     async function clickLogout() {

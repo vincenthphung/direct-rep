@@ -1,69 +1,81 @@
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import { useAuthContext } from "./TokenTest.js";
-import {useEffect,useState} from "react";
+import { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import copy from "copy-to-clipboard";
 
 function DetailView() {
-    const params = useParams();
-    const { token } = useAuthContext();
-    const [, setOneLetter] = useState([""]);
-    const [, setId] = useState();
-    const [oneContent, setContent] = useState();
-    const [oneStance, setStance] = useState();
-    const [oneTopic, setTopic] = useState();
-    const [oneDate, setDate] = useState();
-    const [repSelection, setSelection] = useState([]);
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const s = params.id
-    // console.log(id)
-    useEffect(() => {
-        (async () => {
-          const response = await fetch(`${process.env.REACT_APP_LETTERS_API_HOST}/letters/${s}`, {
-            headers: { Authorization: `Bearer ${token}` },
-          });
-          const content = await response.json();
-          // console.log("ALL LETTERS CONTENT", content);
-          // console.log("test user content", userContent);
-          setOneLetter(content);
-    setId(content["id"]);
-    setContent(content["content"]);
-    setStance(content["stance"]);
-    setTopic(content["topic"]);
-    setDate(content["created"]);
-        })();
-        async function seeReps() {
-            const urlReps = `${process.env.REACT_APP_LETTERS_API_HOST}/reps/letter/${s}`;
-            const response = await fetch(urlReps, {
-              headers: { Authorization: `Bearer ${token}` },
-            });
-            if (response.ok) {
-              const data = await response.json();
-              // console.log("\n \n DATA", data);
-              setSelection(data);
-            }
-          }
-          seeReps();
-      }, [token, s]);
-      const copyToClipboard = () => {
-        copy(oneContent);
-        alert(`Your letter has been copied:${oneContent}`);
-      };
+  const params = useParams();
+  const { token } = useAuthContext();
+  const [, setOneLetter] = useState([""]);
+  const [, setId] = useState();
+  const [oneContent, setContent] = useState();
+  const [oneStance, setStance] = useState();
+  const [oneTopic, setTopic] = useState();
+  const [oneDate, setDate] = useState();
+  const [repSelection, setSelection] = useState([]);
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  const s = params.id;
+  useEffect(() => {
+    (async () => {
+      const response = await fetch(
+        `${process.env.REACT_APP_LETTERS_API_HOST}/letters/${s}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      const content = await response.json();
+      setOneLetter(content);
+      setId(content["id"]);
+      setContent(content["content"]);
+      setStance(content["stance"]);
+      setTopic(content["topic"]);
+      setDate(content["created"]);
+    })();
+    async function seeReps() {
+      const urlReps = `${process.env.REACT_APP_LETTERS_API_HOST}/reps/letter/${s}`;
+      const response = await fetch(urlReps, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setSelection(data);
+      }
+    }
+    seeReps();
+  }, [token, s]);
+  const copyToClipboard = () => {
+    copy(oneContent);
+    alert(`Your letter has been copied:${oneContent}`);
+  };
 
-
-      return(
-      <div className="offset-3 col-6">
+  return (
+    <div className="offset-3 col-6">
       <div className="shadow p-4 mt-4">
-      <div className="text-center">
-        <h2>Detail letter view</h2>
+        <div className="text-center">
+          <h2>Detail letter view</h2>
         </div>
         <div className="mb-3">
           <Card className="text-center">
-            <Card.Header>Date created: {''} {oneDate ? new Date(oneDate).toLocaleDateString(undefined, options) : ''} </Card.Header>
+            <Card.Header>
+              Date created: {""}{" "}
+              {oneDate
+                ? new Date(oneDate).toLocaleDateString(undefined, options)
+                : ""}{" "}
+            </Card.Header>
             <Card.Body>
               <Card.Title>
-                {oneTopic != null? oneStance ? `Write a letter in favor of ${oneTopic}` : `Write a letter in opposition to ${oneTopic}` : '' }
+                {oneTopic != null
+                  ? oneStance
+                    ? `Write a letter in favor of ${oneTopic}`
+                    : `Write a letter in opposition to ${oneTopic}`
+                  : ""}
               </Card.Title>
               <Card.Text> {oneContent} </Card.Text>
             </Card.Body>
@@ -104,9 +116,7 @@ function DetailView() {
               Dashboard
             </button>
           </Link>
-
         </div>
-
       </div>
       <div className="offset-3 col-2">
         <div className="shadow p-4 mt-4">
@@ -117,10 +127,10 @@ function DetailView() {
           >
             Copy letter
           </button>
-          </div>
-          </div>
+        </div>
       </div>
-      )
+    </div>
+  );
 }
 
-export default DetailView
+export default DetailView;

@@ -2,38 +2,34 @@ import Card from "react-bootstrap/Card";
 import { useState, useEffect } from "react";
 import React from "react";
 import { useAuthContext } from "./TokenTest.js";
-// import { useEditLetterMutation } from "./store/lettersApi";
 import { useNavigate } from "react-router-dom";
-import { trackPromise } from 'react-promise-tracker';
+import { trackPromise } from "react-promise-tracker";
 
 export const EditLetter = () => {
   const { token } = useAuthContext();
- const [user, setUser] = useState();
+  const [user, setUser] = useState();
   const [, setOneLetter] = useState([""]);
   const [oneId, setId] = useState();
   const [oneContent, setContent] = useState();
   const [oneStance, setStance] = useState();
   const [oneTopic, setTopic] = useState();
   const [oneDate, setDate] = useState();
-  // const [editLetter, ] = useEditLetterMutation();
-  // const [editLetter, result] = useEditLetterMutation();
   const navigate = useNavigate();
 
- // to get the user's id
- useEffect(() => {
-  async function getUserId() {
-    const url = `${process.env.REACT_APP_USERS_API_HOST}/token`;
-    const response = await fetch(url, {
-      credentials: "include",
-    });
-    if (response.ok) {
-      const data = await response.json();
-      setUser(data.account.id);
-      // console.log("Set user", user)
+  // to get the user's id
+  useEffect(() => {
+    async function getUserId() {
+      const url = `${process.env.REACT_APP_USERS_API_HOST}/token`;
+      const response = await fetch(url, {
+        credentials: "include",
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setUser(data.account.id);
+      }
     }
-  }
-  getUserId();
-}, [token, user]);
+    getUserId();
+  }, [token, user]);
 
   // to get the id of the most recent letter created:
   useEffect(() => {
@@ -44,12 +40,10 @@ export const EditLetter = () => {
       });
       if (response.ok) {
         const content = await response.json();
-        const data = content.filter((c) => c['user_id'] === user)
-        // console.log("LETTER DATA", data);
+        const data = content.filter((c) => c["user_id"] === user);
         for (let i = 0; i < data.length; i++) {
           if (i === data.length - 1) {
             const lastId = data[i].id;
-            // console.log("LAST", lastId);
             setId(lastId);
           }
         }
@@ -62,18 +56,19 @@ export const EditLetter = () => {
   useEffect(() => {
     if (oneId != null) {
       async function showLetter(oneId) {
-        const response = await fetch(`${process.env.REACT_APP_LETTERS_API_HOST}/letters/${oneId}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const response = await fetch(
+          `${process.env.REACT_APP_LETTERS_API_HOST}/letters/${oneId}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
         const content = await response.json();
         setOneLetter(content);
         setId(content["id"]);
         setContent(content["content"]);
-        // console.log("initial content", content["content"]);
         setStance(content["stance"]);
         setTopic(content["topic"]);
         setDate(content["created"]);
-        // console.log("LETTER ONE CONTENT", content);
       }
       showLetter(oneId);
     }
@@ -85,35 +80,45 @@ export const EditLetter = () => {
     const fetchConfig = {
       method: "put",
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     };
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
+      // eslint-disable-next-line no-unused-vars
       const data = await response.json();
-      console.log("put letter", data);
     }
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
-    trackPromise(putLetter(oneId, oneContent).then(() => navigate("/selectreps")));
-    // console.log(oneId, oneContent);
-    // trackPromise(editLetter({ oneId, oneContent }).then(() => navigate("/selectreps")));
+    trackPromise(
+      putLetter(oneId, oneContent).then(() => navigate("/selectreps"))
+    );
   }
 
-  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
   return (
     <div className="row">
       <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
           <div className="text-center">
-          <h1>Edit letter</h1>
+            <h1>Edit letter</h1>
           </div>
           <div className="mb-3">
             <Card className="text-center">
-              <Card.Header>Date created: {''} {oneDate ? new Date(oneDate).toLocaleDateString(undefined, options) : ''} </Card.Header>
+              <Card.Header>
+                Date created: {""}{" "}
+                {oneDate
+                  ? new Date(oneDate).toLocaleDateString(undefined, options)
+                  : ""}{" "}
+              </Card.Header>
               <Card.Body>
                 <Card.Title>
                   Write a letter{" "}

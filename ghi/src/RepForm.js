@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import React from "react";
-// import { useCreateRepMutation } from "./store/repsApi";
 import { useAuthContext } from "./TokenTest.js";
-// import { trackPromise } from 'react-promise-tracker';
 import { useNavigate } from "react-router-dom";
 
 function RepForm() {
@@ -18,25 +16,22 @@ function RepForm() {
   const [selection, setSelection] = useState([]);
   const [zip, setZip] = useState();
   const [email, setEmail] = useState();
-  // const [createRep, ] = useCreateRepMutation();
-  // const [createRep, result] = useCreateRepMutation();
   const navigate = useNavigate();
 
- // to get the user's id
- useEffect(() => {
-  async function getUserId() {
-    const url = `${process.env.REACT_APP_USERS_API_HOST}/token`;
-    const response = await fetch(url, {
-      credentials: "include",
-    });
-    if (response.ok) {
-      const data = await response.json();
-      setUser(data.account.id);
-      // console.log("Set user", user)
+  // to get the user's id
+  useEffect(() => {
+    async function getUserId() {
+      const url = `${process.env.REACT_APP_USERS_API_HOST}/token`;
+      const response = await fetch(url, {
+        credentials: "include",
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setUser(data.account.id);
+      }
     }
-  }
-  getUserId();
-}, [token, user]);
+    getUserId();
+  }, [token, user]);
 
   // to get the id of the most recent letter created:
   useEffect(() => {
@@ -47,13 +42,10 @@ function RepForm() {
       });
       if (response.ok) {
         const content = await response.json();
-        const data = content.filter((c) => c['user_id'] === user)
-        // console.log("test user content", data);
-        // console.log("LETTER DATA", data);
+        const data = content.filter((c) => c["user_id"] === user);
         for (let i = 0; i < data.length; i++) {
           if (i === data.length - 1) {
             const lastId = data[i].id;
-            // console.log("LAST", lastId);
             setLetterId(lastId);
           }
         }
@@ -71,9 +63,7 @@ function RepForm() {
       });
       if (response.ok) {
         const data = await response.json();
-        // console.log("response", response);
         const zipcode = data.account.zipcode;
-        // console.log("zipcode", zipcode);
         setZip(zipcode);
       }
     }
@@ -82,7 +72,6 @@ function RepForm() {
 
   //  to select the reps
   useEffect(() => {
-    // to prevent loading before zip is defined:
     if (zip != null) {
       async function fetchReps(zip) {
         const urlCivics = `${process.env.REACT_APP_LETTERS_API_HOST}/civics?zipcode=${zip}`;
@@ -98,8 +87,6 @@ function RepForm() {
       // connects the reps fetch with the user's zip code
     }
   }, [token, zip]);
-
-  // console.log("\n \n REPS LIST", reps_list);
 
   // to get the rep data from the dropdown selection for the database:
   async function handleRepChange(event) {
@@ -122,30 +109,29 @@ function RepForm() {
 
   // to create a rep:
   async function postRep() {
-    const data = {office, level, name, party, address, email, letter_id}
+    const data = { office, level, name, party, address, email, letter_id };
     const url = `${process.env.REACT_APP_LETTERS_API_HOST}/api/reps`;
     const fetchConfig = {
       method: "post",
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(data),
     };
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
+      // eslint-disable-next-line no-unused-vars
       const data = await response.json();
-      console.log("post rep", data);
     }
   }
 
   // to send that data to the database via the store reducer:
   async function handleSubmit(e) {
     e.preventDefault();
-    postRep({ office, level, name, party, address, email, letter_id }).then(() => showReps(letter_id));
-    // trackPromise(createRep({ office, level, name, party, address, email, letter_id }).then(
-    //   () => showReps(letter_id)
-    // ));
+    postRep({ office, level, name, party, address, email, letter_id }).then(
+      () => showReps(letter_id)
+    );
   }
 
   async function showReps(letter_id) {
@@ -181,17 +167,14 @@ function RepForm() {
   }, [letter_id, token]);
 
   async function deleteRep(id) {
-    // if (window.confirm("Are you sure? This letter will be deleted")) {
     await fetch(
       `${process.env.REACT_APP_LETTERS_API_HOST}/reps/letters/${letter_id}?rep_id=${id}`,
       { headers: { Authorization: `Bearer ${token}` }, method: "DELETE" }
     ).then(() => showReps(letter_id));
   }
-  // }
 
   async function finalPage(e) {
     e.preventDefault();
-    // console.log(oneId, oneContent);
     navigate("/review");
   }
 
@@ -227,8 +210,8 @@ function RepForm() {
       </div>
       <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
-        <div className="text-center">
-          <h2>Representatives</h2>
+          <div className="text-center">
+            <h2>Representatives</h2>
           </div>
           <div>
             <table className="table table-striped table-sm">
@@ -258,7 +241,9 @@ function RepForm() {
               </tbody>
             </table>
           </div>
-            <button onClick={finalPage} className="btn btn-primary">Final Page</button>
+          <button onClick={finalPage} className="btn btn-primary">
+            Final Page
+          </button>
         </div>
       </div>
     </div>

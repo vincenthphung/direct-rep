@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
   const [, login] = useToken();
-  // const [token, login] = useToken();
   const [username, setUser] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -20,7 +19,6 @@ function LoginForm() {
       <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
           <h1>Login</h1>
-          {/* <form onSubmit={login}> */}
           <form>
             <div className="mb-3">
               <label htmlFor="username">Email</label>

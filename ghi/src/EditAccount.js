@@ -31,8 +31,7 @@ function EditAccount() {
   const [password, setPassword] = useState("");
   const [userId, setId] = useState("");
   const navigate = useNavigate();
-  const [editUser, ] = useEditUserMutation();
-  // const [editUser, result] = useEditUserMutation();
+  const [editUser] = useEditUserMutation();
 
   // to get current account info
   useEffect(() => {
@@ -43,7 +42,6 @@ function EditAccount() {
       });
       if (response.ok) {
         const data = await response.json();
-        // console.log("get user data test", data);
         setName(data.account.full_name);
         setEmail(data.account.email);
         setZipcode(data.account.zipcode);

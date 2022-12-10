@@ -9,11 +9,8 @@ export const lettersApi = createApi({
       const selector = authApi.endpoints.getToken.select();
       const { data: tokenData } = selector(getState());
       if (tokenData && tokenData.access_token) {
-        console.log("letters store authorized, token data:", tokenData);
         headers.set("Authorization", `Bearer ${tokenData.access_token}`);
-      }
-      else {
-        console.log("headers invalid");
+      } else {
       }
       return headers;
     },
@@ -26,20 +23,16 @@ export const lettersApi = createApi({
     createLetter: builder.mutation({
       query: (arg) => {
         const { topic, stance } = arg;
-        console.log("create letter arg", arg);
         return {
           method: "post",
           url: `/api/letters?topic=${topic}&stance=${stance}`,
-          // url: `/api/letters?`,
           credentials: "include",
-          // params: { topic, stance },
         };
       },
     }),
     editLetter: builder.mutation({
       query: (arg) => {
         const { oneId, oneContent } = arg;
-        // console.log("edit letter arg", arg);
         return {
           method: "put",
           url: `/letters/${oneId}?content=${oneContent}`,

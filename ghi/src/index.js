@@ -1,48 +1,49 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 import { store } from "./store/store";
 import { Provider } from "react-redux";
 import { usePromiseTracker } from "react-promise-tracker";
-import {ProgressBar} from 'react-loader-spinner';
+import { ProgressBar } from "react-loader-spinner";
 
-
-const LoadingIndicator = props => {
+const LoadingIndicator = (props) => {
   const { promiseInProgress } = usePromiseTracker();
- return (
-  promiseInProgress &&
+  return (
+    promiseInProgress && (
       <div
         style={{
           width: "100%",
           height: "100",
           display: "flex",
           justifyContent: "center",
-          alignItems: "center"
+          alignItems: "center",
         }}
       >
-        <div><h2>Your letter is being processed</h2></div>
+        <div>
+          <h2>Your letter is being processed</h2>
+        </div>
         <ProgressBar
-  height="75"
-  width="75"
-  ariaLabel="progress-bar-loading"
-  wrapperStyle={{}}
-  wrapperClass="progress-bar-wrapper"
-  borderColor = '#000000'
-  barColor = '#1E90FF'
-/>
+          height="75"
+          width="75"
+          ariaLabel="progress-bar-loading"
+          wrapperStyle={{}}
+          wrapperClass="progress-bar-wrapper"
+          borderColor="#000000"
+          barColor="#1E90FF"
+        />
       </div>
- );
-}
+    )
+  );
+};
 
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
       <App />
-      <LoadingIndicator/>
+      <LoadingIndicator />
     </Provider>
   </React.StrictMode>
 );

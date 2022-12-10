@@ -29,8 +29,7 @@ function AccountForm() {
   const [email, setEmail] = useState("");
   const [zipcode, setZipcode] = useState("");
   const [password, setPassword] = useState("");
-  const [createUser, ] = useCreateUserMutation();
-  // const [createUser, result ] = useCreateUserMutation();
+  const [createUser] = useCreateUserMutation();
   const navigate = useNavigate();
 
   async function handleSubmit(e) {

@@ -1,10 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider, useToken } from "./TokenTest.js";
-// import ErrorNotification from "./ErrorNotification";
 import AccountForm from "./AccountForm";
 import RepForm from "./RepForm";
 import "./App.css";
-// import Navigation from "./Nav";
 import Dashboard from "./Dashboard";
 import LetterForm from "./CreateLetter";
 import EditLetter from "./EditLetter";
@@ -25,16 +23,10 @@ function GetToken() {
 
 function App() {
   const domain = /https:\/\/[^/]+/;
-
-  console.log("DOMAIN", domain);
-  const basename = process.env.PUBLIC_URL.replace(domain, '');
-  // const basename = process.env.PUBLIC_URL;
-  console.log("What is process env public url", process.env.PUBLIC_URL);
-  // const basename = process.env.PUBLIC_URL.replace(domain,domain);
+  const basename = process.env.PUBLIC_URL.replace(domain, "");
 
   return (
     <BrowserRouter basename={basename}>
-      {console.log("BASENAME TEST", basename)}
       <AuthProvider>
         <GetToken />
         <Navb />

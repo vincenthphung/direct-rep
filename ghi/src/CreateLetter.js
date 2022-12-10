@@ -1,21 +1,16 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import Form from "react-bootstrap/Form";
-// import { useCreateLetterMutation } from "./store/lettersApi";
 import { useAuthContext } from "./TokenTest.js";
 import { useNavigate } from "react-router-dom";
-import { trackPromise } from 'react-promise-tracker';
+import { trackPromise } from "react-promise-tracker";
 
 function LetterForm() {
   const { token } = useAuthContext();
   const [issues, setIssues] = useState([]);
   const [topic, setTopic] = useState("");
   const [stance, setStance] = useState();
-  // const [createLetter, ] = useCreateLetterMutation();
-  // const [createLetter, result] = useCreateLetterMutation();
   const navigate = useNavigate();
-
-  console.log("TOKEN CREATE LETTER", token);
 
   // to collect and load the issues list from the database
   useEffect(() => {
@@ -32,31 +27,26 @@ function LetterForm() {
     fetchIssues();
   }, [token]);
 
-  console.log("ISSUES LIST", issues);
-
   // to create a letter:
   async function postLetter(topic, stance) {
     const url = `${process.env.REACT_APP_LETTERS_API_HOST}/api/letters?topic=${topic}&stance=${stance}`;
     const fetchConfig = {
       method: "post",
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     };
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
+      // eslint-disable-next-line no-unused-vars
       const data = await response.json();
-      console.log("post letter", data);
     }
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log("Create letter handle submit")
     trackPromise(postLetter(topic, stance).then(() => navigate("/eletter")));
-    // trackPromise(createLetter({ topic, stance }).then(() => navigate("/eletter")));
-    // createLetter({ topic, stance }).then(() => navigate("/eletter"));
   }
 
   return (

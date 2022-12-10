@@ -1,13 +1,11 @@
-import {useEffect,useState} from "react";
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useAuthContext } from "./TokenTest.js";
 
 function Dashboard() {
   const { token } = useAuthContext();
   const [letters, setLetters] = useState([]);
   const [user, setUser] = useState();
-
-  console.log("TOKEN DASHBOARD", token);
 
   // to get the user's id
   useEffect(() => {
@@ -19,27 +17,24 @@ function Dashboard() {
       if (response.ok) {
         const data = await response.json();
         setUser(data.account.id);
-        console.log("Set user", user)
       }
     }
     getUserId();
   }, [token, user]);
 
-
   useEffect(() => {
     (async () => {
-      const response = await fetch(`${process.env.REACT_APP_LETTERS_API_HOST}/api/letters`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_LETTERS_API_HOST}/api/letters`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       const content = await response.json();
-      console.log("ALL LETTERS CONTENT", content);
-      const userContent = content.filter((c) => c['user_id'] === user)
-      // console.log("test user content", userContent);
+      const userContent = content.filter((c) => c["user_id"] === user);
       setLetters(userContent);
     })();
   }, [token, user]);
-
-  // console.log("user letters", letters);
 
   const del = async (id) => {
     if (window.confirm("Are you sure: This Letter will be Deleted")) {
@@ -86,8 +81,8 @@ function Dashboard() {
                         </Link>
                       </td>
                       <td>
-                      <Link
-                          to={"/letters/"+letter.id}
+                        <Link
+                          to={"/letters/" + letter.id}
                           className="btn btn-sm btn-outline-secondary"
                         >
                           See details
@@ -101,19 +96,16 @@ function Dashboard() {
           </div>
         </div>
       </div>
-
-
-
-        <div className="offset-3 col-1">
-          <div className="shadow p-4 mt-4">
-            <Link to="/cletter">
-              <button type="submit" className="btn btn-success">
-                Create new letter
-              </button>
-            </Link>
-          </div>
+      <div className="offset-3 col-1">
+        <div className="shadow p-4 mt-4">
+          <Link to="/cletter">
+            <button type="submit" className="btn btn-success">
+              Create new letter
+            </button>
+          </Link>
         </div>
       </div>
+    </div>
   );
 }
 

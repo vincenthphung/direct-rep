@@ -11,9 +11,7 @@ function Navb() {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand>
-          DirectREP
-        </Navbar.Brand>
+        <Navbar.Brand>DirectREP</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           {token ? (

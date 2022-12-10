@@ -14,7 +14,6 @@ export async function getTokenInternal() {
     });
     if (response.ok) {
       const data = await response.json();
-      // console.log("token data test", data);
       internalToken = data.access_token;
       return internalToken;
     }
@@ -67,7 +66,6 @@ export function useToken() {
   useEffect(() => {
     async function fetchToken() {
       const token = await getTokenInternal();
-      // console.log("login token test", token);
       setToken(token);
     }
     if (!token) {
@@ -81,7 +79,6 @@ export function useToken() {
       await fetch(url, { method: "delete", credentials: "include" });
       internalToken = null;
       setToken(null);
-      // console.log("LOGOUT TOKEN TEST", token);
       navigate("/");
     }
   }
@@ -90,10 +87,7 @@ export function useToken() {
     const url = `${process.env.REACT_APP_USERS_API_HOST}/token`;
     const form = new FormData();
     form.append("username", username);
-    console.log("token test username", username);
     form.append("password", password);
-    console.log("token test password", password);
-    console.log('URL login token test', url);
     const response = await fetch(url, {
       method: "post",
       credentials: "include",
