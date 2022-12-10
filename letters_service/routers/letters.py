@@ -3,12 +3,10 @@ from typing import Optional, Union, List
 import requests
 import json
 import os
-from queries.letters import (Error, LetterIn, LetterNew,
+from queries.letters import (Error, LetterNew,
                              LetterOut, LetterUpdate, LetterRepository, IssueRepository)
 # from .new_keys import OPENAI_API_KEY
 from jwtdown_fastapi.authentication import Authenticator
-import os
-from .token_auth import get_current_user
 from pydantic import BaseModel
 
 OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
@@ -37,19 +35,11 @@ class MyAuthenticator(Authenticator):
         return account.email, AccountOut(account.dict())
 
 
-# print("\n \n SIGNING_KEY", os.environ)
-# authenticator = MyAuthenticator(os.environ["SIGNING_KEY"])
 authenticator = MyAuthenticator(SIGNING_KEY)
 
 router = APIRouter()
 
-# add keys.py to gitignore
-# openai_api_key = OPENAI_API_KEY
-
-# headers structure vary depending on the api source
-# url = "https://api.openai.com/v1/completions"
 url = OPENAI_URL
-# headers = {"Authorization": f'Bearer {openai_api_key}'}
 headers = {"Authorization": f'Bearer {OPENAI_API_KEY}'}
 
 
@@ -81,14 +71,12 @@ def create_letter(
         else:
             say = "in opposition to"
         input_query = f"Write a letter {say} {topic}"
-        print("POST letter input query", input_query)
         get_open_ai(topic=input_query)
         stance = stance
         content = data['choices'][0]['text']
         user_id = account_data['id']
         return repo.create(topic, stance, content, user_id)
     else:
-        print("Create letter fail")
         return ("Not working")
 
 
@@ -155,8 +143,6 @@ def get_all_issues(
     repo: IssueRepository = Depends(),
 ):
     if account_data:
-        print("\n\n Account Data Issues success \n\n", account_data)
         return repo.get_all()
     else:
-        print("\n\n Account Data Issues Fail \n\n", account_data)
         return ("Not working")
