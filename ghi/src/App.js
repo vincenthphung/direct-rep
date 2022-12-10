@@ -25,7 +25,6 @@ function GetToken() {
 
 function App() {
   const domain = /https:\/\/[^/]+/;
-  // const domain = /https:\/\/[^/]+/;
 
   console.log("DOMAIN", domain);
   const basename = process.env.PUBLIC_URL.replace(domain, '');
