@@ -56,7 +56,7 @@ class CreateRep:
           "party": "Democrat",
           "address": "123 White House Street",
           "email": "joe@biden.com",
-          "letter_id": 100
+          "letter_id": 100,
           }
         result.update(rep)
         return result
@@ -70,7 +70,7 @@ def test_create_rep():
     "party": "Democrat",
     "address": "123 White House Street",
     "email": "joe@biden.com",
-    "letter_id": 100
+    "letter_id": 100,
     }
     # Arrange
   app.dependency_overrides[RepRepository] = CreateRep
@@ -83,8 +83,8 @@ def test_create_rep():
     party= "Democrat",
     address= "123 White House Street",
     email= "joe@biden.com",
-    letter_id= 100
-    ).dict()
+    letter_id= 100,
+    )
 
   expected = {
     "rep_id": 100,
@@ -94,7 +94,7 @@ def test_create_rep():
     "party": "Democrat",
     "address": "123 White House Street",
     "email": "joe@biden.com",
-    "letter_id": 100
+    "letter_id": 100,
     }
 
     # Act
