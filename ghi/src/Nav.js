@@ -25,8 +25,8 @@ function Navb() {
             </Nav>
           ) : (
             <Fragment>
-              <Nav.Link as={NavLink} to="/eaccount">
-                Edit Account
+              <Nav.Link as={NavLink} to="/">
+                Home
               </Nav.Link>
             </Fragment>
           )}
