@@ -93,6 +93,11 @@ function Dashboard() {
                 })}
               </tbody>
             </table>
+            <Link to="/cletter">
+            <button type="submit" className="btn btn-success">
+              Create new letter
+            </button>
+          </Link>
           </div>
         </div>
       </div>

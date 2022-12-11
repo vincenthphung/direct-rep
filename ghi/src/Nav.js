@@ -24,11 +24,11 @@ function Navb() {
               </Nav.Link>
             </Nav>
           ) : (
-            <Fragment>
+            <Nav className="me-auto">
               <Nav.Link as={NavLink} to="/">
                 Home
               </Nav.Link>
-            </Fragment>
+            </Nav>
           )}
           <Nav>
             {token ? (

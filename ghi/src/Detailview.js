@@ -106,9 +106,20 @@ function DetailView() {
               })}
             </tbody>
           </table>
+          <Link to="/dashboard">
+            <button type="submit" className="btn btn-success">
+              Dashboard
+            </button>
+          </Link>
+          <button
+            onClick={copyToClipboard}
+            type="submit"
+            className="btn btn-primary"
+          >
+            Copy letter
+          </button>
         </div>
       </div>
-
       <div className="offset-3 col-2">
         <div className="shadow p-4 mt-4">
           <Link to="/dashboard">
