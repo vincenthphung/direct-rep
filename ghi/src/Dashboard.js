@@ -101,15 +101,6 @@ function Dashboard() {
           </div>
         </div>
       </div>
-      <div className="offset-3 col-1">
-        <div className="shadow p-4 mt-4">
-          <Link to="/cletter">
-            <button type="submit" className="btn btn-success">
-              Create new letter
-            </button>
-          </Link>
-        </div>
-      </div>
     </div>
   );
 }
