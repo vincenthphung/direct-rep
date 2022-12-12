@@ -20,10 +20,11 @@ Making contacting your elected officials more accessible
 ## Design
 
 [API Design](api-design.md)
-![API Design](wireframes/wo.png)
-![API Design](wireframes/direct-rep-wireframe.png)
-![API Design](wireframes/user-service-endpoints.png)
-![API Design](wireframes/letter-service-endpoints.png)
+![API Design](wireframes/direct-rep-wireframe-overview.png)
+![API Design](wireframes/users-microservice-wireframe.png)
+![API Design](wireframes/letters-microservice-wireframe.png)
+![API Design](wireframes/users-microservice-endpoints.png)
+![API Design](wireframes/letters-microservice-endpoints.png)
 
 ## Stretch Goals
 
