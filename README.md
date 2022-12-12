@@ -79,12 +79,13 @@ There may be data missing from Google Civics API which may lead to certain repre
 
 <br><br>
 **Letters-Service Endpoints**
-|     **Page**      | **Request Type** |               **Path**                | **Request Shape (JSON)**                                     | **Response Shape (JSON)**                                                                                                                                 |
-| :---------------: | :--------------: | :-----------------------------------: | :----------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   Create Letter   |       POST       |      localhost:8090/api/letters       | {<br>"topic": `"string"`,<br>"stance": `"boolean"`<br>}      | {<br>"id": `0`,<br>"topic": `"string"`<br>"stance": `true`,<br>"content": `"string"`,<br>"user_id": `0`<br>}                                              |
-| Get Single Letter |       GET        | localhost:8090/letters/`${letter_id}` |                                                              | {<br>"id": `0`,<br>"created": `"2022-12-12T04:00:12.644Z"`,<br>"topic": `"string"`,<br>"stance": `true`,<br>"content": `"string"`,<br>"user_id": `0`<br>} |
-| Edit Letter Body  |       PUT        | localhost:8090/letters/`${letter_id}` | {<br>"letter_id": `"integers,"<br>"content": `"string"`<br>} | {<br>"content": `"string"`<br>}                                                                                                                           |
-|   Delete Letter   |      DELETE      | localhost:8090/letters/`${letter_id}` |                                                              | {<br>`true`<br>}                                                                                                                                          |
+|         **Page**         | **Request Type** |               **Path**                | **Request Shape (JSON)**                                     | **Response Shape (JSON)**                                                                                                                                 |
+| :----------------------: | :--------------: | :-----------------------------------: | :----------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|      Create Letter       |       POST       |      localhost:8090/api/letters       | {<br>"topic": `"string"`,<br>"stance": `"boolean"`<br>}      | {<br>"id": `0`,<br>"topic": `"string"`<br>"stance": `true`,<br>"content": `"string"`,<br>"user_id": `0`<br>}                                              |
+| Get ALL Letters for User |       GET        |      localhost:8090/api/letters       | N/A                                                          | {<br>"id": `0`,<br>"created": `"2022-12-12T04:00:12.644Z"`,<br>"topic": `"string"`,<br>"stance": `true`,<br>"content": `"string"`,<br>"user_id": `0`<br>} |
+|    Get Single Letter     |       GET        | localhost:8090/letters/`${letter_id}` | N/A                                                          | {<br>"id": `0`,<br>"created": `"2022-12-12T04:00:12.644Z"`,<br>"topic": `"string"`,<br>"stance": `true`,<br>"content": `"string"`,<br>"user_id": `0`<br>} |
+|     Edit Letter Body     |       PUT        | localhost:8090/letters/`${letter_id}` | {<br>"letter_id": `"integers,"<br>"content": `"string"`<br>} | {<br>"content": `"string"`<br>}                                                                                                                           |
+|      Delete Letter       |      DELETE      | localhost:8090/letters/`${letter_id}` | N/A                                                          | {<br>`true`<br>}                                                                                                                                          |
 
 
 <br><br>
@@ -97,14 +98,14 @@ There may be data missing from Google Civics API which may lead to certain repre
 <br><br>
 **Reps Endpoints**
 
-|                     **Page**                     | **Request Type** |                 **Path**                 | **Request Shape (JSON)** | **Response Shape (JSON)**                                                                                                                                                                                         |
-| :----------------------------------------------: | :--------------: | :--------------------------------------: | :----------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|                Get Reps from API                 |       GET        |          localhost:8090/civics           |                          | {<br>"office": `"string"`,<br>"level": `"string"`,<br>"name": `"string"`,<br>"party": `"string"`,<br>"address": `"string"`<br>"address": `{}`,<br>"email": `"string"`<br>}                                        |
-|                   Get All Reps                   |       GET        |         localhost:8090/api/reps          |                          | [<br>{<br>"office": `"string"`,<br>"level": `"string"`,<br>"name": `"string"`,<br>"party": `"string"`,<br>"address": `"string"`,<br>"address": `{}`,<br>"email": `"string"`<br>}<br>]                             |
-|                    Select Rep                    |       POST       |         localhost:8090/api/reps          |                          | {<br>"rep_id" `0`,<br>"office": `"string"`,<br>"level": `"string"`,<br>"name": `"string"`,<br>"party": `"string"`,<br>"address": `"string"`,<br>"address": `{}`,<br>"email": `"string"`,<br>"letter_id": `0`<br>} |
-|             Get SINGLE Rep Selection             |       GET        |      localhost:8090/reps/${rep_id}       |                          | {<br>"office": `"string"`,<br>"level": `"string"`,<br>"name": `"string"`,<br>"party": `"string"`,<br>"address": `"string"`,<br>"address": `{}`,<br>"email": `"string"`<br>}                                       |
-|    Get ALL Rep Selections for SPECIFIC letter    |       GET        | localhost:8090/reps/letter/${letter_id}  |                          | [<br>{<br>"office": `"string"`,<br>"level": `"string"`,<br>"name": `"string"`,<br>"party": `"string"`,<br>"address": `"string"`,<br>"address": `{}`,<br>"email": `"string"`<br>}<br>]                             |
-| Delete SINGLE Rep Selection from SPECIFIC letter |      DELETE      | localhost:8090/reps/letters/${letter_id} |                          | {<br>`true`<br>}                                                                                                                                                                                                  |
+|                     **Page**                     | **Request Type** |                **Path**                 | **Request Shape (JSON)**                                                                                                                                                    | **Response Shape (JSON)**                                                                                                                                                                                         |
+| :----------------------------------------------: | :--------------: | :-------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|                Get Reps from API                 |       GET        |          localhost:8090/civics          | N/A                                                                                                                                                                         | {<br>"office": `"string"`,<br>"level": `"string"`,<br>"name": `"string"`,<br>"party": `"string"`,<br>"address": `"string"`<br>"address": `{}`,<br>"email": `"string"`<br>}                                        |
+|                   Get All Reps                   |       GET        |         localhost:8090/api/reps         | N/A                                                                                                                                                                         | [<br>{<br>"office": `"string"`,<br>"level": `"string"`,<br>"name": `"string"`,<br>"party": `"string"`,<br>"address": `"string"`,<br>"address": `{}`,<br>"email": `"string"`<br>}<br>]                             |
+|                    Select Rep                    |       POST       |         localhost:8090/api/reps         | {<br>"office": `"string"`,<br>"level": `"string"`,<br>"name": `"string"`,<br>"party": `"string"`,<br>"address": `"string"`,<br>"address": `{}`,<br>"email": `"string"`<br>} | {<br>"rep_id" `0`,<br>"office": `"string"`,<br>"level": `"string"`,<br>"name": `"string"`,<br>"party": `"string"`,<br>"address": `"string"`,<br>"address": `{}`,<br>"email": `"string"`,<br>"letter_id": `0`<br>} |
+|             Get SINGLE Rep Selection             |       GET        |      localhost:8090/reps/${rep_id}      | N/A                                                                                                                                                                         | {<br>"office": `"string"`,<br>"level": `"string"`,<br>"name": `"string"`,<br>"party": `"string"`,<br>"address": `"string"`,<br>"address": `{}`,<br>"email": `"string"`<br>}                                       |
+|    Get ALL Rep Selections for SPECIFIC letter    |       GET        | localhost:8090/reps/letter/${letter_id} | N/A                                                                                                                                                                         | [<br>{<br>"office": `"string"`,<br>"level": `"string"`,<br>"name": `"string"`,<br>"party": `"string"`,<br>"address": `"string"`,<br>"address": `{}`,<br>"email": `"string"`<br>}<br>]                             |
+| Delete SINGLE Rep Selection from SPECIFIC letter |      DELETE      | localhost:8090/reps/letter/${letter_id} | N/A                                                                                                                                                                         | {<br>`true`<br>}                                                                                                                                                                                                  |
 
 
 
@@ -123,7 +124,6 @@ There may be data missing from Google Civics API which may lead to certain repre
 |   topic   |   `VARCHAR(1000)`    |         `NOT NULL`         |
 |  stance   |      `BOOLEAN`       |         `NOT NULL`         |
 |  user_id  |      `INTEGER`       |         `NOT NULL`         |
-|    id     | `SERIAL PRIMARY KEY` |         `NOT NULL`         |
 
 
 <br><br><br>
@@ -187,12 +187,13 @@ There may be data missing from Google Civics API which may lead to certain repre
 	`git clone «repo»`
 2. cd into it
    `cd direct-rep`
-3. Create a volume and name it beta-data
+3. Create a new file in the root directory called `.env` (This is where you'll store your Google Civics API Key and you OpenAI API Key)
+4. Create a volume and name it beta-data
 	`docker volume create postgres-data`
-4. Build the image and run the container
+5. Build the image and run the container
 	`docker compose up --build`
-5.  Open browser to http://localhost:3000 to make sure it’s running
-6.  Once it’s up and running, you can begin with creating an account and confirming that account. Once you confirm the account, you can create a new letter.
+6.  Open browser to http://localhost:3000 to make sure it’s running
+7.  Once it’s up and running, you can begin with creating an account and confirming that account. Once you confirm the account, you can create a new letter.
 
 
 <br><br><br>
