@@ -1,4 +1,4 @@
-<html>
+<>
 <centered>
 # **DirectRep**
 </centered>
@@ -209,4 +209,4 @@ There may be data missing from Google Civics API which may lead to certain repre
 > - Login / logout feature.
 > - Email template sent to user’s email with letter draft and rep’s emails list.
 > - Keep track of past letter templates / requests
-</html>
+</>
