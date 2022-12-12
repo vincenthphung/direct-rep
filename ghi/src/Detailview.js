@@ -55,6 +55,20 @@ function DetailView() {
     alert(`Your letter has been copied:${oneContent}`);
   };
 
+  const ButtonMailto = ({ mailto, text }) => {
+    return (
+        <Link
+            to='#'
+            onClick={(e) => {
+                window.location.href = mailto;
+                e.preventDefault();
+            }}
+        >
+            {text}
+        </Link>
+    );
+};
+
   return (
     <div className="offset-3 col-6">
       <div className="shadow p-4 mt-4">
@@ -91,6 +105,7 @@ function DetailView() {
                 <th>Office</th>
                 <th>Address</th>
                 <th>Email</th>
+                <th>Send email</th>
               </tr>
             </thead>
             <tbody>
@@ -101,6 +116,12 @@ function DetailView() {
                     <td value={rep.office}>{rep.office}</td>
                     <td value={rep.rep_id}>{rep.address}</td>
                     <td value={rep.email}>{rep.email}</td>
+                    <td value={rep.email}>
+                        {
+                          rep.email === "N/A"? "N/A" :
+                          <button><ButtonMailto text={`Email ${rep.name}`} mailto={`mailto:${rep.email}?body=${oneContent}`} /></button>
+                        }
+                      </td>
                   </tr>
                 );
               })}
