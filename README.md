@@ -75,18 +75,20 @@ There may be data missing from Google Civics API which may lead to certain repre
 ### **Local Endpoints**
 
 
-|                  **Page**                  | **Request Type** |                **Path**                 |
-| :----------------------------------------: | :--------------: | :-------------------------------------: |
-|               Create Letter                |       POST       |       localhost:8090/api/letters        |
-|           Get All User's Letters           |       GET        |         localhost:8090/letters          |
-|              Edit Letter Body              |       PUT        |  localhost:8090/letters/`${letter_id}`  |
-|               Delete Letter                |      DELETE      |  localhost:8090/letters/`${letter_id}`  |
-|             Get Single Letter              |       GET        |  localhost:8090/letters/`${letter_id}`  |
+|                  **Page**                  | **Request Type** |                **Path**                 | **Request Shape (JSON)**                                     | **Response Shape (JSON)**                                                                                                                                 |
+| :----------------------------------------: | :--------------: | :-------------------------------------: | :----------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|               Create Letter                |       POST       |       localhost:8090/api/letters        | {<br>"topic": `"string"`,<br>"stance": `"boolean"`<br>}      | {<br>"id": `0`,<br>"topic": `"string"`<br>"stance": `true`,<br>"content": `"string"`,<br>"user_id": `0`<br>}                                              |
+|           Get All User's Letters           |       GET        |         localhost:8090/letters          |                                                              | {<br> "id": `0`,<br>"created": `"2022-12-12T03:56:37:142Z"`<br>}                                                                                          |
+|              Edit Letter Body              |       PUT        |  localhost:8090/letters/`${letter_id}`  | {<br>"letter_id": `"integers,"<br>"content": `"string"`<br>} | {<br>"content": `"string"`}                                                                                                                               |
+|               Delete Letter                |      DELETE      |  localhost:8090/letters/`${letter_id}`  |                                                              | {<br>`"true"`<br>}                                                                                                                                        |
+|             Get Single Letter              |       GET        |  localhost:8090/letters/`${letter_id}`  |                                                              | {<br>"id": `0`,<br>"created": `"2022-12-12T04:00:12.644Z"`,<br>"topic": `"string"`,<br>"stance": `true`,<br>"content": `"string"`,<br>"user_id": `0`<br>} |
 |               Get ALL issues               |       GET        |        localhost:8090/api/issues        |
 |             Get Reps from API              |       GET        |          localhost:8090/civics          |
 |                 Select Rep                 |       POST       |         localhost:8090/api/reps         |
 |          Get SINGLE Rep Selection          |       GET        |      localhost:8090/reps/${rep_id}      |
 | Get ALL Rep Selections for SPECIFIC letter |       GET        | localhost:8090/reps/letter/${letter_id} |
+
+### **Response Shape (JSON)**
 
 
 <br><br><br>
