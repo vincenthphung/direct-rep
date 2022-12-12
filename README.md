@@ -1,7 +1,6 @@
-<>
-<centered>
+
 # **DirectRep**
-</centered>
+
 
 ⚡️ Powered by: [Google Civics API](https://developers.google.com/civic-information) and [OpenAI GPT3](https://beta.openai.com/docs/models/gpt-3) ⚡️
 
@@ -209,4 +208,3 @@ There may be data missing from Google Civics API which may lead to certain repre
 > - Login / logout feature.
 > - Email template sent to user’s email with letter draft and rep’s emails list.
 > - Keep track of past letter templates / requests
-</>
