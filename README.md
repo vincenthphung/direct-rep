@@ -6,11 +6,11 @@
 
 DirectRep is an app that allows US Citizens to write letters to their elected representatives using Artifical Intelligence to generate the body text given a specific "issue" and "stance" on that issue. The user's representatives are gathered using [Google Civic Information API](https://developers.google.com/civic-information) and are determined by the Zip Code the user provides on Sign-Up.
 
-This service lowers the barrier-to-entry for citizens to have their voices heard by their elected representatives. Regardless of your literacy, your English proficiency, your ability to articulate your thoughts and opinions, all of these things are now easier for ***everyone*** to access. 
+This service lowers the barrier-to-entry for citizens to have their voices heard by their elected representatives. Regardless of your literacy, your English proficiency, your ability to articulate your thoughts and opinions, having your voice heard is now easier for ***everyone*** to access. 
 
 <br><br>
 **\*\*Disclaimers\*\***  
-There may be data missing from Google Civics API which may lead to certain representatives not being shown in the results. Always double check and verify your representatives data.
+There may be data missing from Google Civics API which may lead to certain representatives not being shown in the results. Always double check and verify your representatives' data.
 
 
 <br>
@@ -29,19 +29,19 @@ There may be data missing from Google Civics API which may lead to certain repre
 ## 🗺️**Diagrams of Architecture**🗺️
 
 ---
-### **DirectRep WireFrame Ovierview**
+### **DirectRep Wireframe Overview**
 ![DirectRep wireframe overview](https://i.imgur.com/soj2m9q.png)
 ### **Users-Service Microservice**
 ![users-service microservice architecture diagram](https://i.imgur.com/2rLvTBS.png)
-### **Users Service Endpoints**
+### **Users-Service Endpoints**
 ![users-service microservice endpoints diagram](https://i.imgur.com/kRd2CNz.png)
 ### **Letters-Service Microservice**
 ![letters-service microservice architecture diagram](https://i.imgur.com/hP3HoZe.jpg)
-### **Letters Service Endpoints**
+### **Letters-Service Endpoints**
 ![letters-service microservice endpoints diagram](https://i.imgur.com/0JKQQVk.png)
 <br><br><br>
 
-## 👥**Users Microservice**👥 -- `:8080`
+## 👥**Users-Service Microservice**👥 -- `:8080`
 
 <br><br>
 
@@ -78,7 +78,7 @@ There may be data missing from Google Civics API which may lead to certain repre
 ### **Endpoints**
 
 <br><br>
-**Letter Endpoints**
+**Letters-Service Endpoints**
 |     **Page**      | **Request Type** |               **Path**                | **Request Shape (JSON)**                                     | **Response Shape (JSON)**                                                                                                                                 |
 | :---------------: | :--------------: | :-----------------------------------: | :----------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |   Create Letter   |       POST       |      localhost:8090/api/letters       | {<br>"topic": `"string"`,<br>"stance": `"boolean"`<br>}      | {<br>"id": `0`,<br>"topic": `"string"`<br>"stance": `true`,<br>"content": `"string"`,<br>"user_id": `0`<br>}                                              |
