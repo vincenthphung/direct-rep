@@ -163,7 +163,7 @@ function ReviewForm() {
                       <td value={rep.email}>
                         {
                           rep.email === "N/A"? "N/A" :
-                          <button><ButtonMailto label={oneContent} mailto={rep.email} /></button>
+                          <button><ButtonMailto label={oneContent} mailto={`mailto:${rep.email}`} /></button>
                         }
                       </td>
                     </tr>
