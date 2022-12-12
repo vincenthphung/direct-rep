@@ -1,9 +1,12 @@
 # **DirectRep**
 ⚡️ Powered by: [Google Civics API](https://developers.google.com/civic-information) and [OpenAI GPT3](https://beta.openai.com/docs/models/gpt-3) ⚡️
 
-DirectRep is an app that allows users to write letters to their elected representatives using Artifical Intelligence to generate the body text given a specific "issue" and "stance" on that issue. The user's representatives are gathered using [Google Civic Information API](https://developers.google.com/civic-information) and are determined by the Zip Code the user provides on Sign-Up. 
+DirectRep is an app that allows US Citizens to write letters to their elected representatives using Artifical Intelligence to generate the body text given a specific "issue" and "stance" on that issue. The user's representatives are gathered using [Google Civic Information API](https://developers.google.com/civic-information) and are determined by the Zip Code the user provides on Sign-Up.
 
-\*\*Disclaimers\*\*  
+This service lowers the barrier-to-entry for citizens to have their voices heard by their elected representatives. Regardless of your literacy, your English proficiency, your ability to articulate your thoughts and opinions, all of these things are now easier for ***everyone*** to access. 
+
+<br><br>
+**\*\*Disclaimers\*\***  
 There may be data missing from Google Civics API which may lead to certain representatives not being shown in the results. Always double check and verify your representatives data.
 
 
@@ -20,7 +23,7 @@ There may be data missing from Google Civics API which may lead to certain repre
 <br><br>
 
 
-## 🗺️**Diagram of Architecture**🗺️
+## 🗺️**Diagrams of Architecture**🗺️
 
 ---
 
@@ -170,3 +173,20 @@ There may be data missing from Google Civics API which may lead to certain repre
 	`docker compose up --build`
 5.  Open browser to http://localhost:3000 to make sure it’s running
 6.  Once it’s up and running, you can begin with creating an account and confirming that account. Once you confirm the account, you can create a new letter.
+
+
+<br><br><br>
+## **FAQ**
+### **Who are your customers?**  
+> People residing in the United States of America.
+### **What needs/desires does your application satisfy for your customers?**  
+> Making contacting your elected officials more accessible
+### What features/functionality do you plan to have in the application that helps your customers?
+> - List of representatives with their details.
+> - List of issues.
+> - Open AI to draft an automated AI generated letter.
+> - Login / logout feature.
+> - Email template sent to user’s email with letter draft and rep’s emails list.
+> - Keep track of past letter templates / requests
+### next
+> next
