@@ -45,8 +45,8 @@ There may be data missing from Google Civics API which may lead to certain repre
 ### **Endpoints**
 
 
-|      **Page**       | **Request Type** |             **Path**              |
-| :-----------------: | :--------------: | :-------------------------------: |
+|      **Page**       | **Request Type** |             **Path**              | **Request Shape JSON** | **Response Shape (JSON) |
+| :-----------------: | :--------------: | :-------------------------------: | :--------------------: | :---------------------: |
 |     Signup Page     |      `POST`      |    localhost:8080/api/accounts    |
 |     Login Page      |      `POST`      |       localhost:8080/token        |
 |      Get Token      |      `GET`       |       localhost:8080/token        |
@@ -74,56 +74,66 @@ There may be data missing from Google Civics API which may lead to certain repre
 
 ### **Local Endpoints**
 
+<br><br>
+**Letter Endpoints**
+|        **Page**        | **Request Type** |               **Path**                | **Request Shape (JSON)**                                     | **Response Shape (JSON)**                                                                                                                                 |
+| :--------------------: | :--------------: | :-----------------------------------: | :----------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|     Create Letter      |       POST       |      localhost:8090/api/letters       | {<br>"topic": `"string"`,<br>"stance": `"boolean"`<br>}      | {<br>"id": `0`,<br>"topic": `"string"`<br>"stance": `true`,<br>"content": `"string"`,<br>"user_id": `0`<br>}                                              |
+| Get All User's Letters |       GET        |      localhost:8090/api/letters       |                                                              | {<br> "id": `0`,<br>"created": `"2022-12-12T03:56:37:142Z"`<br>}                                                                                          |
+|   Get Single Letter    |       GET        | localhost:8090/letters/`${letter_id}` |                                                              | {<br>"id": `0`,<br>"created": `"2022-12-12T04:00:12.644Z"`,<br>"topic": `"string"`,<br>"stance": `true`,<br>"content": `"string"`,<br>"user_id": `0`<br>} |
+|    Edit Letter Body    |       PUT        | localhost:8090/letters/`${letter_id}` | {<br>"letter_id": `"integers,"<br>"content": `"string"`<br>} | {<br>"content": `"string"`<br>}                                                                                                                           |
+|     Delete Letter      |      DELETE      | localhost:8090/letters/`${letter_id}` |                                                              | {<br>`"true"`<br>}                                                                                                                                        |
 
-|                  **Page**                  | **Request Type** |                **Path**                 | **Request Shape (JSON)**                                     | **Response Shape (JSON)**                                                                                                                                 |
-| :----------------------------------------: | :--------------: | :-------------------------------------: | :----------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|               Create Letter                |       POST       |       localhost:8090/api/letters        | {<br>"topic": `"string"`,<br>"stance": `"boolean"`<br>}      | {<br>"id": `0`,<br>"topic": `"string"`<br>"stance": `true`,<br>"content": `"string"`,<br>"user_id": `0`<br>}                                              |
-|           Get All User's Letters           |       GET        |         localhost:8090/letters          |                                                              | {<br> "id": `0`,<br>"created": `"2022-12-12T03:56:37:142Z"`<br>}                                                                                          |
-|              Edit Letter Body              |       PUT        |  localhost:8090/letters/`${letter_id}`  | {<br>"letter_id": `"integers,"<br>"content": `"string"`<br>} | {<br>"content": `"string"`}                                                                                                                               |
-|               Delete Letter                |      DELETE      |  localhost:8090/letters/`${letter_id}`  |                                                              | {<br>`"true"`<br>}                                                                                                                                        |
-|             Get Single Letter              |       GET        |  localhost:8090/letters/`${letter_id}`  |                                                              | {<br>"id": `0`,<br>"created": `"2022-12-12T04:00:12.644Z"`,<br>"topic": `"string"`,<br>"stance": `true`,<br>"content": `"string"`,<br>"user_id": `0`<br>} |
-|               Get ALL issues               |       GET        |        localhost:8090/api/issues        |
-|             Get Reps from API              |       GET        |          localhost:8090/civics          |
-|                 Select Rep                 |       POST       |         localhost:8090/api/reps         |
-|          Get SINGLE Rep Selection          |       GET        |      localhost:8090/reps/${rep_id}      |
-| Get ALL Rep Selections for SPECIFIC letter |       GET        | localhost:8090/reps/letter/${letter_id} |
 
-### **Response Shape (JSON)**
+<br><br>
+**Issues Endpoints**
+
+|    **Page**    | **Request Type** |         **Path**          | **Request Shape (JSON)** | **Response Shape (JSON)** |
+| :------------: | :--------------: | :-----------------------: | :----------------------: | :-----------------------: |
+| Get ALL issues |       GET        | localhost:8090/api/issues |                          |   {<br>`"string"`<br>}    |
+
+<br><br>
+**Reps Endpoints**
+
+|                     **Page**                     | **Request Type** |                 **Path**                 | **Request Shape (JSON)** |                                                                                             **Response Shape (JSON)**                                                                                             |
+| :----------------------------------------------: | :--------------: | :--------------------------------------: | :----------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|                Get Reps from API                 |       GET        |          localhost:8090/civics           |                          |                    {<br>"office": `"string"`,<br>"level": `"string"`,<br>"name": `"string"`,<br>"party": `"string"`,<br>"address": `"string"`,<br>"address": `{}`,<br>"email": `"string"`<br>}                    |
+|                   Get All Reps                   |       GET        |         localhost:8090/api/reps          |                          |               [<br>{<br>"office": `"string"`,<br>"level": `"string"`,<br>"name": `"string"`,<br>"party": `"string"`,<br>"address": `"string"`,<br>"address": `{}`,<br>"email": `"string"`<br>}<br>]               |
+|                    Select Rep                    |       POST       |         localhost:8090/api/reps          |                          | {<br>"rep_id" `0`,<br>"office": `"string"`,<br>"level": `"string"`,<br>"name": `"string"`,<br>"party": `"string"`,<br>"address": `"string"`,<br>"address": `{}`,<br>"email": `"string"`,<br>"letter_id": `0`<br>} |
+|             Get SINGLE Rep Selection             |       GET        |      localhost:8090/reps/${rep_id}       |                          |                    {<br>"office": `"string"`,<br>"level": `"string"`,<br>"name": `"string"`,<br>"party": `"string"`,<br>"address": `"string"`,<br>"address": `{}`,<br>"email": `"string"`<br>}                    |
+|    Get ALL Rep Selections for SPECIFIC letter    |       GET        | localhost:8090/reps/letter/${letter_id}  |                          |               [<br>{<br>"office": `"string"`,<br>"level": `"string"`,<br>"name": `"string"`,<br>"party": `"string"`,<br>"address": `"string"`,<br>"address": `{}`,<br>"email": `"string"`<br>}<br>]               |
+| Delete SINGLE Rep Selection from SPECIFIC letter |      DELETE      | localhost:8090/reps/letters/${letter_id} |                          |                                                                                                {<br>`"true"`<br>}                                                                                                 |
+
 
 
 <br><br><br>
 
-
-### **3rd Party API Endpoints**
-
-
-| **Page** | **Request Type** |      **Path**       |
-| :------: | :--------------: | :-----------------: |
-|   test   |       POST       | localhost:8090/path |
 
 ### **Database Models**  
 *(values in parenthesis are max values. e.g. VARCHAR(255) is a variable character with a max_length of 255 characters)*
 
 <br><br><br>
 #### **'letter' database table**
-|  **Field**   |    **FieldType**     |      **\*\*options**       |
-| :----------: | :------------------: | :------------------------: |
-|      id      | `SERIAL PRIMARY KEY` |         `NOT NULL`         |
-|   created    |     `TIMESTAMP`      | `DEFAULT CURRENT_TIMESTAMP |
-|    topic     |   `VARCHAR(1000)`    |         `NOT NULL`         |
-|    stance    |      `BOOLEAN`       |         `NOT NULL`         |
-|   user_id    |      `INTEGER`       |         `NOT NULL`         |
-|      id      | `SERIAL PRIMARY KEY` |         `NOT NULL`         |
-|  user_issue  |    `VARCHAR(1000)    |         `NOT NULL`         |
-| openai_issue |   `VARCHAR(1000)`    |         `NOT NULL`         |
+| **Field** |    **FieldType**     |      **\*\*options**       |
+| :-------: | :------------------: | :------------------------: |
+|    id     | `SERIAL PRIMARY KEY` |         `NOT NULL`         |
+|  created  |     `TIMESTAMP`      | `DEFAULT CURRENT_TIMESTAMP |
+|   topic   |   `VARCHAR(1000)`    |         `NOT NULL`         |
+|  stance   |      `BOOLEAN`       |         `NOT NULL`         |
+|  user_id  |      `INTEGER`       |         `NOT NULL`         |
+|    id     | `SERIAL PRIMARY KEY` |         `NOT NULL`         |
+
+
 <br><br><br>
 
 #### **'issue' database table**
 |  **Field**   |    **FieldType**     | **\*\*options** |
 | :----------: | :------------------: | :-------------: |
 |      id      | `SERIAL PRIMARY KEY` |   `NOT NULL`    |
-|  user_issue  |   `VARCHAR(1000)`    |    `NOT NULL    |
+|  user_issue  |   `VARCHAR(1000)`    |   `NOT NULL`    |
 | openai_issue |   `VARCHAR(1000)`    |   `NOT NULL`    |
+
+
 <br><br><br>
 
 #### **'rep' database table**
@@ -136,6 +146,8 @@ There may be data missing from Google Civics API which may lead to certain repre
 |  address  |   `VARCHAR(1000)`    |                                  `NOT NULL`                                  |
 |   email   |    `VARCHAR(255)`    |                                  `NOT NULL`                                  |
 | letter_id |        `INT`         | `FOREIGN KEY (letter_id)`<br>`REFERENCES (letter_id)`<br>`ON DELETE CASCADE` |
+
+
 <br><br><br>
 
 
@@ -194,5 +206,3 @@ There may be data missing from Google Civics API which may lead to certain repre
 > - Login / logout feature.
 > - Email template sent to user’s email with letter draft and rep’s emails list.
 > - Keep track of past letter templates / requests
-### next
-> next
