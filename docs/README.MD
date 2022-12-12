@@ -20,6 +20,10 @@ Making contacting your elected officials more accessible
 ## Design
 
 [API Design Users](api-design-users.md)
+[API Design Letters](api-design-letters.md)
+
+## Wireframe and endpoints diagrams
+
 ![API Design](wireframes/direct-rep-wireframe-overview.png)
 ![API Design](wireframes/users-microservice-wireframe.png)
 ![API Design](wireframes/letters-microservice-wireframe.png)

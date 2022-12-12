@@ -7,32 +7,31 @@
 
 - Request shape (JSON):
 
-  ````json
-  {
-  "full_name": "string",
-  "email": "string",
-  "zipcode": "string",
-  "password": "string"
-  }
-    ```
+````json
+ {
+ "full_name": "string",
+ "email": "string",
+ "zipcode": "string",
+ "password": "string"
+ }
+   ```
 
-  ````
 
 - Response: Account information
-  of response»
+ of response»
 - Response shape (JSON):
-  ```json
-  {
-    "access_token": "string",
-    "token_type": "Bearer",
-    "account": {
-      "id": 0,
-      "full_name": "string",
-      "email": "string",
-      "zipcode": "string"
-    }
-  }
-  ```
+ ```json
+ {
+   "access_token": "string",
+   "token_type": "Bearer",
+   "account": {
+     "id": 0,
+     "full_name": "string",
+     "email": "string",
+     "zipcode": "string"
+   }
+ }
+````
 
 ### Edit Account
 
