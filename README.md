@@ -40,11 +40,11 @@ There may be data missing from Google Civics API which may lead to certain repre
 
 |      **Page**       | **Request Type** |             **Path**              |
 | :-----------------: | :--------------: | :-------------------------------: |
-|     Login Page      |      `POST`      |       localhost:8080/token        |
 |     Signup Page     |      `POST`      |    localhost:8080/api/accounts    |
+|     Login Page      |      `POST`      |       localhost:8080/token        |
 |      Get Token      |      `GET`       |       localhost:8080/token        |
-|     Logout Page     |     `DELETE`     |       localhost:8080/token        |
 | Update Profile Page |      `PUT`       | localhost:8080/api/accounts/`$id` |
+|     Logout Page     |     `DELETE`     |       localhost:8080/token        |
 
 <br>
 
@@ -65,7 +65,27 @@ There may be data missing from Google Civics API which may lead to certain repre
 
 ## 📨**Letters Microservice**📨 -- `:8090`
 
-### **Endpoints**
+### **Local Endpoints**
+
+
+|                  **Page**                  | **Request Type** |                **Path**                 |
+| :----------------------------------------: | :--------------: | :-------------------------------------: |
+|               Create Letter                |       POST       |       localhost:8090/api/letters        |
+|           Get All User's Letters           |       GET        |         localhost:8090/letters          |
+|              Edit Letter Body              |       PUT        |  localhost:8090/letters/`${letter_id}`  |
+|               Delete Letter                |      DELETE      |  localhost:8090/letters/`${letter_id}`  |
+|             Get Single Letter              |       GET        |  localhost:8090/letters/`${letter_id}`  |
+|               Get ALL issues               |       GET        |        localhost:8090/api/issues        |
+|             Get Reps from API              |       GET        |          localhost:8090/civics          |
+|                 Select Rep                 |       POST       |         localhost:8090/api/reps         |
+|          Get SINGLE Rep Selection          |       GET        |      localhost:8090/reps/${rep_id}      |
+| Get ALL Rep Selections for SPECIFIC letter |       GET        | localhost:8090/reps/letter/${letter_id} |
+
+
+<br><br><br>
+
+
+### **3rd Party API Endpoints**
 
 
 | **Page** | **Request Type** |      **Path**       |
