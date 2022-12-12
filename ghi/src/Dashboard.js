@@ -37,7 +37,7 @@ function Dashboard() {
   }, [token, user]);
 
   const del = async (id) => {
-    if (window.confirm("Are you sure: This Letter will be Deleted")) {
+    if (window.confirm("Are you sure? This letter will be deleted")) {
       await fetch(`${process.env.REACT_APP_LETTERS_API_HOST}/letters/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
         method: "DELETE",
