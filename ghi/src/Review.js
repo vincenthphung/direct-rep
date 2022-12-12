@@ -99,7 +99,7 @@ function ReviewForm() {
     alert(`Your letter has been copied:${oneContent}`);
   };
 
-  const ButtonMailto = ({ mailto, message }) => {
+  const ButtonMailto = ({ mailto, text }) => {
     return (
         <Link
             to='#'
@@ -108,7 +108,7 @@ function ReviewForm() {
                 e.preventDefault();
             }}
         >
-            {message}
+            {text}
         </Link>
     );
 };
@@ -163,7 +163,7 @@ function ReviewForm() {
                       <td value={rep.email}>
                         {
                           rep.email === "N/A"? "N/A" :
-                          <button><ButtonMailto message={oneContent} mailto={`mailto:${rep.email}`} /></button>
+                          <button><ButtonMailto text={`Email ${rep.name}`} mailto={`mailto:${rep.email}?body=${oneContent}`} /></button>
                         }
                       </td>
                     </tr>
