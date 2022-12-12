@@ -59,6 +59,8 @@ There may be data missing from Google Civics API which may lead to certain repre
 |      email      |    `VARCHAR(255)`    |   `NOT NULL`    |
 |     zipcode     |     `VARCHAR(5)`     |   `NOT NULL`    |
 | hashed_password |    `VARCHAR(255)`    |   `NOT NULL`    |
+
+
 <br><br><br>
 
 ## 📨**Letters Microservice**📨 -- `:8090`
