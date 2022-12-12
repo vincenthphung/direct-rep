@@ -2,6 +2,7 @@ import Card from "react-bootstrap/Card";
 import { useEffect, useState } from "react";
 import copy from "copy-to-clipboard";
 import { useAuthContext } from "./TokenTest.js";
+import { Link } from "react-router-dom";
 
 function ReviewForm() {
   const { token } = useAuthContext();
@@ -98,6 +99,20 @@ function ReviewForm() {
     alert(`Your letter has been copied:${oneContent}`);
   };
 
+  const ButtonMailto = ({ mailto, email }) => {
+    return (
+        <Link
+            to='#'
+            onClick={(e) => {
+                window.location.href = mailto;
+                e.preventDefault();
+            }}
+        >
+            {email}
+        </Link>
+    );
+};
+
   return (
     <div className="row">
       <div className="offset-3 col-6">
@@ -133,6 +148,7 @@ function ReviewForm() {
                   <th>Party</th>
                   <th>Address</th>
                   <th>Email</th>
+                  <th>Send email</th>
                 </tr>
               </thead>
               <tbody>
@@ -144,6 +160,12 @@ function ReviewForm() {
                       <td value={rep.party}>{rep.party}</td>
                       <td value={rep.rep_id}>{rep.address}</td>
                       <td value={rep.email}>{rep.email}</td>
+                      <td value={rep.email}>
+                        {
+                          rep.email === "N/A"? "N/A" :
+                          <ButtonMailto label={oneContent} mailto={rep.email} />
+                        }
+                      </td>
                     </tr>
                   );
                 })}
