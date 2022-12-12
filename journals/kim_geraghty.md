@@ -274,7 +274,7 @@ Three days spent entirely on deployment. It took a while.
 We have one database on render and one database on Elephant SQL. We had to restart a few times but finally got it working.
 We had some errors with too many connections with the database. We did upgrade to a slightly better than free version and changed the method we use in our pool.py files to access and insert data into the database.
 We have two services deployed on render.
-We got the frontend deployment done. We're using the gitlab-ci.yml file and have our environment variables saved on render and gitlab.
+I got the frontend deployment done. We're using the gitlab-ci.yml file and have our environment variables saved on render and gitlab.
 These include our API keys, database urls, third party api endpoints, public url, and render's urls for our microservices.
 
 I fixed the leading zeros issue by converting the zipcode from an integer to a string. Everything works now.
@@ -290,4 +290,8 @@ Phew! 😊
 
 ## Friday 12/9/2022
 
-Hopefully we can finish unit tests today.
+We finished our unit tests and the frontend deployment is done. Aaryen and I spent some time linting and cleaning up the code, deleting comments and console log statements, and we are able to pass all tests on the gitlab pipeline.
+
+Over the weekend I spent some time adding a mailto button for the reps where the email is available. It also includes the content of the letter that will appear in the email body.
+
+I updated the endpoint diagrams to match the final project and cleaned up the wireframe diagrams a bit. We should also clean up the endpoints in the readme docs to match the final project. We will present the project on Monday.
