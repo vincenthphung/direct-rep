@@ -93,7 +93,7 @@ There may be data missing from Google Civics API which may lead to certain repre
 
 |    **Page**    | **Request Type** |         **Path**          | **Request Shape (JSON)** | **Response Shape (JSON)** |
 | :------------: | :--------------: | :-----------------------: | :----------------------: | :------------------------ |
-| Get ALL issues |       GET        | localhost:8090/api/issues |                          | {<br>`"string"`<br>}      |
+| Get ALL issues |       GET        | localhost:8090/api/issues |           N/A            | {<br>`"string"`<br>}      |
 
 <br><br>
 **Reps Endpoints**
