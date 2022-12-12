@@ -26,12 +26,16 @@ There may be data missing from Google Civics API which may lead to certain repre
 ## 🗺️**Diagrams of Architecture**🗺️
 
 ---
-
-<br>
-
-<p align="center">
-	<img src="https://i.imgur.com/1wxwuWE.jpg"/>
-</p>
+### **Users-Service Microservice**
+![users-service microservice architecture diagram](https://i.imgur.com/2rLvTBS.png)
+### **Letters-Service Microservice**
+![letters-service microservice architecture diagram](https://i.imgur.com/hP3HoZe.jpg)
+### **Users Service Endpoints**
+![users-service microservice endpoints diagram](https://i.imgur.com/kRd2CNz.png)
+### **Letters Service Endpoints**
+![letters-service microservice endpoints diagram](https://i.imgur.com/0JKQQVk.png)
+### **DirectRep WireFrame Ovierview**
+![DirectRep wireframe overview](https://i.imgur.com/soj2m9q.png)
 <br><br><br>
 
 ## 👥**Users Microservice**👥 -- `:8080`
