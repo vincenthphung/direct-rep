@@ -1,6 +1,8 @@
+<html>
 <centered>
 # **DirectRep**
 </centered>
+
 ⚡️ Powered by: [Google Civics API](https://developers.google.com/civic-information) and [OpenAI GPT3](https://beta.openai.com/docs/models/gpt-3) ⚡️
 
 DirectRep is an app that allows US Citizens to write letters to their elected representatives using Artifical Intelligence to generate the body text given a specific "issue" and "stance" on that issue. The user's representatives are gathered using [Google Civic Information API](https://developers.google.com/civic-information) and are determined by the Zip Code the user provides on Sign-Up.
@@ -207,3 +209,4 @@ There may be data missing from Google Civics API which may lead to certain repre
 > - Login / logout feature.
 > - Email template sent to user’s email with letter draft and rep’s emails list.
 > - Keep track of past letter templates / requests
+</html>
