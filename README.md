@@ -75,7 +75,7 @@ There may be data missing from Google Civics API which may lead to certain repre
 
 ## 📨**Letters Microservice**📨 -- `:8090`
 
-### **Local Endpoints**
+### **Endpoints**
 
 <br><br>
 **Letter Endpoints**
