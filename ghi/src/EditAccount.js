@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
-import { useCreateUserMutation } from "./store/usersApi";
+import { useEditUserMutation } from "./store/usersApi";
+import { useNavigate } from "react-router-dom";
 
 function InputLabel(props) {
   const { id, placeholder, labelText, value, onChange, type } = props;
@@ -23,19 +24,38 @@ function InputLabel(props) {
   );
 }
 
-// NEED TO UPDATE THIS PAGE FROM CREATE ACCOUNT TO EDIT ACCOUNT
-// CURRENTLY THIS IS JUST A COPY OF THE CREATE ACCOUNT PAGE
-
-function EditAccount(props) {
+function EditAccount() {
   const [full_name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [zipcode, setZipcode] = useState("");
   const [password, setPassword] = useState("");
-  const [createUser, result] = useCreateUserMutation();
+  const [userId, setId] = useState("");
+  const navigate = useNavigate();
+  const [editUser] = useEditUserMutation();
+
+  // to get current account info
+  useEffect(() => {
+    async function getUserData() {
+      const url = `${process.env.REACT_APP_USERS_API_HOST}/token`;
+      const response = await fetch(url, {
+        credentials: "include",
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setName(data.account.full_name);
+        setEmail(data.account.email);
+        setZipcode(data.account.zipcode);
+        setId(data.account.id);
+      }
+    }
+    getUserData();
+  }, []);
 
   async function handleSubmit(e) {
     e.preventDefault();
-    createUser({ full_name, email, zipcode, password });
+    editUser({ full_name, email, zipcode, password, userId }).then(() =>
+      navigate("/dashboard")
+    );
   }
 
   return (
@@ -76,7 +96,7 @@ function EditAccount(props) {
               type="password"
             />
             <button type="submit" className="btn btn-primary">
-              Submit
+              Save changes
             </button>
           </form>
         </div>

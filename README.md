@@ -1,147 +1,211 @@
-# Module3 Project Gamma
 
-## Getting started
+# **DirectRep**
 
-You have a project repository, now what? The next section
-lists all of the deliverables that are due at the end of the
-week. Below is some guidance for getting started on the
-tasks for this week.
 
-## Install Extensions
+⚡️ Powered by: [Google Civics API](https://developers.google.com/civic-information) and [OpenAI GPT3](https://beta.openai.com/docs/models/gpt-3) ⚡️
 
-* Prettier: <https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode>
-* Black Formatter: <https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter>
+DirectRep is an app that allows US Citizens to write letters to their elected representatives using Artifical Intelligence to generate the body text given a specific "issue" and "stance" on that issue. The user's representatives are gathered using [Google Civic Information API](https://developers.google.com/civic-information) and are determined by the Zip Code the user provides on Sign-Up.
 
-## Deliverables
+This service lowers the barrier-to-entry for citizens to have their voices heard by their elected representatives. Regardless of your literacy, your English proficiency, your ability to articulate your thoughts and opinions, having your voice heard is now easier for ***everyone*** to access. 
 
-* [ ] Wire-frame diagrams
-* [ ] API documentation
-* [ ] Project is deployed to Render.com/GitLab-pages
-* [ ] GitLab issue board is setup and in use
-* [ ] Journals
+<br><br>
+**\*\*Disclaimers\*\***  
+There may be data missing from Google Civics API which may lead to certain representatives not being shown in the results. Always double check and verify your representatives' data.
 
-## Project layout
 
-The layout of the project is just like all of the projects
-you did with `docker-compose` in module #2. You will create
-a directory in the root of the repository for each service
-that you add to your project just like those previous
-projects were setup.
+<br>
 
-### Directories
 
-Several directories have been added to your project. The
-directories `docs` and `journals` are places for you and
-your team-mates to, respectively, put any documentation
-about your project that you create and to put your
-project-journal entries. See the _README.md_ file in each
-directory for more info.
+## 👾**Developers**👾
+### **[Kim Geraghty](https://gitlab.com/kim.geraghty.kg)** -- FullStack Developer  
+### **[Aaryan Mittal](https://gitlab.com/aaryanmittal154)** -- FullStack Developer  
+### **[Vincent Phung](https://gitlab.com/vincent.h.phung)** -- FullStack Developer  
+### **[John Gardner](https://gitlab.com/John.Gardner)** -- FullStack Developer  
 
-The other directories, `ghi` and `sample_service`, are
-sample services, that you can start building off of or use
-as a reference point.
 
-Inside of `ghi` is a minimal React app that has an "under
-construction" page. It is setup similarly to all of the
-other React projects that you have worked on.
+<br><br>
 
-Inside of `sample_service` is a minimal FastAPI application.
-"Where are all the files?" you might ask? Well, the
-`main.py` file is the whole thing, and go take look inside
-of it... There's not even much in there..., hmm? That is
-FastAPI, we'll learn more about it in the coming days. Can
-you figure out what this little web-application does even
-though you haven't learned about FastAPI yet?
 
-Also in `sample_service` is a directory for your migrations.
-If you choose to use PostgreSQL, then you'll want to use
-migrations to control your database. Unlike Django, where
-migrations were automatically created for you, you'll write
-yours by hand using DDL. Don't worry about not knowing what
-DDL means; we have you covered. There's a sample migration
-in there that creates two tables so you can see what they
-look like.
+## 🗺️**Diagrams of Architecture**🗺️
 
-The sample Dockerfile and Dockerfile.dev run your migrations
-for you automatically.
+---
+### **DirectRep Wireframe Overview**
+![DirectRep wireframe overview](https://i.imgur.com/soj2m9q.png)
+### **Users-Service Microservice**
+![users-service microservice architecture diagram](https://i.imgur.com/2rLvTBS.png)
+### **Users-Service Endpoints**
+![users-service microservice endpoints diagram](https://i.imgur.com/kRd2CNz.png)
+### **Letters-Service Microservice**
+![letters-service microservice architecture diagram](https://i.imgur.com/hP3HoZe.jpg)
+### **Letters-Service Endpoints**
+![letters-service microservice endpoints diagram](https://i.imgur.com/0JKQQVk.png)
+<br><br><br>
 
-### Other files
+## 👥**Users-Service Microservice**👥 -- `:8080`
 
-The following project files have been created as a minimal
-starting point. Please follow the guidance for each one for
-a most successful project.
+<br><br>
 
-* `docker-compose.yaml`: there isn't much in here, just a
-  **really** simple UI and FastAPI service. Add services
-  (like a database) to this file as you did with previous
-  projects in module #2.
-* `.gitlab-ci.yml`: This is your "ci/cd" file where you will
-  configure automated unit tests, code quality checks, and
-  the building and deployment of your production system.
-  Currently, all it does is deploy an "under construction"
-  page to your production UI on GitLab and a sample backend
-  to Render.com. We will learn much more about this file.
-* `.gitignore`: This is a file that prevents unwanted files
-  from getting added to your repository, files like
-  `pyc` files, `__pycache__`, etc. We've set it up so that
-  it has a good default configuration for Python projects.
+### **Endpoints**
 
-## How to complete the initial deploy
 
-There will be further guidance on completing the initial
-deployment, but it just consists of these steps:
+|      **Page**       | **Request Type** |             **Path**              | **Request Shape JSON**                                                                                          | **Response Shape (JSON)                                                                                                                                                                |
+| :-----------------: | :--------------: | :-------------------------------: | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|     Signup Page     |      `POST`      |    localhost:8080/api/accounts    | {<br>;"full_name": `"string"`,<br>"email": `"string"`,<br>"zipcode": `"string"`,<br>"password": `"string"`<br>} | {<br>"access_token": `"string"`,<br>"token_type": `"Bearer"`,<br>"account": <br>{<br>"id": `0`,<br>"full_name": `"string"`,<br>"email": `"string"`,<br>"zipcode": `"string"`<br>}<br>} |
+|     Login Page      |      `POST`      |       localhost:8080/token        | {<br>"username": `"string"`,<br>"password": `"string"`<br>}                                                     | {<br>"access_token": `"string"`,<br>"token_type": `"Bearer"`<br>}                                                                                                                      |
+|      Get Token      |      `GET`       |       localhost:8080/token        | N/A                                                                                                             | {<br>"access_token": `"string"`,<br>"token_type": `"Bearer"`,<br>"account": <br>{<br>"id": `0`,<br>"full_name": `"string"`,<br>"email": `"string"`,<br>"zipcode": `"string"`<br>}<br>} |
+| Update Profile Page |      `PUT`       | localhost:8080/api/accounts/`$id` | {<br>"full_name": `"string"`,<br>"email": `"string"`,<br>"zipcode": `"string"`,<br>"password": `"string"`<br>}  | {<br>"access_token": `"string"`,<br>"token_type": `"Bearer"`,<br>"account": <br>{<br>"id": `0`,<br>"full_name": `"string"`,<br>"email": `"string"`,<br>"zipcode": `"string"`<br>}<br>} |
+|     Logout Page     |     `DELETE`     |       localhost:8080/token        | N/A                                                                                                             | {<br>`true`<br>}                                                                                                                                                                       |
 
-### Setup GitLab repo/project
+<br>
 
-* make sure this project is in a group. If it isn't, stop
-  now and move it to a GitLab group
-* remove the fork relationship: In GitLab go to:
-  
-  Settings -> General -> Advanced -> Remove fork relationship
+### **Database Models**  
+*(values in parenthesis are max values. e.g. VARCHAR(255) is a variable character with a max_length of 255 characters)*
+<br><br><br>
+#### **'user' database table**
+|    **Field**    |    **FieldType**     | **\*\*options** |
+| :-------------: | :------------------: | :-------------: |
+|       id        | `SERIAL PRIMARY KEY` |   `NOT NULL`    |
+|    full_name    |    `VARCHAR(255)`    |   `NOT NULL`    |
+|      email      |    `VARCHAR(255)`    |   `NOT NULL`    |
+|     zipcode     |     `VARCHAR(5)`     |   `NOT NULL`    |
+| hashed_password |    `VARCHAR(255)`    |   `NOT NULL`    |
 
-* add these GitLab CI/CD variables:
-  * PUBLIC_URL : this is your gitlab pages URL
-  * SAMPLE_SERVICE_API_HOST: enter "blank" for now
 
-#### Your GitLab pages URL
+<br><br><br>
 
-You can't find this in GitLab until after you've done a deploy
-but you can figure it out yourself from your GitLab project URL.
+## 📨**Letters Microservice**📨 -- `:8090`
 
-If this is your project URL
+### **Endpoints**
 
-https://gitlab.com/GROUP_NAME/PROJECT_NAME
+<br><br>
+**Letters-Service Endpoints**
+|         **Page**         | **Request Type** |               **Path**                | **Request Shape (JSON)**                                | **Response Shape (JSON)**                                                                                                                                 |
+| :----------------------: | :--------------: | :-----------------------------------: | :------------------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|      Create Letter       |       POST       |      localhost:8090/api/letters       | {<br>"topic": `"string"`,<br>"stance": `"boolean"`<br>} | {<br>"id": `0`,<br>"topic": `"string"`<br>"stance": `true`,<br>"content": `"string"`,<br>"user_id": `0`<br>}                                              |
+| Get ALL Letters for User |       GET        |      localhost:8090/api/letters       | N/A                                                     | {<br>"id": `0`,<br>"created": `"2022-12-12T04:00:12.644Z"`,<br>"topic": `"string"`,<br>"stance": `true`,<br>"content": `"string"`,<br>"user_id": `0`<br>} |
+|    Get Single Letter     |       GET        | localhost:8090/letters/`${letter_id}` | N/A                                                     | {<br>"id": `0`,<br>"created": `"2022-12-12T04:00:12.644Z"`,<br>"topic": `"string"`,<br>"stance": `true`,<br>"content": `"string"`,<br>"user_id": `0`<br>} |
+|     Edit Letter Body     |       PUT        | localhost:8090/letters/`${letter_id}` | {<br>"letter_id": `0`,<br>"content": `"string"`<br>}    | {<br>"content": `"string"`<br>}                                                                                                                           |
+|      Delete Letter       |      DELETE      | localhost:8090/letters/`${letter_id}` | N/A                                                     | {<br>`true`<br>}                                                                                                                                          |
 
-then your GitLab pages URL will be
 
-https://GROUP_NAME.gitlab.io/PROJECT_NAME
+<br><br>
+**Issues Endpoints**
 
-### Create render.com account and application
+|    **Page**    | **Request Type** |         **Path**          | **Request Shape (JSON)** | **Response Shape (JSON)** |
+| :------------: | :--------------: | :-----------------------: | :----------------------: | :------------------------ |
+| Get ALL issues |       GET        | localhost:8090/api/issues |           N/A            | {<br>`"string"`<br>}      |
 
-* create account on render.com
-* one person create a group and invite all other members
-* create a new "Web Service"
-  * authenticate with GitLab and choose your project
-  * Enter fields:
-    * Name: name of your service
-    * Root Directory: the directory of your service in your git repo.
-      For this example use "sample_service".
-    * Environment: Docker
-    * Plan Type: Free
-  * click the "Create Web Service" button to create it
-  * the build will succeed and it will look like the server is running,
-    most likely, in 6-10 minutes, it will fail.
-  * click "Manual Deploy" -> "Deploy latest commit" and the service
-    should deploy successfully.
+<br><br>
+**Reps Endpoints**
 
-### Update GitLab CI/CD variables
+|                     **Page**                     | **Request Type** |                **Path**                 | **Request Shape (JSON)**                                                                                                                                                    | **Response Shape (JSON)**                                                                                                                                                                                         |
+| :----------------------------------------------: | :--------------: | :-------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|                Get Reps from API                 |       GET        |          localhost:8090/civics          | N/A                                                                                                                                                                         | {<br>"office": `"string"`,<br>"level": `"string"`,<br>"name": `"string"`,<br>"party": `"string"`,<br>"address": `"string"`<br>"address": `{}`,<br>"email": `"string"`<br>}                                        |
+|                   Get All Reps                   |       GET        |         localhost:8090/api/reps         | N/A                                                                                                                                                                         | [<br>{<br>"office": `"string"`,<br>"level": `"string"`,<br>"name": `"string"`,<br>"party": `"string"`,<br>"address": `"string"`,<br>"address": `{}`,<br>"email": `"string"`<br>}<br>]                             |
+|                    Select Rep                    |       POST       |         localhost:8090/api/reps         | {<br>"office": `"string"`,<br>"level": `"string"`,<br>"name": `"string"`,<br>"party": `"string"`,<br>"address": `"string"`,<br>"address": `{}`,<br>"email": `"string"`<br>} | {<br>"rep_id" `0`,<br>"office": `"string"`,<br>"level": `"string"`,<br>"name": `"string"`,<br>"party": `"string"`,<br>"address": `"string"`,<br>"address": `{}`,<br>"email": `"string"`,<br>"letter_id": `0`<br>} |
+|             Get SINGLE Rep Selection             |       GET        |      localhost:8090/reps/${rep_id}      | N/A                                                                                                                                                                         | {<br>"office": `"string"`,<br>"level": `"string"`,<br>"name": `"string"`,<br>"party": `"string"`,<br>"address": `"string"`,<br>"address": `{}`,<br>"email": `"string"`<br>}                                       |
+|    Get ALL Rep Selections for SPECIFIC letter    |       GET        | localhost:8090/reps/letter/${letter_id} | N/A                                                                                                                                                                         | [<br>{<br>"office": `"string"`,<br>"level": `"string"`,<br>"name": `"string"`,<br>"party": `"string"`,<br>"address": `"string"`,<br>"address": `{}`,<br>"email": `"string"`<br>}<br>]                             |
+| Delete SINGLE Rep Selection from SPECIFIC letter |      DELETE      | localhost:8090/reps/letter/${letter_id} | N/A                                                                                                                                                                         | {<br>`true`<br>}                                                                                                                                                                                                  |
 
-Copy the service URL for your new render.com service and then paste
-that into the value for the SAMPLE_SERVICE_API_HOST CI/CD variable
-in GitLab.
 
-### Deploy it
 
-Merge a change into main to kick off the initial deploy. Once the build pipeline
-finishes you should be able to see an "under construction" page on your GitLab
-pages site.
+<br><br><br>
+
+
+### **Database Models**  
+*(values in parenthesis are max values. e.g. VARCHAR(255) is a variable character with a max_length of 255 characters)*
+
+<br><br><br>
+#### **'letter' database table**
+| **Field** |    **FieldType**     |      **\*\*options**       |
+| :-------: | :------------------: | :------------------------: |
+|    id     | `SERIAL PRIMARY KEY` |         `NOT NULL`         |
+|  created  |     `TIMESTAMP`      | `DEFAULT CURRENT_TIMESTAMP |
+|   topic   |   `VARCHAR(1000)`    |         `NOT NULL`         |
+|  stance   |      `BOOLEAN`       |         `NOT NULL`         |
+|  user_id  |      `INTEGER`       |         `NOT NULL`         |
+
+
+<br><br><br>
+
+#### **'issue' database table**
+|  **Field**   |    **FieldType**     | **\*\*options** |
+| :----------: | :------------------: | :-------------: |
+|      id      | `SERIAL PRIMARY KEY` |   `NOT NULL`    |
+|  user_issue  |   `VARCHAR(1000)`    |   `NOT NULL`    |
+| openai_issue |   `VARCHAR(1000)`    |   `NOT NULL`    |
+
+
+<br><br><br>
+
+#### **'rep' database table**
+|  **Field  |    **FieldType**     |                               **\*\*options**                                |
+| :-------: | :------------------: | :--------------------------------------------------------------------------: |
+|  rep_id   | `SERIAL PRIMARY KEY` |                                  `NOT NULL`                                  |
+|  office   |    `VARCHAR(255)`    |                                  `NOT NULL`                                  |
+|   level   |    `VARCHAR(255)`    |                                  `NOT NULL`                                  |
+|   name    |    `VARCHAR(255)`    |                                  `NOT NULL`                                  |
+|  address  |   `VARCHAR(1000)`    |                                  `NOT NULL`                                  |
+|   email   |    `VARCHAR(255)`    |                                  `NOT NULL`                                  |
+| letter_id |        `INT`         | `FOREIGN KEY (letter_id)`<br>`REFERENCES (letter_id)`<br>`ON DELETE CASCADE` |
+
+
+<br><br><br>
+
+
+
+
+**Key Features**
+---
+
+### **Location Dependent Representative Results**
+
+> Your list of available representatives is pulled from Google Civics API using the Zip Code provided on Sign-Up
+
+### **AI Generated Text Response**
+
+> When creating a letter, your "issue" and "stance" are sent to a 3rd party API that then uses a large-language model to generate the letter body the users desires.
+
+### **User Customization**
+
+> When the AI returns your letter body, the user can change, add, or remove any part of the letter, making it fully customizable and ensuring the voice accurately represents the user.
+
+### **Account Dependent Information**
+
+> After creating an account and creating letters, the letters you see in your Dashboard are only the letters you created
+
+### **Account Dependent Information**
+
+> After creating an account and creating letters, the letters you see in your Dashboard are only the letters you created
+
+<br>
+
+## **Getting the App Started**
+---
+
+1. Git clone into your local repository
+	`git clone «repo»`
+2. cd into it
+   `cd direct-rep`
+3. Create a new file in the root directory called `.env` (This is where you'll store your Google Civics API Key and you OpenAI API Key)
+4. Create a volume and name it beta-data
+	`docker volume create postgres-data`
+5. Build the image and run the container
+	`docker compose up --build`
+6.  Open browser to http://localhost:3000 to make sure it’s running
+7.  Once it’s up and running, you can begin with creating an account and confirming that account. Once you confirm the account, you can create a new letter.
+
+
+<br><br><br>
+## **FAQ**
+### **Who are your customers?**  
+> People residing in the United States of America.
+### **What needs/desires does your application satisfy for your customers?**  
+> Making contacting your elected officials more accessible
+### What features/functionality do you plan to have in the application that helps your customers?
+> - List of representatives with their details.
+> - List of issues.
+> - Open AI to draft an automated AI generated letter.
+> - Login / logout feature.
+> - Email template sent to user’s email with letter draft and rep’s emails list.
+> - Keep track of past letter templates / requests

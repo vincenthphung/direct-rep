@@ -1,6 +1,6 @@
 # Journal - Aaryan Mittal
 
-# PROJECT OVERVIEW GROUP
+# PROJECT SETUP
 
 ## November 7, 2022 (Monday)
 
@@ -18,9 +18,7 @@ We started to work upon the endpoints for our web application. We created a new 
 
 We spend more time on making our endpoints more efficient. We made changes to the use model and changed the signup method from dropdowns for state, city and county to only zipcode. This made our code better as we had better aces for the accurate data for the user through civics API, as zipcode made the location more accurate.
 
-# WORKING PROJECT INDIVIDUAL
-
-
+# PROJECT (CODE)
 
 ## Goals for the week 2
 
@@ -104,7 +102,6 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 3. Reviewed the endpoints with /api in the beginning.
 
-
 ## November 18, 2022 (Friday)
 
 ### Work done during the day
@@ -120,7 +117,6 @@ We spend more time on making our endpoints more efficient. We made changes to th
 2. React server issue is solved.
 
 ## Goals for the week 3
-
 
 1. Finish all the CRUD operations for the endpoints.
 
@@ -141,7 +137,6 @@ We spend more time on making our endpoints more efficient. We made changes to th
 1. OpenAI Post request endpoint finished.
 
 2. Signup form in React complete.
-
 
 ## November 22, 2022 (Tuesday)
 
@@ -175,7 +170,6 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 3. Delete endpoint for letters working in backend and frontend.
 
-
 ## Goals for the week 4
 
 1. Work on authentication.
@@ -185,6 +179,7 @@ We spend more time on making our endpoints more efficient. We made changes to th
 3. Finish the minimal viable product.
 
 ## November 28, 2022 (Monday)
+
 ### Work done during the day
 
 1. I worked upon the create letter endpoint and faced a error 402.
@@ -199,9 +194,9 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 2. Made all the issues for letters.
 
-3. Get reps API working in frontend.
+3. reps API working in frontend.
 
-## November 29, 2022 (Monday)
+## November 29, 2022 (Tuesday)
 
 ### Work done during the day
 
@@ -213,6 +208,182 @@ We spend more time on making our endpoints more efficient. We made changes to th
 
 ### Work achieved during the day
 
-1. Create letter frontend connected with the backend.
+1. Create letter form (frontend) connected with the backend.
 
 2. All the issues working in the backend.
+
+## November 30, 2022 (Wednesday)
+
+### Work done during the day
+
+1. Today, I worked upon populating the issues from the issues model. I populated the issues into create letter form in react. So, now the issues(in create letter form) can be selected from a dropdown which is connected to the issues model in the database.
+
+2. I used the react copy clipboard library to create an alert message and copy the contents of a letter from the review page.
+
+3. Our group pair programmed and I shared my screen. We worked upon implementing authentication for the all the endpoints in the letters service. We faced a lot issues in the beginning such as connecting the authenticator from the letters microservice. Later, we were abe to resolve it by duplicating a new authenticator in the router by using the same signing key for all the microservices.
+
+4. Our group spent time on the react part of authentication. We faced a lot problems, so , we decided to do more research and work on it the next day.
+
+### Work achieved during the day
+
+1. Issues dropdown working in the create letter form.
+
+2. Copy letter working in review page.
+
+3. Authentication working for all the letters endpoints.
+
+## December 1, 2022 (Thursday)
+
+### Work done during the day
+
+1. We worked upon login component today. There were problems for the endpoints in react authentication. We fixed by revisiting all the endpoints. We solved the login unauthorized error by trial and error method. We fixed it by trying all the patterns that we could form.
+
+2. We created a react redux file for the login component and connected to all the redux endpoints and React store.
+
+3. We included login authorization for the dashboard and review page.
+
+4. Kim and Vincent did pair-programming and worked upon the edit letter endpoint for react.
+
+5. While merging, I merged the wrong branch to main branch. This lead to a broken main branch and none of our work for the day was reflecting in the main branch. So, I manually changed all the files not realizing I merged the wrong branch. We fixed main, although, we were still confused in what led to the error. So, we checked gitlab and found out that I had merged the wrong branch which led to a broken main branch.
+
+### Work achieved during the day
+
+1. Login user component working in React.
+
+2. Redux file for login component created and connected with React store.
+
+3. Authorization working for all the frontend endpoints.
+
+4. Edit letter endpoint for frontend.
+
+5. Fixed Main branch after wrong merge.
+
+## December 2, 2022 (Friday)
+
+### Work done during the day
+
+1. My team worked upon the logout component for authentication in frontend. Kim worked upon it.
+
+2. I worked upon the flow for making a letter. I connected the create letter page to edit letter. So when a letter is made the user is directly taken to edit letter. Then I connected the edit letter to representative selection page. So, after editing the letter the used can select the reps accordingly. Then, I connected the reps page to the final review page. So, after the letter is made the user can see the final letter with the representatives accordingly. I also worked upon the interface of the review to make it appear better.
+
+3. We worked upon the navigation bar to change according to authentication.
+
+4. We started working upon deployment. We did pair programming and John shared his screen. We were unable to finish it and were facing errors. So, we decided to do more research upon and then finish it.
+
+### Work achieved during the day
+
+1. Login component working in frontend.
+
+2. All the endpoints after creating a letter are connected.
+
+3. Navigation bar working according to authentication.
+
+## Goals for the week 5
+
+1. Finish Deployment for the application.
+
+2. Write unit tests for the working components.
+
+3. Start working on stretch goals.
+
+
+## December 5, 2022 (Monday)
+
+### Work done during the day
+
+1. I worked upon showing the loading sign when there is a buffer while generating a letter. I used a built in react library named PromiseTracker and added it to the index.js page to make it work.
+
+2. We worked upon cleaning the console errors and messages.
+
+3. John worked upon deployment and succeeded with deploying one letters microservice.
+
+4. Kim added the created by field to the letters table and then filtered the letters in dashboard according to the user.
+
+### Work achieved during the day
+
+1. Loading sign showing during the buffer time to generate a letter.
+
+2. Browser console in cleaned and has no errors.
+
+3. Letters in dashboard filtered for each user.
+
+## December 6, 2022 (Tuesday)
+
+### Work done during the day
+
+1. I upon showing the loading icon for buffers in edit letter and rep selection page.
+
+2. I added letter detail view to another page. I used the letter id to redirect to another page with letter id. Then I used react params function to decode the letter id and put it to the get letter url. I created a copy button to copy the details of the letter.
+
+3. My team worked upon deployment.
+
+### Work achieved during the day
+
+1. Loading icon added to edit letter and select rep page.
+
+2. Detail View is working on another page
+
+
+## December 7, 2022 (Wednesday)
+
+### Work done during the day
+
+1. We worked upon deployment. We faced issues during authentication in deployment. The authentication works for letter microservice in development but does not work in deploymeny.
+
+2. We worked upon creating a Elephantsql server for our letters database.
+
+3. We created a users service database in render.com. We connected the users service database to beekeeper application.
+
+
+### Work achieved during the day
+
+1. Letters service database working in Elephantsql.
+
+2. Users service database working in Render.com and connected to beekeeper.
+
+
+## December 8, 2022 (Thursday)
+
+### Work done during the day
+
+1. We worked upon backend deployment today. We faced an issue of not being able to communicate the render docs to letters and users service. We spent a lot of time looking for the issue. Later, through instruction we got to know that they do not communicate in backend but work in frontend deployment.
+
+2. We wrote gitlab yml files and did frontend deployment. We got stuck in an issue where our filed would work for HTTP web request but would not work for HTTPS web request. Gitlab only supported HTTPS request. So, we looked at the code and found a request in our authenticator which was HTTP. After, changing the authenticator request, the issue got fixed.
+
+3. Kim worked upon the zipcodes. If a zipcode started from the digit 0, then reps api did not work because it would not consider it as a real digit. She then changed the inout from integer to a string and then sent to Google Civic API. The API accepted it as a string, so the error got fixed.
+
+
+### Work achieved during the day
+
+1. Backend deployed on render.com and working.
+
+2. Frontend deployed on gitlab and working.
+
+3. Website is fully deployed.
+
+4. Zipcodes that start with digit 0 are working.
+
+
+## December 9, 2022 (Friday)
+
+### Work done during the day
+
+1. We started working upon unit tests. We started with users service and made the first unit for checking a logged in user through their token. We created another unit test to test a logged out user.
+
+2. After lunch, we started with letters service and made a unit for getting an issue endpoint and then for getting all letter endpoint. We then tried to create an unit test for posting a rep into letter but were running into an authorization error. After spending a lot of time and not being able to succeed, we decided it's best for us to do it as a stretch goal as we were meeting the requirements for unit tests.
+
+3. We spend time into formatting. I worked upon the react and frontend portion. I remove the console.log statements, unnecessary comments and did the formatting. I also worked upon the formatting the files in the letters-service and user-service (backend) according to the lint tests. I setup black formatter for python files and set it up on vscode and did it.
+
+4. John decided to work on the readme file for the project. Kim worked upon formatting the backend files.
+
+### Work achieved during the day
+
+1. Unit tests complete for users service.
+
+2. Unit tests complete for letters service.
+
+3. Formatting done for all the files.
+
+4. Readme is updated.
+
+## MVP FOR THE PROJECT IS FINISHED!!!

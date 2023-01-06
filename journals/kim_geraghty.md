@@ -203,3 +203,95 @@ Upcoming to do list:
 - clean up endpoints: some inconsistencies
 
 The list is getting shorter! I can see the end in sight 😊
+
+## Wednesday 11/30/2022 and Thursday 12/1/2022
+
+AUTH:
+
+We got the authentication working on the backend and frontend.
+
+For the backend we had to add a new Authenticator class in our letters microservice, since the authenticator file is in the user microservice.
+
+Then we had to update our routers with the following:
+
+```
+account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
+```
+
+For the frontend, we added the TokenTest.js file to be able to create and retrieve the token. Then we connected it to our LoginTest form, where we use state to define username and password, and then call the login function.
+
+We had to make sure the endpoints being called matched what we had in the backend: /token.
+
+I added console.log statements everywhere to be able to follow the token and see what was going on.
+
+Then we had to add the authorization as a header, with the token,to all of our endpoints throughout the React files, inculde the Redux fetch calls.
+
+CONNECT ZIPCODE TO USER:
+
+The RepForm now pulls the zipcode from the current user, by hitting the get account endpoint, and including credentials in that fetch call. Numbers starting with a leading 0 aren't working so we'll have to find a way to fix that (either directly in the SQL table, or by checking the length of the zipcode and adding 0 on the frontend).
+
+The edit letter is now complete. We only edit the content. Followed the same approach as for create letter to pass multiple query arguments to the redux query option:
+
+```
+      query: (arg) => {
+        const { oneId, oneContent } = arg;
+        ... }
+```
+
+Updated to do list:
+
+- start deployment
+- add unit tests
+- finish logout button
+- edit / hide nav bar
+- filter letters per user
+
+## Friday 12/2/2022 and Monday 12/5/2022
+
+On Friday we started testing deployment. There is still a lot to learn on that front.
+Over the weekend I spent some time cleaning up the code, commenting out console log and print statements, and fixing a few errors that still popped up in the console.
+I edited tables to make sure keys were not overlapping.
+I added do not if null statements to prevent some fetch functions from running empty (!= null)
+I updated useEffect dependencies where needed to make sure they run smoothly.
+I added .then to our navigate links to make sure the user doesn't get to a page before the state has had time to change.
+
+Today I added the user_id field to the letter table so that we can filter the letters by user. This connects to the account data in the backend that is being pulled during the authentication check.
+
+The MVP is practically complete.
+
+Updated to do list:
+
+- fix leading zeros issue for zipcodes that start with zeros
+- create unit tests
+- get deployment done.
+
+The list keeps getting shorter!
+
+## Tuesday 12/6/2022, Wednesday 12/7/2022, Thursday 12/8/2022
+
+Three days spent entirely on deployment. It took a while.
+
+We have one database on render and one database on Elephant SQL. We had to restart a few times but finally got it working.
+We had some errors with too many connections with the database. We did upgrade to a slightly better than free version and changed the method we use in our pool.py files to access and insert data into the database.
+We have two services deployed on render.
+I got the frontend deployment done. We're using the gitlab-ci.yml file and have our environment variables saved on render and gitlab.
+These include our API keys, database urls, third party api endpoints, public url, and render's urls for our microservices.
+
+I fixed the leading zeros issue by converting the zipcode from an integer to a string. Everything works now.
+
+It was so great to finally get frontend deployment working. I had to change a few of our auth stuff and switched back from redux to regular React to make that easier to deal with.
+
+To do list:
+
+- unit tests
+- clean up code and frontend a little bit.
+
+Phew! 😊
+
+## Friday 12/9/2022
+
+We finished our unit tests and the frontend deployment is done. Aaryen and I spent some time linting and cleaning up the code, deleting comments and console log statements, and we are able to pass all tests on the gitlab pipeline.
+
+Over the weekend I spent some time adding a mailto button for the reps where the email is available. It also includes the content of the letter that will appear in the email body.
+
+I updated the endpoint diagrams to match the final project and cleaned up the wireframe diagrams a bit. We should also clean up the endpoints in the readme docs to match the final project. We will present the project on Monday.
