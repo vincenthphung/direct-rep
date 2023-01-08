@@ -1,0 +1,15 @@
+{
+  "editor.formatOnPaste": true,
+  "python.formatting.provider": "black",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "files.autoSave": "off",
+  "cSpell.words": [
+    "Excalidraw",
+    "labeltext",
+    "Mittal",
+    "Signup",
+    "wireframes",
+    "zipcode"
+  ]
+}

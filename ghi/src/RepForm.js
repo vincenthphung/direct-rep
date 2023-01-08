@@ -1,55 +1,92 @@
 import { useState, useEffect } from "react";
 import React from "react";
-import { useCreateRepMutation } from "./store/repsApi";
-import { Link } from "react-router-dom";
+import { useAuthContext } from "./TokenTest.js";
+import { useNavigate } from "react-router-dom";
 
 function RepForm() {
-  const [name, setName] = useState("name");
-  const [office, setOffice] = useState("office");
-  const [level, setLevel] = useState("level");
-  const [party, setParty] = useState("party");
-  const [address, setAddress] = useState("address");
-  const [letter_id, setLetterId] = useState("letter id");
+  const { token } = useAuthContext();
+  const [user, setUser] = useState();
+  const [name, setName] = useState();
+  const [office, setOffice] = useState();
+  const [level, setLevel] = useState();
+  const [party, setParty] = useState();
+  const [address, setAddress] = useState();
+  const [letter_id, setLetterId] = useState();
   const [reps_list, setList] = useState([]);
   const [selection, setSelection] = useState([]);
-  const [createRep, result] = useCreateRepMutation();
+  const [zip, setZip] = useState();
+  const [email, setEmail] = useState();
+  const navigate = useNavigate();
+
+  // to get the user's id
+  useEffect(() => {
+    async function getUserId() {
+      const url = `${process.env.REACT_APP_USERS_API_HOST}/token`;
+      const response = await fetch(url, {
+        credentials: "include",
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setUser(data.account.id);
+      }
+    }
+    getUserId();
+  }, [token, user]);
 
   // to get the id of the most recent letter created:
   useEffect(() => {
     async function fetchLetterId() {
-      const urlLetter = `http://localhost:8090/api/letters`;
-      const response = await fetch(urlLetter);
+      const urlLetter = `${process.env.REACT_APP_LETTERS_API_HOST}/api/letters`;
+      const response = await fetch(urlLetter, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       if (response.ok) {
-        const data = await response.json();
-        // console.log("LETTER DATA", data);
+        const content = await response.json();
+        const data = content.filter((c) => c["user_id"] === user);
         for (let i = 0; i < data.length; i++) {
           if (i === data.length - 1) {
             const lastId = data[i].id;
-            // console.log("LAST", lastId);
             setLetterId(lastId);
           }
         }
       }
     }
     fetchLetterId();
-  }, []);
+  }, [token, user]);
+
+  // to get the zipcode
+  useEffect(() => {
+    async function getZipFromUser() {
+      const url = `${process.env.REACT_APP_USERS_API_HOST}/token`;
+      const response = await fetch(url, {
+        credentials: "include",
+      });
+      if (response.ok) {
+        const data = await response.json();
+        const zipcode = data.account.zipcode;
+        setZip(zipcode);
+      }
+    }
+    getZipFromUser();
+  }, [token, zip]);
 
   //  to select the reps
   useEffect(() => {
-    async function fetchReps(zipcode) {
-      const urlCivics = `http://localhost:8090/civics?zipcode=${zipcode}`;
-      const response = await fetch(urlCivics);
-      if (response.ok) {
-        const data = await response.json();
-        // console.log("\n \n DATA", data);
-        setList(data);
+    if (zip != null) {
+      async function fetchReps(zip) {
+        const urlCivics = `${process.env.REACT_APP_LETTERS_API_HOST}/civics?zipcode=${zip}`;
+        const response = await fetch(urlCivics, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setList(data);
+        }
       }
+      fetchReps(zip);
+      // connects the reps fetch with the user's zip code
     }
-    fetchReps(`90017`);
-    // connect this with the user account zip code
-  }, []);
-
-  // console.log("\n \n REPS LIST", reps_list);
+  }, [token, zip]);
 
   // to get the rep data from the dropdown selection for the database:
   async function handleRepChange(event) {
@@ -65,53 +102,87 @@ function RepForm() {
         setAddress(
           `${addressDict["line1"]} ${addressDict["city"]}, ${addressDict["state"]} ${addressDict["zip"]}`
         );
+        setEmail(reps_list[i].email);
       }
+    }
+  }
+
+  // to create a rep:
+  async function postRep() {
+    const data = { office, level, name, party, address, email, letter_id };
+    const url = `${process.env.REACT_APP_LETTERS_API_HOST}/api/reps`;
+    const fetchConfig = {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+    };
+    const response = await fetch(url, fetchConfig);
+    if (response.ok) {
+      // eslint-disable-next-line no-unused-vars
+      const data = await response.json();
     }
   }
 
   // to send that data to the database via the store reducer:
   async function handleSubmit(e) {
     e.preventDefault();
-    createRep({ office, level, name, party, address, letter_id }).then(() =>
-      showReps(letter_id)
+    postRep({ office, level, name, party, address, email, letter_id }).then(
+      () => showReps(letter_id)
     );
   }
 
   async function showReps(letter_id) {
-    const urlReps = `http://localhost:8090/reps/letter/${letter_id}`;
-    const response = await fetch(urlReps);
+    const response = await fetch(
+      `${process.env.REACT_APP_LETTERS_API_HOST}/reps/letter/${letter_id}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     if (response.ok) {
       const data = await response.json();
       setSelection(data);
     }
   }
 
-  // to load it the first time the page renders
+  // to load the Reps selected
   useEffect(() => {
-    showReps(letter_id);
-  }, [letter_id]);
-
-  // to load it any time we add or delete a rep
-  useEffect(() => {
-    showReps(letter_id);
-  }, []);
+    if (letter_id != null) {
+      async function showReps(letter_id) {
+        const response = await fetch(
+          `${process.env.REACT_APP_LETTERS_API_HOST}/reps/letter/${letter_id}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setSelection(data);
+        }
+      }
+      showReps(letter_id);
+    }
+  }, [letter_id, token]);
 
   async function deleteRep(id) {
-    // if (window.confirm("Are you sure: This Letter will be Deleted")) {
     await fetch(
-      `http://localhost:8090/reps/letters/${letter_id}?rep_id=${id}`,
-      {
-        method: "DELETE",
-      }
+      `${process.env.REACT_APP_LETTERS_API_HOST}/reps/letters/${letter_id}?rep_id=${id}`,
+      { headers: { Authorization: `Bearer ${token}` }, method: "DELETE" }
     ).then(() => showReps(letter_id));
   }
-  // }
+
+  async function finalPage(e) {
+    e.preventDefault();
+    navigate("/review");
+  }
 
   return (
     <div className="row">
       <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
-          <h1>Select your reps</h1>
+          <h1>Select Representatives</h1>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <select
@@ -121,7 +192,7 @@ function RepForm() {
                 name="reps"
                 className="form-select"
               >
-                <option value="">See your reps</option>
+                <option value="">Representatives</option>
                 {reps_list.map((rep) => {
                   return (
                     <option key={rep.name} value={rep.name}>
@@ -132,14 +203,16 @@ function RepForm() {
               </select>
             </div>
             <button type="submit" className="btn btn-primary">
-              Add to selection
+              ADD
             </button>
           </form>
         </div>
       </div>
       <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
-          <h2>Reps selection</h2>
+          <div className="text-center">
+            <h2>Representatives</h2>
+          </div>
           <div>
             <table className="table table-striped table-sm">
               <thead>
@@ -150,22 +223,17 @@ function RepForm() {
                 </tr>
               </thead>
               <tbody>
-                {selection.map((rep, i, j) => {
+                {selection.map((rep) => {
                   return (
-                    <tr>
-                      <td key={rep[j]} value={rep.name}>
-                        {rep.name}
-                      </td>
-                      <td key={rep[i]} value={rep.office}>
-                        {rep.office}
-                      </td>
+                    <tr key={rep.rep_id}>
+                      <td value={rep.name}>{rep.name}</td>
+                      <td value={rep.office}>{rep.office}</td>
                       <td
-                        className="btn"
+                        className="btn btn-sm btn-outline-secondary"
                         onClick={() => deleteRep(rep.rep_id)}
-                        key={rep.rep_id}
                         value={rep.rep_id}
                       >
-                        Delete {rep.rep_id}
+                        Delete
                       </td>
                     </tr>
                   );
@@ -173,9 +241,9 @@ function RepForm() {
               </tbody>
             </table>
           </div>
-          <Link to="/review">
-            <button className="btn btn-primary">Continue to final page</button>
-          </Link>
+          <button onClick={finalPage} className="btn btn-primary">
+            Final Page
+          </button>
         </div>
       </div>
     </div>
